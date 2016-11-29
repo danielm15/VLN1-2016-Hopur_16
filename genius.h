@@ -10,6 +10,7 @@ class Genius
 public:
     Genius();
     Genius(string name, string gender, int age);
+    friend ostream& operator <<(ostream& out, const Genius& p1);
 
     string getName() const
     {

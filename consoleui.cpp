@@ -26,10 +26,13 @@ void ConsoleUI::run()
             DataLayer p;
             vector<Genius> GVector = p.getVector();
 
+            cout << GVector.size() << endl;
+
             for(int i = 0; i < GVector.size(); i++)
             {
                 cout << GVector[i] << endl;
             }
+
 
 
         }

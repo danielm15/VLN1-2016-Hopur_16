@@ -8,16 +8,6 @@ DataLayer::DataLayer()
 
 }
 
-ostream& operator <<(ostream& out, const Genius& p1)
-{
-    out << p1.getName();
-    out << p1.getGender();
-    out << p1.getAge();
-
-    return out;
-
-}
-
 istream& operator >>(istream& in, const Genius& p1)
 {
     string name = p1.getName();
@@ -27,16 +17,15 @@ istream& operator >>(istream& in, const Genius& p1)
     getline(in, name, ',');
     getline(in, gender, ',');
     in >> age;
-    in.ignore();
 
     return in;
 }
 
 
-vector<Genius> getVector()
+vector<Genius> DataLayer::getVector()
 {
     vector<Genius> GeniusVector;
-    fstream theFile("data.txt", ios::in);
+    fstream theFile ("data.txt", ios::in);
     Genius temp;
     if(theFile.is_open())
     {
