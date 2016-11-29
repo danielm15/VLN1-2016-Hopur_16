@@ -9,7 +9,7 @@ class Genius
 {
 public:
     Genius();
-    Genius(string name, string gender, int age, int id);
+    Genius(string name, string gender, int age);
 
     string getName() const
     {
@@ -26,16 +26,12 @@ public:
         return _age;
     }
 
-    int getId() const
-    {
-        return _id;
-    }
+
 
 private:
     string _name;
     string _gender;
     int _age;
-    int _id;
 };
 
 #endif // GENIUS_H
