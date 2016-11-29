@@ -1,5 +1,5 @@
 #include "consoleui.h"
-#include <iostream>
+#include "datalayer.h"
 
 using namespace std;
 
@@ -23,7 +23,15 @@ void ConsoleUI::run()
 
         if(input == '1')
         {
-            cout << "Unsorted list" << endl;
+            DataLayer p;
+            vector<Genius> GVector = p.getVector();
+
+            for(int i = 0; i < GVector.size(); i++)
+            {
+                cout << GVector[i] << endl;
+            }
+
+
         }
         else if(input == '2')
         {

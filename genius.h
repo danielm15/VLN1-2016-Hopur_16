@@ -34,4 +34,4 @@ private:
     int _age;
 };
 
-#endif // GENIUS_H
+#endif GENIUS_H

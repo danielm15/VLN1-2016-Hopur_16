@@ -14,4 +14,4 @@ public:
     //vector<Genius> getGenius();
 };
 
-#endif // SERVICELAYER_H
+#endif SERVICELAYER_H

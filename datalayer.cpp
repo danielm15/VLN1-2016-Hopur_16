@@ -1,10 +1,4 @@
 #include "datalayer.h"
-#include <fstream>
-#include <iostream>
-#include <istream>
-#include <iomanip>
-#include <vector>
-#include <string>
 #include "genius.h"
 
 using namespace std;
@@ -17,42 +11,46 @@ DataLayer::DataLayer()
 ostream& operator <<(ostream& out, const Genius& p1)
 {
     out << p1.getName();
-    out << p1.getAge();
     out << p1.getGender();
+    out << p1.getAge();
+
     return out;
 
 }
 
-/*istream& operator >>(istream& in, Genius& p1)
+istream& operator >>(istream& in, const Genius& p1)
 {
-    getline(in, p1.getName());
-    in >> p1.getAge();
-    in >> p1.getGender();
+    string name = p1.getName();
+    string gender = p1.getGender();
+    int age = p1.getAge();
+
+    getline(in, name, ',');
+    getline(in, gender, ',');
+    in >> age;
     in.ignore();
+
     return in;
 }
-*/
 
-void readFile(vector<Genius> getGenius)
+
+vector<Genius> getVector()
 {
-    ifstream theFile;
-    theFile.open("data.txt");
+    vector<Genius> GeniusVector;
+    fstream theFile("data.txt", ios::in);
     Genius temp;
     if(theFile.is_open())
     {
         while(theFile >> temp)
         {
-            getGenius.push_back(temp);
-        }
-        for(int i=0; i < getGenius.size(); i++)
-        {
-            cout << getGenius[i] << endl;
+            GeniusVector.push_back(temp);
         }
     }
     else
     {
         cout << "List was not found" << endl;
     }
+
+    return GeniusVector;
 }
 
 // Post fall

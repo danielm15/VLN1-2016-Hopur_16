@@ -1,7 +1,8 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
-
-#include "servicelayer.h"
+#include <iostream>
+#include <vector>
+#include "datalayer.h"
 
 class ConsoleUI
 {
@@ -10,7 +11,7 @@ public:
 
     void run();
 private:
-    ServiceLayer _service;
+    //ServiceLayer _service;
 };
 
-#endif // CONSOLEUI_H
+#endif CONSOLEUI_H

@@ -13,8 +13,8 @@ class DataLayer
 public:
     DataLayer();
     friend ostream& operator <<(ostream& out, const Genius& p1);
-    //friend istream& operator >>(istream& in, const Genius& p1);
-    void readFile(vector<Genius> getGenius);
+    friend istream& operator >>(istream& in, const Genius& p1);
+    vector<Genius> getVector();
 };
 
-#endif // DATALAYER_H
+#endif DATALAYER_H
