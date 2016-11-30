@@ -11,6 +11,19 @@ Genius::Genius(string name, string gender, unsigned int year_of_birth, unsigned 
     _gender = gender;
     _year_of_birth = year_of_birth;
     _year_of_death = year_of_death;
+<<<<<<< HEAD
+}
+
+ostream& operator <<(ostream& out, const Genius& p1)
+{
+    out << p1.getName() << " | ";
+    out << p1.getGender() << " | ";
+    out << p1.getBirthYear() << "-";
+    out << p1.getDeathYear() << " | ";
+
+    return out;
+=======
+>>>>>>> bcb7d08d5c2d3979683b10917a90db9b45b91e4f
 }
 
 ostream& operator <<(ostream& out, const Genius& p1)
@@ -22,3 +35,5 @@ ostream& operator <<(ostream& out, const Genius& p1)
 
     return out;
 }
+
+

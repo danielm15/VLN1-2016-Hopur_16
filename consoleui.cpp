@@ -29,8 +29,8 @@ void ConsoleUI::run()
         case '1':
         {
             cout << "Unsorted list" << endl;
-            DataLayer p;
-            vector<Genius> GVector = p.getInfo();
+            ServiceLayer s;
+            vector<Genius> GVector = s.getGenius();
 
             cout << GVector.size() << endl;
 
@@ -55,17 +55,26 @@ void ConsoleUI::run()
             break;
         }
         case '3':
+        {
             cout << "Add entrey" << endl;
+
             break;
+        }
         case '4':
+        {
             cout << "Search for entry" << endl;
             break;
+        }
         case 'q':
+        {
             break;
+        }
         default:
+        {
             cout << "Please enter a number between 1-3" << endl;
             cout << "or q to quit the application" << endl;
             break;
+        }
         }
 
     }
