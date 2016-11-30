@@ -23,13 +23,8 @@ void ConsoleUI::run()
 
         if(input == '1')
         {
-<<<<<<< HEAD
-            ServiceLayer p;
-            vector<Genius> GVector = p.sortVector();
-=======
             ServiceLayer s;
             vector<Genius> GVector = s.getGenius();
->>>>>>> 64987420dd9cd958d282cfa45190bd683d1bac98
 
             cout << GVector.size() << endl;
 

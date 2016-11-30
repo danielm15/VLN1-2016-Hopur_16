@@ -7,7 +7,6 @@ ServiceLayer::ServiceLayer()
 
 }
 
-<<<<<<< HEAD
 vector<Genius> ServiceLayer::sortVector()
 {
     DataLayer d;
@@ -18,24 +17,12 @@ vector<Genius> ServiceLayer::sortVector()
     return GVector;
 }
 
-=======
 vector<Genius> ServiceLayer::getGenius()
 {
 	DataLayer p;
 	return p.getInfo();
 }
 
-//Sort fall TODO
-/*
-vector<Genius> ServiceLayer::sort()
-{
-	DataLayer d;
-	std::sort(d.begin(), d.end());
-
-}
-*/
-
->>>>>>> 64987420dd9cd958d282cfa45190bd683d1bac98
 
 // Searches for name in Geniues vector from the data layer.
 // If it finds a subset of the query in name it returns corresponding
