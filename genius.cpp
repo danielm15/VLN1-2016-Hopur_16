@@ -18,8 +18,15 @@ ostream& operator <<(ostream& out, const Genius& p1)
     out << p1.getName() << " | ";
     out << p1.getGender() << " | ";
     out << p1.getBirthYear() << "-";
-    out << p1.getDeathYear() << " | ";
 
+    if(p1.getDeathYear() == 0)
+    {
+        out << "N/A" << " | ";
+    }
+    else
+    {
+        out << p1.getDeathYear() << " | ";
+    }
     return out;
 }
 
