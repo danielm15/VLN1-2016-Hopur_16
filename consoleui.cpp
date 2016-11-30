@@ -23,8 +23,8 @@ void ConsoleUI::run()
 
         if(input == '1')
         {
-            DataLayer p;
-            vector<Genius> GVector = p.getInfo();
+            ServiceLayer p;
+            vector<Genius> GVector = p.sortVector();
 
             cout << GVector.size() << endl;
 
