@@ -23,4 +23,3 @@ ostream& operator <<(ostream& out, const Genius& p1)
     return out;
 }
 
-

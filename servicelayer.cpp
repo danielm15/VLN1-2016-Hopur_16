@@ -7,16 +7,19 @@ ServiceLayer::ServiceLayer()
 
 }
 
+// Fetches the GeniusVector with getGenius and sorts
+// it in descending alphabetical order.
+// Makes use of the overloaded < operator
 vector<Genius> ServiceLayer::sortVector()
 {
-    DataLayer d;
-    vector<Genius> GVector = d.getInfo();
+    vector<Genius> GVector = getGenius();
 
     sort(GVector.begin(), GVector.end());
 
     return GVector;
 }
 
+// Fetches the GeniusVector from the DataLayer
 vector<Genius> ServiceLayer::getGenius()
 {
     DataLayer p;
