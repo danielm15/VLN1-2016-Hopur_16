@@ -25,6 +25,7 @@ void ConsoleUI::run()
         {
         case '1':
         {
+            clearscreen ();
             cout << "Unsorted list" << endl;
             ServiceLayer s;
             vector<Genius> GVector = s.getGenius();
@@ -37,6 +38,7 @@ void ConsoleUI::run()
         }
         case '2':
         {
+           clearscreen ();
             cout << "Sorted list" << endl;
             ServiceLayer s;
             vector<Genius> GVector = s.sortVector();
@@ -45,10 +47,12 @@ void ConsoleUI::run()
                 {
                     cout << GVector[i] << endl;
                 }
+
             break;
         }
         case '3':
         {
+            clearscreen ();
             bool saved = false;
 
             string name;
@@ -73,15 +77,16 @@ void ConsoleUI::run()
 
             if(saved == true)
             {
-                cout << "Entry saved";
+                cout << "Entry saved" << endl;
             }
             else
-                cout << "Entry failed";
+                cout << "Entry failed" << endl;
 
             break;
         }
         case '4':
         {
+            clearscreen ();
             string name;
 
             cout << "Search for entry" << endl;
@@ -103,10 +108,12 @@ void ConsoleUI::run()
         }
         case 'q':
         {
+            clearscreen ();
             break;
         }
         default:
         {
+            clearscreen ();
             cout << "Please enter a number between 1-3" << endl;
             cout << "or q to quit the application" << endl;
             break;
@@ -116,6 +123,11 @@ void ConsoleUI::run()
 
     }while(!(input == 'q' || input == 'Q'));
 
+}
+
+void ConsoleUI::clearscreen ()
+{
+   system("cls");
 }
 
 

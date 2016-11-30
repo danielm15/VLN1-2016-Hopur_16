@@ -9,7 +9,7 @@ class ConsoleUI
 {
 public:
     ConsoleUI();
-
+    void clearscreen ();
     void run();
 private:
     //ServiceLayer _service;
