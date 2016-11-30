@@ -39,8 +39,40 @@ void ConsoleUI::run()
         }
         else if(input == '3')
         {
+            ServiceLayer s;
+            string name;
+            char gender;
+            unsigned int date_of_birth, date_of_death;
             //Error check TODO
+
             cout << "Add entry" << endl;
+
+            // Get name
+            cout << "Name: ";
+            cin.ignore();
+            getline(cin, name, '\n');
+
+            // Get gender
+            cout << "Gender (m/f): ";
+            cin >> gender;
+
+            // Get date of birth
+            cout << "Birth: ";
+            cin >> date_of_birth;
+
+            // get date of death
+            cout << "Death (0 if still alive): ";
+            cin >> date_of_death;
+
+            // Add it to the dataset.
+            if (s.addEntry(name, gender, date_of_birth, date_of_death))
+            {
+                cout << "Saved" << endl;
+            }
+            else
+            {
+                cout << "Can't save" << endl;
+            }
         }
         else if(input == '4')
         {

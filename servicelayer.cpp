@@ -43,3 +43,25 @@ Genius ServiceLayer::find(string name) const
     }
     throw -1;
 }
+
+bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death)
+{
+    DataLayer d;
+    string fullGender;
+
+    //Error check TODO
+    if (gender == 'm')
+    {
+        fullGender = "Male";
+    }
+    else if (gender == 'f')
+    {
+        fullGender = "Female";
+    }
+    else
+    {
+        fullGender = "N/A";
+    }
+    Genius genius(name, fullGender, date_of_birth, date_of_death);
+    return d.save(genius);
+}

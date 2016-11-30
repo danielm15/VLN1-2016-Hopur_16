@@ -12,6 +12,7 @@ class DataLayer
 public:
     DataLayer();
     vector<Genius> getInfo();
+    bool save(Genius genius);
 };
 
 #endif DATALAYER_H
