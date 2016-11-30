@@ -43,3 +43,28 @@ vector<Genius> DataLayer::getInfo()
 }
 
 // Post fall
+bool DataLayer::save(Genius genius)
+{
+    string filename = "data.csv";
+
+    ofstream theFile;
+    theFile.open(filename.c_str(), ios::out | ios::app);
+    string deathYear = to_string(genius.getDeathYear());
+
+    if (deathYear == "0")
+    {
+        deathYear = "N/A";
+    }
+
+    if(theFile.is_open())
+    {
+        theFile << genius.getName() << "," << genius.getGender() << "," << genius.getBirthYear() << "," << deathYear << endl;
+    }
+    else
+    {
+        return false;
+    }
+    theFile.close();
+
+    return true;
+}

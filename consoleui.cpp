@@ -23,8 +23,13 @@ void ConsoleUI::run()
 
         if(input == '1')
         {
+<<<<<<< HEAD
             ServiceLayer p;
             vector<Genius> GVector = p.sortVector();
+=======
+            ServiceLayer s;
+            vector<Genius> GVector = s.getGenius();
+>>>>>>> 64987420dd9cd958d282cfa45190bd683d1bac98
 
             cout << GVector.size() << endl;
 
@@ -39,12 +44,57 @@ void ConsoleUI::run()
         }
         else if(input == '3')
         {
+            ServiceLayer s;
+            string name;
+            char gender;
+            unsigned int date_of_birth, date_of_death;
             //Error check TODO
+
             cout << "Add entry" << endl;
+
+            // Get name
+            cout << "Name: ";
+            cin.ignore();
+            getline(cin, name, '\n');
+
+            // Get gender
+            cout << "Gender (m/f): ";
+            cin >> gender;
+
+            // Get date of birth
+            cout << "Birth: ";
+            cin >> date_of_birth;
+
+            // get date of death
+            cout << "Death (0 if still alive): ";
+            cin >> date_of_death;
+
+            // Add it to the dataset.
+            if (s.addEntry(name, gender, date_of_birth, date_of_death))
+            {
+                cout << "Saved" << endl;
+            }
+            else
+            {
+                cout << "Can't save" << endl;
+            }
         }
         else if(input == '4')
         {
+			string name;
+			ServiceLayer s;
             cout << "Search for entry" << endl;
+            cin.ignore();
+            getline(cin, name, '\n');
+            try
+            {
+                Genius g = s.find(name);
+                cout << g << endl;
+            }
+            catch(int n)
+            {
+                cout << "Did not find anything" << endl;
+            }
         }
         else if(input == 'q' || input == 'Q')
         {

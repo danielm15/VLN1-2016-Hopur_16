@@ -2,6 +2,7 @@
 #define CONSOLEUI_H
 #include <iostream>
 #include <vector>
+#include "datalayer.h"
 #include "servicelayer.h"
 
 class ConsoleUI
