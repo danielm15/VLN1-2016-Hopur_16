@@ -12,7 +12,7 @@ class Genius
 {
 public:
     Genius();
-    Genius(string name, string gender, unsigned int age);
+    Genius(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death);
     friend ostream& operator <<(ostream& out, const Genius& p1);
 
     string getName() const
@@ -25,17 +25,21 @@ public:
         return _gender;
     }
 
-    unsigned int getAge() const
+    unsigned int getBirthYear() const
     {
-        return _age;
+        return _year_of_birth;
     }
 
-
+    unsigned int getDeathYear() const
+    {
+        return _year_of_death;
+    }
 
 private:
     string _name;
     string _gender;
-    unsigned int _age;
+    unsigned int _year_of_birth;
+    unsigned int _year_of_death;
 };
 
 #endif GENIUS_H

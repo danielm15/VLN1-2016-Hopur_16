@@ -5,12 +5,6 @@ ServiceLayer::ServiceLayer()
 
 }
 
-/*vector<Genius> ServiceLayer::getGenius()
-{
-
-}
-*/
-
 
 //Sort fall TODO
 
