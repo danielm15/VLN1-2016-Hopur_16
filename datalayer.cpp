@@ -8,36 +8,34 @@ DataLayer::DataLayer()
 
 }
 
-istream& operator >>(istream& in, const Genius& p1)
-{
-    string name = p1.getName();
-    string gender = p1.getGender();
-    int age = p1.getAge();
-
-    getline(in, name, ',');
-    getline(in, gender, ',');
-    in >> age;
-
-    return in;
-}
-
-
-vector<Genius> DataLayer::getVector()
+vector<Genius> DataLayer::getInfo()
 {
     vector<Genius> GeniusVector;
-    fstream theFile ("data.txt", ios::in);
-    Genius temp;
+    string name, gender,str_age;
+    unsigned int age;
+
+    ifstream theFile;
+    theFile.open("data.csv");
+
     if(theFile.is_open())
     {
-        while(theFile >> temp)
+        while (!theFile.eof())
         {
+            getline(theFile, name, ',');
+            getline(theFile, gender, ',');
+            getline(theFile, str_age, '\n');
+            age = atoi(str_age.c_str());
+
+            Genius temp = Genius(name, gender, age);
             GeniusVector.push_back(temp);
         }
+        GeniusVector.pop_back();
     }
     else
     {
         cout << "List was not found" << endl;
     }
+    theFile.close();
 
     return GeniusVector;
 }

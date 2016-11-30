@@ -5,7 +5,7 @@ Genius::Genius()
 
 }
 
-Genius::Genius(string name, string gender, int age)
+Genius::Genius(string name, string gender, unsigned int age)
 {
     _name = name;
     _gender = gender;
@@ -14,10 +14,10 @@ Genius::Genius(string name, string gender, int age)
 
 ostream& operator <<(ostream& out, const Genius& p1)
 {
-    out << p1.getName();
-    out << p1.getGender();
-    out << p1.getAge();
+    out << p1.getName() << " | ";
+    out << p1.getGender() << " | ";
+    out << p1.getAge() << " | ";
 
     return out;
-
 }
+

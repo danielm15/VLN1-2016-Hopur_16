@@ -24,11 +24,11 @@ void ConsoleUI::run()
         if(input == '1')
         {
             DataLayer p;
-            vector<Genius> GVector = p.getVector();
+            vector<Genius> GVector = p.getInfo();
 
             cout << GVector.size() << endl;
 
-            for(int i = 0; i < GVector.size(); i++)
+            for(unsigned int i = 0; i < GVector.size(); i++)
             {
                 cout << GVector[i] << endl;
             }

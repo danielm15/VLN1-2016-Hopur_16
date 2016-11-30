@@ -1,7 +1,10 @@
 #ifndef GENIUS_H
 #define GENIUS_H
 
+#include <iostream>
+#include <fstream>
 #include <string>
+#include <istream>
 
 using namespace std;
 
@@ -9,7 +12,7 @@ class Genius
 {
 public:
     Genius();
-    Genius(string name, string gender, int age);
+    Genius(string name, string gender, unsigned int age);
     friend ostream& operator <<(ostream& out, const Genius& p1);
 
     string getName() const
@@ -22,7 +25,7 @@ public:
         return _gender;
     }
 
-    int getAge() const
+    unsigned int getAge() const
     {
         return _age;
     }
@@ -32,7 +35,7 @@ public:
 private:
     string _name;
     string _gender;
-    int _age;
+    unsigned int _age;
 };
 
 #endif GENIUS_H
