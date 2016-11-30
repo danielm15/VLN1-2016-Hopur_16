@@ -32,9 +32,6 @@ void ConsoleUI::run()
             {
                 cout << GVector[i] << endl;
             }
-
-
-
         }
         else if(input == '2')
         {

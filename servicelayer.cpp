@@ -11,7 +11,6 @@ vector<Genius> ServiceLayer::getGenius()
 	return p.getInfo();
 }
 
-
 //Sort fall TODO
 /*
 vector<Genius> ServiceLayer::sort()
@@ -29,7 +28,7 @@ Genius ServiceLayer::find(string name) const
     vector<Genius> GVector = d.getInfo();
 	Genius g;
 
-	for(unsigned int i = 0; i < GVector.size(); i++)
+    for(size_t i = 0; i < GVector.size(); i++)
 	{
         if (name == GVector[i].getName())
         {
