@@ -38,10 +38,8 @@ void ConsoleUI::run()
         case '2':
         {
             cout << "Sorted list" << endl;
-            DataLayer d;
-            vector<Genius> GVector = d.getInfo();
-
-            cout << GVector.size() << endl;
+            ServiceLayer s;
+            vector<Genius> GVector = s.sortVector();
 
             for(unsigned int i = 0; i < GVector.size(); i++)
                 {
@@ -60,12 +58,15 @@ void ConsoleUI::run()
             ServiceLayer s;
 
             cout << "Add entrey" << endl;
-            cout << "Name: " << endl;
+            cout << "Name: ";
 
             cin.ignore();
             getline(cin,name,'\n');
+            cout << "Gender (m/f): ";
             cin >> gender;
+            cout << "Year of birth: ";
             cin >> dateOfBirth;
+            cout << "Year of death: ";
             cin >> dateOfDeath;
 
             saved = s.addEntry(name,gender,dateOfBirth,dateOfDeath);
@@ -84,6 +85,7 @@ void ConsoleUI::run()
             string name;
 
             cout << "Search for entry" << endl;
+            cin.ignore();
             getline(cin,name,'\n');
             ServiceLayer s;
 
