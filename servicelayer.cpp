@@ -22,8 +22,8 @@ vector<Genius> ServiceLayer::sortVector()
 // Fetches the GeniusVector from the DataLayer
 vector<Genius> ServiceLayer::getGenius()
 {
-	DataLayer p;
-	return p.getInfo();
+    DataLayer p;
+    return p.getInfo();
 }
 
 
@@ -32,12 +32,12 @@ vector<Genius> ServiceLayer::getGenius()
 // Genius object. If it does not find anything it raises a exception
 Genius ServiceLayer::find(string name) const
 {
-	DataLayer d;
+    DataLayer d;
     vector<Genius> GVector = d.getInfo();
-	Genius g;
+    Genius g;
 
     for(size_t i = 0; i < GVector.size(); i++)
-	{
+    {
         string geniusName = GVector[i].getName();
 
         // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c

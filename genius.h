@@ -10,11 +10,6 @@ using namespace std;
 
 class Genius
 {
-private:
-    string _name;
-    string _gender;
-    unsigned int _year_of_birth;
-    unsigned int _year_of_death;
 public:
     Genius();
     Genius(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death);
@@ -45,6 +40,11 @@ public:
         return _year_of_death;
     }
 
+private:
+    string _name;
+    string _gender;
+    unsigned int _year_of_birth;
+    unsigned int _year_of_death;
 
 };
 

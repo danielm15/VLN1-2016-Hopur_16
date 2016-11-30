@@ -1,5 +1,7 @@
 #include "consoleui.h"
+#include <iostream>
 #include "datalayer.h"
+#include <vector>
 
 using namespace std;
 
@@ -10,7 +12,7 @@ ConsoleUI::ConsoleUI()
 
 void ConsoleUI::run()
 {
-    char input = '1';
+    char input = ' ';
 
     do
     {
@@ -21,85 +23,61 @@ void ConsoleUI::run()
         cout << "Enter *q* to quit application" << endl;
         cin >> input;
 
-        if(input == '1')
+
+        switch (input)
         {
+        case '1':
+        {
+            cout << "Unsorted list" << endl;
             ServiceLayer s;
             vector<Genius> GVector = s.getGenius();
 
             for(unsigned int i = 0; i < GVector.size(); i++)
-            {
-                cout << GVector[i] << endl;
-            }
+               {
+                 cout << GVector[i] << endl;
+               }
+            break;
         }
-        else if(input == '2')
+        case '2':
         {
+            cout << "Sorted list" << endl;
+            DataLayer d;
+            vector<Genius> GVector = d.getInfo();
 
+            cout << GVector.size() << endl;
+
+            for(unsigned int i = 0; i < GVector.size(); i++)
+                {
+                    cout << GVector[i] << endl;
+                }
+            break;
         }
-        else if(input == '3')
+        case '3':
         {
-            ServiceLayer s;
-            string name;
-            char gender;
-            unsigned int date_of_birth, date_of_death;
-            //Error check TODO
+            cout << "Add entrey" << endl;
 
-            cout << "Add entry" << endl;
-
-            // Get name
-            cout << "Name: ";
-            cin.ignore();
-            getline(cin, name, '\n');
-
-            // Get gender
-            cout << "Gender (m/f): ";
-            cin >> gender;
-
-            // Get date of birth
-            cout << "Birth: ";
-            cin >> date_of_birth;
-
-            // get date of death
-            cout << "Death (0 if still alive): ";
-            cin >> date_of_death;
-
-            // Add it to the dataset.
-            if (s.addEntry(name, gender, date_of_birth, date_of_death))
-            {
-                cout << "Saved" << endl;
-            }
-            else
-            {
-                cout << "Can't save" << endl;
-            }
+            break;
         }
-        else if(input == '4')
+        case '4':
         {
-			string name;
-			ServiceLayer s;
             cout << "Search for entry" << endl;
-            cin.ignore();
-            getline(cin, name, '\n');
-            try
-            {
-                Genius g = s.find(name);
-                cout << g << endl;
-            }
-            catch(int n)
-            {
-                cout << "Did not find anything" << endl;
-            }
+            break;
         }
-        else if(input == 'q' || input == 'Q')
+        case 'q':
         {
             break;
         }
-        else
+        default:
         {
             cout << "Please enter a number between 1-3" << endl;
             cout << "or q to quit the application" << endl;
+            break;
+        }
         }
 
     }
-    while(1);
+    while(!(input == 'q' || input == 'Q'));
 
 }
+
+
