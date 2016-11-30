@@ -48,7 +48,6 @@ Genius ServiceLayer::find(string name) const
     }
     throw -1;
 }
-
 bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death)
 {
     DataLayer d;

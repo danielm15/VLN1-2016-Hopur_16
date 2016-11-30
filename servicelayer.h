@@ -13,7 +13,7 @@ class ServiceLayer
 public:
     ServiceLayer();
     vector<Genius> sortVector();
-	Genius find(string name) const;
+    Genius find(string name) const;
     vector<Genius> getGenius();
     bool addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death);
 };

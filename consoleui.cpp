@@ -100,7 +100,7 @@ void ConsoleUI::run()
                 Genius g = s.find(name);
                 cout << g << endl;
             }
-            catch (int i)
+            catch(int)
             {
                 cout << "Did not find anything" << endl;
             }
