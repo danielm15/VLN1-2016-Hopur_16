@@ -23,8 +23,8 @@ void ConsoleUI::run()
 
         if(input == '1')
         {
-            DataLayer p;
-            vector<Genius> GVector = p.getInfo();
+            ServiceLayer s;
+            vector<Genius> GVector = s.getGenius();
 
             cout << GVector.size() << endl;
 
@@ -47,7 +47,20 @@ void ConsoleUI::run()
         }
         else if(input == '4')
         {
+			string name;
+			ServiceLayer s;
             cout << "Search for entry" << endl;
+            cin.ignore();
+            getline(cin, name, '\n');
+            try
+            {
+                Genius g = s.find(name);
+                cout << g << endl;
+            }
+            catch(int n)
+            {
+                cout << "Did not find anything" << endl;
+            }
         }
         else if(input == 'q' || input == 'Q')
         {

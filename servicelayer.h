@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <genius.h>
+#include <datalayer.h>
 
 using namespace std;
 
@@ -11,7 +12,9 @@ class ServiceLayer
 public:
     ServiceLayer();
 
-    //vector<Genius> getGenius();
+	Genius find(string name) const;
+    vector<Genius> getGenius();
+	vector<Genius> sort();
 };
 
 #endif SERVICELAYER_H

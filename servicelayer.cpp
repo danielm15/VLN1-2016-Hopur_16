@@ -5,15 +5,37 @@ ServiceLayer::ServiceLayer()
 
 }
 
-/*vector<Genius> ServiceLayer::getGenius()
+vector<Genius> ServiceLayer::getGenius()
 {
+	DataLayer p;
+	return p.getInfo();
+}
+
+
+//Sort fall TODO
+/*
+vector<Genius> ServiceLayer::sort()
+{
+	DataLayer d;
+	std::sort(d.begin(), d.end());
 
 }
 */
 
 
-//Sort fall TODO
+Genius ServiceLayer::find(string name) const
+{
+	DataLayer d;
+    vector<Genius> GVector = d.getInfo();
+	Genius g;
 
-
-//Search fall TODO
+	for(unsigned int i = 0; i < GVector.size(); i++)
+	{
+        if (name == GVector[i].getName())
+        {
+            return GVector[i];
+        }
+    }
+    throw -1;
+}
 
