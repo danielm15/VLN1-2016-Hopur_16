@@ -26,8 +26,6 @@ void ConsoleUI::run()
             ServiceLayer s;
             vector<Genius> GVector = s.getGenius();
 
-            cout << GVector.size() << endl;
-
             for(unsigned int i = 0; i < GVector.size(); i++)
             {
                 cout << GVector[i] << endl;
@@ -35,7 +33,7 @@ void ConsoleUI::run()
         }
         else if(input == '2')
         {
-            cout << "Sorted list" << endl;
+
         }
         else if(input == '3')
         {
