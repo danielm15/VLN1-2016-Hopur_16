@@ -128,12 +128,8 @@ void ConsoleUI::run()
 
 void ConsoleUI::clearscreen ()
 {
-#ifdef WINDOWS
-    std::system("cls");
-#else
-    // Assume POSIX
-    std::system ("clear");
-#endif
+    system("cls");
+    system ("clear");
 }
 
 
