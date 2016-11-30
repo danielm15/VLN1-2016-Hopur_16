@@ -53,12 +53,11 @@ bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size
     DataLayer d;
     string fullGender;
 
-    //Error check TODO
-    if (gender == 'm')
+    if (gender == 'm' || gender == 'M')
     {
         fullGender = "Male";
     }
-    else if (gender == 'f')
+    else if (gender == 'f' || gender == 'F')
     {
         fullGender = "Female";
     }
