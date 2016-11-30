@@ -21,34 +21,41 @@ void ConsoleUI::run()
         cout << "Enter *q* to quit application" << endl;
         cin >> input;
 
-        if(input == '1')
+
+        switch (input)
         {
+        case '1':
             cout << "Unsorted list" << endl;
-        }
-        else if(input == '2')
-        {
-            cout << "Sorted list" << endl;
-        }
-        else if(input == '3')
-        {
-            //Error check TODO
-            cout << "Add entry" << endl;
-        }
-        else if(input == '4')
-        {
-            cout << "Search for entry" << endl;
-        }
-        else if(input == 'q' || input == 'Q')
-        {
+            DataLayer p;
+            vector<Genius> GVector = p.getInfo();
+
+            cout << GVector.size() << endl;
+
+            for(unsigned int i = 0; i < GVector.size(); i++)
+               {
+                 cout << GVector[i] << endl;
+               }
             break;
-        }
-        else
-        {
+        case '2':
+            cout << "Sorted list" << endl;
+            break;
+        case '3':
+            cout << "Add entrey" << endl;
+            break;
+        case '4':
+            cout << "Search for entry" << endl;
+            break;
+        case 'q':
+            break;
+        default:
             cout << "Please enter a number between 1-3" << endl;
             cout << "or q to quit the application" << endl;
+            break;
         }
 
     }
-    while(1);
+    while(!(input == 'q' || input == 'Q'));
 
 }
+
+
