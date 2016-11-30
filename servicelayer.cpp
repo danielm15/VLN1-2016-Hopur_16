@@ -22,6 +22,9 @@ vector<Genius> ServiceLayer::sort()
 */
 
 
+// Searches for name in Geniues vector from the data layer.
+// If it finds a subset of the query in name it returns corresponding
+// Genius object. If it does not find anything it raises a exception
 Genius ServiceLayer::find(string name) const
 {
 	DataLayer d;
@@ -30,11 +33,13 @@ Genius ServiceLayer::find(string name) const
 
     for(size_t i = 0; i < GVector.size(); i++)
 	{
-        if (name == GVector[i].getName())
+        string geniusName = GVector[i].getName();
+
+        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
+        if (geniusName.find(name) != std::string::npos)
         {
             return GVector[i];
         }
     }
     throw -1;
 }
-
