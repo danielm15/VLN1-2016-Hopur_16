@@ -30,9 +30,9 @@ void ConsoleUI::run()
             vector<Genius> GVector = s.getGenius();
 
             for(unsigned int i = 0; i < GVector.size(); i++)
-               {
-                 cout << GVector[i] << endl;
-               }
+            {
+                cout << GVector[i] << endl;
+            }
             break;
         }
         case '2':
@@ -42,9 +42,9 @@ void ConsoleUI::run()
             vector<Genius> GVector = s.sortVector();
 
             for(unsigned int i = 0; i < GVector.size(); i++)
-                {
-                    cout << GVector[i] << endl;
-                }
+            {
+                cout << GVector[i] << endl;
+            }
             break;
         }
         case '3':
@@ -76,7 +76,9 @@ void ConsoleUI::run()
                 cout << "Entry saved";
             }
             else
+            {
                 cout << "Entry failed";
+            }
 
             break;
         }
