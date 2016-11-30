@@ -1,5 +1,7 @@
 #include "consoleui.h"
 #include <iostream>
+#include "datalayer.h"
+#include <vector>
 
 using namespace std;
 
@@ -10,7 +12,7 @@ ConsoleUI::ConsoleUI()
 
 void ConsoleUI::run()
 {
-    char input = '1';
+    char input = ' ';
 
     do
     {
@@ -25,6 +27,7 @@ void ConsoleUI::run()
         switch (input)
         {
         case '1':
+        {
             cout << "Unsorted list" << endl;
             DataLayer p;
             vector<Genius> GVector = p.getInfo();
@@ -36,9 +39,21 @@ void ConsoleUI::run()
                  cout << GVector[i] << endl;
                }
             break;
+        }
         case '2':
+        {
             cout << "Sorted list" << endl;
+            DataLayer d;
+            vector<Genius> GVector = d.getInfo();
+
+            cout << GVector.size() << endl;
+
+            for(unsigned int i = 0; i < GVector.size(); i++)
+                {
+                    cout << GVector[i] << endl;
+                }
             break;
+        }
         case '3':
             cout << "Add entrey" << endl;
             break;

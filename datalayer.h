@@ -3,15 +3,16 @@
 
 #include <iostream>
 #include <fstream>
-
-
-
+#include <vector>
+#include <string>
+#include "genius.h"
 
 class DataLayer
 {
 public:
     DataLayer();
-
+    vector<Genius> getInfo();
+    bool save(Genius genius);
 };
 
-#endif // DATALAYER_H
+#endif DATALAYER_H
