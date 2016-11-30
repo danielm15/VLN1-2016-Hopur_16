@@ -45,7 +45,6 @@ private:
     string _gender;
     unsigned int _year_of_birth;
     unsigned int _year_of_death;
-
 };
 
 #endif GENIUS_H

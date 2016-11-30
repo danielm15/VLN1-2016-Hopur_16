@@ -1,7 +1,4 @@
 #include "consoleui.h"
-#include <iostream>
-#include "datalayer.h"
-#include <vector>
 
 using namespace std;
 
@@ -54,13 +51,52 @@ void ConsoleUI::run()
         }
         case '3':
         {
+            bool saved = false;
+
+            string name;
+            char gender;
+            int dateOfBirth;
+            int dateOfDeath;
+            ServiceLayer s;
+
             cout << "Add entrey" << endl;
+            cout << "Name: " << endl;
+
+            cin.ignore();
+            getline(cin,name,'\n');
+            cin >> gender;
+            cin >> dateOfBirth;
+            cin >> dateOfDeath;
+
+            saved = s.addEntry(name,gender,dateOfBirth,dateOfDeath);
+
+            if(saved == true)
+            {
+                cout << "Entry saved";
+            }
+            else
+                cout << "Entry failed";
 
             break;
         }
         case '4':
         {
+            string name;
+
             cout << "Search for entry" << endl;
+            getline(cin,name,'\n');
+            ServiceLayer s;
+
+            try
+            {
+                Genius g = s.find(name);
+                cout << g << endl;
+            }
+            catch (int i)
+            {
+                cout << "Did not find anything" << endl;
+            }
+
             break;
         }
         case 'q':
@@ -73,10 +109,10 @@ void ConsoleUI::run()
             cout << "or q to quit the application" << endl;
             break;
         }
-        }
 
     }
-    while(!(input == 'q' || input == 'Q'));
+
+    }while(!(input == 'q' || input == 'Q'));
 
 }
 
