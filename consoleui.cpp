@@ -64,7 +64,7 @@ void ConsoleUI::run()
             int dateOfDeath;
             ServiceLayer s;
 
-            cout << "Add entrey" << endl;
+            cout << "Add entry" << endl;
             cout << "Name: ";
 
             cin.ignore();
@@ -118,7 +118,6 @@ void ConsoleUI::run()
         }
         default:
         {
-            clearscreen ();
             cout << "Please enter a number between 1-3" << endl;
             cout << "or q to quit the application" << endl;
             break;
