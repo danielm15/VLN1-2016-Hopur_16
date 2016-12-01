@@ -55,8 +55,15 @@ Genius ServiceLayer::find(string name) const
 bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death)
 {
     DataLayer d;
-    string fullGender;
+    string fullGender = getFullGenderName(gender);
+    Genius genius(name, fullGender, date_of_birth, date_of_death);
+    return d.save(genius);
+}
 
+// Give me a char and I will tell you what gender it is supposed to be
+string ServiceLayer::getFullGenderName(char gender)
+{
+    string fullGender = "";
     if (gender == 'm' || gender == 'M')
     {
         fullGender = "Male";
@@ -69,6 +76,6 @@ bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size
     {
         fullGender = "N/A";
     }
-    Genius genius(name, fullGender, date_of_birth, date_of_death);
-    return d.save(genius);
+
+    return fullGender;
 }
