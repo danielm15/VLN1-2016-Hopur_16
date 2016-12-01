@@ -23,7 +23,7 @@ public:
     vector<Genius> getGenius();
 
     // Adds a new line to the dataset.
-    bool addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death);
+    bool addEntry(string name, char gender, size_t dateOfBirth, size_t dateOfDeath);
 
     // Removes entry
     // Use find to get genius
