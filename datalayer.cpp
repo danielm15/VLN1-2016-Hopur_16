@@ -1,5 +1,4 @@
 #include "datalayer.h"
-#include "genius.h"
 
 using namespace std;
 
