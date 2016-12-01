@@ -11,7 +11,7 @@ public:
     void clearscreen ();
     void run();
 private:
-    //ServiceLayer _service;
+    ServiceLayer _service;
 };
 
 #endif //CONSOLEUI_H

@@ -31,8 +31,7 @@ void ConsoleUI::run()
         {
             clearscreen ();
             cout << "=============| Unsorted list |==============" << endl;
-            ServiceLayer s;
-            vector<Genius> GVector = s.getGenius();
+            vector<Genius> GVector = _service.getGenius();
 
             for(unsigned int i = 0; i < GVector.size(); i++)
             {
@@ -53,8 +52,7 @@ void ConsoleUI::run()
             {
                 clearscreen ();
                 cout << "==============| Sorted list by Descending order |===============" << endl;
-                ServiceLayer s;
-                vector<Genius> GVector = s.sortVector();
+                vector<Genius> GVector = _service.sortVector();
 
                 for(unsigned int i = 0; i < GVector.size(); i++)
                 {
@@ -67,8 +65,7 @@ void ConsoleUI::run()
             {
                 clearscreen ();
                 cout << "==============| Sorted list by Ascending order |===============" << endl;
-                ServiceLayer s;
-                vector<Genius> GVector = s.sortVector();
+                vector<Genius> GVector = _service.sortVector();
 
                 for(int i = GVector.size()-2; i >= 0; i--)
                 {
@@ -89,7 +86,6 @@ void ConsoleUI::run()
             size_t dateOfDeath;
             bool rejected = false;
             bool check = true;
-            ServiceLayer s;
 
             cout << "===============| Add entry |================" << endl;
 
@@ -127,7 +123,7 @@ void ConsoleUI::run()
             cout << "Year of death: ";
             cin >> dateOfDeath;
 
-            saved = s.addEntry(name,gender,dateOfBirth,dateOfDeath);
+            saved = _service.addEntry(name,gender,dateOfBirth,dateOfDeath);
 
             if(saved == true)
             {
@@ -148,11 +144,10 @@ void ConsoleUI::run()
             cout << "===============| Search for entry |================" << endl;
             cin.ignore();
             getline(cin,name,'\n');
-            ServiceLayer s;
 
             try
             {
-                Genius g = s.find(name);
+                Genius g = _service.find(name);
                 cout << g << endl;
             }
             catch(int)
@@ -171,17 +166,16 @@ void ConsoleUI::run()
             cout << "===============| Delete entry |================" << endl;
             cin.ignore();
             getline(cin,name,'\n');
-            ServiceLayer s;
 
             try
             {
-                Genius g = s.find(name);
+                Genius g = _service.find(name);
                 cout << g << endl;
                 cout << "Would you like to delete this entry? (y/n): ";
                 cin >> YorN;
                 if(YorN == 'y' || YorN == 'Y')
                 {
-                    s.removeEntry(g);
+                    _service.removeEntry(g);
                 }
                 else
                 {
