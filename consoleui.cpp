@@ -49,32 +49,32 @@ void ConsoleUI::run()
             cout << "============================" << endl;
             cin >> sortby;
 
-            if ('D' == sortby)
+            if ('D' == sortby || 'd' == sortby)
             {
-           clearscreen ();
-            cout << "==============| Sorted list by Descending order |===============" << endl;
-            ServiceLayer s;
-            vector<Genius> GVector = s.sortVector();
+                clearscreen ();
+                cout << "==============| Sorted list by Descending order |===============" << endl;
+                ServiceLayer s;
+                vector<Genius> GVector = s.sortVector();
 
-            for(unsigned int i = 0; i < GVector.size(); i++)
+                for(unsigned int i = 0; i < GVector.size(); i++)
                 {
                     cout << GVector[i] << endl;
                 }
-            cout << endl;
+                cout << endl;
             }
 
-            else if ('A' == sortby)
+            else if ('A' == sortby || 'a' == sortby)
             {
-           clearscreen ();
-            cout << "==============| Sorted list by Ascending order |===============" << endl;
-            ServiceLayer s;
-            vector<Genius> GVector = s.sortVector();
+                clearscreen ();
+                cout << "==============| Sorted list by Ascending order |===============" << endl;
+                ServiceLayer s;
+                vector<Genius> GVector = s.sortVector();
 
-            for(int i = GVector.size()-2; i >= 0; i--)
+                for(int i = GVector.size()-2; i >= 0; i--)
                 {
                     cout << GVector[i] << endl;
                 }
-            cout << endl;
+                cout << endl;
             }
             break;
         }
