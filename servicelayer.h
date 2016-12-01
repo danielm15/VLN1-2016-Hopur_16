@@ -24,9 +24,10 @@ public:
 
     // Adds a new line to the dataset.
     bool addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death);
+    bool removeEntry(Genius genius);
 
     // Takes char and returns corresponding gender
-    string getFullGenderName(char gender)
+    string getFullGenderName(char gender);
 
 };
 

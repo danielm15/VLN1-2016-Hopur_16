@@ -59,3 +59,17 @@ ostream& operator <<(ostream& out, const Genius& p1)
     return out;
 }
 
+bool operator ==(const Genius& g1, const Genius& g2)
+{
+    if (g1._name != g2._name)
+        return false;
+    if (g1._gender != g2._gender)
+        return false;
+    if (g1._year_of_birth != g2._year_of_birth)
+        return false;
+    if (g1._year_of_death != g2._year_of_death)
+        return false;
+
+    return true;
+}
+

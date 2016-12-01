@@ -28,6 +28,7 @@ public:
 
     // Friend functions
     friend ostream& operator <<(ostream& out, const Genius& p1);
+    friend bool operator ==(const Genius& g1, const Genius& p2);
 
 private:
     string _name;
