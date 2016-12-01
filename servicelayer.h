@@ -19,7 +19,7 @@ public:
     // Checks if name is a substring in the dataset
     Genius find(string name) const;
 
-    // Reterns the dataset
+    // Returns the dataset
     vector<Genius> getGenius();
 
     // Adds a new line to the dataset.

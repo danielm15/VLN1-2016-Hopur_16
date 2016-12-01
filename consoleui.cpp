@@ -10,6 +10,7 @@ ConsoleUI::ConsoleUI()
 void ConsoleUI::run()
 {
     char input = ' ';
+    char sortby = ' ';
 
     do
     {
@@ -41,8 +42,16 @@ void ConsoleUI::run()
         }
         case '2':
         {
+            cout << "============================" << endl;
+            cout << "Enter D for order by decending" << endl;
+            cout << "Enter A for order by ascending" << endl;
+            cout << "============================" << endl;
+            cin >> sortby;
+
+            if ('D' == sortby)
+            {
            clearscreen ();
-            cout << "==============| Sorted list |===============" << endl;
+            cout << "==============| Sorted list by Descending order |===============" << endl;
             ServiceLayer s;
             vector<Genius> GVector = s.sortVector();
 
@@ -51,6 +60,21 @@ void ConsoleUI::run()
                     cout << GVector[i] << endl;
                 }
             cout << endl;
+            }
+
+            else if ('A' == sortby)
+            {
+           clearscreen ();
+            cout << "==============| Sorted list by Ascending order |===============" << endl;
+            ServiceLayer s;
+            vector<Genius> GVector = s.sortVector();
+
+            for(int i = GVector.size()-2; i >= 0; i--)
+                {
+                    cout << GVector[i] << endl;
+                }
+            cout << endl;
+            }
             break;
         }
         case '3':
@@ -158,5 +182,4 @@ void ConsoleUI::clearscreen ()
 {
     system("cls");
 }
-
 
