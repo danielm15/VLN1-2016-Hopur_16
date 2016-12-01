@@ -36,7 +36,7 @@ Genius ServiceLayer::find(string name) const
     vector<Genius> GVector = d.getInfo();
     Genius g;
 
-    for(size_t i = 0; i < GVector.size(); i++)
+    for(unsigned int i = 0; i < GVector.size(); i++)
     {
         string geniusName = GVector[i].getName();
 
@@ -48,7 +48,7 @@ Genius ServiceLayer::find(string name) const
     }
     throw -1;
 }
-bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death)
+bool ServiceLayer::addEntry(string name, char gender, unsigned int date_of_birth, unsigned int date_of_death)
 {
     DataLayer d;
     string fullGender;

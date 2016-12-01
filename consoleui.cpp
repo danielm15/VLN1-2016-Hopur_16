@@ -7,6 +7,11 @@ ConsoleUI::ConsoleUI()
 
 }
 
+void wait()
+{
+    Sleep(1000);
+}
+
 void ConsoleUI::run()
 {
     char input = ' ';
@@ -57,24 +62,27 @@ void ConsoleUI::run()
         {
             clearscreen ();
             bool saved = false;
-
-            string name;
-            char gender;
-            size_t dateOfBirth;
-            size_t dateOfDeath;
             bool rejected = false;
             bool check = true;
+            char gender;
+            string strgender,name, strdateOfBirth, strdateOfDeath;
+            unsigned int dateOfDeath, dateOfBirth;;
+
             ServiceLayer s;
 
             cout << "===============| Add entry |================" << endl;
 
+            // Name check fall
             while(check)
             {
+
                 cout << "Name: ";
                 cin.ignore();
                 getline(cin,name,'\n');
-                for(size_t i = 0; i < name.length() && !rejected; i++)
+                for(unsigned int i = 0; i < name.length() && !rejected; i++)
                 {
+                    if(ispunct(name[i]))
+                        rejected = true;
                     if(isalpha(name[i]))
                         continue;
                     if(name[i] == ' ')
@@ -84,21 +92,150 @@ void ConsoleUI::run()
                 }
                 if(rejected == true)
                 {
-                    cout << "Name can only contain alphabetic characters and spaces" << endl;
+                    cout << "Name can only contain alphabetic characters and spaces!" << endl;
                     check = true;
+                    rejected = false;
+                    wait();
                 }
                 else
                 {
                     check = false;
+                    cout << "Name successfully entered" << endl;
+                    wait();
                 }
+                clearscreen();
             }
 
-            cout << "Gender (m/f): ";
-            cin >> gender;
-            cout << "Year of birth: ";
-            cin >> dateOfBirth;
-            cout << "Year of death: ";
-            cin >> dateOfDeath;
+
+            // Gender check fall
+            check = true;
+            rejected = false;
+
+            while(check)
+            {
+                cout << "Gender (m/f): ";
+                getline(cin,strgender,'\n');
+
+                if(strgender.size() == 1)
+                {
+                    rejected = false;
+                    gender = strgender[0];
+                }
+                else
+                {
+                    rejected = true;
+                }
+
+                if(gender == 'm' || gender == 'M' || gender == 'f' || gender == 'F')
+                {
+                    rejected = false;
+                }
+                else
+                {
+                    rejected = true;
+                }
+
+
+                if(rejected == true)
+                {
+                    cout << "Please enter m for male or f for female" << endl;
+                    check = true;
+                    rejected = false;
+                    wait();
+                }
+                else
+                {
+                    check = false;
+                    cout << "Gender successfully entered" << endl;
+                    wait();
+                }
+                clearscreen();
+            }
+
+            //Year of birth check fall
+            rejected = false;
+            check = true;
+            while(check)
+            {
+                cout << "Year of birth: ";
+                getline(cin,strdateOfBirth,'\n');
+
+                for(unsigned int i = 0; i < strdateOfBirth.length() && !rejected; i++)
+                {
+                    if(isdigit(strdateOfBirth[i]))
+                        continue;
+                    rejected = true;
+                }
+
+                if(!rejected && strdateOfBirth.length() == 4)
+                {
+                    dateOfBirth = atoi(strdateOfBirth.c_str());
+
+                    if(dateOfBirth > 999 || dateOfBirth < 2017)
+                    {
+                        check = false;
+                        cout << "Year of birth successfully entered" << endl;
+                        wait();
+                    }
+                }
+                else
+                {
+                    check = true;
+                    cout << "Please enter a valid date of birth" << endl;
+                    rejected = false;
+
+                    wait();
+                }
+                clearscreen();
+            }
+
+            //Year of death check fall
+            rejected = false;
+            check = true;
+            while(check)
+            {
+                cout << "Enter 0 if person is alive" << endl;
+                cout << "Year of death: ";
+                getline(cin,strdateOfDeath,'\n');
+
+                for(unsigned int i = 0; i < strdateOfDeath.length() && !rejected; i++)
+                {
+                    if(isdigit(strdateOfDeath[i]))
+                        continue;
+                    rejected = true;
+                }
+                if(!rejected && strdateOfDeath.length() == 1)
+                {
+                    dateOfDeath = atoi(strdateOfDeath.c_str());
+
+                    if(dateOfDeath == 0)
+                    {
+                        check = false;
+                        cout << "Yay" << " " <<  name << " is still alive" << endl;
+                        wait();
+                    }
+                }
+                else if(!rejected && strdateOfDeath.length() == 4)
+                {
+                    dateOfDeath = atoi(strdateOfDeath.c_str());
+
+                    if(dateOfDeath > 999 && dateOfDeath < 2017)
+                    {
+                        check = false;
+                        cout << "Year of death successfully entered" << endl;
+                        wait();
+                    }
+                }
+                else
+                {
+                    check = true;
+                    cout << "Please enter a valid date of death" << endl;
+                    rejected = false;
+
+                    wait();
+                }
+                clearscreen();
+            }
 
             saved = s.addEntry(name,gender,dateOfBirth,dateOfDeath);
 
@@ -108,7 +245,7 @@ void ConsoleUI::run()
             }
             else
             {
-                cout << "Entry failed" << endl;
+                cerr << "Entry failed" << endl;
             }
             cout << endl;
             break;
@@ -130,7 +267,7 @@ void ConsoleUI::run()
             }
             catch(int)
             {
-                cout << "Did not find anything" << endl;
+                cerr << "Did not find anything" << endl;
             }
             cout << endl;
             break;

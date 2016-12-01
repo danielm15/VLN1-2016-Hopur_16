@@ -2,7 +2,12 @@
 #define CONSOLEUI_H
 #include <iostream>
 #include <vector>
+#include <windows.h>
+#include <conio.h>
 #include <servicelayer.h>
+#include <stdlib.h>
+#include <cstdio>
+
 
 class ConsoleUI
 {
