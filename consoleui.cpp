@@ -18,6 +18,7 @@ void ConsoleUI::run()
         cout << "Enter 2 for Sorted list" << endl;
         cout << "Enter 3 to Add entry" << endl;
         cout << "Enter 4 to Search for entry" << endl;
+        cout << "Enter 5 to Delete an entry" << endl;
         cout << "Enter q to Quit" << endl;
         cout << "============================" << endl;
         cin >> input;
@@ -137,6 +138,40 @@ void ConsoleUI::run()
             cout << endl;
             break;
         }
+        case '5':
+        {
+            clearscreen ();
+            string name;
+            char YorN;
+
+            cout << "===============| Delete entry |================" << endl;
+            cin.ignore();
+            getline(cin,name,'\n');
+            ServiceLayer s;
+
+            try
+            {
+                Genius g = s.find(name);
+                cout << g << endl;
+                cout << "Would you like to delete this entry? (y/n): ";
+                cin >> YorN;
+                if(YorN == 'y' || YorN == 'Y')
+                {
+                    s.removeEntry(g);
+                }
+                else
+                {
+                    "Entry was not deleted";
+                }
+
+            }
+            catch(int)
+            {
+                cout << "Did not find anything" << endl;
+            }
+            cout << endl;
+            break;
+        }
         case 'q':
         {
             clearscreen ();
@@ -145,7 +180,7 @@ void ConsoleUI::run()
         default:
         {
             cout << "*" << input << "*" << " is not valid as an input!" << endl;
-            cout << "Please enter a number between 1-4" << endl;
+            cout << "Please enter a number between 1-5" << endl;
             cout << "or q to quit the application" << endl;
             break;
         }
