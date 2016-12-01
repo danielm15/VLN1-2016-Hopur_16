@@ -72,7 +72,3 @@ bool operator ==(const Genius& g1, const Genius& g2)
 
     return true;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> f95716c960cd62a6d832ba68ac0b2737a1c72217
