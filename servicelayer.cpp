@@ -50,6 +50,27 @@ Genius ServiceLayer::find(string name) const
     throw -1;
 }
 
+vector<Genius> ServiceLayer::filter(string name) const
+{
+    DataLayer d;
+    vector<Genius> GVector = d.getInfo();
+    vector<Genius> filtered;
+    Genius g;
+    string lowercaseName = toLowerCase(name);
+
+    for(size_t i = 0; i < GVector.size(); i++)
+    {
+        string geniusName = toLowerCase(GVector[i].getName());
+
+        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
+        if (geniusName.find(lowercaseName) != std::string::npos)
+        {
+            filtered.push_back(GVector[i]);
+        }
+    }
+    return filtered;
+}
+
 // Saves a new line to data.csv file, checks which gender
 // it is and fills in the right one. Returns true if it
 // could save, false if not

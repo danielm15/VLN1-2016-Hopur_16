@@ -145,15 +145,16 @@ void ConsoleUI::run()
             cin.ignore();
             getline(cin,name,'\n');
 
-            try
-            {
-                Genius g = _service.find(name);
-                cout << g << endl;
-            }
-            catch(int)
-            {
-                cout << "Did not find anything" << endl;
-            }
+                vector<Genius> filtered = _service.filter(name);
+                for(int i = 0; i < filtered.size(); i++)
+                {
+                    cout << filtered[i] << endl;
+                }
+
+           if (filtered.size() == 0)
+                {
+                    cout << "No results found" << endl;
+                }
             cout << endl;
             break;
         }

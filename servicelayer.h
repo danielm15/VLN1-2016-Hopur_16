@@ -13,6 +13,8 @@ class ServiceLayer
 public:
     ServiceLayer();
 
+    vector<Genius> filter(string name) const;
+
     // Returns all data sorted in alphabetical order
     vector<Genius> sortVector();
 
