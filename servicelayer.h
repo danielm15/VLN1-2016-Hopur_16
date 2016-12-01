@@ -33,6 +33,9 @@ public:
     // Takes char and returns corresponding gender
     string getFullGenderName(char gender);
 
+private:
+    // Converts string to lowercase and returns it.
+    string toLowerCase(string s) const;
 };
 
 #endif //SERVICELAYER_H
