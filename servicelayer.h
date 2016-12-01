@@ -12,10 +12,23 @@ class ServiceLayer
 {
 public:
     ServiceLayer();
+
+    // Returns all data sorted in alphabetical order
     vector<Genius> sortVector();
-	Genius find(string name) const;
+
+    // Checks if name is a substring in the dataset
+    Genius find(string name) const;
+
+    // Reterns the dataset
     vector<Genius> getGenius();
+
+    // Adds a new line to the dataset.
     bool addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death);
+    bool removeEntry(Genius genius);
+
+    // Takes char and returns corresponding gender
+    string getFullGenderName(char gender);
+
 };
 
-#endif SERVICELAYER_H
+#endif //SERVICELAYER_H

@@ -2,17 +2,16 @@
 #define CONSOLEUI_H
 #include <iostream>
 #include <vector>
-#include <datalayer.h>
 #include <servicelayer.h>
 
 class ConsoleUI
 {
 public:
     ConsoleUI();
-
+    void clearscreen ();
     void run();
 private:
     //ServiceLayer _service;
 };
 
-#endif CONSOLEUI_H
+#endif //CONSOLEUI_H

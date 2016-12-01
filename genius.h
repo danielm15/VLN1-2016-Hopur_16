@@ -5,46 +5,36 @@
 #include <fstream>
 #include <string>
 #include <istream>
+#include <iomanip>
 
 using namespace std;
 
 class Genius
 {
 public:
+
+    // Constructors
     Genius();
-    Genius(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death);
+    Genius(string name, string gender, size_t year_of_birth, size_t year_of_death);
+
+    // comparison for sort algorithm.
+    bool operator <(const Genius& p) const;
+
+    // Getters for private parameters
+    string getName() const;
+    string getGender() const;
+    size_t getBirthYear() const;
+    size_t getDeathYear() const;
+
+    // Friend functions
     friend ostream& operator <<(ostream& out, const Genius& p1);
-
-    bool operator <(const Genius& p) const
-    {
-        return _name < p._name;
-    }
-
-    string getName() const
-    {
-        return _name;
-    }
-
-    string getGender() const
-    {
-        return _gender;
-    }
-
-    unsigned int getBirthYear() const
-    {
-        return _year_of_birth;
-    }
-
-    unsigned int getDeathYear() const
-    {
-        return _year_of_death;
-    }
+    friend bool operator ==(const Genius& g1, const Genius& p2);
 
 private:
     string _name;
     string _gender;
-    unsigned int _year_of_birth;
-    unsigned int _year_of_death;
+    size_t _year_of_birth;
+    size_t _year_of_death;
 };
 
-#endif GENIUS_H
+#endif //GENIUS_H

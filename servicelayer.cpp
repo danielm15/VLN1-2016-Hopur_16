@@ -49,17 +49,33 @@ Genius ServiceLayer::find(string name) const
     throw -1;
 }
 
+// Saves a new line to data.csv file, checks which gender
+// it is and fills in the right one. Returns true if it
+// could save, false if not
 bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death)
 {
     DataLayer d;
-    string fullGender;
+    string fullGender = getFullGenderName(gender);
+    Genius genius(name, fullGender, date_of_birth, date_of_death);
+    return d.save(genius);
+}
 
-    //Error check TODO
-    if (gender == 'm')
+// could save, false if not
+bool ServiceLayer::removeEntry(Genius genius)
+{
+    DataLayer d;
+    return d.remove(genius);
+}
+
+// Give me a char and I will tell you what gender it is supposed to be
+string ServiceLayer::getFullGenderName(char gender)
+{
+    string fullGender = "";
+    if (gender == 'm' || gender == 'M')
     {
         fullGender = "Male";
     }
-    else if (gender == 'f')
+    else if (gender == 'f' || gender == 'F')
     {
         fullGender = "Female";
     }
@@ -67,6 +83,6 @@ bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size
     {
         fullGender = "N/A";
     }
-    Genius genius(name, fullGender, date_of_birth, date_of_death);
-    return d.save(genius);
+
+    return fullGender;
 }
