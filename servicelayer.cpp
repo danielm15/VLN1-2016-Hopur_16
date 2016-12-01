@@ -35,24 +35,64 @@ Genius ServiceLayer::find(string name) const
     DataLayer d;
     vector<Genius> GVector = d.getInfo();
     Genius g;
+    string lowercaseName = toLowerCase(name);
 
     for(unsigned int i = 0; i < GVector.size(); i++)
     {
-        string geniusName = GVector[i].getName();
+        string geniusName = toLowerCase(GVector[i].getName());
 
         // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
-        if (geniusName.find(name) != std::string::npos)
+        if (geniusName.find(lowercaseName) != std::string::npos)
         {
             return GVector[i];
         }
     }
     throw -1;
 }
-bool ServiceLayer::addEntry(string name, char gender, unsigned int date_of_birth, unsigned int date_of_death)
+
+vector<Genius> ServiceLayer::filter(string name) const
 {
     DataLayer d;
-    string fullGender;
+    vector<Genius> GVector = d.getInfo();
+    vector<Genius> filtered;
+    Genius g;
+    string lowercaseName = toLowerCase(name);
 
+    for(unsigned int i = 0; i < GVector.size(); i++)
+    {
+        string geniusName = toLowerCase(GVector[i].getName());
+
+        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
+        if (geniusName.find(lowercaseName) != std::string::npos)
+        {
+            filtered.push_back(GVector[i]);
+        }
+    }
+    return filtered;
+}
+
+// Saves a new line to data.csv file, checks which gender
+// it is and fills in the right one. Returns true if it
+// could save, false if not
+bool ServiceLayer::addEntry(string name, char gender, unsigned int dateOfBirth, unsigned int dateOfDeath)
+{
+    DataLayer d;
+    string fullGender = getFullGenderName(gender);
+    Genius genius(name, fullGender, dateOfBirth, dateOfDeath);
+    return d.save(genius);
+}
+
+// could save, false if not
+bool ServiceLayer::removeEntry(Genius genius)
+{
+    DataLayer d;
+    return d.remove(genius);
+}
+
+// Give me a char and I will tell you what gender it is supposed to be
+string ServiceLayer::getFullGenderName(char gender)
+{
+    string fullGender = "";
     if (gender == 'm' || gender == 'M')
     {
         fullGender = "Male";
@@ -65,6 +105,17 @@ bool ServiceLayer::addEntry(string name, char gender, unsigned int date_of_birth
     {
         fullGender = "N/A";
     }
-    Genius genius(name, fullGender, date_of_birth, date_of_death);
-    return d.save(genius);
+
+    return fullGender;
+}
+
+// Converts string to lowercase and returns it.
+string ServiceLayer::toLowerCase(string s) const
+{
+    string lowercaseName = s;
+    for (unsigned int i = 0; i < s.length(); i++)
+    {
+        lowercaseName[i] = tolower(lowercaseName[i]);
+    }
+    return lowercaseName;
 }

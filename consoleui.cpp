@@ -15,6 +15,7 @@ void wait()
 void ConsoleUI::run()
 {
     char input = ' ';
+    char sortby = ' ';
 
     do
     {
@@ -23,6 +24,7 @@ void ConsoleUI::run()
         cout << "Enter 2 for Sorted list" << endl;
         cout << "Enter 3 to Add entry" << endl;
         cout << "Enter 4 to Search for entry" << endl;
+        cout << "Enter 5 to Delete an entry" << endl;
         cout << "Enter q to Quit" << endl;
         cout << "============================" << endl;
         cin >> input;
@@ -34,8 +36,7 @@ void ConsoleUI::run()
         {
             clearscreen ();
             cout << "=============| Unsorted list |==============" << endl;
-            ServiceLayer s;
-            vector<Genius> GVector = s.getGenius();
+            vector<Genius> GVector = _service.getGenius();
 
             for(unsigned int i = 0; i < GVector.size(); i++)
             {
@@ -46,16 +47,37 @@ void ConsoleUI::run()
         }
         case '2':
         {
-           clearscreen ();
-            cout << "==============| Sorted list |===============" << endl;
-            ServiceLayer s;
-            vector<Genius> GVector = s.sortVector();
+            cout << "============================" << endl;
+            cout << "Enter D for order by decending" << endl;
+            cout << "Enter A for order by ascending" << endl;
+            cout << "============================" << endl;
+            cin >> sortby;
 
-            for(unsigned int i = 0; i < GVector.size(); i++)
+            if ('D' == sortby || 'd' == sortby)
+            {
+                clearscreen ();
+                cout << "==============| Sorted list by Descending order |===============" << endl;
+                vector<Genius> GVector = _service.sortVector();
+
+                for(unsigned int i = 0; i < GVector.size(); i++)
                 {
                     cout << GVector[i] << endl;
                 }
-            cout << endl;
+                cout << endl;
+            }
+
+            else if ('A' == sortby || 'a' == sortby)
+            {
+                clearscreen ();
+                cout << "==============| Sorted list by Ascending order |===============" << endl;
+                vector<Genius> GVector = _service.sortVector();
+
+                for(int i = GVector.size()-2; i >= 0; i--)
+                {
+                    cout << GVector[i] << endl;
+                }
+                cout << endl;
+            }
             break;
         }
         case '3':
@@ -79,6 +101,8 @@ void ConsoleUI::run()
                 cout << "Name: ";
                 cin.ignore();
                 getline(cin,name,'\n');
+                name[0] = toupper(name[0]);
+
                 for(unsigned int i = 0; i < name.length() && !rejected; i++)
                 {
                     if(ispunct(name[i]))
@@ -237,7 +261,7 @@ void ConsoleUI::run()
                 clearscreen();
             }
 
-            saved = s.addEntry(name,gender,dateOfBirth,dateOfDeath);
+            saved = _service.addEntry(name,gender,dateOfBirth,dateOfDeath);
 
             if(saved == true)
             {
@@ -258,12 +282,45 @@ void ConsoleUI::run()
             cout << "===============| Search for entry |================" << endl;
             cin.ignore();
             getline(cin,name,'\n');
-            ServiceLayer s;
+
+                vector<Genius> filtered = _service.filter(name);
+                for(int i = 0; i < filtered.size(); i++)
+                {
+                    cout << filtered[i] << endl;
+                }
+
+           if (filtered.size() == 0)
+                {
+                    cout << "No results found" << endl;
+                }
+            cout << endl;
+            break;
+        }
+        case '5':
+        {
+            clearscreen ();
+            string name;
+            char YorN;
+
+            cout << "===============| Delete entry |================" << endl;
+            cin.ignore();
+            getline(cin,name,'\n');
 
             try
             {
-                Genius g = s.find(name);
+                Genius g = _service.find(name);
                 cout << g << endl;
+                cout << "Would you like to delete this entry? (y/n): ";
+                cin >> YorN;
+                if(YorN == 'y' || YorN == 'Y')
+                {
+                    _service.removeEntry(g);
+                }
+                else
+                {
+                    "Entry was not deleted";
+                }
+
             }
             catch(int)
             {
@@ -280,7 +337,7 @@ void ConsoleUI::run()
         default:
         {
             cout << "*" << input << "*" << " is not valid as an input!" << endl;
-            cout << "Please enter a number between 1-4" << endl;
+            cout << "Please enter a number between 1-5" << endl;
             cout << "or q to quit the application" << endl;
             break;
         }
@@ -295,5 +352,4 @@ void ConsoleUI::clearscreen ()
 {
     system("cls");
 }
-
 
