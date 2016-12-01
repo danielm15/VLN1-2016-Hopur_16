@@ -72,7 +72,7 @@ void ConsoleUI::run()
                 cout << "==============| Sorted list by Ascending order |===============" << endl;
                 vector<Genius> GVector = _service.sortVector();
 
-                for(int i = GVector.size()-2; i >= 0; i--)
+                for(size_t i = GVector.size()-2; i >= 0; i--)
                 {
                     cout << GVector[i] << endl;
                 }
