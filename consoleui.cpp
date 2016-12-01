@@ -13,11 +13,13 @@ void ConsoleUI::run()
 
     do
     {
-        cout << "Enter *1* to view original list" << endl;
-        cout << "Enter *2* to view list in alphabetical order" << endl;
-        cout << "Enter *3* to add entry to list" << endl;
-        cout << "Enter *4* to search for entry in the list" << endl;
-        cout << "Enter *q* to quit application" << endl;
+        cout << "============================" << endl;
+        cout << "Enter 1 for Unsorted list" << endl;
+        cout << "Enter 2 for Sorted list" << endl;
+        cout << "Enter 3 to Add entry" << endl;
+        cout << "Enter 4 to Search entry" << endl;
+        cout << "Enter q to Quit" << endl;
+        cout << "============================" << endl;
         cin >> input;
 
 
@@ -34,6 +36,7 @@ void ConsoleUI::run()
             {
                 cout << GVector[i] << endl;
             }
+            cout << endl;
             break;
         }
         case '2':
@@ -47,6 +50,7 @@ void ConsoleUI::run()
                 {
                     cout << GVector[i] << endl;
                 }
+            cout << endl;
             break;
         }
         case '3':
@@ -60,7 +64,7 @@ void ConsoleUI::run()
             int dateOfDeath;
             ServiceLayer s;
 
-            cout << "Add entrey" << endl;
+            cout << "Add entry" << endl;
             cout << "Name: ";
 
             cin.ignore();
@@ -82,7 +86,7 @@ void ConsoleUI::run()
             {
                 cout << "Entry failed" << endl;
             }
-
+            cout << endl;
             break;
         }
         case '4':
@@ -104,7 +108,7 @@ void ConsoleUI::run()
             {
                 cout << "Did not find anything" << endl;
             }
-
+            cout << endl;
             break;
         }
         case 'q':
@@ -114,7 +118,6 @@ void ConsoleUI::run()
         }
         default:
         {
-            clearscreen ();
             cout << "Please enter a number between 1-3" << endl;
             cout << "or q to quit the application" << endl;
             break;
@@ -129,7 +132,6 @@ void ConsoleUI::run()
 void ConsoleUI::clearscreen ()
 {
     system("cls");
-    system ("clear");
 }
 
 
