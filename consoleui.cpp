@@ -17,7 +17,7 @@ void ConsoleUI::run()
         cout << "Enter 1 for Unsorted list" << endl;
         cout << "Enter 2 for Sorted list" << endl;
         cout << "Enter 3 to Add entry" << endl;
-        cout << "Enter 4 to Search entry" << endl;
+        cout << "Enter 4 to Search for entry" << endl;
         cout << "Enter q to Quit" << endl;
         cout << "============================" << endl;
         cin >> input;
@@ -28,7 +28,7 @@ void ConsoleUI::run()
         case '1':
         {
             clearscreen ();
-            cout << "Unsorted list" << endl;
+            cout << "=============| Unsorted list |==============" << endl;
             ServiceLayer s;
             vector<Genius> GVector = s.getGenius();
 
@@ -42,7 +42,7 @@ void ConsoleUI::run()
         case '2':
         {
            clearscreen ();
-            cout << "Sorted list" << endl;
+            cout << "==============| Sorted list |===============" << endl;
             ServiceLayer s;
             vector<Genius> GVector = s.sortVector();
 
@@ -60,15 +60,39 @@ void ConsoleUI::run()
 
             string name;
             char gender;
-            int dateOfBirth;
-            int dateOfDeath;
+            size_t dateOfBirth;
+            size_t dateOfDeath;
+            bool rejected = false;
+            bool check = true;
             ServiceLayer s;
 
-            cout << "Add entry" << endl;
-            cout << "Name: ";
+            cout << "===============| Add entry |================" << endl;
 
-            cin.ignore();
-            getline(cin,name,'\n');
+            while(check)
+            {
+                cout << "Name: ";
+                cin.ignore();
+                getline(cin,name,'\n');
+                for(size_t i = 0; i < name.length() && !rejected; i++)
+                {
+                    if(isalpha(name[i]))
+                        continue;
+                    if(name[i] == ' ')
+                        continue;
+
+                    rejected = true;
+                }
+                if(rejected == true)
+                {
+                    cout << "Name can only contain alphabetic characters and spaces" << endl;
+                    check = true;
+                }
+                else
+                {
+                    check = false;
+                }
+            }
+
             cout << "Gender (m/f): ";
             cin >> gender;
             cout << "Year of birth: ";
@@ -94,7 +118,7 @@ void ConsoleUI::run()
             clearscreen ();
             string name;
 
-            cout << "Search for entry" << endl;
+            cout << "===============| Search for entry |================" << endl;
             cin.ignore();
             getline(cin,name,'\n');
             ServiceLayer s;
@@ -118,7 +142,8 @@ void ConsoleUI::run()
         }
         default:
         {
-            cout << "Please enter a number between 1-3" << endl;
+            cout << "*" << input << "*" << " is not valid as an input!" << endl;
+            cout << "Please enter a number between 1-4" << endl;
             cout << "or q to quit the application" << endl;
             break;
         }

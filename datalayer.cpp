@@ -7,6 +7,8 @@ DataLayer::DataLayer()
 
 }
 
+// Reads data from comma seperated file (.csv)
+// by pushing it into a vector of type Genius
 vector<Genius> DataLayer::getInfo()
 {
     vector<Genius> GeniusVector;
@@ -34,14 +36,13 @@ vector<Genius> DataLayer::getInfo()
     }
     else
     {
-        cout << "List was not found" << endl;
+        cerr << "List was not found" << endl;
     }
     theFile.close();
 
     return GeniusVector;
 }
 
-// Post fall
 bool DataLayer::save(Genius genius)
 {
     string filename = "data.csv";
