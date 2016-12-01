@@ -72,4 +72,3 @@ bool operator ==(const Genius& g1, const Genius& g2)
 
     return true;
 }
-

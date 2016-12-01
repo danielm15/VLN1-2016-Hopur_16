@@ -35,13 +35,14 @@ Genius ServiceLayer::find(string name) const
     DataLayer d;
     vector<Genius> GVector = d.getInfo();
     Genius g;
+    string lowercaseName = toLowerCase(name);
 
     for(size_t i = 0; i < GVector.size(); i++)
     {
-        string geniusName = GVector[i].getName();
+        string geniusName = toLowerCase(GVector[i].getName());
 
         // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
-        if (geniusName.find(name) != std::string::npos)
+        if (geniusName.find(lowercaseName) != std::string::npos)
         {
             return GVector[i];
         }
@@ -85,4 +86,15 @@ string ServiceLayer::getFullGenderName(char gender)
     }
 
     return fullGender;
+}
+
+// Converts string to lowercase and returns it.
+string ServiceLayer::toLowerCase(string s) const
+{
+    string lowercaseName = s;
+    for (size_t i = 0; i < s.length(); i++)
+    {
+        lowercaseName[i] = tolower(lowercaseName[i]);
+    }
+    return lowercaseName;
 }

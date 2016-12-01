@@ -97,6 +97,8 @@ void ConsoleUI::run()
                 cout << "Name: ";
                 cin.ignore();
                 getline(cin,name,'\n');
+                name[0] = toupper(name[0]);
+
                 for(size_t i = 0; i < name.length() && !rejected; i++)
                 {
                     if(isalpha(name[i]))
