@@ -73,7 +73,10 @@ void ConsoleUI::run()
                 cout << "Name: ";
                 cin.ignore();
                 getline(cin,name,'\n');
+<<<<<<< HEAD
                 name[0] = toupper(name[0]);
+=======
+>>>>>>> f95716c960cd62a6d832ba68ac0b2737a1c72217
                 for(size_t i = 0; i < name.length() && !rejected; i++)
                 {
                     if(isalpha(name[i]))
