@@ -43,6 +43,8 @@ vector<Genius> DataLayer::getInfo()
     return GeniusVector;
 }
 
+// Saves genius to the bottom of the file, if he is still
+// alive then it saves N/A as a death year.
 bool DataLayer::save(Genius genius)
 {
     string filename = "data.csv";

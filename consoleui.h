@@ -14,4 +14,4 @@ private:
     //ServiceLayer _service;
 };
 
-#endif CONSOLEUI_H
+#endif //CONSOLEUI_H

@@ -15,4 +15,4 @@ public:
     bool save(Genius genius);
 };
 
-#endif DATALAYER_H
+#endif //DATALAYER_H

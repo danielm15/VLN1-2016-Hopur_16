@@ -12,34 +12,22 @@ using namespace std;
 class Genius
 {
 public:
+
+    // Constructors
     Genius();
     Genius(string name, string gender, size_t year_of_birth, size_t year_of_death);
+
+    // comparison for sort algorithm.
+    bool operator <(const Genius& p) const;
+
+    // Getters for private parameters
+    string getName() const;
+    string getGender() const;
+    size_t getBirthYear() const;
+    size_t getDeathYear() const;
+
+    // Friend functions
     friend ostream& operator <<(ostream& out, const Genius& p1);
-
-    bool operator <(const Genius& p) const
-    {
-        return _name < p._name;
-    }
-
-    string getName() const
-    {
-        return _name;
-    }
-
-    string getGender() const
-    {
-        return _gender;
-    }
-
-    size_t getBirthYear() const
-    {
-        return _year_of_birth;
-    }
-
-    size_t getDeathYear() const
-    {
-        return _year_of_death;
-    }
 
 private:
     string _name;
@@ -48,4 +36,4 @@ private:
     size_t _year_of_death;
 };
 
-#endif GENIUS_H
+#endif //GENIUS_H

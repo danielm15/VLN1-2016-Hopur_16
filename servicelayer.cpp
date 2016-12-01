@@ -48,6 +48,10 @@ Genius ServiceLayer::find(string name) const
     }
     throw -1;
 }
+
+// Saves a new line to data.csv file, checks which gender
+// it is and fills in the right one. Returns true if it
+// could save, false if not
 bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death)
 {
     DataLayer d;
