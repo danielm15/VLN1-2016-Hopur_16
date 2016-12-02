@@ -42,24 +42,40 @@ vector<Genius> ServiceLayer::sortByGenderVector()
     return newGVector;
 }
 
-bool Birth (Genius &lhs, Genius &rhs) {return lhs.getBirthYear() < rhs.getBirthYear();}
+struct Birth
+{
+    bool operator() (Genius &lhs, Genius &rhs)
+    {
+        return lhs.getBirthYear() < rhs.getBirthYear();
+    }
+};
 
 vector<Genius> ServiceLayer::sortByBirthYearVector()
 {
     vector<Genius> GVector = getGenius();
 
-    sort(GVector.begin(), GVector.end(), Birth);
+    Birth birth;
+
+    sort(GVector.begin(), GVector.end(), birth);
 
     return GVector;
 }
 
-bool Death(Genius &lhs, Genius &rhs) {return lhs.getDeathYear() < rhs.getDeathYear();}
+struct Death
+{
+    bool operator() (Genius &lhs, Genius &rhs)
+    {
+        return lhs.getDeathYear() < rhs.getDeathYear();
+    }
+};
 
 vector<Genius> ServiceLayer::sortByDeathYearVector()
 {
     vector<Genius> GVector = getGenius();
 
-    sort(GVector.begin(), GVector.end(), Death);
+    Death death;
+
+    sort(GVector.begin(), GVector.end(), death);
 
     return GVector;
 }

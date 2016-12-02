@@ -71,7 +71,6 @@ void ConsoleUI::displaySortedList()
     {
         clearscreen ();
         cout << "==============| Sorted list by Descending order |===============" << endl;
-        vector<Genius> GVector = _service.sortVector();
 
         printVector(GVector);
     }
