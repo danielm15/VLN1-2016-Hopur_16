@@ -22,6 +22,18 @@ private:
     void addNewEntryToDataSet();
     void searchForEntries();
     void deleteAnEntry();
+
+    string promptForName();
+    bool validateName(string name);
+
+    char promptForGender();
+    bool validateGender(string name);
+
+    unsigned int promptForDateOfBirth();
+    bool validateDateOfBirth(string date);
+
+    unsigned int promptForDateOfDeath(string name);
+    bool validateDateOfDeath(string date);
 };
 
 #endif //CONSOLEUI_H
