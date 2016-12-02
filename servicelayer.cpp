@@ -19,6 +19,52 @@ vector<Genius> ServiceLayer::sortVector()
     return GVector;
 }
 
+vector<Genius> ServiceLayer::sortByGenderVector()
+{
+    vector<Genius> GVector = getGenius();
+    vector<Genius> newGVector;
+
+    for(unsigned i = 0; i < GVector.size(); i++)
+    {
+        if(GVector[i].getGender() == "Female")
+            newGVector.push_back(GVector[i]);
+    }
+    for(unsigned i = 0; i < GVector.size(); i++)
+    {
+        if(GVector[i].getGender() == "Male")
+            newGVector.push_back(GVector[i]);
+    }
+    for(unsigned i = 0; i < GVector.size(); i++)
+    {
+        if(GVector[i].getGender() == "N/A")
+            newGVector.push_back(GVector[i]);
+    }
+    return newGVector;
+}
+
+bool Birth (Genius &lhs, Genius &rhs) {return lhs.getBirthYear() < rhs.getBirthYear();}
+
+vector<Genius> ServiceLayer::sortByBirthYearVector()
+{
+    vector<Genius> GVector = getGenius();
+
+    sort(GVector.begin(), GVector.end(), Birth);
+
+    return GVector;
+}
+
+bool Death(Genius &lhs, Genius &rhs) {return lhs.getDeathYear() < rhs.getDeathYear();}
+
+vector<Genius> ServiceLayer::sortByDeathYearVector()
+{
+    vector<Genius> GVector = getGenius();
+
+    sort(GVector.begin(), GVector.end(), Death);
+
+    return GVector;
+}
+
+
 // Fetches the GeniusVector from the DataLayer
 vector<Genius> ServiceLayer::getGenius()
 {

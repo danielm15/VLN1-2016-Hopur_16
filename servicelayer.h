@@ -36,6 +36,12 @@ public:
     // Takes char and returns corresponding gender
     string getFullGenderName(char gender);
 
+    vector<Genius> sortByGenderVector();
+
+    vector<Genius> sortByBirthYearVector();
+
+    vector<Genius> sortByDeathYearVector();
+
 private:
     // Converts string to lowercase and returns it.
     string toLowerCase(string s) const;

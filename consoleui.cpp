@@ -6,7 +6,6 @@ ConsoleUI::ConsoleUI()
 {
 
 }
-
 void ConsoleUI::displayUnsortedList()
 {
     cout << "=============| Unsorted list |==============" << endl;
@@ -28,20 +27,16 @@ void ConsoleUI::displaySortedList()
     cout << "============================" << endl;
     cin >> sortby;
 
-    if ('D' == sortby || 'd' == sortby)
+    if (sortby == 'D' || sortby == 'd')
     {
         clearscreen ();
         cout << "==============| Sorted list by Descending order |===============" << endl;
         vector<Genius> GVector = _service.sortVector();
 
-        for(unsigned int i = 0; i < GVector.size(); i++)
-        {
-            cout << GVector[i] << endl;
-        }
-        cout << endl;
+        printVector(GVector);
     }
 
-    else if ('A' == sortby || 'a' == sortby)
+    else if (sortby == 'A' || sortby == 'a')
     {
         clearscreen ();
         cout << "==============| Sorted list by Ascending order |===============" << endl;
@@ -52,6 +47,10 @@ void ConsoleUI::displaySortedList()
             cout << GVector[i] << endl;
         }
         cout << endl;
+    }
+    else if(sortby == 'Q' || sortby == 'q')
+    {
+        run();
     }
 }
 
@@ -142,7 +141,6 @@ void ConsoleUI::deleteAnEntry()
 void ConsoleUI::run()
 {
     char input = ' ';
-    char sortby = ' ';
 
     do
     {
@@ -167,38 +165,49 @@ void ConsoleUI::run()
         }
         case '2':
         {
+            clearscreen();
+            cout << "==============| Sorted list |===============" << endl;
+            ServiceLayer s;
+            vector<Genius> GVector;
+            char sortedInput;
+
             cout << "============================" << endl;
-            cout << "Enter D for order by decending" << endl;
-            cout << "Enter A for order by ascending" << endl;
+            cout << "Enter a for list sorted by name" << endl;
+            cout << "Enter b for list sorted by gender" << endl;
+            cout << "Enter c for list sorted by birth year" << endl;
+            cout << "Enter d for list sorted by death year" << endl;
             cout << "============================" << endl;
-            cin >> sortby;
+            cin >> sortedInput;
 
-            if ('D' == sortby || 'd' == sortby)
+            if(sortedInput == 'a' || sortedInput == 'A')
             {
-                clearscreen ();
-                cout << "==============| Sorted list by Descending order |===============" << endl;
-                vector<Genius> GVector = _service.sortVector();
-
-                for(unsigned int i = 0; i < GVector.size(); i++)
-                {
-                    cout << GVector[i] << endl;
-                }
-                cout << endl;
+                clearscreen();
+                displaySortedList();
+                break;
             }
-
-            else if ('A' == sortby || 'a' == sortby)
+            else if(sortedInput == 'b' || sortedInput == 'B')
             {
-                clearscreen ();
-                cout << "==============| Sorted list by Ascending order |===============" << endl;
-                vector<Genius> GVector = _service.sortVector();
-
-                for(size_t i = GVector.size()-2; i >= 0; i--)
-                {
-                    cout << GVector[i] << endl;
-                }
-                cout << endl;
+                GVector = s.sortByGenderVector();
+                printVector(GVector);
             }
-            displaySortedList();
+            else if(sortedInput == 'c' || sortedInput == 'C')
+            {
+                GVector = s.sortByBirthYearVector();
+                printVector(GVector);
+            }
+            else if(sortedInput == 'd' || sortedInput == 'D')
+            {
+                GVector = s.sortByDeathYearVector();
+                printVector(GVector);
+            }
+            else if (sortedInput == 'q' || sortedInput == 'Q')
+            {
+                run();
+            }
+            else
+            {
+                cout << "Please enter a-b-c-d for you choice" << endl;
+            }
             break;
         }
         case '3':
@@ -454,5 +463,14 @@ bool ConsoleUI::validateDateOfDeath(string date)
         rejected = true;
     }
     return rejected;
+}
+
+void ConsoleUI::printVector(vector<Genius> GVector)
+{
+    for(unsigned int i = 0; i < GVector.size(); i++)
+    {
+        cout << GVector[i] << endl;
+    }
+    cout << endl;
 }
 

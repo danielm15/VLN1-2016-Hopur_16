@@ -113,3 +113,4 @@ bool DataLayer::saveList(vector<Genius> geniuses)
 
     return true;
 }
+

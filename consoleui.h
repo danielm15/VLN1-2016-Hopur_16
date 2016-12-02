@@ -20,6 +20,7 @@ private:
     void addNewEntryToDataSet();
     void searchForEntries();
     void deleteAnEntry();
+    void printVector(vector<Genius> GVector);
 
     string promptForName();
     bool validateName(string name);
