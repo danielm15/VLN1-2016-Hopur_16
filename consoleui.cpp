@@ -63,10 +63,8 @@ void ConsoleUI::displaySortedList()
 void ConsoleUI::addNewEntryToDataSet()
 {
     bool saved = false;
-    bool rejected = false;
-    bool check = true;
     char gender;
-    string strgender,name, strdateOfBirth, strdateOfDeath;
+    string name;
     unsigned int dateOfDeath, dateOfBirth;;
 
     ServiceLayer s;
@@ -100,7 +98,7 @@ void ConsoleUI::searchForEntries()
     getline(cin,name,'\n');
 
     vector<Genius> filtered = _service.filter(name);
-    for(int i = 0; i < filtered.size(); i++)
+    for(size_t i = 0; i < filtered.size(); i++)
     {
         cout << filtered[i] << endl;
     }
@@ -133,7 +131,7 @@ void ConsoleUI::deleteAnEntry()
         }
         else
         {
-            "Entry was not deleted";
+            cout << "Entry was not deleted" << endl;
         }
 
     }
