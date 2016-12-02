@@ -80,9 +80,9 @@ void ConsoleUI::displaySortedList()
         clearscreen ();
         cout << "==============| Sorted list by Ascending order |===============" << endl;
 
-        for(int i = GVector.size() - 1; i >= 0; i--)
+        for(size_t i = GVector.size(); i > 0; i--)
         {
-            cout << GVector[i] << endl;
+            cout << GVector[i - 1] << endl;
         }
         cout << endl;
     }
