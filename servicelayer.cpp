@@ -89,7 +89,7 @@ vector<Genius> ServiceLayer::getGenius()
 }
 
 
-// Searches for name in Geniues vector from the data layer.
+// Searches for name in Genius vector from the data layer.
 // If it finds a subset of the query in name it returns corresponding
 // Genius object. If it does not find anything it raises a exception
 Genius ServiceLayer::find(string name) const
@@ -144,7 +144,7 @@ bool ServiceLayer::addEntry(string name, char gender, unsigned int dateOfBirth, 
     return d.save(genius);
 }
 
-// could save, false if not
+
 bool ServiceLayer::removeEntry(Genius genius)
 {
     DataLayer d;

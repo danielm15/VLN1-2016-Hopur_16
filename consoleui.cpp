@@ -6,6 +6,7 @@ ConsoleUI::ConsoleUI()
 {
 
 }
+// Displays the unsorted list like it is stored in the data file
 void ConsoleUI::displayUnsortedList()
 {
     cout << "=============| Unsorted list |==============" << endl;
@@ -17,7 +18,10 @@ void ConsoleUI::displayUnsortedList()
     }
     cout << endl;
 }
-
+// Asks the user what variable he would like to sort by and
+// then fetches the data with the appropriate sort function for that
+// variable, then you have a choice to display the sorted list
+// in ascending or descending order
 void ConsoleUI::displaySortedList()
 {
     cout << "==============| Sorted list |===============" << endl;
@@ -93,6 +97,9 @@ void ConsoleUI::displaySortedList()
     }
 }
 
+// Puts some restrictions on what kind of data you can input
+// with each of the validate functions within the prompt functions
+// then saves the input data into the data file
 void ConsoleUI::addNewEntryToDataSet()
 {
     bool saved = false;
@@ -122,6 +129,7 @@ void ConsoleUI::addNewEntryToDataSet()
     cout << endl;
 }
 
+// Finds every instance of the searched term
 void ConsoleUI::searchForEntries()
 {
     string name;
@@ -246,6 +254,7 @@ void ConsoleUI::run()
 
 }
 
+//Clears the console screen
 void ConsoleUI::clearscreen ()
 {
     system("cls");
@@ -280,6 +289,9 @@ string ConsoleUI::promptForName()
     return name;
 }
 
+// Returns a bool value that is false if the name
+// has no invalid characters i.e. is only alphabetic
+// characters or spaces
 bool ConsoleUI::validateName(string name)
 {
     bool rejected = false;
@@ -327,6 +339,8 @@ char ConsoleUI::promptForGender()
     return gender;
 }
 
+// Returns a bool value that is false only if the
+// gender input is m or f non-case sensitive
 bool ConsoleUI::validateGender(string strgender)
 {
     bool rejected;
@@ -392,6 +406,7 @@ unsigned int ConsoleUI::promptForDateOfBirth()
     return dateOfBirth;
 }
 
+// returns false if every letter in string is a number
 bool ConsoleUI::validateDateOfBirth(string date)
 {
     bool rejected = false;
@@ -452,6 +467,7 @@ unsigned int ConsoleUI::promptForDateOfDeath(string name)
     return dateOfDeath;
 }
 
+// returns false if every letter in string is a number
 bool ConsoleUI::validateDateOfDeath(string date)
 {
     bool rejected = false;
