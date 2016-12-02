@@ -17,6 +17,11 @@ public:
     void run();
 private:
     ServiceLayer _service;
+    void displayUnsortedList();
+    void displaySortedList();
+    void addNewEntryToDataSet();
+    void searchForEntries();
+    void deleteAnEntry();
 };
 
 #endif //CONSOLEUI_H
