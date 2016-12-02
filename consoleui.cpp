@@ -63,6 +63,7 @@ void ConsoleUI::displaySortedList()
     cout << "============================" << endl;
     cout << "Enter D for order by decending" << endl;
     cout << "Enter A for order by ascending" << endl;
+    cout << "Enter Q to quit" << endl;
     cout << "============================" << endl;
     cin >> sortby;
 
