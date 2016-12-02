@@ -20,6 +20,45 @@ void ConsoleUI::displayUnsortedList()
 
 void ConsoleUI::displaySortedList()
 {
+    cout << "==============| Sorted list |===============" << endl;
+    ServiceLayer s;
+    vector<Genius> GVector;
+    char sortedInput;
+
+    cout << "============================" << endl;
+    cout << "Enter a for list sorted by name" << endl;
+    cout << "Enter b for list sorted by gender" << endl;
+    cout << "Enter c for list sorted by birth year" << endl;
+    cout << "Enter d for list sorted by death year" << endl;
+    cout << "Enter q to quit" << endl;
+    cout << "============================" << endl;
+    cin >> sortedInput;
+
+    if(sortedInput == 'a' || sortedInput == 'A')
+    {
+        GVector = s.sortVector();
+    }
+    else if(sortedInput == 'b' || sortedInput == 'B')
+    {
+        GVector = s.sortByGenderVector();
+    }
+    else if(sortedInput == 'c' || sortedInput == 'C')
+    {
+        GVector = s.sortByBirthYearVector();
+    }
+    else if(sortedInput == 'd' || sortedInput == 'D')
+    {
+        GVector = s.sortByDeathYearVector();
+    }
+    else if(sortedInput == 'q' || sortedInput == 'Q')
+    {
+        clearscreen();
+        run();
+    }
+    else
+    {
+
+    }
     char sortby = ' ';
     cout << "============================" << endl;
     cout << "Enter D for order by decending" << endl;
@@ -40,9 +79,8 @@ void ConsoleUI::displaySortedList()
     {
         clearscreen ();
         cout << "==============| Sorted list by Ascending order |===============" << endl;
-        vector<Genius> GVector = _service.sortVector();
 
-        for(size_t i = GVector.size()-2; i >= 0; i--)
+        for(int i = GVector.size() - 1; i >= 0; i--)
         {
             cout << GVector[i] << endl;
         }
@@ -50,6 +88,7 @@ void ConsoleUI::displaySortedList()
     }
     else if(sortby == 'Q' || sortby == 'q')
     {
+        clearscreen();
         run();
     }
 }
@@ -165,50 +204,10 @@ void ConsoleUI::run()
         }
         case '2':
         {
-            clearscreen();
-            cout << "==============| Sorted list |===============" << endl;
-            ServiceLayer s;
-            vector<Genius> GVector;
-            char sortedInput;
 
-            cout << "============================" << endl;
-            cout << "Enter a for list sorted by name" << endl;
-            cout << "Enter b for list sorted by gender" << endl;
-            cout << "Enter c for list sorted by birth year" << endl;
-            cout << "Enter d for list sorted by death year" << endl;
-            cout << "============================" << endl;
-            cin >> sortedInput;
-
-            if(sortedInput == 'a' || sortedInput == 'A')
-            {
-                clearscreen();
-                displaySortedList();
-                break;
-            }
-            else if(sortedInput == 'b' || sortedInput == 'B')
-            {
-                GVector = s.sortByGenderVector();
-                printVector(GVector);
-            }
-            else if(sortedInput == 'c' || sortedInput == 'C')
-            {
-                GVector = s.sortByBirthYearVector();
-                printVector(GVector);
-            }
-            else if(sortedInput == 'd' || sortedInput == 'D')
-            {
-                GVector = s.sortByDeathYearVector();
-                printVector(GVector);
-            }
-            else if (sortedInput == 'q' || sortedInput == 'Q')
-            {
-                run();
-            }
-            else
-            {
-                cout << "Please enter a-b-c-d for you choice" << endl;
-            }
-            break;
+           clearscreen ();
+           displaySortedList();
+           break;
         }
         case '3':
         {
