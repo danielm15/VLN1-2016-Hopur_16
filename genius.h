@@ -15,7 +15,7 @@ public:
 
     // Constructors
     Genius();
-    Genius(string name, string gender, size_t year_of_birth, size_t year_of_death);
+    Genius(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death);
 
     // comparison for sort algorithm.
     bool operator <(const Genius& p) const;
@@ -23,8 +23,8 @@ public:
     // Getters for private parameters
     string getName() const;
     string getGender() const;
-    size_t getBirthYear() const;
-    size_t getDeathYear() const;
+    unsigned int getBirthYear() const;
+    unsigned int getDeathYear() const;
 
     // Friend functions
     friend ostream& operator <<(ostream& out, const Genius& p1);
@@ -33,8 +33,8 @@ public:
 private:
     string _name;
     string _gender;
-    size_t _year_of_birth;
-    size_t _year_of_death;
+    unsigned int _year_of_birth;
+    unsigned int _year_of_death;
 };
 
 #endif //GENIUS_H

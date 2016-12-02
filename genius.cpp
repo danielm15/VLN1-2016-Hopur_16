@@ -5,7 +5,7 @@ Genius::Genius()
 
 }
 
-Genius::Genius(string name, string gender, size_t year_of_birth, size_t year_of_death)
+Genius::Genius(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death)
 {
     _name = name;
     _gender = gender;
@@ -29,12 +29,12 @@ string Genius::getGender() const
     return _gender;
 }
 
-size_t Genius::getBirthYear() const
+unsigned int Genius::getBirthYear() const
 {
     return _year_of_birth;
 }
 
-size_t Genius::getDeathYear() const
+unsigned int Genius::getDeathYear() const
 {
     return _year_of_death;
 }

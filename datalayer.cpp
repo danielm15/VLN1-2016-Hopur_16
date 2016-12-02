@@ -74,7 +74,7 @@ bool DataLayer::remove(Genius genius)
 {
     vector<Genius> geniuses = getInfo();
 
-    for (size_t i = 0; i < geniuses.size(); i++)
+    for (unsigned int i = 0; i < geniuses.size(); i++)
     {
         if (genius == geniuses[i])
         {
@@ -94,7 +94,7 @@ bool DataLayer::saveList(vector<Genius> geniuses)
 
     if(theFile.is_open())
     {
-        for (size_t i = 0; i < geniuses.size(); i++)
+        for (unsigned int i = 0; i < geniuses.size(); i++)
         {
             string deathYear = to_string(geniuses[i].getDeathYear());
 

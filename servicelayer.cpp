@@ -83,7 +83,7 @@ Genius ServiceLayer::find(string name) const
     Genius g;
     string lowercaseName = toLowerCase(name);
 
-    for(size_t i = 0; i < GVector.size(); i++)
+    for(unsigned int i = 0; i < GVector.size(); i++)
     {
         string geniusName = toLowerCase(GVector[i].getName());
 
@@ -96,14 +96,35 @@ Genius ServiceLayer::find(string name) const
     throw -1;
 }
 
+vector<Genius> ServiceLayer::filter(string name) const
+{
+    DataLayer d;
+    vector<Genius> GVector = d.getInfo();
+    vector<Genius> filtered;
+    Genius g;
+    string lowercaseName = toLowerCase(name);
+
+    for(unsigned int i = 0; i < GVector.size(); i++)
+    {
+        string geniusName = toLowerCase(GVector[i].getName());
+
+        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
+        if (geniusName.find(lowercaseName) != std::string::npos)
+        {
+            filtered.push_back(GVector[i]);
+        }
+    }
+    return filtered;
+}
+
 // Saves a new line to data.csv file, checks which gender
 // it is and fills in the right one. Returns true if it
 // could save, false if not
-bool ServiceLayer::addEntry(string name, char gender, size_t date_of_birth, size_t date_of_death)
+bool ServiceLayer::addEntry(string name, char gender, unsigned int dateOfBirth, unsigned int dateOfDeath)
 {
     DataLayer d;
     string fullGender = getFullGenderName(gender);
-    Genius genius(name, fullGender, date_of_birth, date_of_death);
+    Genius genius(name, fullGender, dateOfBirth, dateOfDeath);
     return d.save(genius);
 }
 
@@ -138,7 +159,7 @@ string ServiceLayer::getFullGenderName(char gender)
 string ServiceLayer::toLowerCase(string s) const
 {
     string lowercaseName = s;
-    for (size_t i = 0; i < s.length(); i++)
+    for (unsigned int i = 0; i < s.length(); i++)
     {
         lowercaseName[i] = tolower(lowercaseName[i]);
     }
