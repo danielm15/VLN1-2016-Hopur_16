@@ -44,7 +44,7 @@ vector<Genius> ServiceLayer::sortByGenderVector()
 
 struct Birth
 {
-    bool operator() (Genius &lhs, Genius &rhs)
+    bool operator() (Genius &rhs, Genius &lhs)
     {
         return lhs.getBirthYear() < rhs.getBirthYear();
     }
@@ -63,7 +63,7 @@ vector<Genius> ServiceLayer::sortByBirthYearVector()
 
 struct Death
 {
-    bool operator() (Genius &lhs, Genius &rhs)
+    bool operator() (Genius &rhs, Genius &lhs)
     {
         return lhs.getDeathYear() < rhs.getDeathYear();
     }

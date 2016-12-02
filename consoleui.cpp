@@ -414,7 +414,7 @@ unsigned int ConsoleUI::promptForDateOfDeath(string name)
 
     while(check)
     {
-        cout << "Enter 0 if person is alive" << endl;
+        cout << " ~ Enter 0 if person is alive ~ " << endl;
         cout << "Year of death: ";
         getline(cin,strdateOfDeath,'\n');
 
