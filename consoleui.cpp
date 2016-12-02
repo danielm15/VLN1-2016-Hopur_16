@@ -94,6 +94,7 @@ void ConsoleUI::searchForEntries()
     string name;
 
     cout << "===============| Search for entry |================" << endl;
+    cout << "Enter name: ";
     cin.ignore();
     getline(cin,name,'\n');
 
@@ -116,6 +117,7 @@ void ConsoleUI::deleteAnEntry()
     char YorN;
 
     cout << "===============| Delete entry |================" << endl;
+    cout << "Enter name: ";
     cin.ignore();
     getline(cin,name,'\n');
 
