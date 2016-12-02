@@ -45,13 +45,62 @@ void ConsoleUI::run()
            clearscreen ();
             cout << "==============| Sorted list |===============" << endl;
             ServiceLayer s;
-            vector<Genius> GVector = s.sortVector();
+            vector<Genius> GVector;
+            char sortedInput;
 
-            for(unsigned int i = 0; i < GVector.size(); i++)
+            cout << "============================" << endl;
+            cout << "Enter a for list sorted by name" << endl;
+            cout << "Enter b for list sorted by gender" << endl;
+            cout << "Enter c for list sorted by birth year" << endl;
+            cout << "Enter d for list sorted by death year" << endl;
+            cout << "============================" << endl;
+            cin >> sortedInput;
+
+            if(sortedInput == 'a' || sortedInput == 'A')
+            {
+                GVector = s.sortVector();
+
+                for(unsigned int i = 0; i < GVector.size(); i++)
                 {
                     cout << GVector[i] << endl;
                 }
-            cout << endl;
+                cout << endl;
+            }
+            else if(sortedInput == 'b' || sortedInput == 'B')
+            {
+                GVector = s.sortByGenderVector();
+
+                for(unsigned int i = 0; i < GVector.size(); i++)
+                {
+                    cout << GVector[i] << endl;
+                }
+                cout << endl;
+            }
+            else if(sortedInput == 'c' || sortedInput == 'C')
+            {
+                GVector = s.sortByBirthYearVector();
+
+                for(unsigned int i = 0; i < GVector.size(); i++)
+                {
+                    cout << GVector[i] << endl;
+                }
+                cout << endl;
+            }
+            else if(sortedInput == 'd' || sortedInput == 'D')
+            {
+                GVector = s.sortByDeathYearVector();
+
+                for(unsigned int i = 0; i < GVector.size(); i++)
+                {
+                    cout << GVector[i] << endl;
+                }
+                cout << endl;
+            }
+            else
+            {
+
+            }
+
             break;
         }
         case '3':
