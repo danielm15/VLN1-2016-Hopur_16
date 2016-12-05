@@ -14,6 +14,11 @@ class ComputerRepository
 {
 public:
     ComputerRepository();
+    ~ComputerRepository()
+    {
+        _db.close();
+    }
+
 
     /**
     * @brief getAllComputers fetches all computers from the database
