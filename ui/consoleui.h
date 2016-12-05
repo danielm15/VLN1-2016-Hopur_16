@@ -2,7 +2,7 @@
 #define CONSOLEUI_H
 #include <iostream>
 #include <vector>
-#include <servicelayer.h>
+#include <services/servicelayer.h>
 #include <stdlib.h>
 #include <cstdio>
 

@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include "genius.h"
+#include "models/geniusmodel.h"
 
 class DataLayer
 {

@@ -1,4 +1,4 @@
-#include "genius.h"
+#include "models/geniusmodel.h"
 
 Genius::Genius()
 {

@@ -3,8 +3,9 @@
 
 #include <vector>
 #include <algorithm>
-#include <genius.h>
-#include <datalayer.h>
+
+#include "models/geniusmodel.h"
+#include "repositories/datalayer.h"
 
 using namespace std;
 
