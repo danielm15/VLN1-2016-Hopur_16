@@ -13,14 +13,9 @@ vector<GeniusModel> GeniusRepository::getAllGeniuses()
     QSqlQuery query(_db);
     vector<GeniusModel> geniuses;
 
-    query.exec("SELECT * FROM Computers");
+    query.exec("SELECT * FROM Geniuses");
 
-    while(query.next()){
-        int id = query.value("id").toUInt();
-        string name = query.value("name").toString().toStdString();
-        int age = query.value("age").toUInt();
-        // TODO: Push to vector
-    }
+    geniuses = extractQueryToVector(query);
 
     return geniuses;
 }
@@ -31,7 +26,24 @@ vector<GeniusModel> GeniusRepository::searchForGenius()
     return searchlist;
 }
 
-bool GeniusRepository::addGenius()
+vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query)
+{
+    vector<GeniusModel> geniuses;
+
+    while(query.next()){
+        string name = query.value("name").toString().toStdString();
+        string gender = query.value("gender").toString().toStdString();
+        unsigned int yearOfBirth = query.value("yearOfBirth").toUInt();
+        unsigned int yearOfDeath = query.value("yearOfDeath").toUInt();
+
+        geniuses.push_back(GeniusModel(name, gender, yearOfBirth, yearOfDeath));
+    }
+
+    return geniuses;
+}
+
+bool GeniusRepository::addGenius(GeniusModel model)
 {
     return true;
 }
+

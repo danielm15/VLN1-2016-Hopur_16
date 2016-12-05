@@ -15,12 +15,7 @@ vector<ComputerModel> ComputerRepository::getAllComputers()
 
     query.exec("SELECT * FROM Computers");
 
-    while(query.next()){
-        int id = query.value("id").toUInt();
-        string name = query.value("name").toString().toStdString();
-        int age = query.value("age").toUInt();
-        // TODO: Push to vector
-    }
+    computers = extractQueryToVector(query);
 
     return computers;
 }
@@ -31,7 +26,23 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
     return computers;
 }
 
-bool ComputerRepository::addComputer()
+bool ComputerRepository::addComputer(ComputerModel model)
 {
     return true;
+}
+
+vector<ComputerModel> ComputerRepository::extractQueryToVector(QSqlQuery query)
+{
+    vector<ComputerModel> computers;
+
+    while(query.next()){
+        string name = query.value("name").toString().toStdString();
+        string gender = query.value("gender").toString().toStdString();
+        unsigned int yearOfBirth = query.value("yearOfBirth").toUInt();
+        unsigned int yearOfDeath = query.value("yearOfDeath").toUInt();
+
+        //computers.push_back(ComputerModel(name, gender, yearOfBirth, yearOfDeath));
+    }
+
+    return computers;
 }

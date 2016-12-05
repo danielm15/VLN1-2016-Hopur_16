@@ -31,6 +31,7 @@ public:
     friend bool operator ==(const GeniusModel& g1, const GeniusModel& p2);
 
 private:
+    unsigned int _id;
     string _name;
     string _gender;
     unsigned int _year_of_birth;
