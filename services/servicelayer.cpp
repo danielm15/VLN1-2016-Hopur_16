@@ -10,19 +10,19 @@ ServiceLayer::ServiceLayer()
 // Fetches the GeniusVector with getGenius and sorts
 // it in descending alphabetical order.
 // Makes use of the overloaded < operator
-vector<Genius> ServiceLayer::sortVector()
+vector<GeniusModel> ServiceLayer::sortVector()
 {
-    vector<Genius> GVector = getGenius();
+    vector<GeniusModel> GVector = getGenius();
 
     sort(GVector.begin(), GVector.end());
 
     return GVector;
 }
 
-vector<Genius> ServiceLayer::sortByGenderVector()
+vector<GeniusModel> ServiceLayer::sortByGenderVector()
 {
-    vector<Genius> GVector = getGenius();
-    vector<Genius> newGVector;
+    vector<GeniusModel> GVector = getGenius();
+    vector<GeniusModel> newGVector;
 
     for(unsigned i = 0; i < GVector.size(); i++)
     {
@@ -44,15 +44,15 @@ vector<Genius> ServiceLayer::sortByGenderVector()
 
 struct Birth
 {
-    bool operator() (Genius &rhs, Genius &lhs)
+    bool operator() (GeniusModel &rhs, GeniusModel &lhs)
     {
         return lhs.getBirthYear() < rhs.getBirthYear();
     }
 };
 
-vector<Genius> ServiceLayer::sortByBirthYearVector()
+vector<GeniusModel> ServiceLayer::sortByBirthYearVector()
 {
-    vector<Genius> GVector = getGenius();
+    vector<GeniusModel> GVector = getGenius();
 
     Birth birth;
 
@@ -63,15 +63,15 @@ vector<Genius> ServiceLayer::sortByBirthYearVector()
 
 struct Death
 {
-    bool operator() (Genius &rhs, Genius &lhs)
+    bool operator() (GeniusModel &rhs, GeniusModel &lhs)
     {
         return lhs.getDeathYear() < rhs.getDeathYear();
     }
 };
 
-vector<Genius> ServiceLayer::sortByDeathYearVector()
+vector<GeniusModel> ServiceLayer::sortByDeathYearVector()
 {
-    vector<Genius> GVector = getGenius();
+    vector<GeniusModel> GVector = getGenius();
 
     Death death;
 
@@ -82,7 +82,7 @@ vector<Genius> ServiceLayer::sortByDeathYearVector()
 
 
 // Fetches the GeniusVector from the DataLayer
-vector<Genius> ServiceLayer::getGenius()
+vector<GeniusModel> ServiceLayer::getGenius()
 {
     DataLayer p;
     return p.getInfo();
@@ -92,11 +92,11 @@ vector<Genius> ServiceLayer::getGenius()
 // Searches for name in Genius vector from the data layer.
 // If it finds a subset of the query in name it returns corresponding
 // Genius object. If it does not find anything it raises a exception
-Genius ServiceLayer::find(string name) const
+GeniusModel ServiceLayer::find(string name) const
 {
     DataLayer d;
-    vector<Genius> GVector = d.getInfo();
-    Genius g;
+    vector<GeniusModel> GVector = d.getInfo();
+    GeniusModel g;
     string lowercaseName = toLowerCase(name);
 
     for(unsigned int i = 0; i < GVector.size(); i++)
@@ -112,12 +112,12 @@ Genius ServiceLayer::find(string name) const
     throw -1;
 }
 
-vector<Genius> ServiceLayer::filter(string name) const
+vector<GeniusModel> ServiceLayer::filter(string name) const
 {
     DataLayer d;
-    vector<Genius> GVector = d.getInfo();
-    vector<Genius> filtered;
-    Genius g;
+    vector<GeniusModel> GVector = d.getInfo();
+    vector<GeniusModel> filtered;
+    GeniusModel g;
     string lowercaseName = toLowerCase(name);
 
     for(unsigned int i = 0; i < GVector.size(); i++)
@@ -140,12 +140,12 @@ bool ServiceLayer::addEntry(string name, char gender, unsigned int dateOfBirth, 
 {
     DataLayer d;
     string fullGender = getFullGenderName(gender);
-    Genius genius(name, fullGender, dateOfBirth, dateOfDeath);
+    GeniusModel genius(name, fullGender, dateOfBirth, dateOfDeath);
     return d.save(genius);
 }
 
 
-bool ServiceLayer::removeEntry(Genius genius)
+bool ServiceLayer::removeEntry(GeniusModel genius)
 {
     DataLayer d;
     return d.remove(genius);

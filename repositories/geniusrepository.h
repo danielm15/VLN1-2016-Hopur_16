@@ -1,6 +1,8 @@
 #ifndef GENIUSREPOSITORY_H
 #define GENIUSREPOSITORY_H
 
+#include <QtSql>
+
 #include <vector>
 #include <string>
 
@@ -13,12 +15,11 @@ class GeniusRepository
 public:
     GeniusRepository();
 
-    vector<Genius> getAllGeniuses();
-    vector<Genius> searchForGenius();
+    vector<GeniusModel> getAllGeniuses();
+    vector<GeniusModel> searchForGenius();
     bool addGenius();
-
 private:
-    string databasePath;
+    QSqlDatabase _db;
 };
 
 #endif // GENIUSREPOSITORY_H

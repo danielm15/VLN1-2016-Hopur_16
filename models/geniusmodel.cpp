@@ -1,11 +1,11 @@
 #include "models/geniusmodel.h"
 
-Genius::Genius()
+GeniusModel::GeniusModel()
 {
 
 }
 
-Genius::Genius(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death)
+GeniusModel::GeniusModel(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death)
 {
     _name = name;
     _gender = gender;
@@ -14,34 +14,34 @@ Genius::Genius(string name, string gender, unsigned int year_of_birth, unsigned 
 }
 
 // Teach the class who should get higher in shorted list.
-bool Genius::operator <(const Genius& p) const
+bool GeniusModel::operator <(const GeniusModel& p) const
 {
     return _name < p._name;
 }
 
-string Genius::getName() const
+string GeniusModel::getName() const
 {
     return _name;
 }
 
-string Genius::getGender() const
+string GeniusModel::getGender() const
 {
     return _gender;
 }
 
-unsigned int Genius::getBirthYear() const
+unsigned int GeniusModel::getBirthYear() const
 {
     return _year_of_birth;
 }
 
-unsigned int Genius::getDeathYear() const
+unsigned int GeniusModel::getDeathYear() const
 {
     return _year_of_death;
 }
 
 // Prints out genius line, if it is still alive death year
 // prints out as a N/A
-ostream& operator <<(ostream& out, const Genius& p1)
+ostream& operator <<(ostream& out, const GeniusModel& p1)
 {
     out << setw(20) << p1.getName() << " | ";
     out << setw(6) << p1.getGender() << " | ";
@@ -59,7 +59,7 @@ ostream& operator <<(ostream& out, const Genius& p1)
     return out;
 }
 
-bool operator ==(const Genius& g1, const Genius& g2)
+bool operator ==(const GeniusModel& g1, const GeniusModel& g2)
 {
     if (g1._name != g2._name)
         return false;

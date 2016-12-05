@@ -9,16 +9,16 @@
 
 using namespace std;
 
-class Genius
+class GeniusModel
 {
 public:
 
     // Constructors
-    Genius();
-    Genius(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death);
+    GeniusModel();
+    GeniusModel(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death);
 
     // comparison for sort algorithm.
-    bool operator <(const Genius& p) const;
+    bool operator <(const GeniusModel& p) const;
 
     // Getters for private parameters
     string getName() const;
@@ -27,8 +27,8 @@ public:
     unsigned int getDeathYear() const;
 
     // Friend functions
-    friend ostream& operator <<(ostream& out, const Genius& p1);
-    friend bool operator ==(const Genius& g1, const Genius& p2);
+    friend ostream& operator <<(ostream& out, const GeniusModel& p1);
+    friend bool operator ==(const GeniusModel& g1, const GeniusModel& p2);
 
 private:
     string _name;

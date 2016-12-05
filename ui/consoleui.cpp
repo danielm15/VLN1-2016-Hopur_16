@@ -10,7 +10,7 @@ ConsoleUI::ConsoleUI()
 void ConsoleUI::displayUnsortedList()
 {
     cout << "=============| Unsorted list |==============" << endl;
-    vector<Genius> GVector = _service.getGenius();
+    vector<GeniusModel> GVector = _service.getGenius();
 
     for(unsigned int i = 0; i < GVector.size(); i++)
     {
@@ -26,7 +26,7 @@ void ConsoleUI::displaySortedList()
 {
     cout << "==============| Sorted list |===============" << endl;
     ServiceLayer s;
-    vector<Genius> GVector;
+    vector<GeniusModel> GVector;
     char sortedInput;
 
     cout << "============================" << endl;
@@ -139,7 +139,7 @@ void ConsoleUI::searchForEntries()
     cin.ignore();
     getline(cin,name,'\n');
 
-    vector<Genius> filtered = _service.filter(name);
+    vector<GeniusModel> filtered = _service.filter(name);
     for(size_t i = 0; i < filtered.size(); i++)
     {
         cout << filtered[i] << endl;
@@ -164,7 +164,7 @@ void ConsoleUI::deleteAnEntry()
 
     try
     {
-        Genius g = _service.find(name);
+        GeniusModel g = _service.find(name);
         cout << g << endl;
         cout << "Would you like to delete this entry? (y/n): ";
         cin >> YorN;
@@ -480,7 +480,7 @@ bool ConsoleUI::validateDateOfDeath(string date)
     return rejected;
 }
 
-void ConsoleUI::printVector(vector<Genius> GVector)
+void ConsoleUI::printVector(vector<GeniusModel> GVector)
 {
     for(unsigned int i = 0; i < GVector.size(); i++)
     {

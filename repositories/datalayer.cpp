@@ -9,9 +9,9 @@ DataLayer::DataLayer()
 
 // Reads data from comma seperated file (.csv)
 // by pushing it into a vector of type Genius
-vector<Genius> DataLayer::getInfo()
+vector<GeniusModel> DataLayer::getInfo()
 {
-    vector<Genius> GeniusVector;
+    vector<GeniusModel> GeniusVector;
     string name, gender,str_birthyear, str_deathyear;
     unsigned int year_of_birth, year_of_death;
 
@@ -29,7 +29,7 @@ vector<Genius> DataLayer::getInfo()
             year_of_birth = atoi(str_birthyear.c_str());
             year_of_death = atoi(str_deathyear.c_str());
 
-            Genius temp = Genius(name, gender, year_of_birth, year_of_death);
+            GeniusModel temp = GeniusModel(name, gender, year_of_birth, year_of_death);
             GeniusVector.push_back(temp);
         }
         GeniusVector.pop_back();
@@ -45,7 +45,7 @@ vector<Genius> DataLayer::getInfo()
 
 // Saves genius to the bottom of the file, if he is still
 // alive then it saves N/A as a death year.
-bool DataLayer::save(Genius genius)
+bool DataLayer::save(GeniusModel genius)
 {
     ofstream theFile;
     theFile.open(FILE.c_str(), ios::out | ios::app);
@@ -70,9 +70,9 @@ bool DataLayer::save(Genius genius)
 }
 
 // Checks if the genius is in the file and removes him. Saves the file
-bool DataLayer::remove(Genius genius)
+bool DataLayer::remove(GeniusModel genius)
 {
-    vector<Genius> geniuses = getInfo();
+    vector<GeniusModel> geniuses = getInfo();
 
     for (unsigned int i = 0; i < geniuses.size(); i++)
     {
@@ -87,7 +87,7 @@ bool DataLayer::remove(Genius genius)
 }
 
 // Truncates the files and writes everything again to it.
-bool DataLayer::saveList(vector<Genius> geniuses)
+bool DataLayer::saveList(vector<GeniusModel> geniuses)
 {
     ofstream theFile;
     theFile.open(FILE.c_str());

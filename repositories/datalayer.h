@@ -13,18 +13,18 @@ public:
     DataLayer();
 
     // Returns all the geniuses.
-    vector<Genius> getInfo();
+    vector<GeniusModel> getInfo();
 
     // Saves new genius to the file
-    bool save(Genius genius);
+    bool save(GeniusModel genius);
 
     // Removes genius from file
-    bool remove(Genius genius);
+    bool remove(GeniusModel genius);
 private:
     const string FILE = "data.csv";
 
     // Updates the file
-    bool saveList(vector<Genius> geniuses);
+    bool saveList(vector<GeniusModel> geniuses);
 };
 
 #endif //DATALAYER_H
