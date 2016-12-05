@@ -8,6 +8,11 @@ GeniusRepository::GeniusRepository()
     _db.open();
 }
 
+GeniusRepository::~GeniusRepository()
+{
+    _db.close();
+}
+
 vector<GeniusModel> GeniusRepository::getAllGeniuses()
 {
     QSqlQuery query(_db);

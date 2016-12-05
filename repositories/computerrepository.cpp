@@ -8,6 +8,11 @@ ComputerRepository::ComputerRepository()
     _db.open();
 }
 
+ComputerRepository::~ComputerRepository()
+{
+    _db.close();
+}
+
 vector<ComputerModel> ComputerRepository::getAllComputers()
 {
     QSqlQuery query(_db);

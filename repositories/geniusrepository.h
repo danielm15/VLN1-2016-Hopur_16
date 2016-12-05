@@ -14,6 +14,7 @@ class GeniusRepository
 {
 public:
     GeniusRepository();
+    ~GeniusRepository();
 
     /**
     * @brief getAllGeniuses fetches all geniuses from the database
