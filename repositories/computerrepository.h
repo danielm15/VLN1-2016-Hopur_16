@@ -19,7 +19,6 @@ public:
         _db.close();
     }
 
-
     /**
     * @brief getAllComputers fetches all computers from the database
     * @return a vector containing all computers from the database
