@@ -20,9 +20,15 @@ vector<GeniusModel> GeniusRepository::getAllGeniuses()
     return geniuses;
 }
 
-vector<GeniusModel> GeniusRepository::searchForGenius()
+vector<GeniusModel> GeniusRepository::searchForGenius(string name)
 {
+    QSqlQuery query(_db);
     vector<GeniusModel> searchlist;
+
+    //query.exec("SELECT * FROM Geniuses WHERE name LIKE %" + name + "%");
+
+    searchlist = extractQueryToVector(query);
+
     return searchlist;
 }
 

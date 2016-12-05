@@ -23,6 +23,11 @@ vector<ComputerModel> ComputerRepository::getAllComputers()
 vector<ComputerModel> ComputerRepository::searchForComputer(string name)
 {
     vector<ComputerModel> computers;
+    QSqlQuery query(_db);
+
+
+    computers = extractQueryToVector(query);
+
     return computers;
 }
 
@@ -36,12 +41,13 @@ vector<ComputerModel> ComputerRepository::extractQueryToVector(QSqlQuery query)
     vector<ComputerModel> computers;
 
     while(query.next()){
-        string name = query.value("name").toString().toStdString();
-        string gender = query.value("gender").toString().toStdString();
-        unsigned int yearOfBirth = query.value("yearOfBirth").toUInt();
-        unsigned int yearOfDeath = query.value("yearOfDeath").toUInt();
+        unsigned int id = query.value("MakeYear").toUInt();
+        string modelName = query.value("ModelName").toString().toStdString();
+        unsigned int makeYear = query.value("MakeYear").toUInt();
+        string type = query.value("Type").toString().toStdString();
+        bool build = query.value("Build").toUInt();
 
-        //computers.push_back(ComputerModel(name, gender, yearOfBirth, yearOfDeath));
+        computers.push_back(ComputerModel(id, modelName, makeYear, type, build));
     }
 
     return computers;

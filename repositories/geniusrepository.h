@@ -26,7 +26,7 @@ public:
     * @param name that user wishes to filter by
     * @return a vector containing all geniuses from the database that matches this contition
     */
-    vector<GeniusModel> searchForGenius();
+    vector<GeniusModel> searchForGenius(string name);
 
     /**
     * @brief addGenius saves a genius model to a file
