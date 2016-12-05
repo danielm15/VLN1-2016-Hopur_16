@@ -1,4 +1,5 @@
 #include "services/servicelayer.h"
+#include "repositories/geniusrepository.h"
 
 using namespace std;
 
@@ -84,8 +85,8 @@ vector<GeniusModel> ServiceLayer::sortByDeathYearVector()
 // Fetches the GeniusVector from the DataLayer
 vector<GeniusModel> ServiceLayer::getGenius()
 {
-    DataLayer p;
-    return p.getInfo();
+    GeniusRepository repo;
+    return repo.getAllGeniuses();
 }
 
 

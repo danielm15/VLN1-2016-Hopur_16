@@ -39,8 +39,8 @@ vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query)
     while(query.next()){
         string name = query.value("name").toString().toStdString();
         string gender = query.value("gender").toString().toStdString();
-        unsigned int yearOfBirth = query.value("yearOfBirth").toUInt();
-        unsigned int yearOfDeath = query.value("yearOfDeath").toUInt();
+        unsigned int yearOfBirth = query.value("BirthYear").toUInt();
+        unsigned int yearOfDeath = query.value("DeathYear").toUInt();
 
         geniuses.push_back(GeniusModel(name, gender, yearOfBirth, yearOfDeath));
     }
