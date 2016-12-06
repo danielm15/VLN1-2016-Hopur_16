@@ -34,12 +34,8 @@ bool GeniusService::addGenius(string name, char gender, unsigned int dateOfBirth
 
 bool GeniusService::remove(GeniusModel genius)
 {
-<<<<<<< HEAD
     GeniusRepository r;
     return r.removeGenius(genius);
-=======
-    return true;
->>>>>>> ea2b2404611bc8ad9dce98c8279098f12970619a
 }
 
 // Give me a char and I will tell you what gender it is supposed to be

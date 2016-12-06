@@ -32,11 +32,7 @@ vector<ComputerModel> ComputerService::find(string modelName) const
 
 bool ComputerService::remove(ComputerModel model)
 {
-<<<<<<< HEAD
     ComputerRepository c;
     return c.removeComputer(model);
-=======
-    return true;
->>>>>>> ea2b2404611bc8ad9dce98c8279098f12970619a
 }
 
