@@ -20,24 +20,18 @@ vector<GeniusModel> GeniusRepository::getAllGeniuses()
 
 vector<GeniusModel> GeniusRepository::searchForGenius(string name)
 {
-    GeniusModel g;
-    vector<GeniusModel> filtered;
-    vector<GeniusModel> searchlist = getAllGeniuses();
+    QSqlQuery query(_db);
+    vector<GeniusModel> geniuses;
 
-    string lowercaseName = toLowerCase(name);
+    string likeName = "%" + name + "%";
 
-    for(unsigned int i = 0; i < searchlist.size(); i++)
-    {
-        string geniusName = toLowerCase(searchlist[i].getName());
+    query.prepare("SELECT * FROM Geniuses WHERE name LIKE :name");
+    query.bindValue(":name", QString::fromStdString(likeName));
+    query.exec();
 
-        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
-        if (geniusName.find(lowercaseName) != std::string::npos)
-        {
-            filtered.push_back(searchlist[i]);
-        }
-    }
+    geniuses = extractQueryToVector(query);
 
-    return filtered;
+    return geniuses;
 }
 
 vector<GeniusModel> GeniusRepository::sortByName(bool asc)
