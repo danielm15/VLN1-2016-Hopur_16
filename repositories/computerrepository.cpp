@@ -67,6 +67,15 @@ bool ComputerRepository::addComputer(ComputerModel model)
     return true;
 }
 
+bool ComputerRepository::removeComputer(ComputerModel model)
+{
+    QSqlQuery query(_db);
+    query.prepare("DELETE FROM Computers WHERE id = :id");
+    query.bindValue(":id", model.getId());
+
+    return query.exec();
+}
+
 vector<ComputerModel> ComputerRepository::extractQueryToVector(QSqlQuery query)
 {
     vector<ComputerModel> computers;

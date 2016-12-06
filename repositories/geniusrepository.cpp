@@ -80,6 +80,16 @@ bool GeniusRepository::saveGenius(GeniusModel genius)
     return query.exec();
 }
 
+bool GeniusRepository::removeGenius(GeniusModel model)
+{
+    QSqlQuery query(_db);
+
+    query.prepare("DELETE FROM Geniuses WHERE id = :id");
+    query.bindValue(":id", model.getId());
+
+    return query.exec();
+}
+
 vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query) const
 {
     vector<GeniusModel> geniuses;

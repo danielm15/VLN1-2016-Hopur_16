@@ -46,6 +46,12 @@ public:
     */
     bool addComputer(ComputerModel model);
 
+    /**
+     * @brief removeComputer removes computer from the repository
+     * @param model
+     * @return true if delete was a success, else false
+     */
+    bool removeComputer(ComputerModel model);
 private:
     QSqlDatabase _db;
 
