@@ -33,6 +33,13 @@ public:
     std::vector<ComputerModel> searchForComputer(string name);
 
     /**
+     * @brief sortByName Sorts computers by name
+     * @param asc if true sort by ascending
+     * @return sorted vector
+     */
+    vector<ComputerModel> sortByName(bool asc);
+
+    /**
     * @brief addCopmuter saves a computer model to a file
     * @param The model to save
     * @return true if it was a success, false if it was a failure

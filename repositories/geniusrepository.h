@@ -36,6 +36,13 @@ public:
     vector<GeniusModel> searchForGenius(string name);
 
     /**
+     * @brief sortByName Sorts geniuses by name
+     * @param asc if true sort by ascending
+     * @return sorted vector
+     */
+    vector<GeniusModel> sortByName(bool asc);
+
+    /**
     * @brief addGenius saves a genius model to a file
     * @param The model to save
     * @return true if it was a success, false if it was a failure
