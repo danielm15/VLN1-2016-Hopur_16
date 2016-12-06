@@ -10,7 +10,7 @@ ConsoleUI::ConsoleUI()
 void ConsoleUI::displayUnsortedList()
 {
     cout << "=============| Unsorted list |==============" << endl;
-    vector<GeniusModel> GVector = _service.getGenius();
+    vector<GeniusModel> GVector = _geniusservice.getGenius();
 
     for(unsigned int i = 0; i < GVector.size(); i++)
     {
@@ -107,7 +107,8 @@ void ConsoleUI::addNewEntryToDataSet()
     string name;
     unsigned int dateOfDeath, dateOfBirth;;
 
-    ServiceLayer s;
+    //ServiceLayer s;
+    GeniusService s;
 
     cout << "===============| Add entry |================" << endl;
 
@@ -116,7 +117,9 @@ void ConsoleUI::addNewEntryToDataSet()
     dateOfBirth = promptForDateOfBirth();
     dateOfDeath = promptForDateOfDeath(name);
 
-    saved = _service.addEntry(name,gender,dateOfBirth,dateOfDeath);
+    //saved = _service.addEntry(name,gender,dateOfBirth,dateOfDeath);
+
+    saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
 
     if(saved == true)
     {

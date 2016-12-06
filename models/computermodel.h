@@ -11,7 +11,7 @@ public:
     ComputerModel();
 
     /**
-     * @brief ComputerModel Construcing new object of computer
+     * @brief ComputerModel Constructing new object of computer
      * @param id
      * @param modelName
      * @param makeYear

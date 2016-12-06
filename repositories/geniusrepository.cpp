@@ -32,6 +32,24 @@ vector<GeniusModel> GeniusRepository::searchForGenius(string name)
     return searchlist;
 }
 
+bool GeniusRepository::saveGenius(GeniusModel genius)
+{
+    QString Qname = QString::fromStdString(genius.getName());
+    QString Qgender = QString::fromStdString(genius.getGender());
+    unsigned int birthYear = genius.getBirthYear();
+    unsigned int deathYear = genius.getDeathYear();
+
+    QSqlQuery query(_db);
+    query.prepare("INSERT INTO Geniuses(Name, Gender, BirthYear, DeathYear) VALUES(:Name,:Gender,:BirthYear,:DeathYear)");
+    query.bindValue(":Name", Qname);
+    query.bindValue(":Gender", Qgender);
+    query.bindValue(":BirthYear", birthYear);
+    query.bindValue(":DeathYear", deathYear);
+
+    return query.exec();
+}
+
+
 vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query)
 {
     vector<GeniusModel> geniuses;
@@ -47,9 +65,3 @@ vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query)
 
     return geniuses;
 }
-
-bool GeniusRepository::addGenius(GeniusModel model)
-{
-    return true;
-}
-

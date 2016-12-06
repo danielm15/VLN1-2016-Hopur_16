@@ -2,6 +2,9 @@
 #define GENIUSREPOSITORY_H
 
 #include <QtSql>
+#include <QSqlQuery>
+#include <QSqlDatabase>
+#include <QVariant>
 
 #include <vector>
 #include <string>
@@ -33,7 +36,7 @@ public:
     * @param The model to save
     * @return true if it was a success, false if it was a failure
     */
-    bool addGenius(GeniusModel model);
+    bool saveGenius(GeniusModel genius);
 private:
     QSqlDatabase _db;
 

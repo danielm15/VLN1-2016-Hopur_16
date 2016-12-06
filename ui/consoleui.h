@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <services/servicelayer.h>
+#include <services/geniusservice.h>
+#include <services/computerservice.h>
 #include <stdlib.h>
 #include <cstdio>
 
@@ -15,6 +17,8 @@ public:
     void run();
 private:
     ServiceLayer _service;
+    GeniusService _geniusservice;
+    ComputerService _computerservice;
     void displayUnsortedList();
     void displaySortedList();
     void addNewEntryToDataSet();

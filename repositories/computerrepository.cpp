@@ -25,6 +25,7 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
     vector<ComputerModel> computers;
     QSqlQuery query(_db);
 
+    // Search kóði TODO
 
     computers = extractQueryToVector(query);
 
