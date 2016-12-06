@@ -2,8 +2,6 @@
 #define GENIUSREPOSITORY_H
 
 #include <QtSql>
-#include <QSqlQuery>
-#include <QSqlDatabase>
 #include <QVariant>
 
 #include <vector>
@@ -34,6 +32,13 @@ public:
     * @return a vector containing all geniuses from the database that matches this contition
     */
     vector<GeniusModel> searchForGenius(string name);
+
+    /**
+     * @brief sortByName Sorts geniuses by name
+     * @param asc if true sort by ascending
+     * @return sorted vector
+     */
+    vector<GeniusModel> sortByName(bool asc);
 
     /**
     * @brief addGenius saves a genius model to a file

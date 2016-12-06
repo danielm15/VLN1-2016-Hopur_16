@@ -41,6 +41,26 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
     return filtered;
 }
 
+vector<ComputerModel> ComputerRepository::sortByName(bool asc)
+{
+    QSqlQuery query(_db);
+    vector<ComputerModel> computers;
+    string sortBy = "ASC";
+
+    if (!asc)
+    {
+        sortBy = "DESC";
+    }
+
+    string queryString = "SELECT * FROM Computers SORT BY name " + sortBy;
+
+    query.exec(QString::fromStdString(queryString));
+
+    computers = extractQueryToVector(query);
+
+    return computers;
+}
+
 bool ComputerRepository::saveComputer(ComputerModel model)
 {
     QString QmodelName = QString::fromStdString(model.getModelName());
