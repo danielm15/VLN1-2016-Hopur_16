@@ -68,12 +68,20 @@ bool GeniusRepository::saveGenius(GeniusModel genius)
     unsigned int birthYear = genius.getBirthYear();
     unsigned int deathYear = genius.getDeathYear();
 
+
     QSqlQuery query(_db);
     query.prepare("INSERT INTO Geniuses(Name, Gender, BirthYear, DeathYear) VALUES(:Name,:Gender,:BirthYear,:DeathYear)");
     query.bindValue(":Name", Qname);
     query.bindValue(":Gender", Qgender);
     query.bindValue(":BirthYear", birthYear);
-    query.bindValue(":DeathYear", deathYear);
+    if(deathYear == 0)
+    {
+        query.bindValue(":DeathYear", QVariant(QVariant::Int));
+    }
+    else
+    {
+        query.bindValue(":DeathYear", deathYear);
+    }
 
     return query.exec();
 }

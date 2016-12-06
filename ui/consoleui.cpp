@@ -120,6 +120,7 @@ void ConsoleUI::addNewEntryToDataSet()
 
         if(input = '1')
         {
+            clearscreen();
             name = promptForName();
             gender = promptForGender();
             dateOfBirth = promptForDateOfBirth();
@@ -130,6 +131,7 @@ void ConsoleUI::addNewEntryToDataSet()
         }
         else if(input = '2')
         {
+            clearscreen();
             // ///////////////////////// //
             // input Computer validation //
             // ///////////////////////// //
