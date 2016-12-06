@@ -17,7 +17,7 @@ public:
     bool validateName(string name);
 
     char promptForGender();
-    bool validateGender(string name);
+    bool validateGender(string strgender);
 
     unsigned int promptForDateOfBirth();
     bool validateDateOfBirth(string date);

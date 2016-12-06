@@ -180,6 +180,8 @@ unsigned int GeniusValidation::promptForDateOfDeath(string name)
         cout << "Year of death: ";
         getline(cin,strdateOfDeath,'\n');
 
+        rejected = validateDateOfDeath(strdateOfDeath);
+
         if(!rejected && strdateOfDeath.length() == 1)
         {
             dateOfDeath = atoi(strdateOfDeath.c_str());
