@@ -59,6 +59,14 @@ public:
      */
     bool getBuilt();
 
+    /**
+     * @brief operator == Checks if two objects are the same
+     * @param g1
+     * @param p2
+     * @return bool
+     */
+    friend bool operator ==(const ComputerModel& c1, const ComputerModel& c2);
+
 private:
     unsigned int _id;
     string _modelName;

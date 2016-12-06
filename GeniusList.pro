@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     models/geniusmodel.cpp \
     services/geniusservice.cpp \
     services/computerservice.cpp\
-    databasemanager.cpp
+    databasemanager.cpp \
+    repositories/computergeniusrepository.cpp
 
 HEADERS += \
     repositories/geniusrepository.h \
@@ -31,5 +32,6 @@ HEADERS += \
     models/geniusmodel.h \
     services/geniusservice.h \
     services/computerservice.h \
-    databasemanager.h
+    databasemanager.h \
+    repositories/computergeniusrepository.h
 

@@ -46,3 +46,19 @@ bool ComputerModel::getBuilt()
 {
     return _built;
 }
+
+bool operator ==(const ComputerModel& g1, const ComputerModel& g2)
+{
+    if (g1._id != g2._id)
+        return false;
+    if (g1._modelName != g2._modelName)
+        return false;
+    if (g1._makeYear != g2._makeYear)
+        return false;
+    if (g1._type != g2._type)
+        return false;
+    if (g1._built != g2._built)
+        return false;
+
+    return true;
+}
