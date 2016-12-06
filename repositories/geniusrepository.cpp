@@ -3,10 +3,7 @@
 
 GeniusRepository::GeniusRepository()
 {
-    _db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "db.sqlite";
-    _db.setDatabaseName(dbName);
-    _db.open();
+    _db = QSqlDatabase::database();
 }
 
 vector<GeniusModel> GeniusRepository::getAllGeniuses()

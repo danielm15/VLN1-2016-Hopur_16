@@ -2,10 +2,7 @@
 
 ComputerRepository::ComputerRepository()
 {
-    _db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "db.sqlite";
-    _db.setDatabaseName(dbName);
-    _db.open();
+    _db = QSqlDatabase::database();
 }
 
 vector<ComputerModel> ComputerRepository::getAllComputers()
