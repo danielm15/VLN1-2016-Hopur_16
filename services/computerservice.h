@@ -14,7 +14,7 @@ public:
      * @brief getAll Gets all computers from the repository
      * @return
      */
-    vector<ComputerModel> getAll();
+    vector<ComputerModel> getComputer();
 
     /**
      * @brief sort Gets all computers and sorts them eather ascending or decending
@@ -38,7 +38,7 @@ public:
      * @param built
      * @return
      */
-    bool add(unsigned int id, string modelName, unsigned int makeYear, string type, bool built);
+    bool addComputer(string modelName, unsigned int makeYear, string type, bool built);
 
     /**
      * @brief removes genius from the database

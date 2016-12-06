@@ -11,13 +11,12 @@ class GeniusService
 {
 public:
     GeniusService();
-    vector<GeniusModel> getGenius();
 
     /**
      * @brief getAll Gets all Geniuses from the repository
      * @return
      */
-    vector<GeniusModel> getAll();
+    vector<GeniusModel> getGenius();
 
     /**
      * @brief sort Gets all Geniuses and sorts them eather ascending or decending

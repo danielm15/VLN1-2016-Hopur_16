@@ -5,13 +5,21 @@ ComputerModel::ComputerModel()
 
 }
 
-ComputerModel::ComputerModel(unsigned int id, string modelName, unsigned int makeYear, string type, bool build)
+ComputerModel::ComputerModel(string modelName, unsigned int makeYear, string type, bool built)
+{
+    _modelName = modelName;
+    _makeYear = makeYear;
+    _type = type;
+    _built = built;
+}
+
+ComputerModel::ComputerModel(unsigned int id, string modelName, unsigned int makeYear, string type, bool built)
 {
     _id = id;
     _modelName = modelName;
     _makeYear = makeYear;
     _type = type;
-    _build = build;
+    _built = built;
 }
 
 unsigned int ComputerModel::getId()
@@ -34,7 +42,7 @@ string ComputerModel::getType()
     return _type;
 }
 
-bool ComputerModel::getBuild()
+bool ComputerModel::getBuilt()
 {
-    return _build;
+    return _built;
 }

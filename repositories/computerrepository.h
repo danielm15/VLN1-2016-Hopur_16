@@ -37,7 +37,7 @@ public:
     * @param The model to save
     * @return true if it was a success, false if it was a failure
     */
-    bool addComputer(ComputerModel model);
+    bool saveComputer(ComputerModel model);
 
 private:
     QSqlDatabase _db;
