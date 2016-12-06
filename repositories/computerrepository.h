@@ -47,6 +47,12 @@ public:
     */
     bool saveComputer(ComputerModel model);
 
+    /**
+     * @brief removeComputer removes computer from the repository, it uses id from the model to find out which one to remve
+     * @param model
+     * @return true if delete was a success, else false
+     */
+    bool removeComputer(ComputerModel model);
 private:
     QSqlDatabase _db;
 

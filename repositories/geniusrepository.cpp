@@ -3,10 +3,7 @@
 
 GeniusRepository::GeniusRepository()
 {
-    _db = QSqlDatabase::addDatabase("QSQLITE");
-    QString dbName = "db.sqlite";
-    _db.setDatabaseName(dbName);
-    _db.open();
+    _db = QSqlDatabase::database();
 }
 
 vector<GeniusModel> GeniusRepository::getAllGeniuses()
@@ -23,24 +20,18 @@ vector<GeniusModel> GeniusRepository::getAllGeniuses()
 
 vector<GeniusModel> GeniusRepository::searchForGenius(string name)
 {
-    GeniusModel g;
-    vector<GeniusModel> filtered;
-    vector<GeniusModel> searchlist = getAllGeniuses();
+    QSqlQuery query(_db);
+    vector<GeniusModel> geniuses;
 
-    string lowercaseName = toLowerCase(name);
+    string likeName = "%" + name + "%";
 
-    for(unsigned int i = 0; i < searchlist.size(); i++)
-    {
-        string geniusName = toLowerCase(searchlist[i].getName());
+    query.prepare("SELECT * FROM Geniuses WHERE name LIKE :name");
+    query.bindValue(":name", QString::fromStdString(likeName));
+    query.exec();
 
-        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
-        if (geniusName.find(lowercaseName) != std::string::npos)
-        {
-            filtered.push_back(searchlist[i]);
-        }
-    }
+    geniuses = extractQueryToVector(query);
 
-    return filtered;
+    return geniuses;
 }
 
 vector<GeniusModel> GeniusRepository::sortByName(bool asc)
@@ -84,6 +75,16 @@ bool GeniusRepository::saveGenius(GeniusModel genius)
     {
         query.bindValue(":DeathYear", deathYear);
     }
+
+    return query.exec();
+}
+
+bool GeniusRepository::removeGenius(GeniusModel model)
+{
+    QSqlQuery query(_db);
+
+    query.prepare("DELETE FROM Geniuses WHERE id = :id");
+    query.bindValue(":id", model.getId());
 
     return query.exec();
 }

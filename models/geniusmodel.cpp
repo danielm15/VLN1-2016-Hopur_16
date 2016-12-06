@@ -5,18 +5,32 @@ GeniusModel::GeniusModel()
 
 }
 
-GeniusModel::GeniusModel(string name, string gender, unsigned int year_of_birth, unsigned int year_of_death)
+GeniusModel::GeniusModel(string name, string gender, unsigned int yearOfBirth, unsigned int yearOfDeath)
 {
     _name = name;
     _gender = gender;
-    _year_of_birth = year_of_birth;
-    _year_of_death = year_of_death;
+    _yearOfBirth = yearOfBirth;
+    _yearOfDeath = yearOfDeath;
+}
+
+GeniusModel::GeniusModel(unsigned int id, string name, string gender, unsigned int yearOfBirth, unsigned int yearOfDeath)
+{
+    _id = id;
+    _name = name;
+    _gender = gender;
+    _yearOfBirth = yearOfBirth;
+    _yearOfDeath = yearOfDeath;
 }
 
 // Teach the class who should get higher in shorted list.
 bool GeniusModel::operator <(const GeniusModel& p) const
 {
     return _name < p._name;
+}
+
+unsigned int GeniusModel::getId() const
+{
+    return _id;
 }
 
 string GeniusModel::getName() const
@@ -31,12 +45,12 @@ string GeniusModel::getGender() const
 
 unsigned int GeniusModel::getBirthYear() const
 {
-    return _year_of_birth;
+    return _yearOfBirth;
 }
 
 unsigned int GeniusModel::getDeathYear() const
 {
-    return _year_of_death;
+    return _yearOfDeath;
 }
 
 // Prints out genius line, if it is still alive death year
@@ -65,9 +79,9 @@ bool operator ==(const GeniusModel& g1, const GeniusModel& g2)
         return false;
     if (g1._gender != g2._gender)
         return false;
-    if (g1._year_of_birth != g2._year_of_birth)
+    if (g1._yearOfBirth != g2._yearOfBirth)
         return false;
-    if (g1._year_of_death != g2._year_of_death)
+    if (g1._yearOfDeath != g2._yearOfDeath)
         return false;
 
     return true;

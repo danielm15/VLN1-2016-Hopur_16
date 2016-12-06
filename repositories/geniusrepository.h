@@ -46,6 +46,13 @@ public:
     * @return true if it was a success, false if it was a failure
     */
     bool saveGenius(GeniusModel genius);
+
+    /**
+     * @brief removeGenius removes genius from the repository, it uses id from the model to find out which one to remve
+     * @param model
+     * @return true if delete was a success, else false
+     */
+    bool removeGenius(GeniusModel model);
 private:
     QSqlDatabase _db;
 
