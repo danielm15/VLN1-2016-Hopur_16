@@ -48,7 +48,7 @@ public:
     bool saveGenius(GeniusModel genius);
 
     /**
-     * @brief removeGenius removes genius from the repository
+     * @brief removeGenius removes genius from the repository, it uses id from the model to find out which one to remve
      * @param model
      * @return true if delete was a success, else false
      */
