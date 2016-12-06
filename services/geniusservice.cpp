@@ -15,19 +15,13 @@ vector<GeniusModel> GeniusService::getGenius()
 vector<GeniusModel> GeniusService::sort(bool ascending)
 {
     GeniusRepository g;
-
     return g.sortByName(ascending);
 }
 
 vector<GeniusModel> GeniusService::find(string name) const
 {
-    vector<GeniusModel> filtered;
-
     GeniusRepository g;
-
-    filtered = g.searchForGenius(name);
-
-    return filtered;
+    return g.searchForGenius(name);
 }
 
 bool GeniusService::addGenius(string name, char gender, unsigned int dateOfBirth, unsigned int dateOfDeath)
