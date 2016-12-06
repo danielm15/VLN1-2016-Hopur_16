@@ -22,13 +22,24 @@ vector<ComputerModel> ComputerRepository::getAllComputers()
 
 vector<ComputerModel> ComputerRepository::searchForComputer(string name)
 {
-    vector<ComputerModel> computers;
-    QSqlQuery query(_db);
+    ComputerModel g;
+    vector<ComputerModel> filtered;
+    vector<ComputerModel> computers = getAllComputers();
 
+    string lowercaseName = toLowerCase(name);
 
-    computers = extractQueryToVector(query);
+    for(unsigned int i = 0; i < computers.size(); i++)
+    {
+        string geniusName = toLowerCase(computers[i].getModelName());
 
-    return computers;
+        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
+        if (geniusName.find(lowercaseName) != std::string::npos)
+        {
+            filtered.push_back(computers[i]);
+        }
+    }
+
+    return filtered;
 }
 
 bool ComputerRepository::addComputer(ComputerModel model)
@@ -51,4 +62,14 @@ vector<ComputerModel> ComputerRepository::extractQueryToVector(QSqlQuery query)
     }
 
     return computers;
+}
+
+string ComputerRepository::toLowerCase(string s) const
+{
+    string lowercaseName = s;
+    for (unsigned int i = 0; i < s.length(); i++)
+    {
+        lowercaseName[i] = tolower(lowercaseName[i]);
+    }
+    return lowercaseName;
 }

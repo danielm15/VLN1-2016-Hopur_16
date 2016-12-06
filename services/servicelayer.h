@@ -6,6 +6,7 @@
 
 #include "models/geniusmodel.h"
 #include "repositories/datalayer.h"
+#include "repositories/geniusrepository.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ class ServiceLayer
 public:
     ServiceLayer();
 
-    vector<GeniusModel> filter(string name) const;
+    vector<GeniusModel> filter(string name);
 
     // Returns all data sorted in alphabetical order
     vector<GeniusModel> sortVector();
@@ -46,6 +47,8 @@ public:
 private:
     // Converts string to lowercase and returns it.
     string toLowerCase(string s) const;
+
+    GeniusRepository _g;
 };
 
 #endif //SERVICELAYER_H

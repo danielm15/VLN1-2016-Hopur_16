@@ -49,6 +49,12 @@ private:
      */
     vector<ComputerModel> extractQueryToVector(QSqlQuery query);
 
+    /**
+     * @brief toLowerCase converts string to lowercase
+     * @param s
+     * @return lowercase version of string s
+     */
+    string toLowerCase(string s) const;
 };
 
 #endif // COMPUTERREPOSITORY_H

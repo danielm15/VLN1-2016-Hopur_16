@@ -1,4 +1,5 @@
 #include "repositories/geniusrepository.h"
+#include <QString>
 
 GeniusRepository::GeniusRepository()
 {
@@ -22,17 +23,27 @@ vector<GeniusModel> GeniusRepository::getAllGeniuses()
 
 vector<GeniusModel> GeniusRepository::searchForGenius(string name)
 {
-    QSqlQuery query(_db);
-    vector<GeniusModel> searchlist;
+    GeniusModel g;
+    vector<GeniusModel> filtered;
+    vector<GeniusModel> searchlist = getAllGeniuses();
 
-    //query.exec("SELECT * FROM Geniuses WHERE name LIKE %" + name + "%");
+    string lowercaseName = toLowerCase(name);
 
-    searchlist = extractQueryToVector(query);
+    for(unsigned int i = 0; i < searchlist.size(); i++)
+    {
+        string geniusName = toLowerCase(searchlist[i].getName());
 
-    return searchlist;
+        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
+        if (geniusName.find(lowercaseName) != std::string::npos)
+        {
+            filtered.push_back(searchlist[i]);
+        }
+    }
+
+    return filtered;
 }
 
-vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query)
+vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query) const
 {
     vector<GeniusModel> geniuses;
 
@@ -41,8 +52,8 @@ vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query)
         string gender = query.value("gender").toString().toStdString();
         unsigned int yearOfBirth = query.value("BirthYear").toUInt();
         unsigned int yearOfDeath = query.value("DeathYear").toUInt();
-
-        geniuses.push_back(GeniusModel(name, gender, yearOfBirth, yearOfDeath));
+        GeniusModel model = GeniusModel(name, gender, yearOfBirth, yearOfDeath);
+        geniuses.push_back(model);
     }
 
     return geniuses;
@@ -53,3 +64,13 @@ bool GeniusRepository::addGenius(GeniusModel model)
     return true;
 }
 
+
+string GeniusRepository::toLowerCase(string s) const
+{
+    string lowercaseName = s;
+    for (unsigned int i = 0; i < s.length(); i++)
+    {
+        lowercaseName[i] = tolower(lowercaseName[i]);
+    }
+    return lowercaseName;
+}
