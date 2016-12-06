@@ -43,7 +43,6 @@ vector<GeniusModel> GeniusRepository::searchForGenius(string name)
     return filtered;
 }
 
-<<<<<<< HEAD
 bool GeniusRepository::saveGenius(GeniusModel genius)
 {
     QString Qname = QString::fromStdString(genius.getName());
@@ -61,11 +60,7 @@ bool GeniusRepository::saveGenius(GeniusModel genius)
     return query.exec();
 }
 
-
-vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query)
-=======
 vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query) const
->>>>>>> dd162a8004d41a2115d507a558cd95468bc12f61
 {
     vector<GeniusModel> geniuses;
 
@@ -80,14 +75,6 @@ vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query) cons
 
     return geniuses;
 }
-<<<<<<< HEAD
-=======
-
-bool GeniusRepository::addGenius(GeniusModel model)
-{
-    return true;
-}
-
 
 string GeniusRepository::toLowerCase(string s) const
 {
@@ -98,4 +85,3 @@ string GeniusRepository::toLowerCase(string s) const
     }
     return lowercaseName;
 }
->>>>>>> dd162a8004d41a2115d507a558cd95468bc12f61

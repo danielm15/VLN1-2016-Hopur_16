@@ -26,11 +26,7 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
     vector<ComputerModel> filtered;
     vector<ComputerModel> computers = getAllComputers();
 
-<<<<<<< HEAD
-    // Search kóði TODO
-=======
     string lowercaseName = toLowerCase(name);
->>>>>>> dd162a8004d41a2115d507a558cd95468bc12f61
 
     for(unsigned int i = 0; i < computers.size(); i++)
     {

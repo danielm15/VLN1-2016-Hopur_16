@@ -3,22 +3,15 @@
 
 #include "models/geniusmodel.h"
 #include "repositories/geniusrepository.h"
-<<<<<<< HEAD
 
 #include <string>
-=======
->>>>>>> dd162a8004d41a2115d507a558cd95468bc12f61
+
 
 class GeniusService
 {
 public:
     GeniusService();
-<<<<<<< HEAD
     vector<GeniusModel> getGenius();
-    bool addGenius(string name, char gender, unsigned int dateOfBirth, unsigned int dateOfDeath);
-    string getFullGenderName(char gender);
-
-=======
 
     /**
      * @brief getAll Gets all Geniuses from the repository
@@ -47,7 +40,7 @@ public:
      * @param date_of_death
      * @return true if it was a success, else false
      */
-    bool add(string name, char gender, unsigned int dateOfBirth, unsigned int dateOfDeath);
+    bool addGenius(string name, char gender, unsigned int dateOfBirth, unsigned int dateOfDeath);
 
     /**
      * @brief removes genius from the database
@@ -58,9 +51,6 @@ public:
 
 private:
     GeniusRepository _geniusRepository;
-<<<<<<< HEAD
->>>>>>> dd162a8004d41a2115d507a558cd95468bc12f61
-=======
 
     /**
      * @brief Takes char of eather m or f and returns full gender name
@@ -68,7 +58,6 @@ private:
      * @return gender name
      */
     string getFullGenderName(char gender);
->>>>>>> 8f4df392ccd7de6dea20dd4e745293b50de49446
 };
 
 #endif // GENIUSSERVICE_H
