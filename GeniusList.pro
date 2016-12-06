@@ -20,8 +20,9 @@ SOURCES += main.cpp \
     services/geniusservice.cpp \
     services/computerservice.cpp\
     databasemanager.cpp \
-    validation/geniusvalidation.cpp \
-    validation/computervalidation.cpp
+    repositories/computergeniusrepository.cpp \
+    validation/computervalidation.cpp \
+    validation/geniusvalidation.cpp
 
 HEADERS += \
     repositories/geniusrepository.h \
@@ -34,6 +35,7 @@ HEADERS += \
     services/geniusservice.h \
     services/computerservice.h \
     databasemanager.h \
-    validation/geniusvalidation.h \
-    validation/computervalidation.h
+    repositories/computergeniusrepository.h \
+    validation/computervalidation.h \
+    validation/geniusvalidation.h
 
