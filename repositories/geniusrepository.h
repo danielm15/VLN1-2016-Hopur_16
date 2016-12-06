@@ -17,6 +17,10 @@ class GeniusRepository
 {
 public:
     GeniusRepository();
+    ~GeniusRepository()
+    {
+        _db.close();
+    }
 
     /**
     * @brief getAllGeniuses fetches all geniuses from the database
@@ -45,7 +49,14 @@ private:
      * @param query object from the database
      * @return a vector for GeniusModels
      */
-    vector<GeniusModel> extractQueryToVector(QSqlQuery query);
+    vector<GeniusModel> extractQueryToVector(QSqlQuery query) const;
+
+    /**
+     * @brief toLowerCase converts string to lowercase
+     * @param s
+     * @return lowercase version of string s
+     */
+    string toLowerCase(string name) const;
 };
 
 #endif // GENIUSREPOSITORY_H

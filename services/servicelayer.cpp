@@ -85,8 +85,7 @@ vector<GeniusModel> ServiceLayer::sortByDeathYearVector()
 // Fetches the GeniusVector from the DataLayer
 vector<GeniusModel> ServiceLayer::getGenius()
 {
-    GeniusRepository repo;
-    return repo.getAllGeniuses();
+    return _g.getAllGeniuses();
 }
 
 
@@ -113,25 +112,9 @@ GeniusModel ServiceLayer::find(string name) const
     throw -1;
 }
 
-vector<GeniusModel> ServiceLayer::filter(string name) const
+vector<GeniusModel> ServiceLayer::filter(string name)
 {
-    DataLayer d;
-    vector<GeniusModel> GVector = d.getInfo();
-    vector<GeniusModel> filtered;
-    GeniusModel g;
-    string lowercaseName = toLowerCase(name);
-
-    for(unsigned int i = 0; i < GVector.size(); i++)
-    {
-        string geniusName = toLowerCase(GVector[i].getName());
-
-        // http://stackoverflow.com/questions/2340281/check-if-a-string-contains-a-string-in-c
-        if (geniusName.find(lowercaseName) != std::string::npos)
-        {
-            filtered.push_back(GVector[i]);
-        }
-    }
-    return filtered;
+    return _g.searchForGenius(name);
 }
 
 // Saves a new line to data.csv file, checks which gender
