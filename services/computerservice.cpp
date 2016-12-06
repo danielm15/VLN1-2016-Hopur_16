@@ -32,6 +32,7 @@ vector<ComputerModel> ComputerService::find(string modelName) const
 
 bool ComputerService::remove(ComputerModel model)
 {
-
+    ComputerRepository c;
+    return c.removeComputer(model);
 }
 
