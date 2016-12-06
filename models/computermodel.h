@@ -11,7 +11,16 @@ public:
     ComputerModel();
 
     /**
-     * @brief ComputerModel Constructing new object of computer
+     * @brief ComputerModel
+     * @param modelName
+     * @param makeYear
+     * @param type
+     * @param build
+     */
+    ComputerModel(string modelName, unsigned int makeYear, string type, bool build);
+
+    /**
+     * @brief ComputerModel
      * @param id
      * @param modelName
      * @param makeYear
@@ -45,17 +54,17 @@ public:
     string getType();
 
     /**
-     * @brief getBuild getter for private variable _build
-     * @return _build
+     * @brief getBuilt getter for private variable _built
+     * @return _built
      */
-    bool getBuild();
+    bool getBuilt();
 
 private:
     unsigned int _id;
     string _modelName;
     unsigned int _makeYear;
     string _type;
-    bool _build;
+    bool _built;
 };
 
 #endif // COMPUTERMODEL_H

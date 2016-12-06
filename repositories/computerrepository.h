@@ -2,6 +2,7 @@
 #define COMPUTERREPOSITORY_H
 
 #include <QtSql>
+#include <QVariant>
 
 #include <vector>
 #include <string>
@@ -44,7 +45,7 @@ public:
     * @param The model to save
     * @return true if it was a success, false if it was a failure
     */
-    bool addComputer(ComputerModel model);
+    bool saveComputer(ComputerModel model);
 
     /**
      * @brief removeComputer removes computer from the repository

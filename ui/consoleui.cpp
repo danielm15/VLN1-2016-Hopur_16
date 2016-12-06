@@ -104,22 +104,42 @@ void ConsoleUI::addNewEntryToDataSet()
 {
     bool saved = false;
     char gender;
+    char input = ' ';
     string name;
-    unsigned int dateOfDeath, dateOfBirth;;
+    unsigned int dateOfDeath, dateOfBirth;
 
-    //ServiceLayer s;
     GeniusService s;
 
-    cout << "===============| Add entry |================" << endl;
+    while(1)
+    {
+        clearscreen();
+        cout << "===============| Add entry |================" << endl;
+        cout << "Enter 1 to add a Genius" << endl;
+        cout << "Enter 2 to add a Computer" << endl;
+        cin >> input;
 
-    name = promptForName();
-    gender = promptForGender();
-    dateOfBirth = promptForDateOfBirth();
-    dateOfDeath = promptForDateOfDeath(name);
+        if(input = '1')
+        {
+            name = promptForName();
+            gender = promptForGender();
+            dateOfBirth = promptForDateOfBirth();
+            dateOfDeath = promptForDateOfDeath(name);
 
-    //saved = _service.addEntry(name,gender,dateOfBirth,dateOfDeath);
-
-    saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
+            saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
+            break;
+        }
+        else if(input = '2')
+        {
+            // ///////////////////////// //
+            // input Computer validation //
+            // ///////////////////////// //
+            break;
+        }
+        else
+        {
+            cout << "Please enter a valid choice" << endl;
+        }
+    }
 
     if(saved == true)
     {

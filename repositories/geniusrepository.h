@@ -2,8 +2,6 @@
 #define GENIUSREPOSITORY_H
 
 #include <QtSql>
-#include <QSqlQuery>
-#include <QSqlDatabase>
 #include <QVariant>
 
 #include <vector>

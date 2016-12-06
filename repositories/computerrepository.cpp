@@ -14,7 +14,6 @@ vector<ComputerModel> ComputerRepository::getAllComputers()
     vector<ComputerModel> computers;
 
     query.exec("SELECT * FROM Computers");
-
     computers = extractQueryToVector(query);
 
     return computers;
@@ -62,9 +61,21 @@ vector<ComputerModel> ComputerRepository::sortByName(bool asc)
     return computers;
 }
 
-bool ComputerRepository::addComputer(ComputerModel model)
+bool ComputerRepository::saveComputer(ComputerModel model)
 {
-    return true;
+    QString QmodelName = QString::fromStdString(model.getModelName());
+    QString Qtype = QString::fromStdString(model.getType());
+    unsigned int makeYear = model.getMakeYear();
+    bool built = model.getBuilt();
+
+    QSqlQuery query(_db);
+    query.prepare("INSERT INTO Computers(ModelName, MakeYear, Type, Built) VALUES(:ModelName,:MakeYear,:Type,:Built)");
+    query.bindValue(":ModelName", QmodelName);
+    query.bindValue(":MakeYear", Qtype);
+    query.bindValue(":Type", makeYear);
+    query.bindValue(":Built", built);
+
+    return query.exec();
 }
 
 bool ComputerRepository::removeComputer(ComputerModel model)
@@ -85,9 +96,9 @@ vector<ComputerModel> ComputerRepository::extractQueryToVector(QSqlQuery query)
         string modelName = query.value("ModelName").toString().toStdString();
         unsigned int makeYear = query.value("MakeYear").toUInt();
         string type = query.value("Type").toString().toStdString();
-        bool build = query.value("Build").toUInt();
+        bool built = query.value("Built").toUInt();
 
-        computers.push_back(ComputerModel(id, modelName, makeYear, type, build));
+        computers.push_back(ComputerModel(id, modelName, makeYear, type, built));
     }
 
     return computers;
