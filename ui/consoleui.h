@@ -5,6 +5,8 @@
 #include <services/servicelayer.h>
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
+#include <validation/computervalidation.h>
+#include <validation/geniusvalidation.h>
 #include <stdlib.h>
 #include <cstdio>
 
@@ -25,18 +27,6 @@ private:
     void searchForEntries();
     void deleteAnEntry();
     void printVector(vector<GeniusModel> GVector);
-
-    string promptForName();
-    bool validateName(string name);
-
-    char promptForGender();
-    bool validateGender(string name);
-
-    unsigned int promptForDateOfBirth();
-    bool validateDateOfBirth(string date);
-
-    unsigned int promptForDateOfDeath(string name);
-    bool validateDateOfDeath(string date);
 };
 
 #endif //CONSOLEUI_H
