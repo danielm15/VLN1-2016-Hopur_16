@@ -241,7 +241,6 @@ void ConsoleUI::addNewEntryToDataSet()
                 }
                 case '2':
                 {
-                    /*
                     clearscreen();
                     modelName = c.promptForModelName();
                     makeYear = c.promptForMakeYear();
@@ -249,7 +248,6 @@ void ConsoleUI::addNewEntryToDataSet()
                     built = c.promptForBuilt();
 
                     saved = _computerservice.addComputer(modelName,makeYear,type,built);
-                    */
                     check = false;
                 }
                 default:
@@ -257,7 +255,6 @@ void ConsoleUI::addNewEntryToDataSet()
                 }
             }
         }
-
         if(saved == true && check == false)
         {
             cout << "Entry saved" << endl;
