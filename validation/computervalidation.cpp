@@ -17,12 +17,12 @@ string ComputerValidation::promptForModelName()
     while(check)
     {
 
-        cout << "Modelname: ";
+        cout << "Model name: ";
         cin.ignore();
         getline(cin,modelName,'\n');
         modelName[0] = toupper(modelName[0]);
 
-       // rejected = validateName(name);
+        rejected = validateModelName(modelName);
 
         if(rejected == true)
         {
@@ -39,7 +39,21 @@ string ComputerValidation::promptForModelName()
 
 bool ComputerValidation::validateModelName(string modelName)
 {
-    return true;
+    bool rejected = false;
+    for(unsigned int i = 0; i < modelName.length() && !rejected; i++)
+    {
+        if(ispunct(modelName[i]))
+            rejected = true;
+        if(isdigit(modelName[0]))
+            rejected = true;
+        if(isalnum(modelName[i]))
+            continue;
+        if(modelName[i] == ' ')
+            continue;
+
+        rejected = true;
+    }
+    return rejected;
 }
 
 unsigned int ComputerValidation::promptForMakeYear()
