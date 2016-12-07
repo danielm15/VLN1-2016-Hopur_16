@@ -127,7 +127,7 @@ void ConsoleUI::addNewEntryToDataSet()
             name = v.promptForName();
             gender = v.promptForGender();
             dateOfBirth = v.promptForDateOfBirth();
-            dateOfDeath = v.promptForDateOfDeath(name);
+            dateOfDeath = v.promptForDateOfDeath(name, dateOfBirth);
 
             saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
             break;

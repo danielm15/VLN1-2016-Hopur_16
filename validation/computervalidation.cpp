@@ -40,6 +40,10 @@ string ComputerValidation::promptForModelName()
 bool ComputerValidation::validateModelName(string modelName)
 {
     bool rejected = false;
+
+    if(modelName.empty())
+        rejected = true;
+
     for(unsigned int i = 0; i < modelName.length() && !rejected; i++)
     {
         if(ispunct(modelName[i]))
