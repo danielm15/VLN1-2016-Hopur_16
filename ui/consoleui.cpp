@@ -61,8 +61,10 @@ void ConsoleUI::displaySortedList()
     }
     else
     {
+    cout << "Incorrect input, try again" << endl;
+    displaySortedList();
 
-    }
+    }     
     char sortby = ' ';
     cout << "============================" << endl;
     cout << "Enter D for order by decending" << endl;
