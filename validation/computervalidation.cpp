@@ -77,7 +77,6 @@ unsigned int ComputerValidation::promptForMakeYear()
         if(!rejected && makeYearString.length() == 1)
         {
             makeYear = atoi(makeYearString.c_str());
-
         }
 
         if(check = true)
@@ -189,7 +188,6 @@ bool ComputerValidation::promptForBuilt()
             cout << "Built successfully entered!" << endl;
         }
     }
-
     return built;
 }
 
