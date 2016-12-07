@@ -27,7 +27,7 @@ void ConsoleUI::displaySortedList()
     cout << "==============| Sorted list |===============" << endl;
     ServiceLayer _service;
     vector<GeniusModel> GVector;
-    char sortedInput;
+    string sortedInput;
 
     cout << "======================================" << endl;
     cout << "Enter a for list sorted by name" << endl;
@@ -38,23 +38,23 @@ void ConsoleUI::displaySortedList()
     cout << "======================================" << endl;
     cin >> sortedInput;
 
-    if(sortedInput == 'a' || sortedInput == 'A')
+    if(sortedInput == "a" || sortedInput == "A")
     {
         GVector = _service.sortVector();
     }
-    else if(sortedInput == 'b' || sortedInput == 'B')
+    else if(sortedInput == "b" || sortedInput == "B")
     {
         GVector = _service.sortByGenderVector();
     }
-    else if(sortedInput == 'c' || sortedInput == 'C')
+    else if(sortedInput == "c" || sortedInput == "C")
     {
         GVector = _service.sortByBirthYearVector();
     }
-    else if(sortedInput == 'd' || sortedInput == 'D')
+    else if(sortedInput == "d" || sortedInput == "D")
     {
         GVector = _service.sortByDeathYearVector();
     }
-    else if(sortedInput == 'q' || sortedInput == 'Q')
+    else if(sortedInput == "q" || sortedInput == "Q")
     {
         clearscreen();
         run();
@@ -106,62 +106,78 @@ void ConsoleUI::addNewEntryToDataSet()
 {
     bool saved = false;
     bool built = false;
+    bool check = true;
     char gender;
     char input = ' ';
-    string name, modelName, type;
+    string name, modelName, type, strinput;
     unsigned int dateOfDeath, dateOfBirth, makeYear;
 
     GeniusService s;
     GeniusValidation v;
     ComputerValidation c;
 
-    while(1)
+    while(!(input == 'q' || input == 'Q') && check)
     {
         clearscreen();
         cout << "===============| Add entry |================" << endl;
         cout << "Enter 1 to add a Genius" << endl;
         cout << "Enter 2 to add a Computer" << endl;
-        cin >> input;
+        cout << "Enter q to quit" << endl;
+        getline(cin, strinput);
 
-        if(input = '1')
-        {
-            clearscreen();
-            name = v.promptForName();
-            gender = v.promptForGender();
-            dateOfBirth = v.promptForDateOfBirth();
-            dateOfDeath = v.promptForDateOfDeath(name, dateOfBirth);
-
-            saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
-            break;
-        }
-        else if(input = '2')
-        {
-            /*
-            clearscreen();
-            modelName = c.promptForModelName();
-            makeYear = c.promptForMakeYear();
-            type = c.promptForType();
-            built = c.promptForBuilt();
-
-            saved = _computerservice.addComputer(modelName,makeYear,type,built);
-            */
-            break;
-        }
-        else
+        if(strinput.length() != 1)
         {
             cout << "Please enter a valid choice" << endl;
         }
+        else
+        {
+            input = strinput[0];
+
+            switch(input)
+            {
+                case '1':
+                {
+                    clearscreen();
+                    name = v.promptForName();
+                    gender = v.promptForGender();
+                    dateOfBirth = v.promptForDateOfBirth();
+                    dateOfDeath = v.promptForDateOfDeath(name, dateOfBirth);
+
+                    saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
+                    check = false;
+                }
+                case '2':
+                {
+                    /*
+                    clearscreen();
+                    modelName = c.promptForModelName();
+                    makeYear = c.promptForMakeYear();
+                    type = c.promptForType();
+                    built = c.promptForBuilt();
+
+                    saved = _computerservice.addComputer(modelName,makeYear,type,built);
+                    */
+                    check = false;
+                }
+                default:
+                {
+
+                }
+            }
+
+        }
+        if(saved == true && check == false)
+        {
+            cout << "Entry saved" << endl;
+        }
+        else if(saved == false)
+        {
+            cerr << "Entry failed" << endl;
+        }
+        cout << endl;
     }
 
-    if(saved == true)
-    {
-        cout << "Entry saved" << endl;
-    }
-    else
-    {
-        cerr << "Entry failed" << endl;
-    }
-    cout << endl;
+
 }
 
 // Finds every instance of the searched term
@@ -239,51 +255,51 @@ void ConsoleUI::run()
 
         switch (input)
         {
-        case '1':
-        {
-            clearscreen ();
-            displayUnsortedList();
-            break;
-        }
-        case '2':
-        {
+            case '1':
+            {
+                clearscreen ();
+                displayUnsortedList();
+                break;
+            }
+            case '2':
+            {
 
-           clearscreen ();
-           displaySortedList();
-           break;
-        }
-        case '3':
-        {
-            clearscreen ();
-            addNewEntryToDataSet();
-            break;
-        }
-        case '4':
-        {
-            clearscreen ();
-            searchForEntries();
-            break;
-        }
-        case '5':
-        {
-            clearscreen ();
-            deleteAnEntry();
-            break;
-        }
-        case 'q':
-        {
-            clearscreen ();
-            break;
-        }
-        default:
-        {
-            cout << "*" << input << "*" << " is not valid as an input!" << endl;
-            cout << "Please enter a number between 1-5" << endl;
-            cout << "or q to quit the application" << endl;
-            break;
-        }
+               clearscreen ();
+               displaySortedList();
+               break;
+            }
+            case '3':
+            {
+                clearscreen ();
+                addNewEntryToDataSet();
+                break;
+            }
+            case '4':
+            {
+                clearscreen ();
+                searchForEntries();
+                break;
+            }
+            case '5':
+            {
+                clearscreen ();
+                deleteAnEntry();
+                break;
+            }
+            case 'q':
+            {
+                clearscreen ();
+                break;
+            }
+            default:
+            {
+                cout << "*" << input << "*" << " is not valid as an input!" << endl;
+                cout << "Please enter a number between 1-5" << endl;
+                cout << "or q to quit the application" << endl;
+                break;
+            }
 
-    }
+        }
 
     }while(!(input == 'q' || input == 'Q'));
 
