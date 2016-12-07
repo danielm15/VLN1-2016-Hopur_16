@@ -11,14 +11,13 @@ string GeniusValidation::promptForName()
 {
     bool check = true;
     bool rejected = false;
-    string name = "";
+    string name;
 
     while(check)
     {
-
         cout << "Name: ";
-        cin.ignore();
         getline(cin,name,'\n');
+
         name[0] = toupper(name[0]);
 
         rejected = validateName(name);

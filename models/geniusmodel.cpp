@@ -88,17 +88,17 @@ void GeniusModel::addComputers(vector<ComputerModel> models)
 // prints out as a N/A
 ostream& operator <<(ostream& out, const GeniusModel& p1)
 {
-    out << setw(20) << p1.getName() << " | ";
+    out << setw(23) << p1.getName() << " | ";
     out << setw(6) << p1.getGender() << " | ";
-    out << setw(7) << p1.getBirthYear() << "-";
+    out << setw(5) << p1.getBirthYear() << "-";
 
     if(p1.getDeathYear() == 0)
     {
-        out << "N/A";
+        out << "N/A" << "  |";
     }
     else
     {
-        out << p1.getDeathYear();
+        out << p1.getDeathYear() << " |";
     }
 
     return out;

@@ -35,11 +35,12 @@ public:
     vector<GeniusModel> searchForGenius(string name);
 
     /**
-     * @brief sortByName Sorts geniuses by name
+     * @brief sort Sorts geniuses by name
+     * @param field, which field should be sorted by
      * @param asc if true sort by ascending
      * @return sorted vector
      */
-    vector<GeniusModel> sortByName(bool asc);
+    vector<GeniusModel> sort(string field, bool asc);
 
     /**
     * @brief addGenius saves a genius model to a file

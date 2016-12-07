@@ -16,10 +16,11 @@ public:
     ComputerGeniusRepository();
 
     vector<ComputerModel> getGeniusesComputers(GeniusModel model);
+    vector<GeniusModel> getComputerGeniuses(ComputerModel model);
 private:
     QSqlDatabase _db;
     vector<ComputerModel> extractComputerQueryToVector(QSqlQuery query) const;
-
+    vector<GeniusModel> extractGeniusQueryToVector(QSqlQuery query) const;
 };
 
 #endif // COMPUTERGENIUSREPOSITORY_H

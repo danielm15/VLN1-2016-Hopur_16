@@ -1,6 +1,7 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <services/servicelayer.h>
 #include <services/geniusservice.h>
@@ -9,6 +10,7 @@
 #include <validation/geniusvalidation.h>
 #include <stdlib.h>
 #include <cstdio>
+#include <string>
 
 
 class ConsoleUI

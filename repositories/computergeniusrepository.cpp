@@ -19,6 +19,20 @@ vector<ComputerModel> ComputerGeniusRepository::getGeniusesComputers(GeniusModel
     return computers;
 }
 
+vector<GeniusModel> ComputerGeniusRepository::getComputerGeniuses(ComputerModel model)
+{
+    QSqlQuery query(_db);
+    vector<GeniusModel> geniuses;
+
+    query.prepare("SELECT Name, Gender, BirthYear, DeathYear FROM GC_Join as j \
+               INNER JOIN Geniuses as g on g.GeniusID = j.GeniusId \
+               WHERE ComputerID = :computerID");
+    query.bindValue(":computerID", model.getId());
+    geniuses = extractGeniusQueryToVector(query);
+
+    return geniuses;
+}
+
 vector<ComputerModel> ComputerGeniusRepository::extractComputerQueryToVector(QSqlQuery query) const
 {
     vector<ComputerModel> computers;
@@ -34,4 +48,20 @@ vector<ComputerModel> ComputerGeniusRepository::extractComputerQueryToVector(QSq
     }
 
     return computers;
+}
+
+vector<GeniusModel> ComputerGeniusRepository::extractGeniusQueryToVector(QSqlQuery query) const
+{
+    vector<GeniusModel> geniuses;
+
+    while(query.next()){
+        string name = query.value("name").toString().toStdString();
+        string gender = query.value("gender").toString().toStdString();
+        unsigned int yearOfBirth = query.value("BirthYear").toUInt();
+        unsigned int yearOfDeath = query.value("DeathYear").toUInt();
+        GeniusModel model = GeniusModel(name, gender, yearOfBirth, yearOfDeath);
+        geniuses.push_back(model);
+    }
+
+    return geniuses;
 }

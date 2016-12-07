@@ -34,11 +34,12 @@ public:
     std::vector<ComputerModel> searchForComputer(string name);
 
     /**
-     * @brief sortByName Sorts computers by name
+     * @brief sort Sorts computers by name
+     * @param field, which field to sort by
      * @param asc if true sort by ascending
      * @return sorted vector
      */
-    vector<ComputerModel> sortByName(bool asc);
+    vector<ComputerModel> sort(string field, bool asc);
 
     /**
     * @brief addCopmuter saves a computer model to a file
