@@ -1,6 +1,7 @@
 #ifndef CONSOLEUI_H
 #define CONSOLEUI_H
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <services/servicelayer.h>
 #include <services/geniusservice.h>
