@@ -25,34 +25,34 @@ void ConsoleUI::displayUnsortedList()
 void ConsoleUI::displaySortedList()
 {
     cout << "==============| Sorted list |===============" << endl;
-    ServiceLayer s;
+    ServiceLayer _service;
     vector<GeniusModel> GVector;
     char sortedInput;
 
-    cout << "============================" << endl;
+    cout << "======================================" << endl;
     cout << "Enter a for list sorted by name" << endl;
     cout << "Enter b for list sorted by gender" << endl;
     cout << "Enter c for list sorted by birth year" << endl;
     cout << "Enter d for list sorted by death year" << endl;
     cout << "Enter q to quit" << endl;
-    cout << "============================" << endl;
+    cout << "======================================" << endl;
     cin >> sortedInput;
 
     if(sortedInput == 'a' || sortedInput == 'A')
     {
-        GVector = s.sortVector();
+        GVector = _service.sortVector();
     }
     else if(sortedInput == 'b' || sortedInput == 'B')
     {
-        GVector = s.sortByGenderVector();
+        GVector = _service.sortByGenderVector();
     }
     else if(sortedInput == 'c' || sortedInput == 'C')
     {
-        GVector = s.sortByBirthYearVector();
+        GVector = _service.sortByBirthYearVector();
     }
     else if(sortedInput == 'd' || sortedInput == 'D')
     {
-        GVector = s.sortByDeathYearVector();
+        GVector = _service.sortByDeathYearVector();
     }
     else if(sortedInput == 'q' || sortedInput == 'Q')
     {
