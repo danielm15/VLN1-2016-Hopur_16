@@ -77,9 +77,20 @@ unsigned int ComputerValidation::promptForMakeYear()
         if(!rejected && makeYearString.length() == 1)
         {
             makeYear = atoi(makeYearString.c_str());
+
+            if(makeYear > 999 && makeYear < 2017)
+            {
+                check = false;
+                cout << "Make Year successfully entered" << endl;
+            }
+            else
+            {
+                check = true;
+                cout << "Please enter a valid year" << endl;
+            }
         }
 
-        if(check = true)
+        if(rejected == false)
         {
             cout << "Please enter a valid year" << endl;
         }
@@ -102,11 +113,6 @@ bool ComputerValidation::validateMakeYear(string makeYearString)
     }
 
     makeYear = atoi(makeYearString.c_str());
-
-    if(makeYear < 0)
-    {
-        rejected = true;
-    }
 
     return rejected;
 }
@@ -184,6 +190,14 @@ bool ComputerValidation::promptForBuilt()
         else
         {
             built = strBuilt[0];
+            if(built == 'Y' || built == 'y')
+            {
+                built = true;
+            }
+            else if (built == 'N' || built == 'n')
+            {
+                built = false;
+            }
             check = false;
             cout << "Built successfully entered!" << endl;
         }
