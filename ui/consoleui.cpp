@@ -274,56 +274,204 @@ void ConsoleUI::addNewEntryToDataSet()
 void ConsoleUI::searchForEntries()
 {
     string name;
+    char input = ' ';
 
     cout << "===============| Search for entry |================" << endl;
-    cout << "Enter name: ";
-    cin.ignore();
-    getline(cin,name,'\n');
+    cout << "Enter 1 to add a Genius" << endl;
+    cout << "Enter 2 to add a Computer" << endl;
+    cout << "====================================" << endl;
+    cin >> input;
 
-    vector<GeniusModel> filtered = _service.filter(name);
-    for(size_t i = 0; i < filtered.size(); i++)
+    if(input == '1')
     {
-        cout << filtered[i] << endl;
-    }
+        cout << "Enter name of Genius: ";
+        cin.ignore();
+        getline(cin,name,'\n');
 
-    if (filtered.size() == 0)
-    {
-        cout << "No results found" << endl;
+        vector<GeniusModel> filtered = _geniusservice.find(name);
+        for(size_t i = 0; i < filtered.size(); i++)
+        {
+            cout << filtered[i] << endl;
+        }
+
+        if (filtered.size() == 0)
+        {
+            cout << "No results found" << endl;
+        }
+        cout << endl;
     }
-    cout << endl;
+    else if(input == '2')
+    {
+        cout << "Enter name of computer: ";
+        cin.ignore();
+        getline(cin,name,'\n');
+
+        vector<ComputerModel> filtered = _computerservice.find(name);
+        for(size_t i = 0; i < filtered.size(); i++)
+        {
+            cout << filtered[i] << endl;
+        }
+
+        if (filtered.size() == 0)
+        {
+            cout << "No results found" << endl;
+        }
+        cout << endl;
+    }
+    else
+    {
+        cout << "Please enter a valid choice" << endl;
+    }
 }
 
 void ConsoleUI::deleteAnEntry()
 {
     string name;
     char YorN;
+    char input = ' ';
 
     cout << "===============| Delete entry |================" << endl;
-    cout << "Enter name: ";
-    cin.ignore();
-    getline(cin,name,'\n');
+    cout << "Enter 1 to delete a Genius" << endl;
+    cout << "Enter 2 to delete a Computer" << endl;
+    cout << "===================================" << endl;
+    cin >> input;
 
-    try
+    if(input == '1')
     {
-        GeniusModel g = _service.find(name);
-        cout << g << endl;
-        cout << "Would you like to delete this entry? (y/n): ";
-        cin >> YorN;
-        if(YorN == 'y' || YorN == 'Y')
-        {
-            _service.removeEntry(g);
-        }
-        else
-        {
-            cout << "Entry was not deleted" << endl;
-        }
+        cout << "Enter name of Genius: ";
+        cin.ignore();
+        getline(cin,name,'\n');
 
+        try
+        {
+            vector<GeniusModel> g = _geniusservice.find(name);
+            int option;
+            //TODO: Breyta í string til þess að villutékka option
+
+            if (g.size() > 1)
+            {
+                for(size_t i = 0; i < g.size(); i++)
+                {
+                    cout << "Option " << i+1 << "  " << g[i] << endl;
+                }
+                cout << "Please enter the option you would like to delete: " << endl;
+                cin >> option;
+                if (option > 0 && option < g.size()+1)
+                {
+                    cout << g[option-1] << endl;
+                    cout << "Are you sure you want to delete this entry? (y/n): ";
+                    cin >> YorN;
+                    if(YorN == 'y' || YorN == 'Y')
+                    {
+                        _geniusservice.remove(g[option-1]);
+                        cout << "Entry was deleted" << endl;
+                    }
+                    else
+                    {
+                        cout << "Entry was not deleted" << endl;
+                    }
+                }
+                else
+                {
+                    cout << "You seem to have entered an unsigned option" << endl;
+                }
+            }
+            else if (g.size() == 1)
+            {
+                cout << g[0] << endl;
+                cout << "Would you like to delete this entry? (y/n): ";
+                cin >> YorN;
+                if(YorN == 'y' || YorN == 'Y')
+                {
+                    _geniusservice.remove(g[0]);
+                    cout << "Entry was deleted" << endl;
+                }
+                else
+                {
+                    cout << "Entry was not deleted" << endl;
+                }
+            }
+            else
+            {
+                cout << "Please enter a valid choice!" << endl;
+            }
+        }
+        catch(int)
+        {
+            cerr << "Did not find anything" << endl;
+        }
+        cout << endl;
     }
-    catch(int)
+    else if(input == '2')
     {
-        cerr << "Did not find anything" << endl;
+        cout << "Enter name of Computer: ";
+        cin.ignore();
+        getline(cin,name,'\n');
+
+        try
+        {
+            vector<ComputerModel> c = _computerservice.find(name);
+            int option;
+            //TODO: Breyta í string til þess að villutékka option
+
+            if (c.size() > 1)
+            {
+                for(size_t i = 0; i < c.size(); i++)
+                {
+                    cout << "Option " << i+1 << "  " << c[i] << endl;
+                }
+                cout << "Please enter the option you would like to delete: " << endl;
+                cin >> option;
+                if (option > 0 && option < c.size()+1)
+                {
+                    cout << c[option-1] << endl;
+                    cout << "Are you sure you want to delete this entry? (y/n): ";
+                    cin >> YorN;
+                    if(YorN == 'y' || YorN == 'Y')
+                    {
+                        _computerservice.remove(c[option-1]);
+                        cout << "Entry was deleted" << endl;
+                    }
+                    else
+                    {
+                        cout << "Entry was not deleted" << endl;
+                    }
+                }
+                else
+                {
+                    cout << "You seem to have entered an unsigned option" << endl;
+                }
+            }
+            else if (c.size() == 1)
+            {
+                cout << c[0] << endl;
+                cout << "Would you like to delete this entry? (y/n): ";
+                cin >> YorN;
+                if(YorN == 'y' || YorN == 'Y')
+                {
+                    _computerservice.remove(c[0]);
+                    cout << "Entry was deleted" << endl;
+                }
+                else
+                {
+                    cout << "Entry was not deleted" << endl;
+                }
+            }
+            else
+            {
+                cout << "Please enter a valid choice!" << endl;
+            }
+        }
+        catch(int)
+        {
+            cerr << "Did not find anything" << endl;
+        }
+        cout << endl;
     }
-    cout << endl;
+    else
+    {
+        cout << "It's rather simple, enter 1 or 2" << endl;
+    }
 }
 
 void ConsoleUI::run()

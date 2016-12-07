@@ -21,7 +21,7 @@ bool ComputerService::addComputer(string modelName, unsigned int makeYear, strin
 vector<ComputerModel> ComputerService::sort(bool ascending)
 {
     ComputerRepository c;
-    return c.sortByName(ascending);
+    return c.sort("ModelName", ascending);
 }
 
 vector<ComputerModel> ComputerService::find(string modelName) const

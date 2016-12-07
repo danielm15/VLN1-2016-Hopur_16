@@ -70,6 +70,14 @@ public:
      * @param p2
      * @return bool
      */
+    friend ostream& operator <<(ostream& out, const ComputerModel& p1);
+
+    /**
+     * @brief operator == Checks if two objects are the same
+     * @param g1
+     * @param p2
+     * @return bool
+     */
     friend bool operator ==(const ComputerModel& c1, const ComputerModel& c2);
 
     /**
