@@ -218,25 +218,6 @@ void ConsoleUI::addNewEntryToDataSet()
         cout << "Enter q to quit" << endl;
         getline(cin, strinput);
 
-        if(input == '1')
-        {
-            clearscreen();
-            name = v.promptForName();
-            gender = v.promptForGender();
-            dateOfBirth = v.promptForDateOfBirth();
-            dateOfDeath = v.promptForDateOfDeath(name);
-
-            saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
-            break;
-        }
-        else if(input == '2')
-        {
-            clearscreen();
-            // ///////////////////////// //
-            // input Computer validation //
-            // ///////////////////////// //
-            break;
-        }
         if(strinput.length() != 1)
         {
             cout << "Please enter a valid choice" << endl;
