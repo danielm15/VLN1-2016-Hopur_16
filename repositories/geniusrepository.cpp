@@ -56,7 +56,7 @@ vector<GeniusModel> GeniusRepository::sort(string field, bool asc)
 
     query.prepare(QString::fromStdString(queryString));
     query.bindValue(":name", QString::fromStdString(field));
-    query.exec()
+    query.exec();
 
     geniuses = extractQueryToVector(query);
 
