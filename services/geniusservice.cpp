@@ -15,7 +15,7 @@ vector<GeniusModel> GeniusService::getGenius()
 vector<GeniusModel> GeniusService::sort(bool ascending)
 {
     GeniusRepository g;
-    return g.sortByName(ascending);
+    return g.sort("Name", ascending);
 }
 
 vector<GeniusModel> GeniusService::find(string name) const

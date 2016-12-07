@@ -30,7 +30,7 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
 
     string likeName = "%" + name + "%";
 
-    query.prepare("SELECT * FROM Geniuses WHERE ModelName LIKE :name");
+    query.prepare("SELECT * FROM Computers WHERE ModelName LIKE :name");
     query.bindValue(":name", QString::fromStdString(likeName));
     query.exec();
 
@@ -50,9 +50,11 @@ vector<ComputerModel> ComputerRepository::sort(string field, bool asc)
         sortBy = "DESC";
     }
 
-    string queryString = "SELECT * FROM Computers SORT BY name " + sortBy;
+    string queryString = "SELECT * FROM Computers ORDER BY :name " + sortBy;
 
-    query.exec(QString::fromStdString(queryString));
+    query.prepare(QString::fromStdString(queryString));
+    query.bindValue(":name", QString::fromStdString(field));
+    query.exec();
 
     computers = extractQueryToVector(query);
 
