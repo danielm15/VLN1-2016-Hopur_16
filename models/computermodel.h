@@ -1,7 +1,11 @@
 #ifndef COMPUTERMODEL_H
 #define COMPUTERMODEL_H
 
+#include <iostream>
+#include <fstream>
 #include <string>
+#include <istream>
+#include <iomanip>
 #include <vector>
 
 using namespace std;
@@ -16,9 +20,9 @@ public:
      * @param modelName
      * @param makeYear
      * @param type
-     * @param build
+     * @param built
      */
-    ComputerModel(string modelName, unsigned int makeYear, string type, bool build);
+    ComputerModel(string modelName, unsigned int makeYear, string type, bool built);
 
     /**
      * @brief ComputerModel
@@ -26,39 +30,39 @@ public:
      * @param modelName
      * @param makeYear
      * @param type
-     * @param build
+     * @param built
      */
-    ComputerModel(unsigned int id, string modelName, unsigned int makeYear, string type, bool build);
+    ComputerModel(unsigned int id, string modelName, unsigned int makeYear, string type, bool built);
 
     /**
      * @brief getId getter for id
      * @return _id
      */
-    unsigned int getId();
+    unsigned int getId() const;
 
     /**
      * @brief getModelName getter
      * @return _modelName
      */
-    string getModelName();
+    string getModelName() const;
 
     /**
      * @brief getMakeYear getter for private variable _makeYear
      * @return _makeYear
      */
-    unsigned int getMakeYear();
+    unsigned int getMakeYear() const;
 
     /**
      * @brief getType getter for private variable _type
      * @return _type
      */
-    string getType();
+    string getType() const;
 
     /**
      * @brief getBuilt getter for private variable _built
      * @return _built
      */
-    bool getBuilt();
+    bool getBuilt() const;
 
     /**
      * @brief operator == Checks if two objects are the same
@@ -67,6 +71,14 @@ public:
      * @return bool
      */
     friend bool operator ==(const ComputerModel& c1, const ComputerModel& c2);
+
+    /**
+     * @brief operator << Prints out the model
+     * @param out
+     * @param p1
+     * @return void
+     */
+    friend ostream& operator <<(ostream& out, const ComputerModel& p1);
 
 private:
     unsigned int _id;
