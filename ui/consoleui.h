@@ -12,7 +12,6 @@
 #include <cstdio>
 #include <string>
 
-
 class ConsoleUI
 {
 public:

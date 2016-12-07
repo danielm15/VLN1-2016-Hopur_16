@@ -77,9 +77,20 @@ unsigned int ComputerValidation::promptForMakeYear()
         if(!rejected && makeYearString.length() == 1)
         {
             makeYear = atoi(makeYearString.c_str());
+
+            if(makeYear > 999 && makeYear < 2017)
+            {
+                check = false;
+                cout << "Make Year successfully entered" << endl;
+            }
+            else
+            {
+                check = true;
+                cout << "Please enter a valid year" << endl;
+            }
         }
 
-        if(check = true)
+        if(rejected == false)
         {
             cout << "Please enter a valid year" << endl;
         }
@@ -102,11 +113,6 @@ bool ComputerValidation::validateMakeYear(string makeYearString)
     }
 
     makeYear = atoi(makeYearString.c_str());
-
-    if(makeYear < 0)
-    {
-        rejected = true;
-    }
 
     return rejected;
 }
@@ -167,7 +173,7 @@ bool ComputerValidation::promptForBuilt()
     bool check = true;
     bool rejected = false;
     string strBuilt;
-    char built;
+    bool built = true;
 
     while(check)
     {
@@ -183,7 +189,14 @@ bool ComputerValidation::promptForBuilt()
         }
         else
         {
-            built = strBuilt[0];
+            if(strBuilt[0] == 'Y' || strBuilt[0] == 'y')
+            {
+                built = true;
+            }
+            else if (strBuilt[0] == 'N' || strBuilt[0] == 'n')
+            {
+                built = false;
+            }
             check = false;
             cout << "Built successfully entered!" << endl;
         }
@@ -197,16 +210,10 @@ bool ComputerValidation::validateBuilt(string built)
 
     if(built.empty())
         rejected = true;
-
-    for(unsigned int i = 0; i < built.length() && !rejected; i++)
+    if(built.length() != 1)
+        rejected = true;
+    if((built[0] != 'Y' || built[0] != 'y') && (built[0] != 'N' || built[0] != 'n'))
     {
-        if(ispunct(built[i]))
-            rejected = true;
-        if(isalpha(built[i]))
-            continue;
-        if(built[i] == ' ')
-            continue;
-
         rejected = true;
     }
 
