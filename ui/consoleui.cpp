@@ -103,13 +103,15 @@ void ConsoleUI::displaySortedList()
 void ConsoleUI::addNewEntryToDataSet()
 {
     bool saved = false;
+    bool built = false;
     char gender;
     char input = ' ';
-    string name;
-    unsigned int dateOfDeath, dateOfBirth;
+    string name, modelName, type;
+    unsigned int dateOfDeath, dateOfBirth, makeYear;
 
     GeniusService s;
     GeniusValidation v;
+    ComputerValidation c;
 
     while(1)
     {
@@ -132,10 +134,15 @@ void ConsoleUI::addNewEntryToDataSet()
         }
         else if(input = '2')
         {
+            /*
             clearscreen();
-            // ///////////////////////// //
-            // input Computer validation //
-            // ///////////////////////// //
+            modelName = c.promptForModelName();
+            makeYear = c.promptForMakeYear();
+            type = c.promptForType();
+            built = c.promptForBuilt();
+
+            saved = _computerservice.addComputer(modelName,makeYear,type,built);
+            */
             break;
         }
         else
