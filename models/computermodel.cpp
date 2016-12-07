@@ -72,3 +72,13 @@ bool operator ==(const ComputerModel& g1, const ComputerModel& g2)
 
     return true;
 }
+
+ostream& operator <<(ostream& out, const ComputerModel& p1)
+{
+    out << setw(25) << p1.getModelName() << " | ";
+    out << setw(4) << p1.getMakeYear() << " | ";
+    out << setw(20) << p1.getType() << " | ";
+    out << p1.getBuilt() << " |";
+
+    return out;
+}

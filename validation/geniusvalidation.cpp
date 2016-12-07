@@ -11,14 +11,13 @@ string GeniusValidation::promptForName()
 {
     bool check = true;
     bool rejected = false;
-    string name = "";
+    string name;
 
     while(check)
     {
-
         cout << "Name: ";
-        cin.ignore();
         getline(cin,name,'\n');
+
         name[0] = toupper(name[0]);
 
         rejected = validateName(name);
@@ -42,6 +41,10 @@ string GeniusValidation::promptForName()
 bool GeniusValidation::validateName(string name)
 {
     bool rejected = false;
+
+    if(name.empty())
+        rejected = true;
+
     for(unsigned int i = 0; i < name.length() && !rejected; i++)
     {
         if(ispunct(name[i]))
@@ -166,7 +169,7 @@ bool GeniusValidation::validateDateOfBirth(string date)
     return rejected;
 }
 
-unsigned int GeniusValidation::promptForDateOfDeath(string name)
+unsigned int GeniusValidation::promptForDateOfDeath(string name, unsigned int dateOfBirth)
 {
     //Year of death check fall
     bool rejected = false;
@@ -179,6 +182,8 @@ unsigned int GeniusValidation::promptForDateOfDeath(string name)
         cout << " ~ Enter 0 if person is alive ~ " << endl;
         cout << "Year of death: ";
         getline(cin,strdateOfDeath,'\n');
+
+        rejected = validateDateOfDeath(strdateOfDeath, dateOfBirth);
 
         if(!rejected && strdateOfDeath.length() == 1)
         {
@@ -215,14 +220,20 @@ unsigned int GeniusValidation::promptForDateOfDeath(string name)
 }
 
 // returns false if every letter in string is a number
-bool GeniusValidation::validateDateOfDeath(string date)
+bool GeniusValidation::validateDateOfDeath(string date, unsigned int dateOfBirth)
 {
     bool rejected = false;
+    unsigned int dateOfDeath;
     for(unsigned int i = 0; i < date.length() && !rejected; i++)
     {
         if(isdigit(date[i]))
             continue;
         rejected = true;
     }
+    dateOfDeath = atoi(date.c_str());
+
+    if(dateOfDeath < dateOfBirth && dateOfDeath != 0)
+        rejected = true;
+
     return rejected;
 }

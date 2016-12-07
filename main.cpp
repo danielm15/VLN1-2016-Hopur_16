@@ -1,5 +1,5 @@
 #include "ui/consoleui.h"
-#include "databasemanager.h"
+#include <repositories/databasemanager.h>
 
 int main()
 {
