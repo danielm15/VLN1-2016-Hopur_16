@@ -119,7 +119,7 @@ void ConsoleUI::addNewEntryToDataSet()
         cout << "Enter 2 to add a Computer" << endl;
         cin >> input;
 
-        if(input = '1')
+        if(input == '1')
         {
             clearscreen();
             name = v.promptForName();
@@ -130,7 +130,7 @@ void ConsoleUI::addNewEntryToDataSet()
             saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
             break;
         }
-        else if(input = '2')
+        else if(input == '2')
         {
             clearscreen();
             // ///////////////////////// //
@@ -159,56 +159,131 @@ void ConsoleUI::addNewEntryToDataSet()
 void ConsoleUI::searchForEntries()
 {
     string name;
+    char input = ' ';
 
     cout << "===============| Search for entry |================" << endl;
-    cout << "Enter name: ";
-    cin.ignore();
-    getline(cin,name,'\n');
+    cout << "Enter 1 to add a Genius" << endl;
+    cout << "Enter 2 to add a Computer" << endl;
+    cout << "====================================" << endl;
+    cin >> input;
 
-    vector<GeniusModel> filtered = _service.filter(name);
-    for(size_t i = 0; i < filtered.size(); i++)
+    if(input == '1')
     {
-        cout << filtered[i] << endl;
-    }
+        cout << "Enter name of Genius: ";
+        cin.ignore();
+        getline(cin,name,'\n');
 
-    if (filtered.size() == 0)
-    {
-        cout << "No results found" << endl;
+        vector<GeniusModel> filtered = _geniusservice.find(name);
+        for(size_t i = 0; i < filtered.size(); i++)
+        {
+            cout << filtered[i] << endl;
+        }
+
+        if (filtered.size() == 0)
+        {
+            cout << "No results found" << endl;
+        }
+        cout << endl;
     }
-    cout << endl;
+    else if(input == '2')
+    {
+        cout << "Enter name of computer: ";
+        cin.ignore();
+        getline(cin,name,'\n');
+
+        vector<ComputerModel> filtered = _computerservice.find(name);
+        for(size_t i = 0; i < filtered.size(); i++)
+        {
+            cout << filtered[i] << endl;
+        }
+
+        if (filtered.size() == 0)
+        {
+            cout << "No results found" << endl;
+        }
+        cout << endl;
+    }
+    else
+    {
+        cout << "Please enter a valid choice" << endl;
+    }
 }
 
 void ConsoleUI::deleteAnEntry()
 {
     string name;
     char YorN;
+    char input = ' ';
 
     cout << "===============| Delete entry |================" << endl;
-    cout << "Enter name: ";
-    cin.ignore();
-    getline(cin,name,'\n');
+    cout << "Enter 1 to delete a Genius" << endl;
+    cout << "Enter 2 to delete a Computer" << endl;
+    cout << "===================================" << endl;
+    cin >> input;
 
-    try
+    if(input == '1')
     {
-        GeniusModel g = _service.find(name);
-        cout << g << endl;
-        cout << "Would you like to delete this entry? (y/n): ";
-        cin >> YorN;
-        if(YorN == 'y' || YorN == 'Y')
-        {
-            _service.removeEntry(g);
-        }
-        else
-        {
-            cout << "Entry was not deleted" << endl;
-        }
+        cout << "Enter name of Genius: ";
+        cin.ignore();
+        getline(cin,name,'\n');
 
+        try
+        {
+            vector<GeniusModel> g = _geniusservice.find(name);
+            cout << g[0] << endl;
+            cout << "Would you like to delete this entry? (y/n): ";
+            cin >> YorN;
+            if(YorN == 'y' || YorN == 'Y')
+            {
+                _geniusservice.remove(g[0]);
+                if(_geniusservice.remove(g[0]))
+                {
+                    cout << "Entry was deleted" << endl;
+                }
+                else
+                {
+                    cout << "Entry was not deleted" << endl;
+                }
+            }
+            else
+            {
+                cout << "Entry was not deleted" << endl;
+            }
+        }
+        catch(int)
+        {
+            cerr << "Did not find anything" << endl;
+        }
+        cout << endl;
     }
-    catch(int)
+    if(input == '2')
     {
-        cerr << "Did not find anything" << endl;
+        cout << "Enter name of Computer: ";
+        cin.ignore();
+        getline(cin,name,'\n');
+
+        try
+        {
+            vector<ComputerModel> c = _computerservice.find(name);
+            cout << c[0] << endl;
+            cout << "Would you like to delete this entry? (y/n): ";
+            cin >> YorN;
+            if(YorN == 'y' || YorN == 'Y')
+            {
+                _computerservice.remove(c[0]);
+                cout << "Entry was deleted" << endl;
+            }
+            else
+            {
+                cout << "Entry was not deleted" << endl;
+            }
+        }
+        catch(int)
+        {
+            cerr << "Did not find anything" << endl;
+        }
+        cout << endl;
     }
-    cout << endl;
 }
 
 void ConsoleUI::run()

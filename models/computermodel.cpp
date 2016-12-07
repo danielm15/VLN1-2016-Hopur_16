@@ -22,29 +22,39 @@ ComputerModel::ComputerModel(unsigned int id, string modelName, unsigned int mak
     _built = built;
 }
 
-unsigned int ComputerModel::getId()
+unsigned int ComputerModel::getId() const
 {
     return _id;
 }
 
-string ComputerModel::getModelName()
+string ComputerModel::getModelName() const
 {
     return _modelName;
 }
 
-unsigned int ComputerModel::getMakeYear()
+unsigned int ComputerModel::getMakeYear() const
 {
     return _makeYear;
 }
 
-string ComputerModel::getType()
+string ComputerModel::getType() const
 {
     return _type;
 }
 
-bool ComputerModel::getBuilt()
+bool ComputerModel::getBuilt() const
 {
     return _built;
+}
+
+ostream& operator <<(ostream& out, const ComputerModel& p1)
+{
+    out << setw(20) << p1.getModelName() << " | ";
+    out << setw(6) << p1.getMakeYear() << " | ";
+    out << setw(7) << p1.getType() << "-";
+    out << setw(5) << p1.getBuilt();
+
+    return out;
 }
 
 bool operator ==(const ComputerModel& g1, const ComputerModel& g2)

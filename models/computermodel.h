@@ -1,7 +1,9 @@
 #ifndef COMPUTERMODEL_H
 #define COMPUTERMODEL_H
 
+#include <iostream>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -33,31 +35,39 @@ public:
      * @brief getId getter for id
      * @return _id
      */
-    unsigned int getId();
+    unsigned int getId() const;
 
     /**
      * @brief getModelName getter
      * @return _modelName
      */
-    string getModelName();
+    string getModelName() const;
 
     /**
      * @brief getMakeYear getter for private variable _makeYear
      * @return _makeYear
      */
-    unsigned int getMakeYear();
+    unsigned int getMakeYear() const;
 
     /**
      * @brief getType getter for private variable _type
      * @return _type
      */
-    string getType();
+    string getType() const;
 
     /**
      * @brief getBuilt getter for private variable _built
      * @return _built
      */
-    bool getBuilt();
+    bool getBuilt() const;
+
+    /**
+     * @brief operator == Checks if two objects are the same
+     * @param g1
+     * @param p2
+     * @return bool
+     */
+    friend ostream& operator <<(ostream& out, const ComputerModel& p1);
 
     /**
      * @brief operator == Checks if two objects are the same
