@@ -77,7 +77,6 @@ unsigned int ComputerValidation::promptForMakeYear()
         if(!rejected && makeYearString.length() == 1)
         {
             makeYear = atoi(makeYearString.c_str());
-
         }
 
         if(check = true)
@@ -199,16 +198,10 @@ bool ComputerValidation::validateBuilt(string built)
 
     if(built.empty())
         rejected = true;
-
-    for(unsigned int i = 0; i < built.length() && !rejected; i++)
+    if(built.length() != 1)
+        rejected = true;
+    if((built[0] != 'Y' || built[0] != 'y') && (built[0] != 'N' || built[0] != 'n'))
     {
-        if(ispunct(built[i]))
-            rejected = true;
-        if(isalpha(built[i]))
-            continue;
-        if(built[i] == ' ')
-            continue;
-
         rejected = true;
     }
 
