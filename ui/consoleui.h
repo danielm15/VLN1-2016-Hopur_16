@@ -10,6 +10,7 @@
 #include <validation/geniusvalidation.h>
 #include <stdlib.h>
 #include <cstdio>
+#include <string>
 
 
 class ConsoleUI
