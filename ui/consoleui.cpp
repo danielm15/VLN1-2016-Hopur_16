@@ -27,7 +27,7 @@ void ConsoleUI::displaySortedList()
     cout << "==============| Sorted list |===============" << endl;
     ServiceLayer _service;
     vector<GeniusModel> GVector;
-    char sortedInput;
+    string sortedInput;
 
     cout << "======================================" << endl;
     cout << "Enter a for list sorted by name" << endl;
@@ -38,23 +38,23 @@ void ConsoleUI::displaySortedList()
     cout << "======================================" << endl;
     cin >> sortedInput;
 
-    if(sortedInput == 'a' || sortedInput == 'A')
+    if(sortedInput == "a" || sortedInput == "A")
     {
         GVector = _service.sortVector();
     }
-    else if(sortedInput == 'b' || sortedInput == 'B')
+    else if(sortedInput == "b" || sortedInput == "B")
     {
         GVector = _service.sortByGenderVector();
     }
-    else if(sortedInput == 'c' || sortedInput == 'C')
+    else if(sortedInput == "c" || sortedInput == "C")
     {
         GVector = _service.sortByBirthYearVector();
     }
-    else if(sortedInput == 'd' || sortedInput == 'D')
+    else if(sortedInput == "d" || sortedInput == "D")
     {
         GVector = _service.sortByDeathYearVector();
     }
-    else if(sortedInput == 'q' || sortedInput == 'Q')
+    else if(sortedInput == "q" || sortedInput == "Q")
     {
         clearscreen();
         run();
