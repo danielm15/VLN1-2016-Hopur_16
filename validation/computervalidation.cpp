@@ -62,33 +62,155 @@ bool ComputerValidation::validateModelName(string modelName)
 
 unsigned int ComputerValidation::promptForMakeYear()
 {
+    bool rejected = false;
+    bool check = true;
     unsigned int makeYear;
+    string makeYearString;
+
+    while (check)
+    {
+        cout << "Make year: ";
+        getline(cin,makeYearString,'\n');
+
+        rejected = validateMakeYear(makeYearString);
+
+        if(!rejected && makeYearString.length() == 1)
+        {
+            makeYear = atoi(makeYearString.c_str());
+
+        }
+
+        if(check = true)
+        {
+            cout << "Please enter a valid year" << endl;
+        }
+    }
+
     return makeYear;
 }
 
-bool ComputerValidation::validateMakeYear(unsigned int makeYear)
+bool ComputerValidation::validateMakeYear(string makeYearString)
 {
-    return true;
+    bool rejected = false;
+    unsigned int makeYear;
+
+
+    for(unsigned int i = 0; i < makeYearString.length() && !rejected; i++)
+    {
+        if(isdigit(makeYearString[i]))
+            continue;
+        rejected = true;
+    }
+
+    makeYear = atoi(makeYearString.c_str());
+
+    if(makeYear < 0)
+    {
+        rejected = true;
+    }
+
+    return rejected;
 }
 
 string ComputerValidation::promptForType()
 {
-    string type;
+    string type = "";
+    bool check = true;
+    bool rejected = false;
+
+    while(check)
+    {
+        cout << "Type: ";
+        cin.ignore();
+        getline(cin,type,'\n');
+        type[0] = toupper(type[0]);
+
+        rejected = validateType(type);
+
+        if(rejected == true)
+        {
+            cout << "Type can only contain alphabetic characters and spaces!" << endl;
+        }
+        else
+        {
+            check = false;
+            cout << "Type successfully entered" << endl;
+        }
+    }
+
     return type;
 }
 
 bool ComputerValidation::validateType(string type)
 {
-    return true;
+    bool rejected = false;
+
+    if(type.empty())
+        rejected = true;
+
+    for(unsigned int i = 0; i < type.length() && !rejected; i++)
+    {
+        if(ispunct(type[i]))
+            rejected = true;
+        if(isalpha(type[i]))
+            continue;
+        if(type[i] == ' ')
+            continue;
+
+        rejected = true;
+    }
+
+    return rejected;
 }
 
 bool ComputerValidation::promptForBuilt()
 {
-    bool built;
+    bool check = true;
+    bool rejected = false;
+    string strBuilt;
+    char built;
+
+    while(check)
+    {
+        cout << "Built: ";
+        getline(cin,strBuilt,'\n');
+
+        rejected = validateBuilt(strBuilt);
+
+        if(rejected == true)
+        {
+            cout << "Please enter yes or no!" << endl;
+            check = true;
+        }
+        else
+        {
+            built = strBuilt[0];
+            check = false;
+            cout << "Built successfully entered!" << endl;
+        }
+    }
+
     return built;
 }
 
-bool ComputerValidation::validateBuilt(bool built)
+bool ComputerValidation::validateBuilt(string built)
 {
-    return true;
+    bool rejected = false;
+
+    if(built.empty())
+        rejected = true;
+
+    for(unsigned int i = 0; i < built.length() && !rejected; i++)
+    {
+        if(ispunct(built[i]))
+            rejected = true;
+        if(isalpha(built[i]))
+            continue;
+        if(built[i] == ' ')
+            continue;
+
+        rejected = true;
+    }
+
+    return rejected;
 }
