@@ -52,7 +52,7 @@ vector<GeniusModel> GeniusRepository::sortByName(bool asc)
         sortBy = "DESC";
     }
 
-    string queryString = "SELECT * FROM Geniuses SORT BY name " + sortBy;
+    string queryString = "SELECT * FROM Geniuses ORDER BY name " + sortBy;
 
     query.exec(QString::fromStdString(queryString));
 
@@ -90,7 +90,7 @@ bool GeniusRepository::removeGenius(GeniusModel model)
 {
     QSqlQuery query(_db);
 
-    query.prepare("DELETE FROM Geniuses WHERE id = :id");
+    query.prepare("DELETE FROM Geniuses WHERE GeniusID = :id");
     query.bindValue(":id", model.getId());
 
     return query.exec();
@@ -101,11 +101,12 @@ vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query) cons
     vector<GeniusModel> geniuses;
 
     while(query.next()){
+        unsigned int id = query.value("GeniusID").toUInt();
         string name = query.value("name").toString().toStdString();
         string gender = query.value("gender").toString().toStdString();
         unsigned int yearOfBirth = query.value("BirthYear").toUInt();
         unsigned int yearOfDeath = query.value("DeathYear").toUInt();
-        GeniusModel model = GeniusModel(name, gender, yearOfBirth, yearOfDeath);
+        GeniusModel model = GeniusModel(id, name, gender, yearOfBirth, yearOfDeath);
         geniuses.push_back(model);
     }
 
