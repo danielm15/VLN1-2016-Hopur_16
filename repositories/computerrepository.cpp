@@ -1,4 +1,5 @@
 #include "repositories/computerrepository.h"
+#include "repositories/computergeniusrepository.h"
 
 ComputerRepository::ComputerRepository()
 {
@@ -8,10 +9,16 @@ ComputerRepository::ComputerRepository()
 vector<ComputerModel> ComputerRepository::getAllComputers()
 {
     QSqlQuery query(_db);
+    ComputerGeniusRepository cgr;
     vector<ComputerModel> computers;
 
     query.exec("SELECT * FROM Computers");
     computers = extractQueryToVector(query);
+
+    for (size_t i = 0; i < computers.size(); i++)
+    {
+        vector<GeniusModel> geniuses = cgr.getComputerGeniuses(computers.at(i));
+    }
 
     return computers;
 }
@@ -32,7 +39,7 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
     return computers;
 }
 
-vector<ComputerModel> ComputerRepository::sortByName(bool asc)
+vector<ComputerModel> ComputerRepository::sort(string field, bool asc)
 {
     QSqlQuery query(_db);
     vector<ComputerModel> computers;
