@@ -136,11 +136,8 @@ void ConsoleUI::addNewEntryToDataSet()
         cout << "Enter q to quit" << endl;
         getline(cin, strinput);
 
-<<<<<<< HEAD
         if(input == '1')
-=======
         if(strinput.length() != 1)
->>>>>>> e046d464ed533d553003e9738af753797de0f4f0
         {
             cout << "Please enter a valid choice" << endl;
         }
@@ -181,11 +178,9 @@ void ConsoleUI::addNewEntryToDataSet()
             }
 
         }
-<<<<<<< HEAD
         else if(input == '2')
-=======
+
         if(saved == true && check == false)
->>>>>>> e046d464ed533d553003e9738af753797de0f4f0
         {
             cout << "Entry saved" << endl;
         }
@@ -271,7 +266,6 @@ void ConsoleUI::run()
         cout << "============================" << endl;
         cin >> input;
 
-<<<<<<< HEAD
         if (input.size() == 0 || input.size() > 1)
         {
             cout << "*" << input << "*" << " is not valid as an input!" << endl;
@@ -321,58 +315,6 @@ void ConsoleUI::run()
         }
 
     }while(!(input == "q" || input == "Q"));
-=======
-
-        switch (input)
-        {
-            case '1':
-            {
-                clearscreen ();
-                displayUnsortedList();
-                break;
-            }
-            case '2':
-            {
-
-               clearscreen ();
-               displaySortedList();
-               break;
-            }
-            case '3':
-            {
-                clearscreen ();
-                addNewEntryToDataSet();
-                break;
-            }
-            case '4':
-            {
-                clearscreen ();
-                searchForEntries();
-                break;
-            }
-            case '5':
-            {
-                clearscreen ();
-                deleteAnEntry();
-                break;
-            }
-            case 'q':
-            {
-                clearscreen ();
-                break;
-            }
-            default:
-            {
-                cout << "*" << input << "*" << " is not valid as an input!" << endl;
-                cout << "Please enter a number between 1-5" << endl;
-                cout << "or q to quit the application" << endl;
-                break;
-            }
-
-        }
-
-    }while(!(input == 'q' || input == 'Q'));
->>>>>>> e046d464ed533d553003e9738af753797de0f4f0
 
 }
 
