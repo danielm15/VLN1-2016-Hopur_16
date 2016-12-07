@@ -121,7 +121,7 @@ void ConsoleUI::addNewEntryToDataSet()
         cout << "Enter 2 to add a Computer" << endl;
         cin >> input;
 
-        if(input = '1')
+        if(input == '1')
         {
             clearscreen();
             name = v.promptForName();
@@ -132,7 +132,7 @@ void ConsoleUI::addNewEntryToDataSet()
             saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
             break;
         }
-        else if(input = '2')
+        else if(input == '2')
         {
             /*
             clearscreen();
@@ -220,7 +220,7 @@ void ConsoleUI::deleteAnEntry()
 
 void ConsoleUI::run()
 {
-    char input = ' ';
+    string input;
 
     do
     {
@@ -234,56 +234,55 @@ void ConsoleUI::run()
         cout << "============================" << endl;
         cin >> input;
 
-
-        switch (input)
-        {
-        case '1':
-        {
-            clearscreen ();
-            displayUnsortedList();
-            break;
-        }
-        case '2':
-        {
-
-           clearscreen ();
-           displaySortedList();
-           break;
-        }
-        case '3':
-        {
-            clearscreen ();
-            addNewEntryToDataSet();
-            break;
-        }
-        case '4':
-        {
-            clearscreen ();
-            searchForEntries();
-            break;
-        }
-        case '5':
-        {
-            clearscreen ();
-            deleteAnEntry();
-            break;
-        }
-        case 'q':
-        {
-            clearscreen ();
-            break;
-        }
-        default:
+        if (input.size() == 0 || input.size() > 1)
         {
             cout << "*" << input << "*" << " is not valid as an input!" << endl;
             cout << "Please enter a number between 1-5" << endl;
             cout << "or q to quit the application" << endl;
-            break;
+        }
+        else if (input.size() == 1)
+        {
+            switch (input[0])
+            {
+                case '1':
+                {
+                    clearscreen ();
+                    displayUnsortedList();
+                    break;
+                }
+                case '2':
+                {
+                    clearscreen ();
+                    displaySortedList();
+                    break;
+                }
+                case '3':
+                {
+                    clearscreen ();
+                    addNewEntryToDataSet();
+                    break;
+                }
+                case '4':
+                {
+                    clearscreen ();
+                    searchForEntries();
+                    break;
+                }
+                case '5':
+                {
+                    clearscreen ();
+                    deleteAnEntry();
+                    break;
+                }
+                case 'q':
+                {
+                    clearscreen ();
+                    break;
+                }
+            }
         }
 
-    }
-
-    }while(!(input == 'q' || input == 'Q'));
+    }while(!(input == "q" || input == "Q"));
 
 }
 
