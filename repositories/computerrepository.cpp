@@ -39,7 +39,7 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
     return computers;
 }
 
-vector<ComputerModel> ComputerRepository::sortByName(bool asc)
+vector<ComputerModel> ComputerRepository::sort(string field, bool asc)
 {
     QSqlQuery query(_db);
     vector<ComputerModel> computers;
