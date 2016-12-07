@@ -47,16 +47,6 @@ bool ComputerModel::getBuilt() const
     return _built;
 }
 
-ostream& operator <<(ostream& out, const ComputerModel& p1)
-{
-    out << setw(20) << p1.getModelName() << " | ";
-    out << setw(6) << p1.getMakeYear() << " | ";
-    out << setw(7) << p1.getType() << "-";
-    out << setw(5) << p1.getBuilt();
-
-    return out;
-}
-
 bool operator ==(const ComputerModel& g1, const ComputerModel& g2)
 {
     if (g1._id != g2._id)
