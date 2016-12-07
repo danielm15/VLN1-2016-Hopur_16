@@ -60,6 +60,11 @@ void ConsoleUI::displayUnsortedList()
                     cout << endl;
                     break;
                 }
+                case 'q':
+                case 'Q':
+                {
+                    clearscreen();
+                }
                 default:
                 {
 
@@ -87,76 +92,103 @@ void ConsoleUI::displaySortedList()
     cout << "Enter d for list sorted by death year" << endl;
     cout << "Enter q to quit" << endl;
     cout << "======================================" << endl;
-    cin >> sortedInput;
 
-    if(sortedInput == "a" || sortedInput == "A")
-    {
-        GVector = _service.sortVector();
-    }
-    else if(sortedInput == "b" || sortedInput == "B")
-    {
-        GVector = _service.sortByGenderVector();
-    }
-    else if(sortedInput == "c" || sortedInput == "C")
-    {
-        GVector = _service.sortByBirthYearVector();
-    }
-    else if(sortedInput == "d" || sortedInput == "D")
-    {
-        GVector = _service.sortByDeathYearVector();
-    }
-    else if(sortedInput == "q" || sortedInput == "Q")
+    getline(cin, sortedInput);
+
+
+    if(sortedInput.length() != 1)
     {
         clearscreen();
-        run();
+        cout << "Incorrect input, try again" << endl;
+        return displaySortedList();
     }
     else
     {
-        cout << "Incorrect input, try again" << endl;
-        displaySortedList();
-    }     
+        sortedInput = sortedInput[0];
+
+        if(sortedInput == "a" || sortedInput == "A")
+        {
+            GVector = _service.sortVector();
+        }
+        else if(sortedInput == "b" || sortedInput == "B")
+        {
+            GVector = _service.sortByGenderVector();
+        }
+        else if(sortedInput == "c" || sortedInput == "C")
+        {
+            GVector = _service.sortByBirthYearVector();
+        }
+        else if(sortedInput == "d" || sortedInput == "D")
+        {
+            GVector = _service.sortByDeathYearVector();
+        }
+        else if(sortedInput == "q" || sortedInput == "Q")
+        {
+            clearscreen();
+            return run();
+        }
+        else
+        {
+            clearscreen();
+            cout << "Incorrect input, try again" << endl;
+            return displaySortedList();
+        }
+    }
+
 
     do
     {
         string sortby;
+        clearscreen();
         cout << "============================" << endl;
-        cout << "Enter D for order by decending" << endl;
+        cout << "Enter D for order by descending" << endl;
         cout << "Enter A for order by ascending" << endl;
         cout << "Enter Q to quit" << endl;
         cout << "============================" << endl;
-        cin >> sortby;
+        getline(cin, sortby);
 
-        if (sortby == "D" || sortby == "d")
+        if(sortby.length() != 1)
         {
-            isValid = true;
-            clearscreen ();
-            cout << "==============| Sorted list by Descending order |===============" << endl;
-
-            printVector(GVector);
-        }
-
-        else if (sortby == "A" || sortby == "a")
-        {
-            isValid = true;
-            clearscreen ();
-            cout << "==============| Sorted list by Ascending order |===============" << endl;
-
-            for(size_t i = GVector.size(); i > 0; i--)
-            {
-                cout << GVector[i - 1] << endl;
-            }
-            cout << endl;
-        }
-        else if(sortby == "Q" || sortby == "q")
-        {
-            isValid = true;
             clearscreen();
-            run();
+            cout << "Incorrect input, try again" << endl;
         }
         else
         {
-            cout << "Incorrect input, try again" << endl;
+            sortby = sortby[0];
+
+            if (sortby == "D" || sortby == "d")
+            {
+                isValid = true;
+                clearscreen ();
+                cout << "==============| Sorted list by Descending order |===============" << endl;
+
+                printVector(GVector);
+            }
+
+            else if (sortby == "A" || sortby == "a")
+            {
+                isValid = true;
+                clearscreen ();
+                cout << "==============| Sorted list by Ascending order |===============" << endl;
+
+                for(size_t i = GVector.size(); i > 0; i--)
+                {
+                    cout << GVector[i - 1] << endl;
+                }
+                cout << endl;
+            }
+            else if(sortby == "Q" || sortby == "q")
+            {
+                isValid = true;
+                clearscreen();
+                return run();
+            }
+            else
+            {
+                cout << "Incorrect input, try again" << endl;
+            }
         }
+
     }
     while(!isValid);
 }
@@ -348,11 +380,6 @@ void ConsoleUI::run()
                 {
                     clearscreen ();
                     deleteAnEntry();
-                    break;
-                }
-                case 'q':
-                {
-                    clearscreen ();
                     break;
                 }
             }
