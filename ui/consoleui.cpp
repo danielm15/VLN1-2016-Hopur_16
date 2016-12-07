@@ -9,14 +9,65 @@ ConsoleUI::ConsoleUI()
 // Displays the unsorted list like it is stored in the data file
 void ConsoleUI::displayUnsortedList()
 {
-    cout << "=============| Unsorted list |==============" << endl;
-    vector<GeniusModel> GVector = _geniusservice.getGenius();
+    bool check = true;
+    char input = ' ';
+    string strinput;
 
-    for(unsigned int i = 0; i < GVector.size(); i++)
+    while(!(input == 'q' || input == 'Q') && check == true)
     {
-        cout << GVector[i] << endl;
+        clearscreen();
+        cout << "=============| Unsorted list |==============" << endl;
+        cout << "Enter 1 for unsorted Genius list" << endl;
+        cout << "Enter 2 for unsorted Computer list" << endl;
+        cout << "Enter q to quit" << endl;
+        getline(cin, strinput);
+
+        if(strinput.length() != 1)
+        {
+            cout << "Please enter a valid choice" << endl;
+        }
+        else
+        {
+            input = strinput[0];
+
+            switch(input)
+            {
+                case '1':
+                {
+                    clearscreen();
+                    cout << "====================| Unsorted Genius list |=================" << endl;
+                    vector<GeniusModel> GVector = _geniusservice.getGenius();
+
+                    for(unsigned int i = 0; i < GVector.size(); i++)
+                    {
+                        cout << GVector[i] << endl;
+                    }
+                    check = false;
+                    cout << endl;
+                    break;
+                }
+                case '2':
+                {
+                    clearscreen();
+                    cout << "====================| Unsorted Computer list |=================" << endl;
+                    vector<ComputerModel> CVector = _computerservice.getComputer();
+
+                    for(unsigned int i = 0; i < CVector.size(); i++)
+                    {
+                        cout << CVector[i] << endl;
+                    }
+                    check = false;
+                    cout << endl;
+                    break;
+                }
+                default:
+                {
+
+                }
+            }
+        }
     }
-    cout << endl;
+
 }
 // Asks the user what variable he would like to sort by and
 // then fetches the data with the appropriate sort function for that
@@ -112,7 +163,6 @@ void ConsoleUI::addNewEntryToDataSet()
     string name, modelName, type, strinput;
     unsigned int dateOfDeath, dateOfBirth, makeYear;
 
-    GeniusService s;
     GeniusValidation v;
     ComputerValidation c;
 
@@ -302,7 +352,6 @@ void ConsoleUI::run()
         }
 
     }while(!(input == 'q' || input == 'Q'));
-
 }
 
 //Clears the console screen

@@ -22,27 +22,27 @@ ComputerModel::ComputerModel(unsigned int id, string modelName, unsigned int mak
     _built = built;
 }
 
-unsigned int ComputerModel::getId()
+unsigned int ComputerModel::getId() const
 {
     return _id;
 }
 
-string ComputerModel::getModelName()
+string ComputerModel::getModelName() const
 {
     return _modelName;
 }
 
-unsigned int ComputerModel::getMakeYear()
+unsigned int ComputerModel::getMakeYear() const
 {
     return _makeYear;
 }
 
-string ComputerModel::getType()
+string ComputerModel::getType() const
 {
     return _type;
 }
 
-bool ComputerModel::getBuilt()
+bool ComputerModel::getBuilt() const
 {
     return _built;
 }
@@ -61,4 +61,14 @@ bool operator ==(const ComputerModel& g1, const ComputerModel& g2)
         return false;
 
     return true;
+}
+
+ostream& operator <<(ostream& out, const ComputerModel& p1)
+{
+    out << setw(25) << p1.getModelName() << " | ";
+    out << setw(4) << p1.getMakeYear() << " | ";
+    out << setw(20) << p1.getType() << " | ";
+    out << p1.getBuilt() << " |";
+
+    return out;
 }
