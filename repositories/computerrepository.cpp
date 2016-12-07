@@ -92,11 +92,21 @@ vector<ComputerModel> ComputerRepository::extractQueryToVector(QSqlQuery query)
     vector<ComputerModel> computers;
 
     while(query.next()){
+        bool built;
         unsigned int id = query.value("MakeYear").toUInt();
         string modelName = query.value("ModelName").toString().toStdString();
         unsigned int makeYear = query.value("MakeYear").toUInt();
         string type = query.value("Type").toString().toStdString();
-        bool built = query.value("Built").toUInt();
+        string builtStr = query.value("Built").toString().toStdString();
+
+        if (builtStr == "Y")
+        {
+            built = true;
+        }
+        else
+        {
+            built = false;
+        }
 
         computers.push_back(ComputerModel(id, modelName, makeYear, type, built));
     }
