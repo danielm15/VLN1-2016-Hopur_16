@@ -17,13 +17,13 @@ public:
     bool validateModelName(string modelName);
 
     unsigned int promptForMakeYear();
-    bool validateMakeYear(unsigned int makeYear);
+    bool validateMakeYear(string makeYearString);
 
     string promptForType();
     bool validateType(string type);
 
     bool promptForBuilt();
-    bool validateBuilt(bool built);
+    bool validateBuilt(string built);
 };
 
 #endif // COMPUTERVALIDATION_H
