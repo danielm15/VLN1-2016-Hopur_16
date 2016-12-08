@@ -145,8 +145,8 @@ void ConsoleUI::displaySortedList()
                 {
                     clearscreen();
                     cout << "============================" << endl;
-                    cout << "Enter D for order by descending" << endl;
                     cout << "Enter A for order by ascending" << endl;
+                    cout << "Enter D for order by descending" << endl;
                     cout << "Enter Q to quit" << endl;
                     cout << "============================" << endl;
                     getline(cin, sortBy);
