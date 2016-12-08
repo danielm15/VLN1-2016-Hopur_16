@@ -31,6 +31,7 @@ private:
     void printGeniusSort();
     void printComputerSort();
     void printError();
+    void smile();
     void printMenu();
     void clearscreen ();
 };
