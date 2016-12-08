@@ -7,6 +7,9 @@ ComputerGeniusRepository::ComputerGeniusRepository()
 
 bool ComputerGeniusRepository::addRelationship(ComputerModel computer, GeniusModel genius)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
 
     query.prepare("INSERT INTO GC_Join(GeniusID, ComputerID VALUES(:genius, :computer");
