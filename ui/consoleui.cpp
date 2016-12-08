@@ -277,53 +277,52 @@ void ConsoleUI::searchForEntries()
     cout << "====================================" << endl;
     getline(cin,inputString,'\n');
 
-    if(name.length() != 1)
+    if(inputString.length() != 1)
     {
         cout << "Please enter a valid choice" << endl;
-    }
-
-   else
-   {
-    if(input == '1')
-    {
-        cout << "Enter name of Genius: ";
-        getline(cin,name,'\n');
-
-        vector<GeniusModel> filtered = _geniusservice.find(name);
-        for(size_t i = 0; i < filtered.size(); i++)
-        {
-            cout << filtered[i] << endl;
-        }
-
-        if (filtered.size() == 0)
-        {
-            cout << "No results found" << endl;
-        }
-        cout << endl;
-    }
-    else if(input == '2')
-    {
-        cout << "Enter name of computer: ";
-        cin.ignore();
-        getline(cin,name,'\n');
-
-        vector<ComputerModel> filtered = _computerservice.find(name);
-        for(size_t i = 0; i < filtered.size(); i++)
-        {
-            cout << filtered[i] << endl;
-        }
-
-        if (filtered.size() == 0)
-        {
-            cout << "No results found" << endl;
-        }
-        cout << endl;
     }
     else
     {
-        cout << "Please enter a valid choice" << endl;
+        if(inputString == "1")
+        {
+            cout << "Enter name of Genius: ";
+            getline(cin,name,'\n');
+
+            vector<GeniusModel> filtered = _geniusservice.find(name);
+            for(size_t i = 0; i < filtered.size(); i++)
+            {
+                cout << filtered[i] << endl;
+            }
+
+            if (filtered.size() == 0)
+            {
+                cout << "No results found" << endl;
+            }
+            cout << endl;
+        }
+        else if(inputString == "2")
+        {
+            cout << "Enter name of computer: ";
+            cin.ignore();
+            getline(cin,name,'\n');
+
+            vector<ComputerModel> filtered = _computerservice.find(name);
+            for(size_t i = 0; i < filtered.size(); i++)
+            {
+                cout << filtered[i] << endl;
+            }
+
+            if (filtered.size() == 0)
+            {
+                cout << "No results found" << endl;
+            }
+            cout << endl;
+        }
+        else
+        {
+            cout << "Please enter a valid choice" << endl;
+        }
     }
-  }
 }
 
 void ConsoleUI::deleteAnEntry()
