@@ -19,6 +19,7 @@ void ConsoleUI::displayUnsortedList()
         cout << "=============| Unsorted list |==============" << endl;
         cout << "Enter 1 for unsorted Genius list" << endl;
         cout << "Enter 2 for unsorted Computer list" << endl;
+        cout << "Enter 3 for unsorted Geniuses & Computers list" << endl;
         cout << "Enter q to quit" << endl;
         getline(cin, strinput);
 
@@ -60,6 +61,27 @@ void ConsoleUI::displayUnsortedList()
                     cout << endl;
                     break;
                 }
+                case '3':
+                {
+                clearscreen();
+                cout << "====================| Unsorted Geniuses & Computers list |=================" << endl;
+                vector<GeniusModel> GVector = _geniusservice.getGenius();
+
+                for(unsigned int i = 0; i < GVector.size(); i++)
+                {
+                    cout << GVector[i] << endl;
+
+                    vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
+
+                    for (unsigned int i= 0; i < computers.size(); i++)
+                    {
+                        cout << computers[i] << endl;
+                    }
+                }
+                check = false;
+                cout << endl;
+                break;
+            }
                 case 'q':
                 case 'Q':
                 {
@@ -238,10 +260,6 @@ void ConsoleUI::addNewEntryToDataSet()
                 }
                 case '2':
                 {
-<<<<<<< HEAD
-
-=======
->>>>>>> b6020f26d91ce2b3f7a67eab1b08b6da7c2429eb
                     clearscreen();
                     modelName = c.promptForModelName();
                     makeYear = c.promptForMakeYear();
@@ -249,10 +267,6 @@ void ConsoleUI::addNewEntryToDataSet()
                     built = c.promptForBuilt();
 
                     saved = _computerservice.addComputer(modelName,makeYear,type,built);
-<<<<<<< HEAD
-
-=======
->>>>>>> b6020f26d91ce2b3f7a67eab1b08b6da7c2429eb
                     check = false;
                 }
                 default:
