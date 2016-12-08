@@ -23,7 +23,7 @@ void ConsoleUI::displayUnsortedList()
         cout << "============================================" << endl;
         getline(cin, strinput);
 
-        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "q" && strinput != "Q"))
+        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "3" && strinput != "q" && strinput != "Q"))
         {
             clearscreen();
             printError();
