@@ -238,10 +238,6 @@ void ConsoleUI::addNewEntryToDataSet()
                 }
                 case '2':
                 {
-<<<<<<< HEAD
-
-=======
->>>>>>> b6020f26d91ce2b3f7a67eab1b08b6da7c2429eb
                     clearscreen();
                     modelName = c.promptForModelName();
                     makeYear = c.promptForMakeYear();
@@ -249,10 +245,6 @@ void ConsoleUI::addNewEntryToDataSet()
                     built = c.promptForBuilt();
 
                     saved = _computerservice.addComputer(modelName,makeYear,type,built);
-<<<<<<< HEAD
-
-=======
->>>>>>> b6020f26d91ce2b3f7a67eab1b08b6da7c2429eb
                     check = false;
                 }
                 default:
