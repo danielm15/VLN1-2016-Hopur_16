@@ -93,6 +93,32 @@ void ConsoleUI::displayUnsortedList()
                 cout << endl;
                 break;
             }
+            case '4':
+            {
+                clearscreen();
+                cout << "========================= Unsorted Computer list =========================" << endl;
+                cout << "=========================================================================="<< endl;
+                cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
+                cout << "=========================================================================="<< endl;
+                vector<ComputerModel> CVector = _computerservice.getComputer();
+
+                for(unsigned int i = 0; i < CVector.size(); i++)
+                {
+                    cout << CVector[i] << endl;
+
+                    vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
+
+                    for (unsigned int i= 0; i < geno.size(); i++)
+                    {
+                        cout << "\t" << geno[i].getName() << endl;
+
+                    }
+                }
+                check = false;
+                cout << "==========================================================================" << endl;
+                cout << endl;
+                break;
+            }
                 case 'q':
                 case 'Q':
                 {
@@ -124,7 +150,6 @@ void ConsoleUI::displaySortedList()
     cout << "==========================================" << endl;
     cout << "Enter 1 to sort Geniuses" << endl;
     cout << "Enter 2 to sort Computers" << endl;
-    cout << "Enter 3 to sort Geniuses & Computers" << endl;
     cout << "Enter q to quit" << endl;
     cout << "==========================================" << endl;
     getline(cin, selectSort);
