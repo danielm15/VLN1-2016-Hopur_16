@@ -75,3 +75,8 @@ bool ComputerService::update(ComputerModel model)
     return _computerRepository.updateComputer(model);
 }
 
+vector<GeniusModel> ComputerService::getAllGeniusesWhoBuiltComputer(ComputerModel model)
+{
+    return _computerGeniusRepository.getComputerGeniuses(model);
+}
+

@@ -16,7 +16,6 @@ class ConsoleUI
 {
 public:
     ConsoleUI();
-    void clearscreen ();
     void run();
 private:
     ServiceLayer _service;
@@ -32,6 +31,9 @@ private:
     void printGeniusSort();
     void printComputerSort();
     void printError();
+    void smile();
+    void printMenu();
+    void clearscreen ();
 };
 
 #endif //CONSOLEUI_H
