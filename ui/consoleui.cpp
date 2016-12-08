@@ -112,13 +112,13 @@ void ConsoleUI::displayUnsortedList()
 // in ascending or descending order
 void ConsoleUI::displaySortedList()
 {
-    cout << "=============== Sort list ================" << endl;
     vector<GeniusModel> GVector;
     vector<ComputerModel> CVector;
     string sortedInput, selectSort, sortBy;
     bool isValid = false;
     bool check = true;
 
+    cout << "=============== Sort list ================" << endl;
     cout << "==========================================" << endl;
     cout << "Enter 1 to sort Geniuses" << endl;
     cout << "Enter 2 to sort Computers" << endl;
@@ -246,14 +246,19 @@ void ConsoleUI::addNewEntryToDataSet()
         cout << "================ Add entry =================" << endl;
         cout << "Enter 1 to add a Genius" << endl;
         cout << "Enter 2 to add a Computer" << endl;
-        cout << "Enter q to quit" << endl;
+        cout << "Enter Q to quit" << endl;
         cout << "============================================" << endl;
         getline(cin, strinput);
 
-        if(strinput.length() != 1)
+        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "q" && strinput != "Q"))
         {
             clearscreen();
             printError();
+        }
+        else if(strinput == "q" || strinput == "Q")
+        {
+            clearscreen();
+            break;
         }
         else
         {
@@ -289,16 +294,18 @@ void ConsoleUI::addNewEntryToDataSet()
                 {
                 }
             }
+
+            if(saved == true && check == false)
+            {
+                cout << "Entry saved" << endl;
+            }
+            else if(saved == false)
+            {
+                cerr << "Entry failed!" << endl;
+            }
+            cout << endl;
         }
-        if(saved == true && check == false)
-        {
-            cout << "Entry saved" << endl;
-        }
-        else if(saved == false)
-        {
-            cerr << "Entry failed!" << endl;
-        }
-        cout << endl;
+
     }
 }
 
@@ -311,8 +318,8 @@ void ConsoleUI::searchForEntries()
     while(!(inputString == "q" || inputString == "Q"))
     {
         cout << "================ Search for entry =================" << endl;
-        cout << "Enter 1 to add a Genius" << endl;
-        cout << "Enter 2 to add a Computer" << endl;
+        cout << "Enter 1 to search for a Genius" << endl;
+        cout << "Enter 2 to search for a Computer" << endl;
         cout << "Enter Q to quit" << endl;
         cout << "===================================================" << endl;
         getline(cin,inputString);
@@ -557,32 +564,19 @@ void ConsoleUI::deleteAnEntry()
     }
 }
 
-
-
 void ConsoleUI::run()
 {
     string input;
 
     do
     {
-        cout << "======== Main Menu =========" << endl;
-        cout << "Enter 1 for Unsorted list" << endl;
-        cout << "Enter 2 for Sorted list" << endl;
-        cout << "Enter 3 to Add entry" << endl;
-        cout << "Enter 4 to Search for entry" << endl;
-        cout << "Enter 5 to Delete an entry" << endl;
-        cout << "Enter q to Quit" << endl;
-        cout << "============================" << endl;
+        printMenu();
         getline(cin, input);
 
         if (input.size() == 0 || input.size() > 1)
         {
             clearscreen();
-            cout << "============= ERROR =============" << endl;
-            cout << "Please enter a number between 1-5" << endl;
-            cout << "or q to quit the application" << endl;
-            cout << "=================================" << endl;
-            cout << endl;
+            printError();
         }
         else if (input.size() == 1)
         {
@@ -689,5 +683,17 @@ void ConsoleUI::printError()
     cout << "Please enter a valid choice" << endl;
     cout << "===========================" << endl;
     cout << endl;
+}
+
+void ConsoleUI::printMenu()
+{
+    cout << "======== Main Menu =========" << endl;
+    cout << "Enter 1 for Unsorted list" << endl;
+    cout << "Enter 2 for Sorted list" << endl;
+    cout << "Enter 3 to Add entry" << endl;
+    cout << "Enter 4 to Search for entry" << endl;
+    cout << "Enter 5 to Delete an entry" << endl;
+    cout << "Enter q to Quit" << endl;
+    cout << "============================" << endl;
 }
 
