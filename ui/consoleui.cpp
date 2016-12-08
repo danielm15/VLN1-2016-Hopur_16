@@ -21,9 +21,10 @@ void ConsoleUI::displayUnsortedList()
         cout << "| Enter 3 for unsorted Geniuses & Computers list |" << endl;
         cout << "| Enter q to quit                                |" << endl;
         cout << "==================================================" << endl;
+
         getline(cin, strinput);
 
-        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "q" && strinput != "Q"))
+        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "3" && strinput != "4" && strinput != "q" && strinput != "Q"))
         {
             clearscreen();
             printError();
@@ -93,6 +94,32 @@ void ConsoleUI::displayUnsortedList()
                 cout << endl;
                 break;
             }
+            case '4':
+            {
+                clearscreen();
+                cout << "========================= Unsorted Computer list =========================" << endl;
+                cout << "=========================================================================="<< endl;
+                cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
+                cout << "=========================================================================="<< endl;
+                vector<ComputerModel> CVector = _computerservice.getComputer();
+
+                for(unsigned int i = 0; i < CVector.size(); i++)
+                {
+                    cout << CVector[i] << endl;
+
+                    vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
+
+                    for (unsigned int i= 0; i < geno.size(); i++)
+                    {
+                        cout << "\t" << geno[i].getName() << endl;
+
+                    }
+                }
+                check = false;
+                cout << "==========================================================================" << endl;
+                cout << endl;
+                break;
+            }
                 case 'q':
                 case 'Q':
                 {
@@ -105,7 +132,6 @@ void ConsoleUI::displayUnsortedList()
             }
         }
     }
-
 }
 
 // Asks the user what variable he would like to sort by and
@@ -126,6 +152,7 @@ void ConsoleUI::displaySortedList()
     cout << "| Enter 3 to sort Geniuses & Computers |" << endl;
     cout << "| Enter q to quit                      |" << endl;
     cout << "========================================" << endl;
+
     getline(cin, selectSort);
 
     if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "q" && selectSort != "Q"))
