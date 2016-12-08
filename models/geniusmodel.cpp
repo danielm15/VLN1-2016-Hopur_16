@@ -57,17 +57,17 @@ unsigned int GeniusModel::getDeathYear() const
 // prints out as a N/A
 ostream& operator <<(ostream& out, const GeniusModel& p1)
 {
-    out << setw(23) << p1.getName() << " | ";
+    out << "|" << setw(23) << p1.getName() << " | ";
     out << setw(6) << p1.getGender() << " | ";
-    out << setw(5) << p1.getBirthYear() << "-";
+    out << setw(7) << p1.getBirthYear() << setw(6) << " - ";
 
     if(p1.getDeathYear() == 0)
     {
-        out << "N/A" << "  |";
+        out << setw(6) << "N/A" << setw(6) << "  |";
     }
     else
     {
-        out << p1.getDeathYear() << " |";
+        out << setw(6) << p1.getDeathYear() << setw(6) << "|";
     }
 
     return out;

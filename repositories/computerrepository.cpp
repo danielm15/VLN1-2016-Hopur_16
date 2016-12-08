@@ -35,6 +35,8 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
 
 vector<ComputerModel> ComputerRepository::sort(string field, bool asc)
 {
+    cout << field << endl;
+    cout << asc << endl;
     QSqlQuery query(_db);
     vector<ComputerModel> computers;
     string sortBy = "ASC";
@@ -44,11 +46,8 @@ vector<ComputerModel> ComputerRepository::sort(string field, bool asc)
         sortBy = "DESC";
     }
 
-    string queryString = "SELECT * FROM Computers ORDER BY :name " + sortBy;
-
-    query.prepare(QString::fromStdString(queryString));
-    query.bindValue(":name", QString::fromStdString(field));
-    query.exec();
+    string queryString = ("SELECT * FROM Computers ORDER BY " + field + ", ModelName " + sortBy);
+    query.exec(QString::fromStdString(queryString));
 
     computers = extractQueryToVector(query);
 
