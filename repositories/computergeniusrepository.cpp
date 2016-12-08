@@ -12,11 +12,15 @@ bool ComputerGeniusRepository::addRelationship(ComputerModel computer, GeniusMod
     query.prepare("INSERT INTO GC_Join(GeniusID, ComputerID VALUES(:genius, :computer");
     query.bindValue(":genius", genius.getId());
     query.bindValue(":computer", computer.getId());
+
     return query.exec();
 }
 
 vector<ComputerModel> ComputerGeniusRepository::getGeniuseComputers(GeniusModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<ComputerModel> computers;
 

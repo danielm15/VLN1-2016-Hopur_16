@@ -1,8 +1,5 @@
 #include "repositories/computerrepository.h"
 
-#include <QtSql>
-
-
 ComputerRepository::ComputerRepository()
 {
     _db = QSqlDatabase::database();

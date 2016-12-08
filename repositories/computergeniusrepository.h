@@ -8,6 +8,7 @@
 #include "models/geniusmodel.h"
 
 #include <vector>
+#include <QtSql>
 
 using namespace std;
 
