@@ -280,13 +280,12 @@ void ConsoleUI::searchForEntries()
     cout << "====================================" << endl;
     getline(cin,inputString,'\n');
 
-    if(name.length() != 1)
+    if(inputString.length() != 1)
     {
         cout << "Please enter a valid choice" << endl;
     }
-
-   else
-   {
+    else
+    {
     if(input == '1')
     {
         cout << "Enter name of Genius: ";
@@ -342,12 +341,13 @@ void ConsoleUI::deleteAnEntry()
     cout << "===================================" << endl;
     getline(cin,inputString,'\n');
 
-    if(name.length() != 1)
+    if(inputString.length() != 1)
     {
         cout << "Please enter a valid choice" << endl;
     }
     else
     {
+        input = inputString[0];
         if(input == '1')
         {
          cout << "Enter name of Genius: ";
@@ -365,7 +365,7 @@ void ConsoleUI::deleteAnEntry()
                     {
                         cout << "Option " << i+1 << "  " << g[i] << endl;
                     }
-                  cout << "Please enter the option you would like to delete: " << endl;
+                    cout << "Please enter the option you would like to delete: " << endl;
                     cin >> option;
                     if (option > 0 && option < g.size()+1)
                     {
