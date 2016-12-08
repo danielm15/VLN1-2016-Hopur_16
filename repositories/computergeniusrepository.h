@@ -15,7 +15,7 @@ class ComputerGeniusRepository
 public:
     ComputerGeniusRepository();
 
-    vector<ComputerModel> getGeniusesComputers(GeniusModel model);
+    vector<ComputerModel> getGeniuseComputers(GeniusModel model);
     vector<GeniusModel> getComputerGeniuses(ComputerModel model);
 private:
     QSqlDatabase _db;

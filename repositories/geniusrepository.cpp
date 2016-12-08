@@ -9,18 +9,11 @@ GeniusRepository::GeniusRepository()
 vector<GeniusModel> GeniusRepository::getAllGeniuses()
 {
     QSqlQuery query(_db);
-    ComputerGeniusRepository cgr;
     vector<GeniusModel> geniuses;
 
     query.exec("SELECT * FROM Geniuses");
 
     geniuses = extractQueryToVector(query);
-
-    for (size_t i = 0; i < geniuses.size(); i++)
-    {
-        vector<ComputerModel> computers = cgr.getGeniusesComputers(geniuses[i]);
-        geniuses[i].addComputers(computers);
-    }
 
     return geniuses;
 }
