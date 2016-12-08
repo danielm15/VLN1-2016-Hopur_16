@@ -19,7 +19,7 @@ void ConsoleUI::displayUnsortedList()
         cout << "| Enter 1 for unsorted Genius list               |" << endl;
         cout << "| Enter 2 for unsorted Computer list             |" << endl;
         cout << "| Enter 3 for unsorted Geniuses & Computers list |" << endl;
-        cout << "| Enter 3 for unsorted Computers & Geniuses list |" << endl;
+        cout << "| Enter 4 for unsorted Computers & Geniuses list |" << endl;
         cout << "| Enter q to quit                                |" << endl;
         cout << "==================================================" << endl;
 
