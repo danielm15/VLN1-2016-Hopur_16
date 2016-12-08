@@ -97,7 +97,7 @@ void ConsoleUI::displayUnsortedList()
             case '4':
             {
                 clearscreen();
-                cout << "========================= Unsorted Computer list =========================" << endl;
+                cout << "========================= unsorted Computers & Geniuses list =========================" << endl;
                 cout << "=========================================================================="<< endl;
                 cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
                 cout << "=========================================================================="<< endl;
