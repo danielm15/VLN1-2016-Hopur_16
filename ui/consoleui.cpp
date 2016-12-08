@@ -607,7 +607,6 @@ void ConsoleUI::deleteAnEntry()
     }
 }
 
-<<<<<<< HEAD
 void ConsoleUI::smile()
 {
     cout << "777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777 777777777" << endl;
@@ -662,31 +661,17 @@ void ConsoleUI::smile()
     cout << "7777.....7777777777777777777.........77777777777777" << endl;
     cout << "7777777........................77777777777777777777" << endl;
     cout << "        YOU JUST GOT TROLLED, TROLOLOLOLO" << endl;
+    cout << "                No game for you          " << endl;
 }
 
 
-
-=======
->>>>>>> bf860eee1dedebea0363a183d4fabd4868a25b90
 void ConsoleUI::run()
 {
     string input;
 
     do
     {
-<<<<<<< HEAD
-        cout << "======== Main Menu =========" << endl;
-        cout << "Enter 1 for Unsorted list" << endl;
-        cout << "Enter 2 for Sorted list" << endl;
-        cout << "Enter 3 to Add entry" << endl;
-        cout << "Enter 4 to Search for entry" << endl;
-        cout << "Enter 5 to Delete an entry" << endl;
-        cout << "Enter 6 to play a game" << endl;
-        cout << "Enter q to Quit" << endl;
-        cout << "============================" << endl;
-=======
         printMenu();
->>>>>>> bf860eee1dedebea0363a183d4fabd4868a25b90
         getline(cin, input);
 
         if (input.size() == 0 || input.size() > 1)
@@ -823,6 +808,7 @@ void ConsoleUI::printMenu()
     cout << "| Enter 3 to Add entry        |" << endl;
     cout << "| Enter 4 to Search for entry |" << endl;
     cout << "| Enter 5 to Delete an entry  |" << endl;
+    cout << "| Enter 6 to Play a game      |" << endl;
     cout << "| Enter q to Quit             |" << endl;
     cout << "===============================" << endl;
 }

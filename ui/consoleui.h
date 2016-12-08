@@ -31,12 +31,9 @@ private:
     void printGeniusSort();
     void printComputerSort();
     void printError();
-<<<<<<< HEAD
     void smile();
-=======
     void printMenu();
     void clearscreen ();
->>>>>>> bf860eee1dedebea0363a183d4fabd4868a25b90
 };
 
 #endif //CONSOLEUI_H
