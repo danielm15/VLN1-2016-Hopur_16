@@ -8,14 +8,12 @@ GeniusService::GeniusService()
 // Fetches the GeniusVector from the DataLayer
 vector<GeniusModel> GeniusService::getGenius()
 {
-    GeniusRepository repo;
-    return repo.getAllGeniuses();
+    return _geniusRepository.getAllGeniuses();
 }
 
 vector<GeniusModel> GeniusService::sort(string column, bool ascending)
 {
-    GeniusRepository g;
-    return g.sort(column, ascending);
+    return _geniusRepository.sort(column, ascending);
 }
 
 bool GeniusService::sortOrder(string sortBy)
@@ -56,24 +54,21 @@ vector<GeniusModel> GeniusService::sortGenius(string sortedInput, string sortBy)
     return sort(column, asc);
 }
 
-vector<GeniusModel> GeniusService::find(string name) const
+vector<GeniusModel> GeniusService::find(string name)
 {
-    GeniusRepository g;
-    return g.searchForGenius(name);
+    return _geniusRepository.searchForGenius(name);
 }
 
 bool GeniusService::addGenius(string name, char gender, unsigned int dateOfBirth, unsigned int dateOfDeath)
 {
-    GeniusRepository g;
     string fullGender = getFullGenderName(gender);
     GeniusModel genius(name, fullGender, dateOfBirth, dateOfDeath);
-    return g.saveGenius(genius);
+    return _geniusRepository.saveGenius(genius);
 }
 
 bool GeniusService::remove(GeniusModel genius)
 {
-    GeniusRepository r;
-    return r.removeGenius(genius);
+    return _geniusRepository.removeGenius(genius);
 }
 
 bool GeniusService::update(GeniusModel model)

@@ -46,7 +46,7 @@ vector<GeniusModel> GeniusRepository::sort(string field, bool asc)
     {
         sortBy = "DESC";
     }
-    string queryString = ("SELECT * FROM Geniuses ORDER BY " + field + " " + sortBy);
+    string queryString = ("SELECT * FROM Geniuses ORDER BY " + field + ", Name " + sortBy);
     query.exec(QString::fromStdString(queryString));
 
     geniuses = extractQueryToVector(query);

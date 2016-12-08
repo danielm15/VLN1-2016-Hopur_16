@@ -31,7 +31,7 @@ private:
     void printCVector(vector<ComputerModel> CVector);
     void printGeniusSort();
     void printComputerSort();
-    void printGenComSort();
+    void printError();
 };
 
 #endif //CONSOLEUI_H
