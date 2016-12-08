@@ -5,7 +5,7 @@ ComputerGeniusRepository::ComputerGeniusRepository()
     _db = QSqlDatabase::database();
 }
 
-vector<ComputerModel> ComputerGeniusRepository::getGeniusesComputers(GeniusModel model)
+vector<ComputerModel> ComputerGeniusRepository::getGeniuseComputers(GeniusModel model)
 {
     QSqlQuery query(_db);
     vector<ComputerModel> computers;

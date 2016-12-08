@@ -39,17 +39,6 @@ public:
     GeniusModel(unsigned int id, string name, string gender, unsigned int yearOfBirth, unsigned int yearOfDeath);
 
     /**
-     * @brief GeniusModel
-     * @param id
-     * @param name
-     * @param gender
-     * @param yearOfBirth
-     * @param yearOfDeath
-     * @param computers
-     */
-    GeniusModel(unsigned int id, string name, string gender, unsigned int yearOfBirth, unsigned int yearOfDeath, vector<ComputerModel> computers);
-
-    /**
      * @brief operator < compares two models together and checks who's smaller
      * @param p
      * @return true of false
@@ -94,19 +83,6 @@ public:
     vector<ComputerModel> getComputers() const;
 
     /**
-     * @brief addComputer Adds new computer that genius has built
-     * @param model
-     * @return true if success, else false
-     */
-    void addComputer(ComputerModel model);
-
-    /**
-     * @brief addComputers adds many computers to the genius computer vector
-     * @param model
-     */
-    void addComputers(vector<ComputerModel> model);
-
-    /**
      * @brief operator << Prints out the model
      * @param out
      * @param p1
@@ -128,14 +104,6 @@ private:
     string _gender;
     unsigned int _yearOfBirth;
     unsigned int _yearOfDeath;
-    vector<ComputerModel> _computers;
-
-    /**
-     * @brief isComputerAlreadyInGenius validates if computer has already been added to genius model.
-     * @param model
-     * @return
-     */
-    bool isComputerAlreadyInGenius(ComputerModel model);
 };
 
 #endif //GENIUS_H

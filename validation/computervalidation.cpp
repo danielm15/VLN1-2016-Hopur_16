@@ -173,7 +173,7 @@ bool ComputerValidation::promptForBuilt()
     bool check = true;
     bool rejected = false;
     string strBuilt;
-    char built;
+    bool built = true;
 
     while(check)
     {
@@ -189,12 +189,11 @@ bool ComputerValidation::promptForBuilt()
         }
         else
         {
-            built = strBuilt[0];
-            if(built == 'Y' || built == 'y')
+            if(strBuilt[0] == 'Y' || strBuilt[0] == 'y')
             {
                 built = true;
             }
-            else if (built == 'N' || built == 'n')
+            else if (strBuilt[0] == 'N' || strBuilt[0] == 'n')
             {
                 built = false;
             }
@@ -202,7 +201,6 @@ bool ComputerValidation::promptForBuilt()
             cout << "Built successfully entered!" << endl;
         }
     }
-
     return built;
 }
 

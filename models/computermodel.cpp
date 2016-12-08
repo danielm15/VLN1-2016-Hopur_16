@@ -68,7 +68,11 @@ ostream& operator <<(ostream& out, const ComputerModel& p1)
     out << setw(25) << p1.getModelName() << " | ";
     out << setw(4) << p1.getMakeYear() << " | ";
     out << setw(20) << p1.getType() << " | ";
-    out << p1.getBuilt() << " |";
+
+    if(p1.getBuilt() == true)
+        out << "Y" << "  |";
+    else
+        out << "N" << "  |";
 
     return out;
 }

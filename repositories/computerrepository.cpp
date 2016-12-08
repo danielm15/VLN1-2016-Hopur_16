@@ -9,16 +9,10 @@ ComputerRepository::ComputerRepository()
 vector<ComputerModel> ComputerRepository::getAllComputers()
 {
     QSqlQuery query(_db);
-    ComputerGeniusRepository cgr;
     vector<ComputerModel> computers;
 
     query.exec("SELECT * FROM Computers");
     computers = extractQueryToVector(query);
-
-    for (size_t i = 0; i < computers.size(); i++)
-    {
-        vector<GeniusModel> geniuses = cgr.getComputerGeniuses(computers.at(i));
-    }
 
     return computers;
 }
