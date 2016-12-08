@@ -15,16 +15,18 @@ void ConsoleUI::displayUnsortedList()
 
     while(!(input == 'q' || input == 'Q') && check == true)
     {
-        clearscreen();
-        cout << "=============| Unsorted list |==============" << endl;
+        cout << "============== Unsorted list ===============" << endl;
         cout << "Enter 1 for unsorted Genius list" << endl;
         cout << "Enter 2 for unsorted Computer list" << endl;
+        cout << "Enter 3 for unsorted Geniuses & Computers list" << endl;
         cout << "Enter q to quit" << endl;
+        cout << "============================================" << endl;
         getline(cin, strinput);
 
-        if(strinput.length() != 1)
+        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "q" && strinput != "Q"))
         {
-            cout << "Please enter a valid choice" << endl;
+            clearscreen();
+            printError();
         }
         else
         {
@@ -35,7 +37,10 @@ void ConsoleUI::displayUnsortedList()
                 case '1':
                 {
                     clearscreen();
-                    cout << "====================| Unsorted Genius list |=================" << endl;
+                    cout << "===================== Unsorted Genius list ==================" << endl;
+                    cout << "============================================================="<< endl;
+                    cout << setw(24)<< "Name" << setw(9) << "Gender" << "  " << "Birth Year" << "  -  " << "Death Year" << endl;
+                    cout << "============================================================="<< endl;
                     vector<GeniusModel> GVector = _geniusservice.getGenius();
 
                     for(unsigned int i = 0; i < GVector.size(); i++)
@@ -43,13 +48,17 @@ void ConsoleUI::displayUnsortedList()
                         cout << GVector[i] << endl;
                     }
                     check = false;
+                    cout << "=============================================================" << endl;
                     cout << endl;
                     break;
                 }
                 case '2':
                 {
                     clearscreen();
-                    cout << "====================| Unsorted Computer list |=================" << endl;
+                    cout << "========================= Unsorted Computer list =========================" << endl;
+                    cout << "=========================================================================="<< endl;
+                    cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
+                    cout << "=========================================================================="<< endl;
                     vector<ComputerModel> CVector = _computerservice.getComputer();
 
                     for(unsigned int i = 0; i < CVector.size(); i++)
@@ -57,9 +66,31 @@ void ConsoleUI::displayUnsortedList()
                         cout << CVector[i] << endl;
                     }
                     check = false;
+                    cout << "==========================================================================" << endl;
                     cout << endl;
                     break;
                 }
+                case '3':
+                {
+                clearscreen();
+                cout << "====================| Unsorted Geniuses & Computers list |=================" << endl;
+                vector<GeniusModel> GVector = _geniusservice.getGenius();
+
+                for(unsigned int i = 0; i < GVector.size(); i++)
+                {
+                    cout << GVector[i] << endl;
+
+                    vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
+
+                    for (unsigned int i= 0; i < computers.size(); i++)
+                    {
+                        cout << computers[i] << endl;
+                    }
+                }
+                check = false;
+                cout << endl;
+                break;
+            }
                 case 'q':
                 case 'Q':
                 {
@@ -81,49 +112,48 @@ void ConsoleUI::displayUnsortedList()
 // in ascending or descending order
 void ConsoleUI::displaySortedList()
 {
-    cout << "==============| Sorted list |===============" << endl;
+    cout << "=============== Sort list ================" << endl;
     vector<GeniusModel> GVector;
     vector<ComputerModel> CVector;
     string sortedInput, selectSort, sortBy;
     bool isValid = false;
     bool check = true;
 
-    cout << "============================" << endl;
+    cout << "==========================================" << endl;
     cout << "Enter 1 to sort Geniuses" << endl;
     cout << "Enter 2 to sort Computers" << endl;
     cout << "Enter q to quit" << endl;
-    cout << "============================" << endl;
+    cout << "==========================================" << endl;
     getline(cin, selectSort);
 
     if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "q" && selectSort != "Q"))
     {
         clearscreen();
-        cout << "Incorrect input, try again" << endl;
+        printError();
         return displaySortedList();
     }
     else
     {
-        selectSort = selectSort[0];
-
-        if(selectSort == "1")
-        {
-            clearscreen();
-            printGeniusSort();
-        }
-        else if(selectSort == "2")
-        {
-            clearscreen();
-            printComputerSort();
-        }
-        else
-        {
-            clearscreen();
-            return run();
-        }
-
-
         while(!isValid)
         {
+            selectSort = selectSort[0];
+
+            if(selectSort == "1")
+            {
+                clearscreen();
+                printGeniusSort();
+            }
+            else if(selectSort == "2")
+            {
+                clearscreen();
+                printComputerSort();
+            }
+            else
+            {
+                clearscreen();
+                return run();
+            }
+
             getline(cin, sortedInput);
 
             if(sortedInput.length() != 1 || (sortedInput != "a" && sortedInput != "A"
@@ -133,8 +163,13 @@ void ConsoleUI::displaySortedList()
                                              && sortedInput != "q" && sortedInput != "Q"))
             {
                 clearscreen();
-                cout << "Incorrect input, try again" << endl;
+                printError();
                 isValid = false;
+            }
+            else if(sortedInput == "q" || sortedInput == "Q")
+            {
+                clearscreen();
+                break;
             }
             else
             {
@@ -144,17 +179,17 @@ void ConsoleUI::displaySortedList()
                 while(check)
                 {
                     clearscreen();
-                    cout << "============================" << endl;
+                    cout << "=========== ASC & DESC ? ===========" << endl;
                     cout << "Enter A for order by ascending" << endl;
                     cout << "Enter D for order by descending" << endl;
                     cout << "Enter Q to quit" << endl;
-                    cout << "============================" << endl;
+                    cout << "====================================" << endl;
                     getline(cin, sortBy);
 
                     if(sortBy.length() != 1)
                     {
                         clearscreen();
-                        cout << "Incorrect input, try again" << endl;
+                        printError();
                         check = true;
                     }
                     else if(sortBy[0] == 'a' || sortBy[0] == 'A' || sortBy[0] == 'd' || sortBy[0] == 'D')
@@ -166,7 +201,6 @@ void ConsoleUI::displaySortedList()
                             GVector = _geniusservice.sortGenius(sortedInput, sortBy);
 
                             clearscreen();
-                            cout << "==============| Sorted list |===============" << endl;
                             printGVector(GVector);
                             check = false;
                         }
@@ -175,14 +209,15 @@ void ConsoleUI::displaySortedList()
                             CVector = _computerservice.sortComputer(sortedInput, sortBy);
 
                             clearscreen();
-                            cout << "==============| Sorted list |===============" << endl;
                             printCVector(CVector);
                             check = false;
                         }
                     }
-                    else
+                    else if(sortBy[0] == 'q' || sortBy[0] == 'Q')
                     {
-                        return run();
+                        clearscreen();
+                        check = false;
+                        break;
                     }
                 }
             }
@@ -208,16 +243,17 @@ void ConsoleUI::addNewEntryToDataSet()
 
     while(!(input == 'q' || input == 'Q') && check)
     {
-        clearscreen();
-        cout << "===============| Add entry |================" << endl;
+        cout << "================ Add entry =================" << endl;
         cout << "Enter 1 to add a Genius" << endl;
         cout << "Enter 2 to add a Computer" << endl;
         cout << "Enter q to quit" << endl;
+        cout << "============================================" << endl;
         getline(cin, strinput);
 
         if(strinput.length() != 1)
         {
-            cout << "Please enter a valid choice" << endl;
+            clearscreen();
+            printError();
         }
         else
         {
@@ -235,6 +271,7 @@ void ConsoleUI::addNewEntryToDataSet()
 
                     saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
                     check = false;
+                    break;
                 }
                 case '2':
                 {
@@ -246,6 +283,7 @@ void ConsoleUI::addNewEntryToDataSet()
 
                     saved = _computerservice.addComputer(modelName,makeYear,type,built);
                     check = false;
+                    break;
                 }
                 default:
                 {
@@ -258,7 +296,7 @@ void ConsoleUI::addNewEntryToDataSet()
         }
         else if(saved == false)
         {
-            cerr << "Entry failed" << endl;
+            cerr << "Entry failed!" << endl;
         }
         cout << endl;
     }
@@ -268,22 +306,24 @@ void ConsoleUI::addNewEntryToDataSet()
 void ConsoleUI::searchForEntries()
 {
     string name;
-    char input = ' ';
     string inputString;
 
-    cout << "===============| Search for entry |================" << endl;
-    cout << "Enter 1 to add a Genius" << endl;
-    cout << "Enter 2 to add a Computer" << endl;
-    cout << "====================================" << endl;
-    getline(cin,inputString,'\n');
+    while(!(inputString == "q" || inputString == "Q"))
+    {
+        cout << "================ Search for entry =================" << endl;
+        cout << "Enter 1 to add a Genius" << endl;
+        cout << "Enter 2 to add a Computer" << endl;
+        cout << "Enter Q to quit" << endl;
+        cout << "===================================================" << endl;
+        getline(cin,inputString);
 
-    if(inputString.length() != 1)
-    {
-        cout << "Please enter a valid choice" << endl;
-    }
-    else
-    {
-        if(inputString == "1")
+        if(inputString.length() != 1 || (inputString != "1" && inputString != "2" && inputString != "q" && inputString != "Q"))
+        {
+            clearscreen();
+            printError();
+            return searchForEntries();
+        }
+        else if(inputString == "1")
         {
             cout << "Enter name of Genius: ";
             getline(cin,name,'\n');
@@ -318,9 +358,16 @@ void ConsoleUI::searchForEntries()
             }
             cout << endl;
         }
+        else if(inputString == "q" || inputString == "Q")
+        {
+            clearscreen();
+            break;
+        }
         else
         {
-            cout << "Please enter a valid choice" << endl;
+            clearscreen();
+            printError();
+            return searchForEntries();
         }
     }
 }
@@ -328,211 +375,215 @@ void ConsoleUI::searchForEntries()
 void ConsoleUI::deleteAnEntry()
 {
     string name;
-    char YorN;
-    string input;
+    string inputString;
     string YorNString;
 
-    cout << "===============| Delete entry |================" << endl;
-    cout << "Enter 1 to delete a Genius" << endl;
-    cout << "Enter 2 to delete a Computer" << endl;
-    cout << "===================================" << endl;
-    getline(cin,input,'\n');
 
-    if(input.length() != 1)
+    while(!(inputString == "q" || inputString == "Q"))
     {
-        cout << "Please enter a valid choice" << endl;
-    }
-    else if(input == "1")
-    {
-        cout << "Enter name of Genius: ";
-        getline(cin,name,'\n');
+        cout << "================ Delete entry =================" << endl;
+        cout << "Enter 1 to delete a Genius" << endl;
+        cout << "Enter 2 to delete a Computer" << endl;
+        cout << "Enter q to quit" << endl;
+        cout << "===============================================" << endl;
+        getline(cin,inputString,'\n');
 
-        try
+        if(inputString.length() != 1 || (inputString != "1" && inputString != "2" && inputString != "q" && inputString != "Q"))
         {
-            bool check = true;
-            do
+            clearscreen();
+            printError();
+            return deleteAnEntry();
+        }
+        else if(inputString == "1")
+        {
+            cout << "Enter name of Genius: ";
+            getline(cin,name,'\n');
+
+            try
             {
-                vector<GeniusModel> g = _geniusservice.find(name);
-                int option;
-                string optionString;
-
-                if (g.size() > 1)
+                bool check = true;
+                do
                 {
-                    check = false;
-                    for(size_t i = 0; i < g.size(); i++)
-                    {
-                        cout << "Option " << i+1 << "  " << g[i] << endl;
-                    }
-                    cout << "Please enter the option you would like to delete: " << endl;
-                    getline(cin,optionString,'\n');
+                    vector<GeniusModel> g = _geniusservice.find(name);
+                    int option;
+                    string optionString;
 
-                    option = atoi(optionString.c_str());
-                    bool validOption = false;
-
-                    do
+                    if (g.size() > 1)
                     {
-                        if (option > 0 && option < g.size()+1)
+                        check = false;
+                        for(size_t i = 0; i < g.size(); i++)
                         {
-                            validOption = true;
-                            cout << g[option-1] << endl;
-                            cout << "Are you sure you want to delete this entry? (y/n): ";
-                            getline(cin,YorNString,'\n');
+                            cout << "Option " << i+1 << "  " << g[i] << endl;
+                        }
+                        cout << "Please enter the option you would like to delete: " << endl;
+                        getline(cin,optionString,'\n');
 
-                            YorN = YorNString[0];
+                        option = atoi(optionString.c_str());
+                        bool validOption = false;
 
-                            if(YorN == 'y' || YorN == 'Y')
+                        do
+                        {
+                            if (option > 0 && option < g.size()+1)
                             {
-                                _geniusservice.remove(g[option-1]);
-                                cout << "Entry was deleted" << endl;
+                                validOption = true;
+                                cout << g[option-1] << endl;
+                                cout << "Are you sure you want to delete this entry? (y/n): ";
+                                getline(cin,YorNString,'\n');
+
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    _geniusservice.remove(g[option-1]);
+                                    cout << "Entry was deleted" << endl;
+                                }
+                                else
+                                {
+                                    cout << "Entry was not deleted" << endl;
+                                }
                             }
                             else
                             {
-                                cout << "Entry was not deleted" << endl;
+                                cout << "You seem to have entered an invalid option" << endl;
+                                cout << "Please enter the option you would like to delete: " << endl;
+                                getline(cin,optionString,'\n');
                             }
+                        }while (validOption == false);
+                    }
+                    else if (g.size() == 1)
+                    {
+                        check = false;
+                        cout << g[0] << endl;
+                        cout << "Would you like to delete this entry? (y/n): ";
+                        getline(cin,YorNString,'\n');
+
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            _geniusservice.remove(g[0]);
+                            cout << "Entry was deleted" << endl;
                         }
                         else
                         {
-                            cout << "You seem to have entered an invalid option" << endl;
-                            cout << "Please enter the option you would like to delete: " << endl;
-                            getline(cin,optionString,'\n');
+                            cout << "Entry was not deleted" << endl;
                         }
-                    }while (validOption == false);
-                }
-                else if (g.size() == 1)
-                {
-                    check = false;
-                    cout << g[0] << endl;
-                    cout << "Would you like to delete this entry? (y/n): ";
-                    getline(cin,YorNString,'\n');
-
-                    YorN = YorNString[0];
-
-                    if(YorN == 'y' || YorN == 'Y')
-                    {
-                        _geniusservice.remove(g[0]);
-                        cout << "Entry was deleted" << endl;
                     }
                     else
                     {
+                        check = true;
+                        cout << "Please enter a valid choice!" << endl;
+                        cout << "Enter name of Genius: " << endl;
+                        getline(cin, name,'\n');
+                    }
+                }while(check == true);
+            }
+            catch(int)
+            {
+                cerr << "Did not find anything" << endl;
+            }
+            cout << endl;
+        }
+
+        else if(inputString == "2")
+        {
+            cout << "Enter name of Computer: ";
+            getline(cin,name,'\n');
+
+            try
+            {
+                bool check = true;
+                do
+                {
+                    vector<ComputerModel> c = _computerservice.find(name);
+                    int option;
+                    string optionString;
+
+                    if (c.size() > 1)
+                    {
+                        check = true;
+                        for(size_t i = 0; i < c.size(); i++)
+                        {
+                            cout << "Option " << i+1 << "  " << c[i] << endl;
+                        }
+                        cout << "Please enter the option you would like to delete: " << endl;
+                        getline(cin,optionString,'\n');
+
+                        option = atoi(optionString.c_str());
+
+                        bool validOption = false;
+                        do
+                        {
+                            if (option > 0 && option < c.size()+1)
+                            {
+                                cout << c[option-1] << endl;
+                                cout << "Are you sure you want to delete this entry? (y/n): ";
+                                getline(cin,YorNString,'\n');
+
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    _computerservice.remove(c[option-1]);
+                                    cout << "Entry was deleted" << endl;
+                                }
+                                else
+                                {
+                                    cout << "Entry was not deleted" << endl;
+                                }
+                            }
+                            else
+                            {
+                                cout << "You seem to have entered an invalid option" << endl;
+                                cout << "Please enter the option you would like to delete: " << endl;
+                                getline(cin,optionString,'\n');
+                                option = atoi(optionString.c_str());
+                            }
+                        }while (validOption == false);
+                    }
+                    else if (c.size() == 1)
+                    {
+                        check = true;
+                        cout << c[0] << endl;
+                        cout << "Would you like to delete this entry? (y/n): ";
+                        getline(cin,YorNString,'\n');
+
+                        YorN = YorNString[0];
+
+                        if(YorN == 'y' || YorN == 'Y')
+                        {
+                            _computerservice.remove(c[0]);
+                            cout << "Entry was deleted" << endl;
+                        }
+                        else
+                        {
                         cout << "Entry was not deleted" << endl;
-                    }
-                }
-                else
-                {
-                    check = true;
-                    cout << "Please enter a valid choice!" << endl;
-                    cout << "Enter name of Genius: " << endl;
-                    getline(cin, name,'\n');
-                }
-            }while(check == true);
-        }
-        catch(int)
-        {
-            cerr << "Did not find anything" << endl;
-        }
-        cout << endl;
-    }
-
-    else if(input == "2")
-    {
-        cout << "Enter name of Computer: ";
-        getline(cin,name,'\n');
-
-        try
-        {
-            bool check = true;
-            do
-            {
-                vector<ComputerModel> c = _computerservice.find(name);
-                int option;
-                string optionString;
-
-                if (c.size() > 1)
-                {
-                    check = true;
-                    for(size_t i = 0; i < c.size(); i++)
-                    {
-                        cout << "Option " << i+1 << "  " << c[i] << endl;
-                    }
-                    cout << "Please enter the option you would like to delete: " << endl;
-                    getline(cin,optionString,'\n');
-
-                    option = atoi(optionString.c_str());
-
-                    bool validOption = false;
-                    do
-                    {
-                        if (option > 0 && option < c.size()+1)
-                        {
-                            cout << c[option-1] << endl;
-                            cout << "Are you sure you want to delete this entry? (y/n): ";
-                            getline(cin,YorNString,'\n');
-
-                            YorN = YorNString[0];
-
-                            if(YorN == 'y' || YorN == 'Y')
-                            {
-                                _computerservice.remove(c[option-1]);
-                                cout << "Entry was deleted" << endl;
-                            }
-                            else
-                            {
-                                cout << "Entry was not deleted" << endl;
-                            }
                         }
-                        else
-                        {
-                            cout << "You seem to have entered an invalid option" << endl;
-                            cout << "Please enter the option you would like to delete: " << endl;
-                            getline(cin,optionString,'\n');
-                            option = atoi(optionString.c_str());
-                        }
-                    }while (validOption == false);
-                }
-                else if (c.size() == 1)
-                {
-                    check = true;
-                    cout << c[0] << endl;
-                    cout << "Would you like to delete this entry? (y/n): ";
-                    getline(cin,YorNString,'\n');
-
-                    YorN = YorNString[0];
-
-                    if(YorN == 'y' || YorN == 'Y')
-                    {
-                        _computerservice.remove(c[0]);
-                        cout << "Entry was deleted" << endl;
                     }
                     else
                     {
-                    cout << "Entry was not deleted" << endl;
+                        check = true;
+                        cout << "Please enter a valid choice!" << endl;
+                        cout << "Enter name of Computer: " << endl;
+                        getline(cin, name,'\n');
                     }
-                }
-                else
-                {
-                    check = true;
-                    cout << "Please enter a valid choice!" << endl;
-                    cout << "Enter name of Computer: " << endl;
-                    getline(cin, name,'\n');
-                }
-            }while(check == true);
+                }while(check == true);
+            }
+            catch(int)
+            {
+                cerr << "Did not find anything" << endl;
+            }
+            cout << endl;
         }
-        catch(int)
+
+        else if (inputString == "q" || inputString == "Q")
         {
-            cerr << "Did not find anything" << endl;
+            clearscreen();
+            break;
         }
-        cout << endl;
-    }
-
-    else if (input == "q" || input == "Q")
-    {
-
-    }
-    else
-    {
-
+        else
+        {
+            clearscreen();
+            printError();
+            return deleteAnEntry();
+        }
     }
 }
+
 
 
 void ConsoleUI::run()
@@ -541,7 +592,7 @@ void ConsoleUI::run()
 
     do
     {
-        cout << "============================" << endl;
+        cout << "======== Main Menu =========" << endl;
         cout << "Enter 1 for Unsorted list" << endl;
         cout << "Enter 2 for Sorted list" << endl;
         cout << "Enter 3 to Add entry" << endl;
@@ -553,9 +604,12 @@ void ConsoleUI::run()
 
         if (input.size() == 0 || input.size() > 1)
         {
-            cout << "*" << input << "*" << " is not valid as an input!" << endl;
+            clearscreen();
+            cout << "============= ERROR =============" << endl;
             cout << "Please enter a number between 1-5" << endl;
             cout << "or q to quit the application" << endl;
+            cout << "=================================" << endl;
+            cout << endl;
         }
         else if (input.size() == 1)
         {
@@ -591,6 +645,11 @@ void ConsoleUI::run()
                     deleteAnEntry();
                     break;
                 }
+                case 'q':
+                case 'Q':
+                {
+                    exit(0);
+                }
             }
         }
     }while(!(input == "q" || input == "Q"));
@@ -604,40 +663,58 @@ void ConsoleUI::clearscreen()
 
 void ConsoleUI::printGVector(vector<GeniusModel> GVector)
 {
+    cout << "===================== Sorted Genius list ====================" << endl;
+    cout << "============================================================="<< endl;
+    cout << setw(24)<< "Name" << setw(9) << "Gender" << "  " << "Birth Year" << "  -  " << "Death Year" << endl;
+    cout << "============================================================="<< endl;
     for(unsigned int i = 0; i < GVector.size(); i++)
     {
         cout << GVector[i] << endl;
     }
+    cout << "============================================================="<< endl;
     cout << endl;
 }
 
 void ConsoleUI::printCVector(vector<ComputerModel> CVector)
 {
+    cout << "========================= Sorted Computer list ===========================" << endl;
+    cout << "=========================================================================="<< endl;
+    cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
+    cout << "=========================================================================="<< endl;
     for(unsigned int i = 0; i < CVector.size(); i++)
     {
         cout << CVector[i] << endl;
     }
+    cout << "=========================================================================="<< endl;
     cout << endl;
 }
 
 void ConsoleUI::printGeniusSort()
 {
     cout << "============= Sort Genius ============" << endl;
-    cout << "Enter a for list sorted by Name" << endl;
-    cout << "Enter b for list sorted by Gender" << endl;
-    cout << "Enter c for list sorted by Birth year" << endl;
-    cout << "Enter d for list sorted by Death year" << endl;
-    cout << "Enter q to quit" << endl;
+    cout << "Enter A for list sorted by Name" << endl;
+    cout << "Enter B for list sorted by Gender" << endl;
+    cout << "Enter C for list sorted by Birth year" << endl;
+    cout << "Enter D for list sorted by Death year" << endl;
+    cout << "Enter Q to quit" << endl;
     cout << "======================================" << endl;
 }
 void ConsoleUI::printComputerSort()
 {
     cout << "=========== Sort Computer ============" << endl;
-    cout << "Enter a for list sorted by Model name" << endl;
-    cout << "Enter b for list sorted by Make year" << endl;
-    cout << "Enter c for list sorted by Type" << endl;
-    cout << "Enter d for list sorted by Built" << endl;
-    cout << "Enter q to quit" << endl;
+    cout << "Enter A for list sorted by Model name" << endl;
+    cout << "Enter B for list sorted by Make year" << endl;
+    cout << "Enter C for list sorted by Type" << endl;
+    cout << "Enter D for list sorted by Built" << endl;
+    cout << "Enter Q to quit" << endl;
     cout << "======================================" << endl;
+}
+
+void ConsoleUI::printError()
+{
+    cout << "========== ERROR ==========" << endl;
+    cout << "Please enter a valid choice" << endl;
+    cout << "===========================" << endl;
+    cout << endl;
 }
 

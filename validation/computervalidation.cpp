@@ -26,7 +26,7 @@ string ComputerValidation::promptForModelName()
 
         if(rejected == true)
         {
-            cout << "Name can only contain alphabetic characters and spaces!" << endl;
+            cout << "Name is invalid" << endl;
         }
         else
         {
@@ -54,7 +54,6 @@ bool ComputerValidation::validateModelName(string modelName)
             continue;
         if(modelName[i] == ' ')
             continue;
-
         rejected = true;
     }
     return rejected;
@@ -74,7 +73,7 @@ unsigned int ComputerValidation::promptForMakeYear()
 
         rejected = validateMakeYear(makeYearString);
 
-        if(!rejected && makeYearString.length() == 1)
+        if(!rejected && makeYearString.length() == 4)
         {
             makeYear = atoi(makeYearString.c_str());
 
@@ -90,7 +89,7 @@ unsigned int ComputerValidation::promptForMakeYear()
             }
         }
 
-        if(rejected == false)
+        if(rejected == true)
         {
             cout << "Please enter a valid year" << endl;
         }
