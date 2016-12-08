@@ -13,15 +13,13 @@ vector<ComputerModel> ComputerService::getComputer()
 
 bool ComputerService::addComputer(string modelName, unsigned int makeYear, string type, bool built)
 {
-    ComputerRepository c;
     ComputerModel model(modelName, makeYear, type, built);
-    return c.saveComputer(model);
+    return _computerRepository.saveComputer(model);
 }
 
 vector<ComputerModel> ComputerService::sort(string column, bool ascending)
 {
-    ComputerRepository c;
-    return c.sort(column, ascending);
+    return _computerRepository.sort(column, ascending);
 }
 
 bool ComputerService::sortOrder(string sortBy)
@@ -62,16 +60,14 @@ vector<ComputerModel> ComputerService::sortComputer(string sortedInput, string s
     return sort(column, asc);
 }
 
-vector<ComputerModel> ComputerService::find(string modelName) const
+vector<ComputerModel> ComputerService::find(string modelName)
 {
-    ComputerRepository c;
-    return c.searchForComputer(modelName);
+    return _computerRepository.searchForComputer(modelName);
 }
 
 bool ComputerService::remove(ComputerModel model)
 {
-    ComputerRepository c;
-    return c.removeComputer(model);
+    return _computerRepository.removeComputer(model);
 }
 
 bool ComputerService::update(ComputerModel model)
