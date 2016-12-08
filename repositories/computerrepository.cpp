@@ -1,5 +1,7 @@
 #include "repositories/computerrepository.h"
-#include "repositories/computergeniusrepository.h"
+
+#include <QtSql>
+
 
 ComputerRepository::ComputerRepository()
 {
@@ -76,6 +78,26 @@ bool ComputerRepository::removeComputer(ComputerModel model)
 {
     QSqlQuery query(_db);
     query.prepare("DELETE FROM Computers WHERE id = :id");
+    query.bindValue(":id", model.getId());
+
+    return query.exec();
+}
+
+bool ComputerRepository::updateComputer(ComputerModel model)
+{
+    QSqlQuery query(_db);
+
+    query.prepare("UPDATE Computers \
+                   SET ModelName = :modelName \
+                   SET MakeYear  = :makeYear \
+                   SET Type      = :type \
+                   SET Built     = :built \
+                   WHERE ComputerID = :id");
+
+    query.bindValue(":modelName", QString::fromStdString(model.getModelName()));
+    query.bindValue(":makeYear", model.getMakeYear());
+    query.bindValue(":type", QString::fromStdString(model.getType()));
+    query.bindValue(":built", model.getBuilt());
     query.bindValue(":id", model.getId());
 
     return query.exec();

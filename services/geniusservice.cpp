@@ -76,6 +76,11 @@ bool GeniusService::remove(GeniusModel genius)
     return r.removeGenius(genius);
 }
 
+bool GeniusService::update(GeniusModel model)
+{
+    return _geniusRepository.updateGenius(model);
+}
+
 // Give me a char and I will tell you what gender it is supposed to be
 string GeniusService::getFullGenderName(char gender)
 {

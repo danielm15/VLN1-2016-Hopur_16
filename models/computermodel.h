@@ -63,6 +63,16 @@ public:
      * @return _built
      */
     bool getBuilt() const;
+    
+    /**
+     * @brief update, 
+     * @param modelName
+     * @param makeYear
+     * @param type
+     * @param built
+     * @return 
+     */
+    bool update(string modelName, unsigned int makeYear, string type, bool built);
 
     /**
      * @brief operator == Checks if two objects are the same

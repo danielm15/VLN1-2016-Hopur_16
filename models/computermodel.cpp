@@ -47,6 +47,17 @@ bool ComputerModel::getBuilt() const
     return _built;
 }
 
+bool ComputerModel::update(string modelName, unsigned int makeYear, string type, bool built)
+{
+    _modelName = modelName;
+    _makeYear = makeYear;
+    _type = type;
+    _built = built;
+
+    return true;
+}
+
+
 bool operator ==(const ComputerModel& g1, const ComputerModel& g2)
 {
     if (g1._id != g2._id)
