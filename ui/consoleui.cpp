@@ -15,15 +15,16 @@ void ConsoleUI::displayUnsortedList()
 
     while(!(input == 'q' || input == 'Q') && check == true)
     {
-        cout << "============== Unsorted list ===============" << endl;
-        cout << "Enter 1 for unsorted Genius list" << endl;
-        cout << "Enter 2 for unsorted Computer list" << endl;
-        cout << "Enter 3 for unsorted Geniuses & Computers list" << endl;
-        cout << "Enter q to quit" << endl;
-        cout << "============================================" << endl;
+        cout << "================= Unsorted list ==================" << endl;
+        cout << "| Enter 1 for unsorted Genius list               |" << endl;
+        cout << "| Enter 2 for unsorted Computer list             |" << endl;
+        cout << "| Enter 3 for unsorted Geniuses & Computers list |" << endl;
+        cout << "| Enter q to quit                                |" << endl;
+        cout << "==================================================" << endl;
+
         getline(cin, strinput);
 
-        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "q" && strinput != "Q"))
+        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "3" && strinput != "4" && strinput != "q" && strinput != "Q"))
         {
             clearscreen();
             printError();
@@ -93,6 +94,32 @@ void ConsoleUI::displayUnsortedList()
                 cout << endl;
                 break;
             }
+            case '4':
+            {
+                clearscreen();
+                cout << "========================= Unsorted Computer list =========================" << endl;
+                cout << "=========================================================================="<< endl;
+                cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
+                cout << "=========================================================================="<< endl;
+                vector<ComputerModel> CVector = _computerservice.getComputer();
+
+                for(unsigned int i = 0; i < CVector.size(); i++)
+                {
+                    cout << CVector[i] << endl;
+
+                    vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
+
+                    for (unsigned int i= 0; i < geno.size(); i++)
+                    {
+                        cout << "\t" << geno[i].getName() << endl;
+
+                    }
+                }
+                check = false;
+                cout << "==========================================================================" << endl;
+                cout << endl;
+                break;
+            }
                 case 'q':
                 case 'Q':
                 {
@@ -105,7 +132,6 @@ void ConsoleUI::displayUnsortedList()
             }
         }
     }
-
 }
 
 // Asks the user what variable he would like to sort by and
@@ -114,19 +140,19 @@ void ConsoleUI::displayUnsortedList()
 // in ascending or descending order
 void ConsoleUI::displaySortedList()
 {
-    cout << "=============== Sort list ================" << endl;
     vector<GeniusModel> GVector;
     vector<ComputerModel> CVector;
     string sortedInput, selectSort, sortBy;
     bool isValid = false;
     bool check = true;
 
-    cout << "==========================================" << endl;
-    cout << "Enter 1 to sort Geniuses" << endl;
-    cout << "Enter 2 to sort Computers" << endl;
-    cout << "Enter 3 to sort Geniuses & Computers" << endl;
-    cout << "Enter q to quit" << endl;
-    cout << "==========================================" << endl;
+    cout << "============== Sort list ===============" << endl;
+    cout << "| Enter 1 to sort Geniuses             |" << endl;
+    cout << "| Enter 2 to sort Computers            |" << endl;
+    cout << "| Enter 3 to sort Geniuses & Computers |" << endl;
+    cout << "| Enter q to quit                      |" << endl;
+    cout << "========================================" << endl;
+
     getline(cin, selectSort);
 
     if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "q" && selectSort != "Q"))
@@ -196,11 +222,11 @@ void ConsoleUI::displaySortedList()
                 while(check)
                 {
                     clearscreen();
-                    cout << "=========== ASC & DESC ? ===========" << endl;
-                    cout << "Enter A for order by ascending" << endl;
-                    cout << "Enter D for order by descending" << endl;
-                    cout << "Enter Q to quit" << endl;
-                    cout << "====================================" << endl;
+                    cout << "=========== ASC & DESC ? ==========" << endl;
+                    cout << "| Enter A for order by ascending  |" << endl;
+                    cout << "| Enter D for order by descending |" << endl;
+                    cout << "| Enter Q to quit                 |" << endl;
+                    cout << "===================================" << endl;
                     getline(cin, sortBy);
 
                     if(sortBy.length() != 1)
@@ -260,17 +286,22 @@ void ConsoleUI::addNewEntryToDataSet()
 
     while(!(input == 'q' || input == 'Q') && check)
     {
-        cout << "================ Add entry =================" << endl;
-        cout << "Enter 1 to add a Genius" << endl;
-        cout << "Enter 2 to add a Computer" << endl;
-        cout << "Enter q to quit" << endl;
-        cout << "============================================" << endl;
+        cout << "============ Add entry =============" << endl;
+        cout << "| Enter 1 to add a Genius          |" << endl;
+        cout << "| Enter 2 to add a Computer        |" << endl;
+        cout << "| Enter Q to quit                  |" << endl;
+        cout << "====================================" << endl;
         getline(cin, strinput);
 
-        if(strinput.length() != 1)
+        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "q" && strinput != "Q"))
         {
             clearscreen();
             printError();
+        }
+        else if(strinput == "q" || strinput == "Q")
+        {
+            clearscreen();
+            break;
         }
         else
         {
@@ -306,16 +337,18 @@ void ConsoleUI::addNewEntryToDataSet()
                 {
                 }
             }
+
+            if(saved == true && check == false)
+            {
+                cout << "Entry saved" << endl;
+            }
+            else if(saved == false)
+            {
+                cerr << "Entry failed!" << endl;
+            }
+            cout << endl;
         }
-        if(saved == true && check == false)
-        {
-            cout << "Entry saved" << endl;
-        }
-        else if(saved == false)
-        {
-            cerr << "Entry failed!" << endl;
-        }
-        cout << endl;
+
     }
 }
 
@@ -327,11 +360,11 @@ void ConsoleUI::searchForEntries()
 
     while(!(inputString == "q" || inputString == "Q"))
     {
-        cout << "================ Search for entry =================" << endl;
-        cout << "Enter 1 to add a Genius" << endl;
-        cout << "Enter 2 to add a Computer" << endl;
-        cout << "Enter Q to quit" << endl;
-        cout << "===================================================" << endl;
+        cout << "========= Search for entry =========" << endl;
+        cout << "| Enter 1 to search for a Genius   |" << endl;
+        cout << "| Enter 2 to search for a Computer |" << endl;
+        cout << "| Enter Q to quit                  |" << endl;
+        cout << "====================================" << endl;
         getline(cin,inputString);
 
         if(inputString.length() != 1 || (inputString != "1" && inputString != "2" && inputString != "q" && inputString != "Q"))
@@ -397,11 +430,11 @@ void ConsoleUI::deleteAnEntry()
     string inputString;
     string YorNString;
 
-    cout << "================ Delete entry =================" << endl;
-    cout << "Enter 1 to delete a Genius" << endl;
-    cout << "Enter 2 to delete a Computer" << endl;
-    cout << "Enter Q to quit" << endl;
-    cout << "===============================================" << endl;
+    cout << "========== Delete entry ==========" << endl;
+    cout << "| Enter 1 to delete a Genius     |" << endl;
+    cout << "| Enter 2 to delete a Computer   |" << endl;
+    cout << "| Enter Q to quit                |" << endl;
+    cout << "==================================" << endl;
     getline(cin,inputString,'\n');
 
     if(inputString.length() != 1 || (inputString != "1" && inputString != "2" && inputString != "q" && inputString != "Q"))
@@ -574,6 +607,7 @@ void ConsoleUI::deleteAnEntry()
     }
 }
 
+<<<<<<< HEAD
 void ConsoleUI::smile()
 {
     cout << "777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777 777777777" << endl;
@@ -632,12 +666,15 @@ void ConsoleUI::smile()
 
 
 
+=======
+>>>>>>> bf860eee1dedebea0363a183d4fabd4868a25b90
 void ConsoleUI::run()
 {
     string input;
 
     do
     {
+<<<<<<< HEAD
         cout << "======== Main Menu =========" << endl;
         cout << "Enter 1 for Unsorted list" << endl;
         cout << "Enter 2 for Sorted list" << endl;
@@ -647,16 +684,15 @@ void ConsoleUI::run()
         cout << "Enter 6 to play a game" << endl;
         cout << "Enter q to Quit" << endl;
         cout << "============================" << endl;
+=======
+        printMenu();
+>>>>>>> bf860eee1dedebea0363a183d4fabd4868a25b90
         getline(cin, input);
 
         if (input.size() == 0 || input.size() > 1)
         {
             clearscreen();
-            cout << "============= ERROR =============" << endl;
-            cout << "Please enter a number between 1-5" << endl;
-            cout << "or q to quit the application" << endl;
-            cout << "=================================" << endl;
-            cout << endl;
+            printError();
         }
         else if (input.size() == 1)
         {
@@ -701,7 +737,15 @@ void ConsoleUI::run()
                 case 'q':
                 case 'Q':
                 {
+                    cout << "=======================" << endl;
+                    cout << "| Program terminated. |" << endl;
+                    cout << "=======================" << endl;
                     exit(0);
+                }
+                default:
+                {
+                    clearscreen();
+                    printError();
                 }
             }
         }
@@ -744,29 +788,41 @@ void ConsoleUI::printCVector(vector<ComputerModel> CVector)
 
 void ConsoleUI::printGeniusSort()
 {
-    cout << "============= Sort Genius ============" << endl;
-    cout << "Enter A for list sorted by Name" << endl;
-    cout << "Enter B for list sorted by Gender" << endl;
-    cout << "Enter C for list sorted by Birth year" << endl;
-    cout << "Enter D for list sorted by Death year" << endl;
-    cout << "Enter Q to quit" << endl;
-    cout << "======================================" << endl;
+    cout << "============== Sort Genius ==============" << endl;
+    cout << "| Enter A for list sorted by Name       |" << endl;
+    cout << "| Enter B for list sorted by Gender     |" << endl;
+    cout << "| Enter C for list sorted by Birth year |" << endl;
+    cout << "| Enter D for list sorted by Death year |" << endl;
+    cout << "| Enter Q to quit                       |" << endl;
+    cout << "=========================================" << endl;
 }
 void ConsoleUI::printComputerSort()
 {
-    cout << "=========== Sort Computer ============" << endl;
-    cout << "Enter a for list sorted by Model name" << endl;
-    cout << "Enter b for list sorted by Make year" << endl;
-    cout << "Enter c for list sorted by Type" << endl;
-    cout << "Enter d for list sorted by Year built" << endl;
-    cout << "Enter q to quit" << endl;
-    cout << "======================================" << endl;
+    cout << "============= Sort Computer =============" << endl;
+    cout << "| Enter a for list sorted by Model name |" << endl;
+    cout << "| Enter b for list sorted by Make year  |" << endl;
+    cout << "| Enter c for list sorted by Type       |" << endl;
+    cout << "| Enter d for list sorted by Year built |" << endl;
+    cout << "| Enter q to quit                       |" << endl;
+    cout << "=========================================" << endl;
 }
 
 void ConsoleUI::printError()
 {
-    cout << "========== ERROR ==========" << endl;
-    cout << "Please enter a valid choice" << endl;
-    cout << "===========================" << endl;
+    cout << "============ ERROR ============" << endl;
+    cout << "| Please enter a valid choice |" << endl;
+    cout << "===============================" << endl;
     cout << endl;
+}
+
+void ConsoleUI::printMenu()
+{
+    cout << "========== Main Menu ==========" << endl;
+    cout << "| Enter 1 for Unsorted list   |" << endl;
+    cout << "| Enter 2 for Sorted list     |" << endl;
+    cout << "| Enter 3 to Add entry        |" << endl;
+    cout << "| Enter 4 to Search for entry |" << endl;
+    cout << "| Enter 5 to Delete an entry  |" << endl;
+    cout << "| Enter q to Quit             |" << endl;
+    cout << "===============================" << endl;
 }
