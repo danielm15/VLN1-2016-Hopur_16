@@ -2,7 +2,9 @@
 #define COMPUTERSERVICE_H
 
 #include "models/computermodel.h"
+#include "models/geniusmodel.h"
 #include "repositories/computerrepository.h"
+#include "repositories/computergeniusrepository.h"
 
 
 class ComputerService
@@ -68,8 +70,17 @@ public:
      * @return true if success, else false
      */
     bool update(ComputerModel model);
+
+    /**
+     * @brief getAllGeniusesWhoBuiltComputer, Returns from the datalayer all geniuses that built that computer
+     * @param model
+     * @return
+     */
+    vector<GeniusModel> getAllGeniusesWhoBuiltComputer(ComputerModel model);
+
 private:
     ComputerRepository _computerRepository;
+    ComputerGeniusRepository _computerGeniusRepository;
 };
 
 #endif // COMPUTERSERVICE_H

@@ -78,14 +78,16 @@ void ConsoleUI::displayUnsortedList()
 
                 for(unsigned int i = 0; i < GVector.size(); i++)
                 {
-                    cout << GVector[i] << endl;
+                    cout << GVector[i].getName() << endl;
 
                     vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
 
                     for (unsigned int i= 0; i < computers.size(); i++)
                     {
-                        cout << computers[i] << endl;
+                        cout << "\t" << computers[i].getModelName() << endl;
+
                     }
+                    cout << endl;
                 }
                 check = false;
                 cout << endl;
@@ -122,6 +124,7 @@ void ConsoleUI::displaySortedList()
     cout << "==========================================" << endl;
     cout << "Enter 1 to sort Geniuses" << endl;
     cout << "Enter 2 to sort Computers" << endl;
+    cout << "Enter 3 to sort Geniuses & Computers" << endl;
     cout << "Enter q to quit" << endl;
     cout << "==========================================" << endl;
     getline(cin, selectSort);
@@ -134,6 +137,20 @@ void ConsoleUI::displaySortedList()
     }
     else
     {
+        selectSort = selectSort[0];
+
+        if(selectSort == "1")
+        {
+            clearscreen();
+            printGeniusSort();
+        }
+        else if(selectSort == "2")
+        {
+            clearscreen();
+            printComputerSort();
+        }
+        else
+
         while(!isValid)
         {
             selectSort = selectSort[0];
@@ -669,11 +686,11 @@ void ConsoleUI::printGeniusSort()
 void ConsoleUI::printComputerSort()
 {
     cout << "=========== Sort Computer ============" << endl;
-    cout << "Enter A for list sorted by Model name" << endl;
-    cout << "Enter B for list sorted by Make year" << endl;
-    cout << "Enter C for list sorted by Type" << endl;
-    cout << "Enter D for list sorted by Built" << endl;
-    cout << "Enter Q to quit" << endl;
+    cout << "Enter a for list sorted by Model name" << endl;
+    cout << "Enter b for list sorted by Make year" << endl;
+    cout << "Enter c for list sorted by Type" << endl;
+    cout << "Enter d for list sorted by Year built" << endl;
+    cout << "Enter q to quit" << endl;
     cout << "======================================" << endl;
 }
 
@@ -696,4 +713,3 @@ void ConsoleUI::printMenu()
     cout << "Enter q to Quit" << endl;
     cout << "============================" << endl;
 }
-
