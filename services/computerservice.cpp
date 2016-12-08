@@ -18,10 +18,48 @@ bool ComputerService::addComputer(string modelName, unsigned int makeYear, strin
     return c.saveComputer(model);
 }
 
-vector<ComputerModel> ComputerService::sort(bool ascending)
+vector<ComputerModel> ComputerService::sort(string column, bool ascending)
 {
     ComputerRepository c;
-    return c.sort("ModelName", ascending);
+    return c.sort(column, ascending);
+}
+
+bool ComputerService::sortOrder(string sortBy)
+{
+    bool ascending = true;
+
+    if (sortBy == "D" || sortBy == "d")
+        ascending = false;
+    else if (sortBy == "A" || sortBy == "a")
+        ascending = true;
+
+    return ascending;
+}
+
+vector<ComputerModel> ComputerService::sortComputer(string sortedInput, string sortBy)
+{
+    string column;
+    bool asc;
+
+    if(sortedInput == "a" || sortedInput == "A")
+    {
+        column = "ModelName";
+    }
+    else if(sortedInput == "b" || sortedInput == "B")
+    {
+        column = "MakeYear";
+    }
+    else if(sortedInput == "c" || sortedInput == "C")
+    {
+        column = "Type";
+    }
+    else if(sortedInput == "d" || sortedInput == "D")
+    {
+        column = "Built";
+    }
+    asc = sortOrder(sortBy);
+
+    return sort(column, asc);
 }
 
 vector<ComputerModel> ComputerService::find(string modelName) const

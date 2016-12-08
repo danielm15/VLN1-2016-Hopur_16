@@ -36,6 +36,8 @@ vector<GeniusModel> GeniusRepository::searchForGenius(string name)
 
 vector<GeniusModel> GeniusRepository::sort(string field, bool asc)
 {
+    cout << field << endl;
+    cout << asc << endl;
     QSqlQuery query(_db);
     vector<GeniusModel> geniuses;
     string sortBy = "ASC";
@@ -44,11 +46,8 @@ vector<GeniusModel> GeniusRepository::sort(string field, bool asc)
     {
         sortBy = "DESC";
     }
-    string queryString = "SELECT * FROM Geniuses ORDER BY :name " + sortBy;
-
-    query.prepare(QString::fromStdString(queryString));
-    query.bindValue(":name", QString::fromStdString(field));
-    query.exec();
+    string queryString = ("SELECT * FROM Geniuses ORDER BY " + field + " " + sortBy);
+    query.exec(QString::fromStdString(queryString));
 
     geniuses = extractQueryToVector(query);
 

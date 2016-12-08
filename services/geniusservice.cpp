@@ -12,10 +12,48 @@ vector<GeniusModel> GeniusService::getGenius()
     return repo.getAllGeniuses();
 }
 
-vector<GeniusModel> GeniusService::sort(bool ascending)
+vector<GeniusModel> GeniusService::sort(string column, bool ascending)
 {
     GeniusRepository g;
-    return g.sort("Name", ascending);
+    return g.sort(column, ascending);
+}
+
+bool GeniusService::sortOrder(string sortBy)
+{
+    bool ascending = true;
+
+    if (sortBy == "D" || sortBy == "d")
+        ascending = false;
+    else if (sortBy == "A" || sortBy == "a")
+        ascending = true;
+
+    return ascending;
+}
+
+vector<GeniusModel> GeniusService::sortGenius(string sortedInput, string sortBy)
+{
+    string column;
+    bool asc;
+
+    if(sortedInput == "a" || sortedInput == "A")
+    {
+        column = "Name";
+    }
+    else if(sortedInput == "b" || sortedInput == "B")
+    {
+        column = "Gender";
+    }
+    else if(sortedInput == "c" || sortedInput == "C")
+    {
+        column = "BirthYear";
+    }
+    else if(sortedInput == "d" || sortedInput == "D")
+    {
+        column = "DeathYear";
+    }
+    asc = sortOrder(sortBy);
+
+    return sort(column, asc);
 }
 
 vector<GeniusModel> GeniusService::find(string name) const

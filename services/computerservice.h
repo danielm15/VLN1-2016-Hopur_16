@@ -20,7 +20,22 @@ public:
      * @brief sort Gets all computers and sorts them eather ascending or decending
      * @return ComputerModel vector of all geniuses sorted
      */
-    vector<ComputerModel> sort(bool ascending);
+    vector<ComputerModel> sort(string column, bool ascending);
+
+    /**
+     * @brief sortOrder
+     * @param sortBy
+     * @return
+     */
+    bool sortOrder(string sortBy);
+
+    /**
+     * @brief sortComputer
+     * @param sortedInput
+     * @param sortBy
+     * @return
+     */
+    vector<ComputerModel> sortComputer(string sortedInput, string sortBy);
 
     /**
      * @brief find all computers that have name that matches name parameter
