@@ -29,6 +29,15 @@ public:
      * @return vector of geniuses
      */
     vector<GeniusModel> getComputerGeniuses(ComputerModel model);
+
+    /**
+     * @brief addRelationship, adds a new relationship between genius and computer
+     * @param computer
+     * @param genius
+     * @return bool if success, else false
+     */
+    bool addRelationship(ComputerModel computer, GeniusModel genius);
+
 private:
     QSqlDatabase _db;
 
