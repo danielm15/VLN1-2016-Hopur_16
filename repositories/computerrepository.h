@@ -54,6 +54,14 @@ public:
      * @return true if delete was a success, else false
      */
     bool removeComputer(ComputerModel model);
+
+    /**
+     * @brief updateComputer, updates the record for the computer based on computer model fields in the model.
+     * @param model
+     * @return true if success, else false
+     */
+    bool updateComputer(ComputerModel model);
+
 private:
     QSqlDatabase _db;
 

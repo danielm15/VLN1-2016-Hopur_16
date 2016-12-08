@@ -3,6 +3,8 @@
 
 #include <QtSql>
 #include <QVariant>
+#include <QString>
+
 
 #include <vector>
 #include <string>
@@ -55,6 +57,13 @@ public:
      * @return true if delete was a success, else false
      */
     bool removeGenius(GeniusModel model);
+
+    /**
+     * @brief updateGenius, updates the record for the genius based on genius model fields in the model.
+     * @param model
+     * @return true if success, else false
+     */
+    bool updateGenius(GeniusModel model);
 private:
     QSqlDatabase _db;
 

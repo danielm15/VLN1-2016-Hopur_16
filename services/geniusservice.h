@@ -1,8 +1,10 @@
 #ifndef GENIUSSERVICE_H
 #define GENIUSSERVICE_H
 
+#include "models/computermodel.h"
 #include "models/geniusmodel.h"
 #include "repositories/geniusrepository.h"
+#include "repositories/computergeniusrepository.h"
 
 #include <string>
 
@@ -69,8 +71,24 @@ public:
      */
     bool remove(GeniusModel genius);
 
+    /**
+     * @brief update, Calls the datalayer for a update of the model.
+     * @param model
+     * @return true if success, else false
+     */
+    bool update(GeniusModel model);
+
+    /**
+     * @brief getAllComputersGeniusBuilt Returns all compuers genius has built
+     * @param model
+     * @return vector of computers
+     */
+    vector<ComputerModel> getAllComputersGeniusBuilt(GeniusModel model);
+
 private:
     GeniusRepository _geniusRepository;
+    ComputerGeniusRepository _computerGeniusRepository;
+
 
     /**
      * @brief Takes char of eather m or f and returns full gender name

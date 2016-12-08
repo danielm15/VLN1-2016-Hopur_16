@@ -18,6 +18,7 @@ void ConsoleUI::displayUnsortedList()
         cout << "============== Unsorted list ===============" << endl;
         cout << "Enter 1 for unsorted Genius list" << endl;
         cout << "Enter 2 for unsorted Computer list" << endl;
+        cout << "Enter 3 for unsorted Geniuses & Computers list" << endl;
         cout << "Enter q to quit" << endl;
         cout << "============================================" << endl;
         getline(cin, strinput);
@@ -69,6 +70,27 @@ void ConsoleUI::displayUnsortedList()
                     cout << endl;
                     break;
                 }
+                case '3':
+                {
+                clearscreen();
+                cout << "====================| Unsorted Geniuses & Computers list |=================" << endl;
+                vector<GeniusModel> GVector = _geniusservice.getGenius();
+
+                for(unsigned int i = 0; i < GVector.size(); i++)
+                {
+                    cout << GVector[i] << endl;
+
+                    vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
+
+                    for (unsigned int i= 0; i < computers.size(); i++)
+                    {
+                        cout << computers[i] << endl;
+                    }
+                }
+                check = false;
+                cout << endl;
+                break;
+            }
                 case 'q':
                 case 'Q':
                 {
@@ -356,6 +378,7 @@ void ConsoleUI::deleteAnEntry()
     char YorN;
     char input = ' ';
     string inputString;
+    string YorNString;
 
     cout << "================ Delete entry =================" << endl;
     cout << "Enter 1 to delete a Genius" << endl;
@@ -375,25 +398,35 @@ void ConsoleUI::deleteAnEntry()
         cout << "Enter name of Genius: ";
         getline(cin,name,'\n');
 
-          try
-          {
-             vector<GeniusModel> g = _geniusservice.find(name);
-              int option;
-              //TODO: Breyta í string til þess að villutékka option
-
-              if (g.size() > 1)
+        try
+        {
+             bool check = true;
+             do
              {
+                vector<GeniusModel> g = _geniusservice.find(name);
+                int option;
+                string optionString;
+
+                if (g.size() > 1)
+                {
+                    check = false;
                     for(size_t i = 0; i < g.size(); i++)
                     {
                         cout << "Option " << i+1 << "  " << g[i] << endl;
                     }
-                  cout << "Please enter the option you would like to delete: " << endl;
-                    cin >> option;
+                    cout << "Please enter the option you would like to delete: " << endl;
+                    getline(cin,optionString,'\n');
+
+                    option = atoi(optionString.c_str());
+
                     if (option > 0 && option < g.size()+1)
-                    {
+                    {   
                         cout << g[option-1] << endl;
                         cout << "Are you sure you want to delete this entry? (y/n): ";
-                       cin >> YorN;
+                        getline(cin,YorNString,'\n');
+
+                        YorN = atoi(YorNString.c_str());
+
                         if(YorN == 'y' || YorN == 'Y')
                         {
                             _geniusservice.remove(g[option-1]);
@@ -411,24 +444,32 @@ void ConsoleUI::deleteAnEntry()
                 }
                 else if (g.size() == 1)
                 {
-                  cout << g[0] << endl;
-                  cout << "Would you like to delete this entry? (y/n): ";
-                  cin >> YorN;
-                  if(YorN == 'y' || YorN == 'Y')
+                    check = false;
+                    cout << g[0] << endl;
+                    cout << "Would you like to delete this entry? (y/n): ";
+                    getline(cin,YorNString,'\n');
+
+                    YorN = atoi(YorNString.c_str());
+
+                    if(YorN == 'y' || YorN == 'Y')
                     {
-                    _geniusservice.remove(g[0]);
-                    cout << "Entry was deleted" << endl;
+                        _geniusservice.remove(g[0]);
+                        cout << "Entry was deleted" << endl;
                     }
-                  else
+                    else
                     {
                         cout << "Entry was not deleted" << endl;
                     }
                 }
                 else
                 {
-                  cout << "Please enter a valid choice!" << endl;
+                    check = true;
+                    cout << "Please enter a valid choice!" << endl;
+                    cout << "Enter name of Genius" << endl;
+                    getline(cin, name,'\n');
                 }
-          }
+            }while(check == true);
+        }
           catch(int)
           {
             cerr << "Did not find anything" << endl;
@@ -438,14 +479,13 @@ void ConsoleUI::deleteAnEntry()
     else if(input == '2')
     {
         cout << "Enter name of Computer: ";
-        cin.ignore();
         getline(cin,name,'\n');
 
         try
         {
             vector<ComputerModel> c = _computerservice.find(name);
             int option;
-            //TODO: Breyta í string til þess að villutékka option
+            string optionString;
 
             if (c.size() > 1)
             {
@@ -454,12 +494,18 @@ void ConsoleUI::deleteAnEntry()
                     cout << "Option " << i+1 << "  " << c[i] << endl;
                 }
                 cout << "Please enter the option you would like to delete: " << endl;
-                cin >> option;
+                getline(cin,optionString,'\n');
+
+                option = atoi(optionString.c_str());
+
                 if (option > 0 && option < c.size()+1)
                 {
                     cout << c[option-1] << endl;
                     cout << "Are you sure you want to delete this entry? (y/n): ";
-                    cin >> YorN;
+                    getline(cin,YorNString,'\n');
+
+                    YorN = atoi(YorNString.c_str());
+
                     if(YorN == 'y' || YorN == 'Y')
                     {
                         _computerservice.remove(c[option-1]);
@@ -479,7 +525,10 @@ void ConsoleUI::deleteAnEntry()
             {
                 cout << c[0] << endl;
                 cout << "Would you like to delete this entry? (y/n): ";
-                cin >> YorN;
+                getline(cin,YorNString,'\n');
+
+                YorN = atoi(YorNString.c_str());
+
                 if(YorN == 'y' || YorN == 'Y')
                 {
                     _computerservice.remove(c[0]);
