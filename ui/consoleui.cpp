@@ -19,11 +19,12 @@ void ConsoleUI::displayUnsortedList()
         cout << "Enter 1 for unsorted Genius list" << endl;
         cout << "Enter 2 for unsorted Computer list" << endl;
         cout << "Enter 3 for unsorted Geniuses & Computers list" << endl;
+        cout << "Enter 4 for unsorted Computers & Geniuses list" << endl;
         cout << "Enter q to quit" << endl;
         cout << "============================================" << endl;
         getline(cin, strinput);
 
-        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "3" && strinput != "q" && strinput != "Q"))
+        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "3" && strinput != "4" && strinput != "q" && strinput != "Q"))
         {
             clearscreen();
             printError();
