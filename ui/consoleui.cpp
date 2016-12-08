@@ -350,14 +350,20 @@ void ConsoleUI::deleteAnEntry()
          cout << "Enter name of Genius: ";
          getline(cin,name,'\n');
 
-          try
-          {
-             vector<GeniusModel> g = _geniusservice.find(name);
-              int option;
-              //TODO: Breyta í string til þess að villutékka option
 
-              if (g.size() > 1)
+        try
+        {
+             bool check = true;
+             do
              {
+                vector<GeniusModel> g = _geniusservice.find(name);
+                int option;
+                //TODO: Breyta í string til þess að villutékka option
+
+
+                if (g.size() > 1)
+                {
+                    check = false;
                     for(size_t i = 0; i < g.size(); i++)
                     {
                         cout << "Option " << i+1 << "  " << g[i] << endl;
@@ -368,7 +374,7 @@ void ConsoleUI::deleteAnEntry()
                     {
                         cout << g[option-1] << endl;
                         cout << "Are you sure you want to delete this entry? (y/n): ";
-                       cin >> YorN;
+                        cin >> YorN;
                         if(YorN == 'y' || YorN == 'Y')
                         {
                             _geniusservice.remove(g[option-1]);
@@ -386,24 +392,29 @@ void ConsoleUI::deleteAnEntry()
                 }
                 else if (g.size() == 1)
                 {
-                  cout << g[0] << endl;
-                  cout << "Would you like to delete this entry? (y/n): ";
-                  cin >> YorN;
-                  if(YorN == 'y' || YorN == 'Y')
+                    check = false;
+                    cout << g[0] << endl;
+                    cout << "Would you like to delete this entry? (y/n): ";
+                    cin >> YorN;
+                    if(YorN == 'y' || YorN == 'Y')
                     {
-                    _geniusservice.remove(g[0]);
-                    cout << "Entry was deleted" << endl;
+                        _geniusservice.remove(g[0]);
+                        cout << "Entry was deleted" << endl;
                     }
-                  else
+                    else
                     {
                         cout << "Entry was not deleted" << endl;
                     }
                 }
                 else
                 {
-                  cout << "Please enter a valid choice!" << endl;
+                    check = true;
+                    cout << "Please enter a valid choice!" << endl;
+                    cout << "Enter name of Genius" << endl;
+                    getline(cin, name,'\n');
                 }
-          }
+            }while(check == true);
+        }
           catch(int)
           {
             cerr << "Did not find anything" << endl;
