@@ -46,6 +46,13 @@ public:
      * @return true if it was a success, else false
      */
     bool remove(ComputerModel genius);
+
+    /**
+     * @brief update, Calls the datalayer for a update of the model.
+     * @param model
+     * @return true if success, else false
+     */
+    bool update(ComputerModel model);
 private:
     ComputerRepository _computerRepository;
 };

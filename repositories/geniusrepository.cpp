@@ -1,5 +1,5 @@
 #include "repositories/geniusrepository.h"
-#include <QString>
+
 
 GeniusRepository::GeniusRepository()
 {
@@ -86,6 +86,26 @@ bool GeniusRepository::removeGenius(GeniusModel model)
 
     query.prepare("DELETE FROM Geniuses WHERE GeniusID = :id");
     query.bindValue(":id", model.getId());
+
+    return query.exec();
+}
+
+bool GeniusRepository::updateGenius(GeniusModel model)
+{
+    QSqlQuery query(_db);
+
+    query.prepare("UPDATE Geniuses \
+                   SET Name         = :name \
+                   SET Gender       = :gender \
+                   SET BirthYear    = :birthYear \
+                   SET DeathYear    = :deathYear \
+                   WHERE GeniusID   = :id");
+
+    query.bindValue(":name",      QString::fromStdString(model.getName()));
+    query.bindValue(":gender",    QString::fromStdString(model.getGender()));
+    query.bindValue(":birthYear", model.getBirthYear());
+    query.bindValue(":deathYear", model.getDeathYear());
+    query.bindValue(":id",        model.getId());
 
     return query.exec();
 }

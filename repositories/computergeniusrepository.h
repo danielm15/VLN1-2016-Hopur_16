@@ -1,6 +1,7 @@
 #ifndef COMPUTERGENIUSREPOSITORY_H
 #define COMPUTERGENIUSREPOSITORY_H
 
+#include "repositories/computergeniusrepository.h"
 #include "repositories/computerrepository.h"
 #include "repositories/geniusrepository.h"
 #include "models/computermodel.h"
@@ -15,10 +16,22 @@ class ComputerGeniusRepository
 public:
     ComputerGeniusRepository();
 
+    /**
+     * @brief getGeniuseComputers, Fetches all computers genius has worked on
+     * @param model
+     * @return vector of computers
+     */
     vector<ComputerModel> getGeniuseComputers(GeniusModel model);
+
+    /**
+     * @brief getComputerGeniuses, fetch all geniuses thata have worked on computer model
+     * @param model that should fetch by
+     * @return vector of geniuses
+     */
     vector<GeniusModel> getComputerGeniuses(ComputerModel model);
 private:
     QSqlDatabase _db;
+
     vector<ComputerModel> extractComputerQueryToVector(QSqlQuery query) const;
     vector<GeniusModel> extractGeniusQueryToVector(QSqlQuery query) const;
 };

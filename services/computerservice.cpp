@@ -36,3 +36,8 @@ bool ComputerService::remove(ComputerModel model)
     return c.removeComputer(model);
 }
 
+bool ComputerService::update(ComputerModel model)
+{
+    return _computerRepository.updateComputer(model);
+}
+

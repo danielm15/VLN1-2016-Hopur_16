@@ -48,6 +48,13 @@ public:
      */
     bool remove(GeniusModel genius);
 
+    /**
+     * @brief update, Calls the datalayer for a update of the model.
+     * @param model
+     * @return true if success, else false
+     */
+    bool update(GeniusModel model);
+
 private:
     GeniusRepository _geniusRepository;
 

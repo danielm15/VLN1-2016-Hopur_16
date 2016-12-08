@@ -77,10 +77,14 @@ public:
     unsigned int getDeathYear() const;
 
     /**
-     * @brief getComputers Returns all computer genius has been associated with
-     * @return vector of computers
+     * @brief update the model
+     * @param name
+     * @param gender
+     * @param birthYear
+     * @param deathYear
+     * @return
      */
-    vector<ComputerModel> getComputers() const;
+    bool update(string name, string gender, unsigned int birthYear, unsigned int deathYear);
 
     /**
      * @brief operator << Prints out the model

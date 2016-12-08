@@ -53,6 +53,14 @@ unsigned int GeniusModel::getDeathYear() const
     return _yearOfDeath;
 }
 
+bool GeniusModel::update(string name, string gender, unsigned int birthYear, unsigned int deathYear)
+{
+    _name = name;
+    _gender = gender;
+    _yearOfBirth = birthYear;
+    _yearOfDeath = deathYear;
+}
+
 // Prints out genius line, if it is still alive death year
 // prints out as a N/A
 ostream& operator <<(ostream& out, const GeniusModel& p1)
