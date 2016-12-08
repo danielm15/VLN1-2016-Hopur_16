@@ -52,7 +52,7 @@ public:
      * @param name
      * @return GeniusModel vector of all geniuses filtered by parameter
      */
-    vector<GeniusModel> find(string name) const;
+    vector<GeniusModel> find(string name);
 
     /**
      * @brief add new entry to the database
