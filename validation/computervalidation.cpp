@@ -18,7 +18,6 @@ string ComputerValidation::promptForModelName()
     {
 
         cout << "Model name: ";
-        cin.ignore();
         getline(cin,modelName,'\n');
         modelName[0] = toupper(modelName[0]);
 
@@ -125,7 +124,6 @@ string ComputerValidation::promptForType()
     while(check)
     {
         cout << "Type: ";
-        cin.ignore();
         getline(cin,type,'\n');
         type[0] = toupper(type[0]);
 
