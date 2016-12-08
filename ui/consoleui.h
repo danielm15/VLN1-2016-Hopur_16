@@ -27,7 +27,10 @@ private:
     void addNewEntryToDataSet();
     void searchForEntries();
     void deleteAnEntry();
-    void printVector(vector<GeniusModel> GVector);
+    void printGVector(vector<GeniusModel> GVector);
+    void printCVector(vector<ComputerModel> CVector);
+    void printGeniusSort();
+    void printComputerSort();
 };
 
 #endif //CONSOLEUI_H

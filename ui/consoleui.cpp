@@ -74,6 +74,7 @@ void ConsoleUI::displayUnsortedList()
     }
 
 }
+
 // Asks the user what variable he would like to sort by and
 // then fetches the data with the appropriate sort function for that
 // variable, then you have a choice to display the sorted list
@@ -82,21 +83,19 @@ void ConsoleUI::displaySortedList()
 {
     cout << "==============| Sorted list |===============" << endl;
     vector<GeniusModel> GVector;
-    string sortedInput;
+    vector<ComputerModel> CVector;
+    string sortedInput, selectSort, sortBy;
     bool isValid = false;
+    bool check = true;
 
-    cout << "======================================" << endl;
-    cout << "Enter a for list sorted by name" << endl;
-    cout << "Enter b for list sorted by gender" << endl;
-    cout << "Enter c for list sorted by birth year" << endl;
-    cout << "Enter d for list sorted by death year" << endl;
+    cout << "============================" << endl;
+    cout << "Enter 1 to sort Geniuses" << endl;
+    cout << "Enter 2 to sort Computers" << endl;
     cout << "Enter q to quit" << endl;
-    cout << "======================================" << endl;
+    cout << "============================" << endl;
+    getline(cin, selectSort);
 
-    getline(cin, sortedInput);
-
-
-    if(sortedInput.length() != 1)
+    if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "q" && selectSort != "Q"))
     {
         clearscreen();
         cout << "Incorrect input, try again" << endl;
@@ -104,93 +103,91 @@ void ConsoleUI::displaySortedList()
     }
     else
     {
-        sortedInput = sortedInput[0];
+        selectSort = selectSort[0];
 
-        if(sortedInput == "a" || sortedInput == "A")
+        if(selectSort == "1")
         {
-            GVector = _service.sortVector();
+            clearscreen();
+            printGeniusSort();
         }
-        else if(sortedInput == "b" || sortedInput == "B")
+        else if(selectSort == "2")
         {
-            GVector = _service.sortByGenderVector();
+            clearscreen();
+            printComputerSort();
         }
-        else if(sortedInput == "c" || sortedInput == "C")
-        {
-            GVector = _service.sortByBirthYearVector();
-        }
-        else if(sortedInput == "d" || sortedInput == "D")
-        {
-            GVector = _service.sortByDeathYearVector();
-        }
-        else if(sortedInput == "q" || sortedInput == "Q")
+        else
         {
             clearscreen();
             return run();
         }
-        else
+
+
+        while(!isValid)
         {
-            clearscreen();
-            cout << "Incorrect input, try again" << endl;
-            return displaySortedList();
-        }
-    }
+            getline(cin, sortedInput);
 
-
-    do
-    {
-        string sortby;
-        clearscreen();
-        cout << "============================" << endl;
-        cout << "Enter D for order by descending" << endl;
-        cout << "Enter A for order by ascending" << endl;
-        cout << "Enter Q to quit" << endl;
-        cout << "============================" << endl;
-        getline(cin, sortby);
-
-        if(sortby.length() != 1)
-        {
-            clearscreen();
-            cout << "Incorrect input, try again" << endl;
-        }
-        else
-        {
-            sortby = sortby[0];
-
-            if (sortby == "D" || sortby == "d")
+            if(sortedInput.length() != 1 || (sortedInput != "a" && sortedInput != "A"
+                                             && sortedInput != "b" && sortedInput != "B"
+                                             && sortedInput != "c" && sortedInput != "C"
+                                             && sortedInput != "d" && sortedInput != "D"
+                                             && sortedInput != "q" && sortedInput != "Q"))
             {
-                isValid = true;
-                clearscreen ();
-                cout << "==============| Sorted list by Descending order |===============" << endl;
-
-                printVector(GVector);
-            }
-
-            else if (sortby == "A" || sortby == "a")
-            {
-                isValid = true;
-                clearscreen ();
-                cout << "==============| Sorted list by Ascending order |===============" << endl;
-
-                for(size_t i = GVector.size(); i > 0; i--)
-                {
-                    cout << GVector[i - 1] << endl;
-                }
-                cout << endl;
-            }
-            else if(sortby == "Q" || sortby == "q")
-            {
-                isValid = true;
                 clearscreen();
-                return run();
+                cout << "Incorrect input, try again" << endl;
+                isValid = false;
             }
             else
             {
-                cout << "Incorrect input, try again" << endl;
+                sortedInput = sortedInput[0];
+                isValid = true;
+
+                while(check)
+                {
+                    clearscreen();
+                    cout << "============================" << endl;
+                    cout << "Enter A for order by ascending" << endl;
+                    cout << "Enter D for order by descending" << endl;
+                    cout << "Enter Q to quit" << endl;
+                    cout << "============================" << endl;
+                    getline(cin, sortBy);
+
+                    if(sortBy.length() != 1)
+                    {
+                        clearscreen();
+                        cout << "Incorrect input, try again" << endl;
+                        check = true;
+                    }
+                    else if(sortBy[0] == 'a' || sortBy[0] == 'A' || sortBy[0] == 'd' || sortBy[0] == 'D')
+                    {
+                        sortBy = sortBy[0];
+
+                        if(selectSort == "1")
+                        {
+                            GVector = _geniusservice.sortGenius(sortedInput, sortBy);
+
+                            clearscreen();
+                            cout << "==============| Sorted list |===============" << endl;
+                            printGVector(GVector);
+                            check = false;
+                        }
+                        else if(selectSort == "2")
+                        {
+                            CVector = _computerservice.sortComputer(sortedInput, sortBy);
+
+                            clearscreen();
+                            cout << "==============| Sorted list |===============" << endl;
+                            printCVector(CVector);
+                            check = false;
+                        }
+                    }
+                    else
+                    {
+                        return run();
+                    }
+                }
             }
         }
-
     }
-    while(!isValid);
 }
 
 // Puts some restrictions on what kind of data you can input
@@ -562,12 +559,42 @@ void ConsoleUI::clearscreen()
     system("cls");
 }
 
-void ConsoleUI::printVector(vector<GeniusModel> GVector)
+void ConsoleUI::printGVector(vector<GeniusModel> GVector)
 {
     for(unsigned int i = 0; i < GVector.size(); i++)
     {
         cout << GVector[i] << endl;
     }
     cout << endl;
+}
+
+void ConsoleUI::printCVector(vector<ComputerModel> CVector)
+{
+    for(unsigned int i = 0; i < CVector.size(); i++)
+    {
+        cout << CVector[i] << endl;
+    }
+    cout << endl;
+}
+
+void ConsoleUI::printGeniusSort()
+{
+    cout << "============= Sort Genius ============" << endl;
+    cout << "Enter a for list sorted by Name" << endl;
+    cout << "Enter b for list sorted by Gender" << endl;
+    cout << "Enter c for list sorted by Birth year" << endl;
+    cout << "Enter d for list sorted by Death year" << endl;
+    cout << "Enter q to quit" << endl;
+    cout << "======================================" << endl;
+}
+void ConsoleUI::printComputerSort()
+{
+    cout << "=========== Sort Computer ============" << endl;
+    cout << "Enter a for list sorted by Model name" << endl;
+    cout << "Enter b for list sorted by Make year" << endl;
+    cout << "Enter c for list sorted by Type" << endl;
+    cout << "Enter d for list sorted by Built" << endl;
+    cout << "Enter q to quit" << endl;
+    cout << "======================================" << endl;
 }
 

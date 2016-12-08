@@ -22,7 +22,28 @@ public:
      * @brief sort Gets all Geniuses and sorts them eather ascending or decending
      * @return GeniuseModel vector of all geniuses sorted
      */
-    vector<GeniusModel> sort(bool ascending);
+    vector<GeniusModel> sort(string column, bool ascending);
+
+    /**
+     * @brief sortOrder
+     * @param sortBy
+     * @return
+     */
+    bool sortOrder(string sortBy);
+
+    /**
+     * @brief sortGenius Uses sort() to sort Geniuses according to the selected column name
+     * @param sortedInput
+     * @return
+     */
+    vector<GeniusModel> sortGenius(string sortedInput, string sortBy);
+
+    /**
+     * @brief sortComputer Uses sort() to sort Computers according to the selected column name
+     * @param sortedInput
+     * @return
+     */
+    vector<GeniusModel> sortComputer(string sortedInput);
 
     /**
      * @brief find all geniuses that have name that matches name parameter
