@@ -22,16 +22,6 @@ GeniusModel::GeniusModel(unsigned int id, string name, string gender, unsigned i
     _yearOfDeath = yearOfDeath;
 }
 
-GeniusModel::GeniusModel(unsigned int id, string name, string gender, unsigned int yearOfBirth, unsigned int yearOfDeath, vector<ComputerModel> computers)
-{
-    _id = id;
-    _name = name;
-    _gender = gender;
-    _yearOfBirth = yearOfBirth;
-    _yearOfDeath = yearOfDeath;
-    _computers = computers;
-}
-
 // Teach the class who should get higher in shorted list.
 bool GeniusModel::operator <(const GeniusModel& p) const
 {
@@ -61,27 +51,6 @@ unsigned int GeniusModel::getBirthYear() const
 unsigned int GeniusModel::getDeathYear() const
 {
     return _yearOfDeath;
-}
-
-vector<ComputerModel> GeniusModel::getComputers() const
-{
-    return _computers;
-}
-
-void GeniusModel::addComputer(ComputerModel model)
-{
-    if (! isComputerAlreadyInGenius(model))
-    {
-        _computers.push_back(model);
-    }
-}
-
-void GeniusModel::addComputers(vector<ComputerModel> models)
-{
-    for (size_t i = 0; i < models.size(); i++)
-    {
-        addComputer(models[i]);
-    }
 }
 
 // Prints out genius line, if it is still alive death year
@@ -118,16 +87,4 @@ bool operator ==(const GeniusModel& g1, const GeniusModel& g2)
         return false;
 
     return true;
-}
-
-bool GeniusModel::isComputerAlreadyInGenius(ComputerModel model)
-{
-    for (size_t i = 0; i < _computers.size(); i++)
-    {
-        if (_computers[i] == model)
-        {
-            return true;
-        }
-    }
-    return false;
 }
