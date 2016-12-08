@@ -18,6 +18,9 @@ bool ComputerGeniusRepository::addRelationship(ComputerModel computer, GeniusMod
 
 vector<ComputerModel> ComputerGeniusRepository::getGeniuseComputers(GeniusModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<ComputerModel> computers;
 
