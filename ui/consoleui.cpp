@@ -524,7 +524,7 @@ void ConsoleUI::deleteAnEntry()
                 do
                 {
                     vector<GeniusModel> g = _geniusservice.find(name);
-                    int option;
+                    unsigned int option;
                     string optionString;
 
                     if (g.size() > 1)
@@ -609,7 +609,7 @@ void ConsoleUI::deleteAnEntry()
                 do
                 {
                     vector<ComputerModel> c = _computerservice.find(name);
-                    int option;
+                    unsigned int option;
                     string optionString;
 
                     if (c.size() > 1)
@@ -628,6 +628,7 @@ void ConsoleUI::deleteAnEntry()
                             if (option > 0 && option < c.size()+1)
                             {
                                 validOption = true;
+                                check = false;
                                 cout << c[option-1] << endl;
                                 cout << "Are you sure you want to delete this entry? (y/n): ";
                                 getline(cin,YorNString,'\n');
@@ -648,11 +649,11 @@ void ConsoleUI::deleteAnEntry()
                                 cout << "Please enter the option you would like to delete: " << endl;
                                 getline(cin,optionString,'\n');
                             }
-                        }while (validOption == false);
+                        }while (!validOption);
                     }
                     else if (c.size() == 1)
                     {
-                        check = true;
+                        check = false;
                         cout << c[0] << endl;
                         cout << "Would you like to delete this entry? (y/n): ";
                         getline(cin,YorNString,'\n');

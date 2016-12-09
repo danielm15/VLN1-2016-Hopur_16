@@ -86,7 +86,7 @@ bool ComputerRepository::removeComputer(ComputerModel model)
     _db = QSqlDatabase::database();
 
     QSqlQuery query(_db);
-    query.prepare("DELETE FROM Computers WHERE id = :id");
+    query.prepare("DELETE FROM Computers WHERE ComputerID = :id");
     query.bindValue(":id", model.getId());
 
     return query.exec();
