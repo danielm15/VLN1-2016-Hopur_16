@@ -16,7 +16,7 @@ string GeniusValidation::promptForName()
     while(check)
     {
         cout << "Name: ";
-        getline(cin,name,'\n');
+        getline(cin,name);
 
         if(name == "q" || name == "Q")
             leave();
