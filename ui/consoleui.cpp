@@ -429,7 +429,7 @@ void ConsoleUI::deleteAnEntry()
     string inputString;
     string YorNString;
 
-    //while(!(inputString == "q" || inputString == "Q"))
+    while(!(inputString == "q" || inputString == "Q"))
     {
         cout << "========== Delete entry ==========" << endl;
         cout << "| Enter 1 to delete a Genius     |" << endl;
@@ -516,7 +516,7 @@ void ConsoleUI::deleteAnEntry()
                     else
                     {
                         check = true;
-                        cout << "Please enter a valid choice!" << endl;
+                        printError();
                         cout << "Enter name of Genius: " << endl;
                         getline(cin, name,'\n');
                     }
@@ -601,7 +601,7 @@ void ConsoleUI::deleteAnEntry()
                     else
                     {
                         check = true;
-                        cout << "Please enter a valid choice!" << endl;
+                        printError();
                         cout << "Enter name of Computer: " << endl;
                         getline(cin, name,'\n');
                     }
@@ -617,7 +617,7 @@ void ConsoleUI::deleteAnEntry()
         else if (inputString == "q" || inputString == "Q")
         {
             clearscreen();
-            //break;
+            break;
         }
         else
         {
@@ -628,6 +628,226 @@ void ConsoleUI::deleteAnEntry()
     }
 }
 
+void ConsoleUI::modifyAnEntry()
+{
+    bool built = false;
+    char gender;
+    string name, genderString;
+    string modelName, type;
+    string inputString, YorNString;
+    unsigned int dateOfDeath, dateOfBirth, makeYear;
+    GeniusValidation vg;
+    ComputerValidation vc;
+
+    while(!(inputString == "q" || inputString == "Q"))
+    {
+        cout << "========== Modify entry ==========" << endl;
+        cout << "| Enter 1 to modify a Genius     |" << endl;
+        cout << "| Enter 2 to modify a Computer   |" << endl;
+        cout << "| Enter Q to quit                |" << endl;
+        cout << "==================================" << endl;
+        getline(cin,inputString,'\n');
+
+        if(inputString.length() != 1 || (inputString != "1" && inputString != "2" && inputString != "q" && inputString != "Q"))
+        {
+            clearscreen();
+            printError();
+            return modifyAnEntry();
+        }
+
+        else if (inputString == "1")
+        {
+            cout << "Enter name of Genius: " << endl;
+            getline(cin,name,'\n');
+            try
+            {
+                bool check = true;
+                do
+                {
+                    vector<GeniusModel> g = _geniusservice.find(name);
+                    int option;
+                    string optionString;
+
+                    if (g.size() > 1)
+                    {
+                        check = false;
+                        for(size_t i = 0; i < g.size(); i++)
+                        {
+                            cout << "Option " << i+1 << "  " << g[i] << endl;
+                        }
+                        cout << "Please enter the option you would like to modify: " << endl;
+                        getline(cin,optionString,'\n');
+                        bool validOption = false;
+                        do
+                        {
+                            option = atoi(optionString.c_str());
+                            if (option > 0 && option < g.size()+1)
+                            {
+                                validOption = true;
+                                clearscreen();
+                                cout << g[option-1] << endl;
+                                cout << "Would you like to change the Genius name? (y/n): ";
+                                getline(cin,YorNString,'\n');
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    name = vg.promptForName();
+                                }
+                                else
+                                {
+                                    name = g[option-1].getName();
+                                }
+                                cout << "Would you like to change the Genius gender? (y/n): ";
+                                getline(cin,YorNString,'\n');
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    gender = vg.promptForGender();
+                                    string fullGender = "";
+                                    if (gender == 'm' || gender == 'M')
+                                    {
+                                        genderString = "Male";
+                                    }
+                                    else if (gender == 'f' || gender == 'F')
+                                    {
+                                        genderString = "Female";
+                                    }
+                                    else
+                                    {
+                                        genderString = "N/A";
+                                    }
+                                }
+                                else
+                                {
+                                    genderString = g[option-1].getGender();
+                                }
+                                cout << "Would you like to change the Genius birth year? (y/n): ";
+                                getline(cin,YorNString,'\n');
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    dateOfBirth = vg.promptForDateOfBirth();
+                                }
+                                else
+                                {
+                                    dateOfBirth = g[option-1].getBirthYear();
+                                }
+                                cout << "Would you like to change the Genius death year? (y/n): ";
+                                getline(cin,YorNString,'\n');
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    dateOfDeath = vg.promptForDateOfDeath(name, dateOfBirth);
+                                }
+                                else
+                                {
+                                    dateOfDeath = g[option-1].getDeathYear();
+                                }
+
+                                g[option-1].update(name, genderString, dateOfBirth, dateOfDeath);
+
+                                _geniusservice.update(g[option-1]);
+
+                            }
+                            else
+                            {
+                                printError();
+                                cout << "Please enter the option you would like to modify: " << endl;
+                                getline(cin,optionString,'\n');
+                            }
+                        }while (validOption == false);
+                    }
+                    else if (g.size() == 1)
+                    {
+                        check = false;
+                        clearscreen();
+                        cout << g[0] << endl;
+                        cout << "Would you like to change the Genius name? (y/n): ";
+                        getline(cin,YorNString,'\n');
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            name = vg.promptForName();
+                        }
+                        else
+                        {
+                            name = g[0].getName();
+                        }
+                        cout << "Would you like to change the Genius gender? (y/n): ";
+                        getline(cin,YorNString,'\n');
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            gender = vg.promptForGender();
+                            if (gender == 'm' || gender == 'M')
+                            {
+                                genderString = "Male";
+                            }
+                            else if (gender == 'f' || gender == 'F')
+                            {
+                                genderString = "Female";
+                            }
+                            else
+                            {
+                                genderString = "N/A";
+                            }
+                        }
+                        else
+                        {
+                            genderString = g[0].getGender();
+                        }
+                        cout << "Would you like to change the Genius birth year? (y/n): ";
+                        getline(cin,YorNString,'\n');
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            dateOfBirth = vg.promptForDateOfBirth();
+                        }
+                        else
+                        {
+                            dateOfBirth = g[0].getBirthYear();
+                        }
+                        cout << "Would you like to change the Genius death year? (y/n): ";
+                        getline(cin,YorNString,'\n');
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            dateOfDeath = vg.promptForDateOfDeath(name, dateOfBirth);
+                        }
+                        else
+                        {
+                            dateOfDeath = g[0].getDeathYear();
+                        }
+
+                        g[0].update(name, genderString, dateOfBirth, dateOfDeath);
+
+                        _geniusservice.update(g[0]);
+                    }
+                    else
+                    {
+                        check = true;
+                        printError();
+                        cout << "Enter name of Genius: " << endl;
+                        getline(cin, name,'\n');
+                    }
+                }while(check == true);
+            }
+            catch(int)
+            {
+                cerr << "Did not find anything" << endl;
+            }
+            cout << endl;
+
+        }
+        else if (inputString == "2")
+        {
+            cout << "Enter name of Computer: " << endl;
+        }
+        else if (inputString == "q" || inputString == "Q")
+        {
+            clearscreen();
+            break;
+        }
+        else
+        {
+            clearscreen();
+            printError();
+            return modifyAnEntry();
+        }
+    }
+}
 void ConsoleUI::smile()
 {
     cout << "777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777 777777777" << endl;
@@ -723,7 +943,7 @@ void ConsoleUI::run()
                     break;
                 }
                 case '4':
-                {
+                {                
                     clearscreen ();
                     searchForEntries();
                     break;
@@ -735,11 +955,17 @@ void ConsoleUI::run()
                     break;
                 }
                 case '6':
-            {
+                {
+                    clearscreen();
+                    modifyAnEntry();
+                    break;
+                }
+                case '7':
+                {
                     clearscreen ();
                     smile();
 
-            }
+                }
                 case 'q':
                 case 'Q':
                 {
@@ -829,7 +1055,8 @@ void ConsoleUI::printMenu()
     cout << "| Enter 3 to Add entry        |" << endl;
     cout << "| Enter 4 to Search for entry |" << endl;
     cout << "| Enter 5 to Delete an entry  |" << endl;
-    cout << "| Enter 6 to Play a game      |" << endl;
+    cout << "| Enter 6 to Modify an entry  |" << endl;
+    cout << "| Enter 7 to Play a game      |" << endl;
     cout << "| Enter q to Quit             |" << endl;
     cout << "===============================" << endl;
 }

@@ -26,6 +26,7 @@ private:
     void addNewEntryToDataSet();
     void searchForEntries();
     void deleteAnEntry();
+    void modifyAnEntry();
     void printGVector(vector<GeniusModel> GVector);
     void printCVector(vector<ComputerModel> CVector);
     void printGeniusSort();
