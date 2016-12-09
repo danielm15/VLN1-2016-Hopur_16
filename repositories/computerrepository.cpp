@@ -121,7 +121,7 @@ vector<ComputerModel> ComputerRepository::extractQueryToVector(QSqlQuery query)
 
     while(query.next()){
         bool built;
-        unsigned int id = query.value("MakeYear").toUInt();
+        unsigned int id = query.value("ComputerID").toUInt();
         string modelName = query.value("ModelName").toString().toStdString();
         unsigned int makeYear = query.value("MakeYear").toUInt();
         string type = query.value("Type").toString().toStdString();
