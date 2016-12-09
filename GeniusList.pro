@@ -11,7 +11,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     repositories/geniusrepository.cpp \
-    services/servicelayer.cpp \
     ui/consoleui.cpp \
     repositories/datalayer.cpp \
     repositories/computerrepository.cpp \
