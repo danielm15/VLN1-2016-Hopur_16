@@ -39,11 +39,11 @@ void ConsoleUI::displayUnsortedList()
                 case '1':
                 {
                     clearscreen();
-                    cout << "============================================================="<< endl;
-                    cout << "===================== Unsorted Genius list ==================" << endl;
-                    cout << "============================================================="<< endl;
-                    cout << setw(24)<< "Name" << setw(9) << "Gender" << "  " << "Birth Year" << "  -  " << "Death Year" << endl;
-                    cout << "============================================================="<< endl;
+                    cout << "========================================================"<< endl;
+                    cout << "================== Unsorted Genius list ================" << endl;
+                    cout << "========================================================"<< endl;
+                    cout << setw(26) << left << " Name" << setw(6) << "Gender" << "  " << " BirthYear" << " - " << "DeathYear" << endl;
+                    cout << "========================================================"<< endl;
                     vector<GeniusModel> GVector = _geniusservice.getGenius();
 
                     for(unsigned int i = 0; i < GVector.size(); i++)
@@ -51,18 +51,18 @@ void ConsoleUI::displayUnsortedList()
                         cout << GVector[i] << endl;
                     }
                     check = false;
-                    cout << "=============================================================" << endl;
+                    cout << "========================================================" << endl;
                     cout << endl;
                     break;
                 }
                 case '2':
                 {
                     clearscreen();
-                    cout << "==========================================================================" << endl;
-                    cout << "========================= Unsorted Computer list =========================" << endl;
-                    cout << "==========================================================================" << endl;
-                    cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
-                    cout << "==========================================================================" << endl;
+                    cout << "========================================================================" << endl;
+                    cout << "======================== Unsorted Computer list ========================" << endl;
+                    cout << "========================================================================" << endl;
+                    cout << setw(26)<< left << " Model Name" << setw(2) << " " << "Make Year" << "   " << setw(21) << "Type" << " " << "Built(Y/N)" << endl;
+                    cout << "========================================================================" << endl;
                     vector<ComputerModel> CVector = _computerservice.getComputer();
 
                     for(unsigned int i = 0; i < CVector.size(); i++)
@@ -70,7 +70,7 @@ void ConsoleUI::displayUnsortedList()
                         cout << CVector[i] << endl;
                     }
                     check = false;
-                    cout << "==========================================================================" << endl;
+                    cout << "========================================================================" << endl;
                     cout << endl;
                     break;
                 }
