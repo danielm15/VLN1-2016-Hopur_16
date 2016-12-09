@@ -12,7 +12,6 @@ TEMPLATE = app
 SOURCES += main.cpp \
     repositories/geniusrepository.cpp \
     ui/consoleui.cpp \
-    repositories/datalayer.cpp \
     repositories/computerrepository.cpp \
     models/computermodel.cpp \
     models/geniusmodel.cpp \
@@ -25,9 +24,7 @@ SOURCES += main.cpp \
 
 HEADERS += \
     repositories/geniusrepository.h \
-    services/servicelayer.h \
     ui/consoleui.h \
-    repositories/datalayer.h \
     repositories/computerrepository.h \
     models/computermodel.h \
     models/geniusmodel.h \
