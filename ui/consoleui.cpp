@@ -29,6 +29,7 @@ void ConsoleUI::displayUnsortedList()
         {
             clearscreen();
             printError();
+            check = true;
         }
         else
         {
@@ -51,7 +52,7 @@ void ConsoleUI::displayUnsortedList()
                         cout << GVector[i] << endl;
                         cout << "|------------------------------------------------------|" << endl;
                     }
-                    check = false;
+                    //check = false;
                     cout << "========================================================" << endl;
                     cout << endl;
                     break;
@@ -71,7 +72,7 @@ void ConsoleUI::displayUnsortedList()
                         cout << CVector[i] << endl;
                         cout << "|----------------------------------------------------------------------|" << endl;
                     }
-                    check = false;
+                    //check = false;
                     cout << "========================================================================" << endl;
                     cout << endl;
                     break;
@@ -99,7 +100,6 @@ void ConsoleUI::displayUnsortedList()
                         }
                         cout << "|-------------------------------------------------------" << endl;
                     }
-                    check = false;
                     cout << "========================================================" << endl;
                     break;
                 }
@@ -127,7 +127,6 @@ void ConsoleUI::displayUnsortedList()
                         }
                         cout << "|-----------------------------------------------------------------------" << endl;
                     }
-                    check = false;
                         cout << "========================================================================" << endl;
                     cout << endl;
                     break;
@@ -136,6 +135,8 @@ void ConsoleUI::displayUnsortedList()
                 case 'Q':
                 {
                     clearscreen();
+                    check = false;
+                    break;
                 }
                 default:
                 {
@@ -242,7 +243,7 @@ void ConsoleUI::displaySortedList()
                             printError();
                             doubleCheck = true;
                         }
-                        else if(sortBy == "a" || sortBy == "A" || sortBy == "d" || sortBy == "D" /*|| sortBy == "q" || sortBy == "Q"*/)
+                        else if(sortBy == "a" || sortBy == "A" || sortBy == "d" || sortBy == "D")
                         {
                             sortBy = sortBy[0];
 
