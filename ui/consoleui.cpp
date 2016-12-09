@@ -242,7 +242,7 @@ void ConsoleUI::displaySortedList()
                             printError();
                             doubleCheck = true;
                         }
-                        else if(sortBy == "a" || sortBy == "A" || sortBy == "d" || sortBy == "D" /*|| sortBy == "q" || sortBy == "Q"*/)
+                        else if(sortBy == "a" || sortBy == "A" || sortBy == "d" || sortBy == "D")
                         {
                             sortBy = sortBy[0];
 
