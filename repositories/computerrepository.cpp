@@ -7,6 +7,9 @@ ComputerRepository::ComputerRepository()
 
 vector<ComputerModel> ComputerRepository::getAllComputers()
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<ComputerModel> computers;
 
@@ -18,6 +21,9 @@ vector<ComputerModel> ComputerRepository::getAllComputers()
 
 vector<ComputerModel> ComputerRepository::searchForComputer(string name)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<ComputerModel> computers;
 
@@ -34,8 +40,9 @@ vector<ComputerModel> ComputerRepository::searchForComputer(string name)
 
 vector<ComputerModel> ComputerRepository::sort(string field, bool asc)
 {
-    cout << field << endl;
-    cout << asc << endl;
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<ComputerModel> computers;
     string sortBy = "ASC";
@@ -55,6 +62,9 @@ vector<ComputerModel> ComputerRepository::sort(string field, bool asc)
 
 bool ComputerRepository::saveComputer(ComputerModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QString QmodelName = QString::fromStdString(model.getModelName());
     QString Qtype = QString::fromStdString(model.getType());
     unsigned int makeYear = model.getMakeYear();
@@ -63,8 +73,8 @@ bool ComputerRepository::saveComputer(ComputerModel model)
     QSqlQuery query(_db);
     query.prepare("INSERT INTO Computers(ModelName, MakeYear, Type, Built) VALUES(:ModelName,:MakeYear,:Type,:Built)");
     query.bindValue(":ModelName", QmodelName);
-    query.bindValue(":MakeYear", Qtype);
-    query.bindValue(":Type", makeYear);
+    query.bindValue(":MakeYear", makeYear);
+    query.bindValue(":Type", Qtype);
     query.bindValue(":Built", built);
 
     return query.exec();
@@ -72,6 +82,9 @@ bool ComputerRepository::saveComputer(ComputerModel model)
 
 bool ComputerRepository::removeComputer(ComputerModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     query.prepare("DELETE FROM Computers WHERE id = :id");
     query.bindValue(":id", model.getId());
@@ -81,6 +94,9 @@ bool ComputerRepository::removeComputer(ComputerModel model)
 
 bool ComputerRepository::updateComputer(ComputerModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
 
     query.prepare("UPDATE Computers \
