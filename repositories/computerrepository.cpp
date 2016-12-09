@@ -45,7 +45,7 @@ vector<ComputerModel> ComputerRepository::sort(string field, bool asc)
         sortBy = "DESC";
     }
 
-    string queryString = ("SELECT * FROM Computers ORDER BY " + field + ", ModelName " + sortBy);
+    string queryString = ("SELECT * FROM Computers ORDER BY " + field + " " + sortBy + ", ModelName " + sortBy);
     query.exec(QString::fromStdString(queryString));
 
     computers = extractQueryToVector(query);

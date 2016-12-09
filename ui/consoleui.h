@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <services/servicelayer.h>
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
 #include <validation/computervalidation.h>
@@ -18,7 +17,6 @@ public:
     ConsoleUI();
     void run();
 private:
-    ServiceLayer _service;
     GeniusService _geniusservice;
     ComputerService _computerservice;
     void displayUnsortedList();
