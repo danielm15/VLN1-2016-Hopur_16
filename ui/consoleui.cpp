@@ -58,11 +58,11 @@ void ConsoleUI::displayUnsortedList()
                 case '2':
                 {
                     clearscreen();
-                    cout << "=========================================================================="<< endl;
+                    cout << "==========================================================================" << endl;
                     cout << "========================= Unsorted Computer list =========================" << endl;
-                    cout << "=========================================================================="<< endl;
+                    cout << "==========================================================================" << endl;
                     cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
-                    cout << "=========================================================================="<< endl;
+                    cout << "==========================================================================" << endl;
                     vector<ComputerModel> CVector = _computerservice.getComputer();
 
                     for(unsigned int i = 0; i < CVector.size(); i++)
@@ -100,11 +100,11 @@ void ConsoleUI::displayUnsortedList()
             case '4':
             {
                 clearscreen();
-                cout << "=========================================================================="<< endl;
-                cout << "========================= Unsorted Computer list =========================" << endl;
-                cout << "=========================================================================="<< endl;
+                cout << "======================================================================================" << endl;
+                cout << "========================= Unsorted Computers & Geniuses list =========================" << endl;
+                cout << "======================================================================================" << endl;
                 cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
-                cout << "=========================================================================="<< endl;
+                cout << "======================================================================================" << endl;
                 vector<ComputerModel> CVector = _computerservice.getComputer();
 
                 for(unsigned int i = 0; i < CVector.size(); i++)
@@ -430,185 +430,205 @@ void ConsoleUI::searchForEntries()
 void ConsoleUI::deleteAnEntry()
 {
     string name;
-    char YorN;
-    char input = ' ';
     string inputString;
     string YorNString;
 
-    cout << "========== Delete entry ==========" << endl;
-    cout << "| Enter 1 to delete a Genius     |" << endl;
-    cout << "| Enter 2 to delete a Computer   |" << endl;
-    cout << "| Enter Q to quit                |" << endl;
-    cout << "==================================" << endl;
-    getline(cin,inputString,'\n');
-
-    if(inputString.length() != 1 || (inputString != "1" && inputString != "2" && inputString != "q" && inputString != "Q"))
+    //while(!(inputString == "q" || inputString == "Q"))
     {
-        clearscreen();
-        printError();
-        return deleteAnEntry();
-    }
-    else if(input == '1')
-    {
-        cout << "Enter name of Genius: ";
-        getline(cin,name,'\n');
+        cout << "========== Delete entry ==========" << endl;
+        cout << "| Enter 1 to delete a Genius     |" << endl;
+        cout << "| Enter 2 to delete a Computer   |" << endl;
+        cout << "| Enter Q to quit                |" << endl;
+        cout << "==================================" << endl;
+        getline(cin,inputString,'\n');
 
-        try
+        if(inputString.length() != 1 || (inputString != "1" && inputString != "2" && inputString != "q" && inputString != "Q"))
         {
-             bool check = true;
-             do
-             {
-                vector<GeniusModel> g = _geniusservice.find(name);
-                int option;
-                string optionString;
+            clearscreen();
+            printError();
+            return deleteAnEntry();
+        }
+        else if(inputString == "1")
+        {
+            cout << "Enter name of Genius: ";
+            getline(cin,name,'\n');
 
-                if (g.size() > 1)
+            try
+            {
+                bool check = true;
+                do
                 {
-                    check = false;
-                    for(size_t i = 0; i < g.size(); i++)
+                    vector<GeniusModel> g = _geniusservice.find(name);
+                    int option;
+                    string optionString;
+
+                    if (g.size() > 1)
                     {
-                        cout << "Option " << i+1 << "  " << g[i] << endl;
+                        check = false;
+                        for(size_t i = 0; i < g.size(); i++)
+                        {
+                            cout << "Option " << i+1 << "  " << g[i] << endl;
+                        }
+                        cout << "Please enter the option you would like to delete: " << endl;
+                        getline(cin,optionString,'\n');                        
+                        bool validOption = false;
+                        do
+                        {
+                            option = atoi(optionString.c_str());
+                            if (option > 0 && option < g.size()+1)
+                            {
+                                validOption = true;
+                                cout << g[option-1] << endl;
+                                cout << "Are you sure you want to delete this entry? (y/n): ";
+                                getline(cin,YorNString,'\n');
+
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    _geniusservice.remove(g[option-1]);
+                                    cout << "Entry was deleted" << endl;
+                                }
+                                else
+                                {
+                                    cout << "Entry was not deleted" << endl;
+                                }
+                            }
+                            else
+                            {
+                                printError();
+                                cout << "Please enter the option you would like to delete: " << endl;
+                                getline(cin,optionString,'\n');
+                            }
+                        }while (validOption == false);
                     }
-                    cout << "Please enter the option you would like to delete: " << endl;
-                    getline(cin,optionString,'\n');
-
-                    option = atoi(optionString.c_str());
-
-                    if (option > 0 && option < g.size()+1)
-                    {   
-                        cout << g[option-1] << endl;
-                        cout << "Are you sure you want to delete this entry? (y/n): ";
+                    else if (g.size() == 1)
+                    {
+                        check = false;
+                        cout << g[0] << endl;
+                        cout << "Would you like to delete this entry? (y/n): ";
                         getline(cin,YorNString,'\n');
 
-                        YorN = atoi(YorNString.c_str());
-
-                        if(YorN == 'y' || YorN == 'Y')
+                        if(YorNString == "y" || YorNString == "Y")
                         {
-                            _geniusservice.remove(g[option-1]);
+                            _geniusservice.remove(g[0]);
                             cout << "Entry was deleted" << endl;
                         }
                         else
                         {
-                           cout << "Entry was not deleted" << endl;
+                            cout << "Entry was not deleted" << endl;
                         }
                     }
                     else
                     {
-                        cout << "You seem to have entered an unsigned option" << endl;
+                        check = true;
+                        cout << "Please enter a valid choice!" << endl;
+                        cout << "Enter name of Genius: " << endl;
+                        getline(cin, name,'\n');
                     }
-                }
-                else if (g.size() == 1)
+                }while(check == true);
+            }
+            catch(int)
+            {
+                cerr << "Did not find anything" << endl;
+            }
+            cout << endl;
+        }
+
+        else if(inputString == "2")
+        {
+            cout << "Enter name of Computer: ";
+            getline(cin,name,'\n');
+
+            try
+            {
+                bool check = true;
+                do
                 {
-                    check = false;
-                    cout << g[0] << endl;
-                    cout << "Would you like to delete this entry? (y/n): ";
-                    getline(cin,YorNString,'\n');
+                    vector<ComputerModel> c = _computerservice.find(name);
+                    int option;
+                    string optionString;
 
-                    YorN = atoi(YorNString.c_str());
-
-                    if(YorN == 'y' || YorN == 'Y')
+                    if (c.size() > 1)
                     {
-                        _geniusservice.remove(g[0]);
-                        cout << "Entry was deleted" << endl;
+                        check = true;
+                        for(size_t i = 0; i < c.size(); i++)
+                        {
+                            cout << "Option " << i+1 << "  " << c[i] << endl;
+                        }
+                        cout << "Please enter the option you would like to delete: " << endl;
+                        getline(cin,optionString,'\n');
+                        bool validOption = false;
+                        do
+                        {
+                            option = atoi(optionString.c_str());
+                            if (option > 0 && option < c.size()+1)
+                            {
+                                validOption = true;
+                                cout << c[option-1] << endl;
+                                cout << "Are you sure you want to delete this entry? (y/n): ";
+                                getline(cin,YorNString,'\n');
+
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    _computerservice.remove(c[option-1]);
+                                    cout << "Entry was deleted" << endl;
+                                }
+                                else
+                                {
+                                    cout << "Entry was not deleted" << endl;
+                                }
+                            }
+                            else
+                            {
+                                printError();
+                                cout << "Please enter the option you would like to delete: " << endl;
+                                getline(cin,optionString,'\n');
+                            }
+                        }while (validOption == false);
+                    }
+                    else if (c.size() == 1)
+                    {
+                        check = true;
+                        cout << c[0] << endl;
+                        cout << "Would you like to delete this entry? (y/n): ";
+                        getline(cin,YorNString,'\n');
+
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            _computerservice.remove(c[0]);
+                            cout << "Entry was deleted" << endl;
+                        }
+                        else
+                        {
+                        cout << "Entry was not deleted" << endl;
+                        }
                     }
                     else
                     {
-                        cout << "Entry was not deleted" << endl;
+                        check = true;
+                        cout << "Please enter a valid choice!" << endl;
+                        cout << "Enter name of Computer: " << endl;
+                        getline(cin, name,'\n');
                     }
-                }
-                else
-                {
-                    check = true;
-                    cout << "Please enter a valid choice!" << endl;
-                    cout << "Enter name of Genius" << endl;
-                    getline(cin, name,'\n');
-                }
-            }while(check == true);
+                }while(check == true);
+            }
+            catch(int)
+            {
+                cerr << "Did not find anything" << endl;
+            }
+            cout << endl;
         }
-          catch(int)
-          {
-            cerr << "Did not find anything" << endl;
-          }
-        cout << endl;
-    }
-    else if(input == '2')
-    {
-        cout << "Enter name of Computer: ";
-        getline(cin,name,'\n');
 
-        try
+        else if (inputString == "q" || inputString == "Q")
         {
-            vector<ComputerModel> c = _computerservice.find(name);
-            int option;
-            string optionString;
-
-            if (c.size() > 1)
-            {
-                for(size_t i = 0; i < c.size(); i++)
-                {
-                    cout << "Option " << i+1 << "  " << c[i] << endl;
-                }
-                cout << "Please enter the option you would like to delete: " << endl;
-                getline(cin,optionString,'\n');
-
-                option = atoi(optionString.c_str());
-
-                if (option > 0 && option < c.size()+1)
-                {
-                    cout << c[option-1] << endl;
-                    cout << "Are you sure you want to delete this entry? (y/n): ";
-                    getline(cin,YorNString,'\n');
-
-                    YorN = atoi(YorNString.c_str());
-
-                    if(YorN == 'y' || YorN == 'Y')
-                    {
-                        _computerservice.remove(c[option-1]);
-                        cout << "Entry was deleted" << endl;
-                    }
-                    else
-                    {
-                        cout << "Entry was not deleted" << endl;
-                    }
-                }
-                else
-                {
-                    cout << "You seem to have entered an unsigned option" << endl;
-                }
-            }
-            else if (c.size() == 1)
-            {
-                cout << c[0] << endl;
-                cout << "Would you like to delete this entry? (y/n): ";
-                getline(cin,YorNString,'\n');
-
-                YorN = atoi(YorNString.c_str());
-
-                if(YorN == 'y' || YorN == 'Y')
-                {
-                    _computerservice.remove(c[0]);
-                    cout << "Entry was deleted" << endl;
-                }
-                else
-                {
-                    cout << "Entry was not deleted" << endl;
-                }
-            }
-            else
-            {
-                cout << "Please enter a valid choice!" << endl;
-            }
+            clearscreen();
+            //break;
         }
-        catch(int)
+        else
         {
-            cerr << "Did not find anything" << endl;
+            clearscreen();
+            printError();
+            return deleteAnEntry();
         }
-        cout << endl;
-    }
-    else
-    {
-        clearscreen();
-        printError();
     }
 }
 
@@ -660,6 +680,12 @@ void ConsoleUI::run()
                     deleteAnEntry();
                     break;
                 }
+                case '6':
+            {
+                    clearscreen ();
+                    smile();
+
+            }
                 case 'q':
                 case 'Q':
                 {
@@ -752,6 +778,64 @@ void ConsoleUI::printMenu()
     cout << "| Enter 3 to Add entry        |" << endl;
     cout << "| Enter 4 to Search for entry |" << endl;
     cout << "| Enter 5 to Delete an entry  |" << endl;
+    cout << "| Enter 6 to Play a game      |" << endl;
     cout << "| Enter q to Quit             |" << endl;
     cout << "===============================" << endl;
+}
+
+void ConsoleUI::smile()
+{
+    cout << "777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777 777777777" << endl;
+    cout << "777777777777777777777777777777777............................................7777777777777 777777777" << endl;
+    cout << "7777777777777777777777777................7777777777777777777777777777777777.....7777777777 777777777" << endl;
+    cout << "7777777777777777777...........7777777777.....777777777777777..7777777777777777...777777777 777777777" << endl;
+    cout << "77777777777777777....77777777777777777777777777777777777777777777..7777777777777...7777777 777777777" << endl;
+    cout << "77777777777777....7777.77......777777777777...77777777777777..777777.777777777777...777777 777777777" << endl;
+    cout << "777777777777....7777777777777777777777777777777777777777777777777..7777.7777777777...77777 777777777" << endl;
+    cout << "77777777777...777777777777.....77777777777777777777.7777777777...777.7777.777777777...7777 777777777" << endl;
+    cout << "7777777777..77777777777.7777777777777777777777777.7777777777777777..777.7777.7777777...777 777777777" << endl;
+    cout << "7777777777..777777777.777777777777.7777777777777777777777777777777777.77.7777.7777777..777 777777777" << endl;
+    cout << "7777777777..77777777.77777777777777777777777777777777777777777777777777.77.77777777777..77 777777777" << endl;
+    cout << "777777777..777777777777777777777777777777777777777777..............7777777777777777777...7 777777777" << endl;
+    cout << "77777777...777777777777........7777777777777777777.....777............77777777777777777... 777777777" << endl;
+    cout << "7777....77777777777..............7777777777777....777777........77...777777777777777777... 7777777" << endl;
+    cout << "777...777.....7...7...............77777777777...77777.................7777.7777........7.. ..77777" << endl;
+    cout << "77..777.777777777777777777.............7777777.........77777777777..777.777777777777777777 ...7777" << endl;
+    cout << "7..77.777..777777777777777777777....77777777777.....777777...77777777777777..........77777 77..777" << endl;
+    cout << "7..7.77.777......7777777777777777..7777777777777777777777777....7777777......777777....777 7.7..77" << endl;
+    cout << "7...77777..........7777.777777777..777777777777777777777777777...........77777..77777...77 7.77..." << endl;
+    cout << "7...77777.7777777........77777777..7777777777777777777777777777777777777777777..777777..77 7.77..." << endl;
+    cout << "7...77.7777777..77....77777777....77777777777777777777777777777777777777777.....7777777..7 7.777.." << endl;
+    cout << "7..7777.777777..77777777777....7777777777777777........7777777777777777.....777......77..7 7.777.." << endl;
+    cout << "7....777..77....7777777777.....77777777777777777777..77777777777777......77777...7...7...7 7.77..." << endl;
+    cout << "77..7..77777....7777777..77.....777777777.......777..7777777777.......77777777..777777..77 7777..." << endl;
+    cout << "77...7777.77..7...777.77777777...77777777777777.7...777777........7..7777777....77777..777 .77...7" << endl;
+    cout << "777...77777.........777777777777......777777777777777........777777..7777......777777777.. 77..777" << endl;
+    cout << "7777...7777..7..7......77777777777...77777777777........7777777777...7........7777777.7777 7...777" << endl;
+    cout << "77777..7777....77..77........77777777..............77..7777777777.......77...7777777777... ..77777" << endl;
+    cout << "77777..7777....77..7777....................7777777777..777777........7777...777777777777.. .777777" << endl;
+    cout << "77777..7777....77..777...7777777..7777777..7777777777...7.........7..777...77777777777...7 7777777" << endl;
+    cout << "77777..7777........777..77777777..7777777..777777777...........7777..77...77777777777...77 7777777" << endl;
+    cout << "77777..7777.................................................7777777......777777777777..777 7777777" << endl;
+    cout << "77777..7777...........................................7..77777777777...7777777777777...777 7777777" << endl;
+    cout << "77777..77777....................................7777777..777777777...77777777777777...7777 7777777" << endl;
+    cout << "77777..77777..7...........................7..7777777777...77777....777777777777777...77777 7777777" << endl;
+    cout << "77777..777777..7..77..777..77777...77777777..77777777777..777....777777777777777...7777777 7777777" << endl;
+    cout << "77777..777777......7...777..77777..77777777..777777777777......7777777777777777...77777777 7777777" << endl;
+    cout << "77777..7777777....777...77...7777..77777777..777777777......7777777.77777.777...7777777777 7777777" << endl;
+    cout << "77777..777777777.........77..7777...7777777..77.........77777777.77777..777....77777777777 7777777" << endl;
+    cout << "77777..77777777777777...............................777777777..7777..7777.... 777777777777777" << endl;
+    cout << "7777...77777777.777777777777777777777777777777777777777777.77777..7777.....77 77777777777777" << endl;
+    cout << "7777..7777777777.777777777777777777777777777777777777..777777.77777.....77777 77777777777777" << endl;
+    cout << "7777..777777777777.777777777777777777777777777777..777777..77777.....77777777 77777777777777" << endl;
+    cout << "77..77777..77777777...77777777777..........777777..7777777......7777777 777777777777" << endl;
+    cout << "7..777777777.7777777777777777777777777...777777777777.....777777 77777777" << endl;
+    cout << "7...7777777777...............777777777777777777777.....777777 7777" << endl;
+    cout << "7...777777777777777777777777777777777777777777.....777777 77" << endl;
+    cout << "77...77777777777777777777777777777777777..7.....7777777" << endl;
+    cout << "777....7777777777777777777777777777..........77777777" << endl;
+    cout << "7777.....7777777777777777777.........77777777777777" << endl;
+    cout << "7777777........................77777777777777777777" << endl;
+    cout << "        YOU JUST GOT TROLLED, TROLOLOLOLO" << endl;
+    cout << "                No game for you          " << endl;
 }
