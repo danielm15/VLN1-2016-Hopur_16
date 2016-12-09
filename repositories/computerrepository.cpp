@@ -100,10 +100,10 @@ bool ComputerRepository::updateComputer(ComputerModel model)
     QSqlQuery query(_db);
 
     query.prepare("UPDATE Computers \
-                   SET ModelName = :modelName \
-                   SET MakeYear  = :makeYear \
-                   SET Type      = :type \
-                   SET Built     = :built \
+                   SET ModelName = :modelName, \
+                       MakeYear  = :makeYear, \
+                       Type      = :type, \
+                       Built     = :built \
                    WHERE ComputerID = :id");
 
     query.bindValue(":modelName", QString::fromStdString(model.getModelName()));

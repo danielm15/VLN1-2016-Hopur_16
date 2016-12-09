@@ -27,12 +27,13 @@ private:
     void searchForEntries();
     void deleteAnEntry();
     void addRelationship();
+    void modifyAnEntry();
     void printGVector(vector<GeniusModel> GVector);
     void printCVector(vector<ComputerModel> CVector);
     void printGeniusSort();
     void printComputerSort();
     void printError();
-    void smile();
+    void game();
     void printMenu();
     void clearscreen ();
 };
