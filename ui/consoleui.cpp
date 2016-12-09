@@ -368,6 +368,7 @@ void ConsoleUI::addNewEntryToDataSet()
         {
             clearscreen();
             printError();
+            check = true;
         }
         else if(strInput == "q" || strInput == "Q")
         {
@@ -389,7 +390,6 @@ void ConsoleUI::addNewEntryToDataSet()
                     dateOfDeath = v.promptForDateOfDeath(name, dateOfBirth);
 
                     saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
-                    check = false;
                     break;
                 }
                 case '2':
@@ -401,7 +401,6 @@ void ConsoleUI::addNewEntryToDataSet()
                     built = c.promptForBuilt();
 
                     saved = _computerservice.addComputer(modelName,makeYear,type,built);
-                    check = false;
                     break;
                 }
                 default:
@@ -994,7 +993,7 @@ void ConsoleUI::modifyAnEntry()
                                 validOption = true;
                                 clearscreen();
                                 cout << g[option-1] << endl;
-                                cout << "Would you like to change the Genius name? (y/n): ";
+                                cout << "Would you like to modify the Genius name? (y/n): ";
                                 getline(cin,YorNString,'\n');
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
@@ -1004,12 +1003,11 @@ void ConsoleUI::modifyAnEntry()
                                 {
                                     name = g[option-1].getName();
                                 }
-                                cout << "Would you like to change the Genius gender? (y/n): ";
+                                cout << "Would you like to modify the Genius gender? (y/n): ";
                                 getline(cin,YorNString,'\n');
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
                                     gender = vg.promptForGender();
-                                    string fullGender = "";
                                     if (gender == 'm' || gender == 'M')
                                     {
                                         genderString = "Male";
@@ -1027,7 +1025,7 @@ void ConsoleUI::modifyAnEntry()
                                 {
                                     genderString = g[option-1].getGender();
                                 }
-                                cout << "Would you like to change the Genius birth year? (y/n): ";
+                                cout << "Would you like to modify the Genius birth year? (y/n): ";
                                 getline(cin,YorNString,'\n');
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
@@ -1037,7 +1035,7 @@ void ConsoleUI::modifyAnEntry()
                                 {
                                     dateOfBirth = g[option-1].getBirthYear();
                                 }
-                                cout << "Would you like to change the Genius death year? (y/n): ";
+                                cout << "Would you like to modify the Genius death year? (y/n): ";
                                 getline(cin,YorNString,'\n');
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
@@ -1065,7 +1063,7 @@ void ConsoleUI::modifyAnEntry()
                         check = false;
                         clearscreen();
                         cout << g[0] << endl;
-                        cout << "Would you like to change the Genius name? (y/n): ";
+                        cout << "Would you like to modify the Genius name? (y/n): ";
                         getline(cin,YorNString,'\n');
                         if(YorNString == "y" || YorNString == "Y")
                         {
@@ -1075,7 +1073,7 @@ void ConsoleUI::modifyAnEntry()
                         {
                             name = g[0].getName();
                         }
-                        cout << "Would you like to change the Genius gender? (y/n): ";
+                        cout << "Would you like to modify the Genius gender? (y/n): ";
                         getline(cin,YorNString,'\n');
                         if(YorNString == "y" || YorNString == "Y")
                         {
@@ -1097,7 +1095,7 @@ void ConsoleUI::modifyAnEntry()
                         {
                             genderString = g[0].getGender();
                         }
-                        cout << "Would you like to change the Genius birth year? (y/n): ";
+                        cout << "Would you like to modify the Genius birth year? (y/n): ";
                         getline(cin,YorNString,'\n');
                         if(YorNString == "y" || YorNString == "Y")
                         {
@@ -1107,7 +1105,7 @@ void ConsoleUI::modifyAnEntry()
                         {
                             dateOfBirth = g[0].getBirthYear();
                         }
-                        cout << "Would you like to change the Genius death year? (y/n): ";
+                        cout << "Would you like to modify the Genius death year? (y/n): ";
                         getline(cin,YorNString,'\n');
                         if(YorNString == "y" || YorNString == "Y")
                         {
@@ -1169,7 +1167,7 @@ void ConsoleUI::modifyAnEntry()
                                 validOption = true;
                                 clearscreen();
                                 cout << c[option-1] << endl;
-                                cout << "Would you like to change the Computer ModelName? (y/n): ";
+                                cout << "Would you like to modify the Computer ModelName? (y/n): ";
                                 getline(cin,YorNString,'\n');
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
@@ -1179,7 +1177,7 @@ void ConsoleUI::modifyAnEntry()
                                 {
                                     modelName = c[option-1].getModelName();
                                 }
-                                cout << "Would you like to change the Computer MakeYear? (y/n): ";
+                                cout << "Would you like to modify the Computer MakeYear? (y/n): ";
                                 getline(cin,YorNString,'\n');
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
@@ -1189,7 +1187,7 @@ void ConsoleUI::modifyAnEntry()
                                 {
                                     makeYear = c[option-1].getMakeYear();
                                 }
-                                cout << "Would you like to change the Computer Type? (y/n): ";
+                                cout << "Would you like to modify the Computer Type? (y/n): ";
                                 getline(cin,YorNString,'\n');
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
@@ -1199,7 +1197,7 @@ void ConsoleUI::modifyAnEntry()
                                 {
                                     type = c[option-1].getType();
                                 }
-                                cout << "Would you like to change the Genius Built? (y/n): ";
+                                cout << "Would you like to modify the Genius Built? (y/n): ";
                                 getline(cin,YorNString,'\n');
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
@@ -1228,7 +1226,7 @@ void ConsoleUI::modifyAnEntry()
                         check = false;
                         clearscreen();
                         cout << c[0] << endl;
-                        cout << "Would you like to change the Computer ModelName? (y/n): ";
+                        cout << "Would you like to modify the Computer ModelName? (y/n): ";
                         getline(cin,YorNString,'\n');
                         if(YorNString == "y" || YorNString == "Y")
                         {
@@ -1238,7 +1236,7 @@ void ConsoleUI::modifyAnEntry()
                         {
                             modelName = c[0].getModelName();
                         }
-                        cout << "Would you like to change the Computer MakeYear? (y/n): ";
+                        cout << "Would you like to modify the Computer MakeYear? (y/n): ";
                         getline(cin,YorNString,'\n');
                         if(YorNString == "y" || YorNString == "Y")
                         {
@@ -1248,7 +1246,7 @@ void ConsoleUI::modifyAnEntry()
                         {
                             makeYear = c[0].getMakeYear();
                         }
-                        cout << "Would you like to change the Computer Type? (y/n): ";
+                        cout << "Would you like to modify the Computer Type? (y/n): ";
                         getline(cin,YorNString,'\n');
                         if(YorNString == "y" || YorNString == "Y")
                         {
@@ -1258,7 +1256,7 @@ void ConsoleUI::modifyAnEntry()
                         {
                             type = c[0].getType();
                         }
-                        cout << "Would you like to change the Genius Built? (y/n): ";
+                        cout << "Would you like to modify the Genius Built? (y/n): ";
                         getline(cin,YorNString,'\n');
                         if(YorNString == "y" || YorNString == "Y")
                         {
