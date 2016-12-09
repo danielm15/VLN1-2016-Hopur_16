@@ -68,7 +68,7 @@ bool ComputerRepository::saveComputer(ComputerModel model)
     QString QmodelName = QString::fromStdString(model.getModelName());
     QString Qtype = QString::fromStdString(model.getType());
     unsigned int makeYear = model.getMakeYear();
-    bool built = model.getBuilt();
+    int built = model.getBuilt();
 
     QSqlQuery query(_db);
     query.prepare("INSERT INTO Computers(ModelName, MakeYear, Type, Built) VALUES(:ModelName,:MakeYear,:Type,:Built)");
@@ -120,21 +120,11 @@ vector<ComputerModel> ComputerRepository::extractQueryToVector(QSqlQuery query)
     vector<ComputerModel> computers;
 
     while(query.next()){
-        bool built;
         unsigned int id = query.value("ComputerID").toUInt();
         string modelName = query.value("ModelName").toString().toStdString();
         unsigned int makeYear = query.value("MakeYear").toUInt();
         string type = query.value("Type").toString().toStdString();
-        string builtStr = query.value("Built").toString().toStdString();
-
-        if (builtStr == "Y")
-        {
-            built = true;
-        }
-        else
-        {
-            built = false;
-        }
+        int built = query.value("Built").toInt();
 
         computers.push_back(ComputerModel(id, modelName, makeYear, type, built));
     }

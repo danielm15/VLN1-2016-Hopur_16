@@ -9,6 +9,7 @@ ComputerValidation::ComputerValidation()
 
 string ComputerValidation::promptForModelName()
 {
+    ConsoleUI c;
     bool check = true;
     bool rejected = false;
 
@@ -16,19 +17,24 @@ string ComputerValidation::promptForModelName()
 
     while(check)
     {
-
         cout << "Model name: ";
         getline(cin,modelName);
+
+        if(modelName == "q" || modelName == "Q")
+            leave();
+
         modelName[0] = toupper(modelName[0]);
 
         rejected = validateModelName(modelName);
 
         if(rejected == true)
         {
+            system("cls");
             cout << "Name is invalid" << endl;
         }
         else
         {
+            system("cls");
             check = false;
             cout << "Name successfully entered" << endl;
         }
@@ -42,7 +48,7 @@ bool ComputerValidation::validateModelName(string modelName)
 
     if(modelName.empty())
         rejected = true;
-    if(modelName.length() > 40)
+    if(modelName.length() > 30)
         rejected = true;
 
     for(unsigned int i = 0; i < modelName.length() && !rejected; i++)
@@ -50,6 +56,8 @@ bool ComputerValidation::validateModelName(string modelName)
         if(ispunct(modelName[i]))
             rejected = true;
         if(isdigit(modelName[0]))
+            rejected = true;
+        if(modelName[0] == ' ')
             rejected = true;
         if(isalnum(modelName[i]))
             continue;
@@ -67,11 +75,15 @@ unsigned int ComputerValidation::promptForMakeYear()
     bool check = true;
     unsigned int makeYear;
     string makeYearString;
+    ConsoleUI c;
 
     while (check)
     {
         cout << "Make year: ";
         getline(cin,makeYearString);
+
+        if(makeYearString == "q" || makeYearString == "Q")
+            leave();
 
         rejected = validateMakeYear(makeYearString);
 
@@ -81,17 +93,20 @@ unsigned int ComputerValidation::promptForMakeYear()
 
             if(makeYear > 999 && makeYear < 2017)
             {
+                system("cls");
                 check = false;
                 cout << "Make Year successfully entered" << endl;
             }
             else
             {
+                system("cls");
                 check = true;
                 cout << "Please enter a valid year" << endl;
             }
         }
         else
         {
+            system("cls");
             cout << "Please enter a valid year" << endl;
         }
     }
@@ -121,18 +136,25 @@ string ComputerValidation::promptForType()
     string type;
     bool check = true;
     bool rejected = false;
+    ConsoleUI c;
 
     while(check)
     {
         cout << endl;
-        cout << "1 = Mechanical, 2 = Electronic, 3 = Electromechanical, 4 = Integrated circuit" << endl;
+        cout << "1 = Mechanical, 2 = Electronic" << endl;
+        cout << "3 = Electromechanical, 4 = Integrated circuit" << endl;
+        cout << endl;
         cout << "Type: ";
         getline(cin,type);
+
+        if(type == "q" || type == "Q")
+            leave();
 
         rejected = validateType(type);
 
         if(rejected == true)
         {
+            system("cls");
             cout << "Please enter 1,2,3 or 4 to specify type" << endl;
         }
         else
@@ -146,6 +168,7 @@ string ComputerValidation::promptForType()
             else if(type == "4")
                 type = "Integrated circuit";
 
+            system("cls");
             check = false;
             break;
             cout << "Type successfully entered" << endl;
@@ -164,7 +187,7 @@ bool ComputerValidation::validateType(string type)
         rejected = true;
     }
 
-    if(type != "1" || type != "2" || type != "3" || type != "4")
+    if(type != "1" && type != "2" && type != "3" && type != "4")
     {
         rejected = true;
     }
@@ -172,34 +195,39 @@ bool ComputerValidation::validateType(string type)
     return rejected;
 }
 
-bool ComputerValidation::promptForBuilt()
+int ComputerValidation::promptForBuilt()
 {
     bool check = true;
     bool rejected = false;
     string strBuilt;
-    bool built = true;
+    int built;
+    ConsoleUI c;
 
     while(check)
     {
         cout << "Built(y/n): ";
-        getline(cin,strBuilt,'\n');
+        getline(cin,strBuilt);
+
+        if(strBuilt == "q" || strBuilt == "Q")
+            leave();
 
         rejected = validateBuilt(strBuilt);
 
         if(rejected == true)
         {
+            system("cls");
             cout << "Please enter y or n!" << endl;
             check = true;
         }
         else
         {
-            if(strBuilt[0] == 'Y' || strBuilt[0] == 'y')
+            if(strBuilt == "Y" || strBuilt == "y")
             {
-                built = true;
+                built = 1;
             }
-            else if (strBuilt[0] == 'N' || strBuilt[0] == 'n')
+            else if (strBuilt == "N" || strBuilt == "n")
             {
-                built = false;
+                built = 0;
             }
             check = false;
             cout << "Built successfully entered!" << endl;
@@ -208,18 +236,24 @@ bool ComputerValidation::promptForBuilt()
     return built;
 }
 
-bool ComputerValidation::validateBuilt(string built)
+bool ComputerValidation::validateBuilt(string strBuilt)
 {
     bool rejected = false;
 
-    if(built.empty())
+    if(strBuilt.empty())
         rejected = true;
-    if(built.length() != 1)
+    if(strBuilt.length() != 1)
         rejected = true;
-    if((built[0] != 'Y' && built[0] != 'y') && (built[0] != 'N' && built[0] != 'n'))
+    if(strBuilt != "Y" && strBuilt != "y" && strBuilt != "N" && strBuilt != "n")
     {
         rejected = true;
     }
-
     return rejected;
+}
+
+void ComputerValidation::leave()
+{
+    ConsoleUI c;
+    system("cls");
+    c.run();
 }

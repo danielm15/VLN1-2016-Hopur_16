@@ -5,7 +5,7 @@ ComputerModel::ComputerModel()
 
 }
 
-ComputerModel::ComputerModel(string modelName, unsigned int makeYear, string type, bool built)
+ComputerModel::ComputerModel(string modelName, unsigned int makeYear, string type, int built)
 {
     _modelName = modelName;
     _makeYear = makeYear;
@@ -13,7 +13,7 @@ ComputerModel::ComputerModel(string modelName, unsigned int makeYear, string typ
     _built = built;
 }
 
-ComputerModel::ComputerModel(unsigned int id, string modelName, unsigned int makeYear, string type, bool built)
+ComputerModel::ComputerModel(unsigned int id, string modelName, unsigned int makeYear, string type, int built)
 {
     _id = id;
     _modelName = modelName;
@@ -42,12 +42,12 @@ string ComputerModel::getType() const
     return _type;
 }
 
-bool ComputerModel::getBuilt() const
+int ComputerModel::getBuilt() const
 {
     return _built;
 }
 
-bool ComputerModel::update(string modelName, unsigned int makeYear, string type, bool built)
+bool ComputerModel::update(string modelName, unsigned int makeYear, string type, int built)
 {
     _modelName = modelName;
     _makeYear = makeYear;
@@ -76,14 +76,20 @@ bool operator ==(const ComputerModel& g1, const ComputerModel& g2)
 
 ostream& operator <<(ostream& out, const ComputerModel& p1)
 {
-    out << "|" <<setw(25) << p1.getModelName() << " | ";
+    int built = p1.getBuilt();
+
+    out << "|" << setw(25) << p1.getModelName() << " | ";
     out << setw(9) << p1.getMakeYear() << " | ";
     out << setw(20) << p1.getType() << " | ";
 
-    if(p1.getBuilt() == true)
+    if(built == 1)
+    {
         out << setw(5) << "Y" << setw(5) << "  |";
+    }
     else
+    {
         out << setw(5) << "N" << setw(5) << "  |";
+    }
 
     return out;
 }

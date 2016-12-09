@@ -11,7 +11,7 @@ vector<ComputerModel> ComputerService::getComputer()
     return repo.getAllComputers();
 }
 
-bool ComputerService::addComputer(string modelName, unsigned int makeYear, string type, bool built)
+bool ComputerService::addComputer(string modelName, unsigned int makeYear, string type, int built)
 {
     ComputerModel model(modelName, makeYear, type, built);
     return _computerRepository.saveComputer(model);

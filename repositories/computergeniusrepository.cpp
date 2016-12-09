@@ -66,7 +66,7 @@ vector<ComputerModel> ComputerGeniusRepository::extractComputerQueryToVector(QSq
         string modelName = query.value("ModelName").toString().toStdString();
         unsigned int makeYear = query.value("MakeYear").toUInt();
         string type = query.value("Type").toString().toStdString();
-        bool built = query.value("Built").toUInt();
+        int built = query.value("Built").toUInt();
         computers.push_back(ComputerModel(modelName, makeYear, type, built));
     }
 

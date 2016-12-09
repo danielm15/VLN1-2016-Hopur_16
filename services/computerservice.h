@@ -55,7 +55,7 @@ public:
      * @param built
      * @return
      */
-    bool addComputer(string modelName, unsigned int makeYear, string type, bool built);
+    bool addComputer(string modelName, unsigned int makeYear, string type, int built);
 
     /**
      * @brief removes genius from the database

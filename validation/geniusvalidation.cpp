@@ -18,16 +18,21 @@ string GeniusValidation::promptForName()
         cout << "Name: ";
         getline(cin,name,'\n');
 
+        if(name == "q" || name == "Q")
+            leave();
+
         name[0] = toupper(name[0]);
 
         rejected = validateName(name);
 
         if(rejected == true)
         {
+            system("cls");
             cout << "Name is invalid" << endl;
         }
         else
         {
+            system("cls");
             check = false;
             cout << "Name successfully entered" << endl;
         }
@@ -50,6 +55,8 @@ bool GeniusValidation::validateName(string name)
     for(unsigned int i = 0; i < name.length() && !rejected; i++)
     {
         if(ispunct(name[i]))
+            rejected = true;
+        if(name[0] == ' ')
             rejected = true;
         if(isalpha(name[i]))
             continue;
@@ -74,15 +81,20 @@ char GeniusValidation::promptForGender()
         cout << "Gender (m/f): ";
         getline(cin,strgender,'\n');
 
+        if(strgender == "q" || strgender == "Q")
+            leave();
+
         rejected = validateGender(strgender);
 
         if(rejected == true)
         {
+            system("cls");
             cout << "Please enter m for male or f for female" << endl;
             check = true;
         }
         else
         {
+            system("cls");
             gender = strgender[0];
             check = false;
             cout << "Gender successfully entered" << endl;
@@ -130,7 +142,10 @@ unsigned int GeniusValidation::promptForDateOfBirth()
     while(check)
     {
         cout << "Year of birth: ";
-        getline(cin,strdateOfBirth,'\n');
+        getline(cin,strdateOfBirth);
+
+        if(strdateOfBirth == "q" || strdateOfBirth == "Q")
+            leave();
 
         rejected = validateDateOfBirth(strdateOfBirth);
 
@@ -140,17 +155,20 @@ unsigned int GeniusValidation::promptForDateOfBirth()
 
             if(dateOfBirth > 999 && dateOfBirth < 2017)
             {
+                system("cls");
                 check = false;
                 cout << "Year of birth successfully entered" << endl;
             }
             else
             {
+                system("cls");
                 check = true;
                 cout << "Please enter a valid date of birth" << endl;
             }
         }
         else
         {
+            system("cls");
             check = true;
             cout << "Please enter a valid date of birth" << endl;
         }
@@ -183,7 +201,10 @@ unsigned int GeniusValidation::promptForDateOfDeath(string name, unsigned int da
     {
         cout << " ~ Enter 0 if person is alive ~ " << endl;
         cout << "Year of death: ";
-        getline(cin,strdateOfDeath,'\n');
+        getline(cin,strdateOfDeath);
+
+        if(strdateOfDeath == "q" || strdateOfDeath == "Q")
+            leave();
 
         rejected = validateDateOfDeath(strdateOfDeath, dateOfBirth);
 
@@ -193,6 +214,7 @@ unsigned int GeniusValidation::promptForDateOfDeath(string name, unsigned int da
 
             if(dateOfDeath == 0)
             {
+                system("cls");
                 check = false;
                 cout << "Yay" << " " <<  name << " is still alive" << endl;
             }
@@ -203,17 +225,20 @@ unsigned int GeniusValidation::promptForDateOfDeath(string name, unsigned int da
 
             if(dateOfDeath > 999 && dateOfDeath < 2017)
             {
+                system("cls");
                 check = false;
                 cout << "Year of death successfully entered" << endl;
             }
             else
             {
+                system("cls");
                 check = true;
                 cout << "Please enter a valid date of death" << endl;
             }
         }
         else
         {
+            system("cls");
             check = true;
             cout << "Please enter a valid date of death" << endl;
         }
@@ -238,4 +263,11 @@ bool GeniusValidation::validateDateOfDeath(string date, unsigned int dateOfBirth
         rejected = true;
 
     return rejected;
+}
+
+void GeniusValidation::leave()
+{
+    ConsoleUI c;
+    system("cls");
+    c.run();
 }

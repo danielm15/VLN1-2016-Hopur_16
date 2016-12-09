@@ -345,7 +345,7 @@ void ConsoleUI::displaySortedList()
 void ConsoleUI::addNewEntryToDataSet()
 {
     bool saved = false;
-    bool built = false;
+    int built;
     bool check = true;
     char gender;
     char input = ' ';
@@ -390,6 +390,7 @@ void ConsoleUI::addNewEntryToDataSet()
                     dateOfDeath = v.promptForDateOfDeath(name, dateOfBirth);
 
                     saved = _geniusservice.addGenius(name,gender,dateOfBirth,dateOfDeath);
+                    check = false;
                     break;
                 }
                 case '2':
@@ -401,6 +402,7 @@ void ConsoleUI::addNewEntryToDataSet()
                     built = c.promptForBuilt();
 
                     saved = _computerservice.addComputer(modelName,makeYear,type,built);
+                    check = false;
                     break;
                 }
                 default:
@@ -937,7 +939,7 @@ void ConsoleUI::addRelationship()
 
 void ConsoleUI::modifyAnEntry()
 {
-    bool built = false;
+    int built;
     char gender;
     string name, genderString;
     string modelName, type;

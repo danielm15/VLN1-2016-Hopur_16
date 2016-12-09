@@ -1,6 +1,8 @@
 #ifndef COMPUTERVALIDATION_H
 #define COMPUTERVALIDATION_H
 
+#include <ui/consoleui.h>
+
 #include <string>
 #include <iostream>
 #include <stdlib.h>
@@ -22,8 +24,10 @@ public:
     string promptForType();
     bool validateType(string type);
 
-    bool promptForBuilt();
+    int promptForBuilt();
     bool validateBuilt(string built);
+private:
+    void leave();
 };
 
 #endif // COMPUTERVALIDATION_H

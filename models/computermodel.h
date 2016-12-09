@@ -22,7 +22,7 @@ public:
      * @param type
      * @param built
      */
-    ComputerModel(string modelName, unsigned int makeYear, string type, bool built);
+    ComputerModel(string modelName, unsigned int makeYear, string type, int built);
 
     /**
      * @brief ComputerModel
@@ -32,7 +32,7 @@ public:
      * @param type
      * @param built
      */
-    ComputerModel(unsigned int id, string modelName, unsigned int makeYear, string type, bool built);
+    ComputerModel(unsigned int id, string modelName, unsigned int makeYear, string type, int built);
 
     /**
      * @brief getId getter for id
@@ -62,7 +62,7 @@ public:
      * @brief getBuilt getter for private variable _built
      * @return _built
      */
-    bool getBuilt() const;
+    int getBuilt() const;
     
     /**
      * @brief update, 
@@ -72,7 +72,7 @@ public:
      * @param built
      * @return 
      */
-    bool update(string modelName, unsigned int makeYear, string type, bool built);
+    bool update(string modelName, unsigned int makeYear, string type, int built);
 
     /**
      * @brief operator == Checks if two objects are the same
@@ -103,7 +103,7 @@ private:
     string _modelName;
     unsigned int _makeYear;
     string _type;
-    bool _built;
+    int _built;
 };
 
 #endif // COMPUTERMODEL_H
