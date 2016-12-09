@@ -1041,7 +1041,7 @@ void ConsoleUI::modifyAnEntry()
                         check = true;
                         printError();
                         cout << "Enter name of Genius: " << endl;
-                        getline(cin, name,'\n');
+                        getline(cin, modelName,'\n');
                     }
                 }while(check == true);
             }
