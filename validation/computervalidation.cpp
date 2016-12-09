@@ -12,13 +12,13 @@ string ComputerValidation::promptForModelName()
     bool check = true;
     bool rejected = false;
 
-    string modelName = "";
+    string modelName;
 
     while(check)
     {
 
         cout << "Model name: ";
-        getline(cin,modelName,'\n');
+        getline(cin,modelName);
         modelName[0] = toupper(modelName[0]);
 
         rejected = validateModelName(modelName);
@@ -42,6 +42,8 @@ bool ComputerValidation::validateModelName(string modelName)
 
     if(modelName.empty())
         rejected = true;
+    if(modelName.length() > 40)
+        rejected = true;
 
     for(unsigned int i = 0; i < modelName.length() && !rejected; i++)
     {
@@ -55,6 +57,7 @@ bool ComputerValidation::validateModelName(string modelName)
             continue;
         rejected = true;
     }
+
     return rejected;
 }
 
@@ -68,7 +71,7 @@ unsigned int ComputerValidation::promptForMakeYear()
     while (check)
     {
         cout << "Make year: ";
-        getline(cin,makeYearString,'\n');
+        getline(cin,makeYearString);
 
         rejected = validateMakeYear(makeYearString);
 
@@ -87,8 +90,7 @@ unsigned int ComputerValidation::promptForMakeYear()
                 cout << "Please enter a valid year" << endl;
             }
         }
-
-        if(rejected == true)
+        else
         {
             cout << "Please enter a valid year" << endl;
         }
@@ -101,7 +103,6 @@ bool ComputerValidation::validateMakeYear(string makeYearString)
 {
     bool rejected = false;
     unsigned int makeYear;
-
 
     for(unsigned int i = 0; i < makeYearString.length() && !rejected; i++)
     {
@@ -117,25 +118,36 @@ bool ComputerValidation::validateMakeYear(string makeYearString)
 
 string ComputerValidation::promptForType()
 {
-    string type = "";
+    string type;
     bool check = true;
     bool rejected = false;
 
     while(check)
     {
+        cout << endl;
+        cout << "1 = Mechanical, 2 = Electronic, 3 = Electromechanical, 4 = Integrated circuit" << endl;
         cout << "Type: ";
-        getline(cin,type,'\n');
-        type[0] = toupper(type[0]);
+        getline(cin,type);
 
         rejected = validateType(type);
 
         if(rejected == true)
         {
-            cout << "Type can only contain alphabetic characters and spaces!" << endl;
+            cout << "Please enter 1,2,3 or 4 to specify type" << endl;
         }
         else
         {
+            if(type == "1")
+                type = "Mechanical";
+            else if(type == "2")
+                type = "Electronic";
+            else if(type == "3")
+                type = "Electromechanical";
+            else if(type == "4")
+                type = "Integrated circuit";
+
             check = false;
+            break;
             cout << "Type successfully entered" << endl;
         }
     }
@@ -148,17 +160,12 @@ bool ComputerValidation::validateType(string type)
     bool rejected = false;
 
     if(type.empty())
-        rejected = true;
-
-    for(unsigned int i = 0; i < type.length() && !rejected; i++)
     {
-        if(ispunct(type[i]))
-            rejected = true;
-        if(isalpha(type[i]))
-            continue;
-        if(type[i] == ' ')
-            continue;
+        rejected = true;
+    }
 
+    if(type != "1" || type != "2" || type != "3" || type != "4")
+    {
         rejected = true;
     }
 

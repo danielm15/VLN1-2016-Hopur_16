@@ -24,7 +24,7 @@ string GeniusValidation::promptForName()
 
         if(rejected == true)
         {
-            cout << "Name can only contain alphabetic characters and spaces!" << endl;
+            cout << "Name is invalid" << endl;
         }
         else
         {
@@ -43,6 +43,8 @@ bool GeniusValidation::validateName(string name)
     bool rejected = false;
 
     if(name.empty())
+        rejected = true;
+    if(name.length() > 30)
         rejected = true;
 
     for(unsigned int i = 0; i < name.length() && !rejected; i++)
