@@ -11,7 +11,7 @@ void ConsoleUI::displayUnsortedList()
 {
     bool check = true;
     char input = ' ';
-    string strinput;
+    string strInput;
 
     while(!(input == 'q' || input == 'Q') && check == true)
     {
@@ -19,25 +19,27 @@ void ConsoleUI::displayUnsortedList()
         cout << "| Enter 1 for unsorted Genius list               |" << endl;
         cout << "| Enter 2 for unsorted Computer list             |" << endl;
         cout << "| Enter 3 for unsorted Geniuses & Computers list |" << endl;
+        cout << "| Enter 4 for unsorted Computers & Geniuses list |" << endl;
         cout << "| Enter q to quit                                |" << endl;
         cout << "==================================================" << endl;
 
-        getline(cin, strinput);
+        getline(cin, strInput);
 
-        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "3" && strinput != "4" && strinput != "q" && strinput != "Q"))
+        if(strInput.length() != 1 || (strInput != "1" && strInput != "2" && strInput != "3" && strInput != "4" && strInput != "q" && strInput != "Q"))
         {
             clearscreen();
             printError();
         }
         else
         {
-            input = strinput[0];
+            input = strInput[0];
 
             switch(input)
             {
                 case '1':
                 {
                     clearscreen();
+                    cout << "============================================================="<< endl;
                     cout << "===================== Unsorted Genius list ==================" << endl;
                     cout << "============================================================="<< endl;
                     cout << setw(24)<< "Name" << setw(9) << "Gender" << "  " << "Birth Year" << "  -  " << "Death Year" << endl;
@@ -56,6 +58,7 @@ void ConsoleUI::displayUnsortedList()
                 case '2':
                 {
                     clearscreen();
+                    cout << "=========================================================================="<< endl;
                     cout << "========================= Unsorted Computer list =========================" << endl;
                     cout << "=========================================================================="<< endl;
                     cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
@@ -97,6 +100,7 @@ void ConsoleUI::displayUnsortedList()
             case '4':
             {
                 clearscreen();
+                cout << "=========================================================================="<< endl;
                 cout << "========================= Unsorted Computer list =========================" << endl;
                 cout << "=========================================================================="<< endl;
                 cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
@@ -144,128 +148,129 @@ void ConsoleUI::displaySortedList()
     vector<ComputerModel> CVector;
     string sortedInput, selectSort, sortBy;
     bool isValid = false;
+    bool doubleCheck = true;
     bool check = true;
 
-    cout << "============== Sort list ===============" << endl;
-    cout << "| Enter 1 to sort Geniuses             |" << endl;
-    cout << "| Enter 2 to sort Computers            |" << endl;
-    cout << "| Enter 3 to sort Geniuses & Computers |" << endl;
-    cout << "| Enter q to quit                      |" << endl;
-    cout << "========================================" << endl;
-
-    getline(cin, selectSort);
-
-    if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "q" && selectSort != "Q"))
+    while(check || (selectSort != "q" && selectSort != "Q"))
     {
-        clearscreen();
-        printError();
-        return displaySortedList();
-    }
-    else
-    {
-        selectSort = selectSort[0];
+        cout << "============== Sort list ===============" << endl;
+        cout << "| Enter 1 to sort Geniuses             |" << endl;
+        cout << "| Enter 2 to sort Computers            |" << endl;
+        cout << "| Enter 3 to sort Geniuses & Computers |" << endl;
+        cout << "| Enter q to quit                      |" << endl;
+        cout << "========================================" << endl;
 
-        if(selectSort == "1")
+        getline(cin, selectSort);
+
+        if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "3" && selectSort != "q" && selectSort != "Q"))
         {
             clearscreen();
-            printGeniusSort();
+            printError();
+            check = true;
         }
-        else if(selectSort == "2")
+        else if(selectSort == "q" || selectSort == "Q")
         {
             clearscreen();
-            printComputerSort();
+            check = false;
+            break;
         }
         else
-
-        while(!isValid)
         {
-            selectSort = selectSort[0];
+            clearscreen();
+            while(!isValid || sortedInput != "q" || sortedInput != "Q")
+            {
+                selectSort = selectSort[0];
 
-            if(selectSort == "1")
-            {
-                clearscreen();
-                printGeniusSort();
-            }
-            else if(selectSort == "2")
-            {
-                clearscreen();
-                printComputerSort();
-            }
-            else
-            {
-                clearscreen();
-                return run();
-            }
-
-            getline(cin, sortedInput);
-
-            if(sortedInput.length() != 1 || (sortedInput != "a" && sortedInput != "A"
-                                             && sortedInput != "b" && sortedInput != "B"
-                                             && sortedInput != "c" && sortedInput != "C"
-                                             && sortedInput != "d" && sortedInput != "D"
-                                             && sortedInput != "q" && sortedInput != "Q"))
-            {
-                clearscreen();
-                printError();
-                isValid = false;
-            }
-            else if(sortedInput == "q" || sortedInput == "Q")
-            {
-                clearscreen();
-                break;
-            }
-            else
-            {
-                sortedInput = sortedInput[0];
-                isValid = true;
-
-                while(check)
+                if(selectSort == "1")
+                {
+                    printGeniusSort();
+                }
+                else if(selectSort == "2")
+                {
+                    printComputerSort();
+                }
+                else
                 {
                     clearscreen();
-                    cout << "=========== ASC & DESC ? ==========" << endl;
-                    cout << "| Enter A for order by ascending  |" << endl;
-                    cout << "| Enter D for order by descending |" << endl;
-                    cout << "| Enter Q to quit                 |" << endl;
-                    cout << "===================================" << endl;
-                    getline(cin, sortBy);
+                    printError();
+                    break;
+                }
+                getline(cin, sortedInput);
 
-                    if(sortBy.length() != 1)
+                if(sortedInput.length() != 1 || (sortedInput != "a" && sortedInput != "A"
+                                                 && sortedInput != "b" && sortedInput != "B"
+                                                 && sortedInput != "c" && sortedInput != "C"
+                                                 && sortedInput != "d" && sortedInput != "D"
+                                                 && sortedInput != "q" && sortedInput != "Q"))
+                {
+                    clearscreen();
+                    printError();
+                    isValid = false;
+                }
+                else if(sortedInput == "q" || sortedInput == "Q")
+                {
+                    isValid = true;
+                    clearscreen();
+                    break;
+                }
+                else
+                {
+                    sortedInput = sortedInput[0];
+                    clearscreen();
+                    while(doubleCheck)
                     {
-                        clearscreen();
-                        printError();
-                        check = true;
-                    }
-                    else if(sortBy[0] == 'a' || sortBy[0] == 'A' || sortBy[0] == 'd' || sortBy[0] == 'D')
-                    {
-                        sortBy = sortBy[0];
+                        cout << "=========== ASC & DESC ? ==========" << endl;
+                        cout << "| Enter A for order by ascending  |" << endl;
+                        cout << "| Enter D for order by descending |" << endl;
+                        cout << "| Enter Q to quit                 |" << endl;
+                        cout << "===================================" << endl;
+                        getline(cin, sortBy);
 
-                        if(selectSort == "1")
+                        if(sortBy.length() != 1 || (sortBy != "A" && sortBy != "a" && sortBy != "D" && sortBy != "d"))
                         {
-                            GVector = _geniusservice.sortGenius(sortedInput, sortBy);
-
                             clearscreen();
-                            printGVector(GVector);
-                            check = false;
+                            printError();
+                            doubleCheck = true;
                         }
-                        else if(selectSort == "2")
+                        else if(sortBy == "a" || sortBy == "A" || sortBy == "d" || sortBy == "D")
                         {
-                            CVector = _computerservice.sortComputer(sortedInput, sortBy);
+                            sortBy = sortBy[0];
 
-                            clearscreen();
-                            printCVector(CVector);
-                            check = false;
+                            if(selectSort == "1")
+                            {
+                                GVector = _geniusservice.sortGenius(sortedInput, sortBy);
+
+                                clearscreen();
+                                printGVector(GVector);
+                                check = false;
+                            }
+                            else if(selectSort == "2")
+                            {
+                                CVector = _computerservice.sortComputer(sortedInput, sortBy);
+
+                                clearscreen();
+                                printCVector(CVector);
+                                check = false;
+                            }
+                            doubleCheck = false;
                         }
-                    }
-                    else if(sortBy[0] == 'q' || sortBy[0] == 'Q')
-                    {
-                        clearscreen();
-                        check = false;
-                        break;
+                        else if(sortBy == "q" || sortBy == "Q")
+                        {
+                            clearscreen();
+                            doubleCheck = false;
+                            break;
+                        }
+                        else
+                        {
+                            clearscreen();
+                            printError();
+                        }
                     }
                 }
             }
         }
     }
+
 }
 
 // Puts some restrictions on what kind of data you can input
@@ -278,34 +283,34 @@ void ConsoleUI::addNewEntryToDataSet()
     bool check = true;
     char gender;
     char input = ' ';
-    string name, modelName, type, strinput;
+    string name, modelName, type, strInput;
     unsigned int dateOfDeath, dateOfBirth, makeYear;
 
     GeniusValidation v;
     ComputerValidation c;
 
-    while(!(input == 'q' || input == 'Q') && check)
+    while(!(strInput == "q" || strInput == "Q") && check)
     {
         cout << "============ Add entry =============" << endl;
         cout << "| Enter 1 to add a Genius          |" << endl;
         cout << "| Enter 2 to add a Computer        |" << endl;
         cout << "| Enter Q to quit                  |" << endl;
         cout << "====================================" << endl;
-        getline(cin, strinput);
+        getline(cin, strInput);
 
-        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "q" && strinput != "Q"))
+        if(strInput.length() != 1 || (strInput != "1" && strInput != "2" && strInput != "q" && strInput != "Q"))
         {
             clearscreen();
             printError();
         }
-        else if(strinput == "q" || strinput == "Q")
+        else if(strInput == "q" || strInput == "Q")
         {
             clearscreen();
             break;
         }
         else
         {
-            input = strinput[0];
+            input = strInput[0];
 
             switch(input)
             {
@@ -658,6 +663,7 @@ void ConsoleUI::run()
                 case 'q':
                 case 'Q':
                 {
+                    clearscreen();
                     cout << "=======================" << endl;
                     cout << "| Program terminated. |" << endl;
                     cout << "=======================" << endl;
@@ -681,6 +687,7 @@ void ConsoleUI::clearscreen()
 
 void ConsoleUI::printGVector(vector<GeniusModel> GVector)
 {
+    cout << "============================================================="<< endl;
     cout << "===================== Sorted Genius list ====================" << endl;
     cout << "============================================================="<< endl;
     cout << setw(24)<< "Name" << setw(9) << "Gender" << "  " << "Birth Year" << "  -  " << "Death Year" << endl;
@@ -695,6 +702,7 @@ void ConsoleUI::printGVector(vector<GeniusModel> GVector)
 
 void ConsoleUI::printCVector(vector<ComputerModel> CVector)
 {
+    cout << "=========================================================================="<< endl;
     cout << "========================= Sorted Computer list ===========================" << endl;
     cout << "=========================================================================="<< endl;
     cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;

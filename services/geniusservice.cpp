@@ -78,7 +78,7 @@ bool GeniusService::update(GeniusModel model)
 
 vector<ComputerModel> GeniusService::getAllComputersGeniusBuilt(GeniusModel model)
 {
-    return _computerGeniusRepository.getGeniuseComputers(model);
+    return _computerGeniusRepository.getGeniusComputers(model);
 }
 
 // Give me a char and I will tell you what gender it is supposed to be

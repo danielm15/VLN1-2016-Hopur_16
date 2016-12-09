@@ -19,7 +19,7 @@ bool ComputerGeniusRepository::addRelationship(ComputerModel computer, GeniusMod
     return query.exec();
 }
 
-vector<ComputerModel> ComputerGeniusRepository::getGeniuseComputers(GeniusModel model)
+vector<ComputerModel> ComputerGeniusRepository::getGeniusComputers(GeniusModel model)
 {
     // For some reason if I do not do this again here I get database connection error
     _db = QSqlDatabase::database();

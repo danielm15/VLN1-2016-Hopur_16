@@ -22,7 +22,7 @@ public:
      * @param model
      * @return vector of computers
      */
-    vector<ComputerModel> getGeniuseComputers(GeniusModel model);
+    vector<ComputerModel> getGeniusComputers(GeniusModel model);
 
     /**
      * @brief getComputerGeniuses, fetch all geniuses thata have worked on computer model
