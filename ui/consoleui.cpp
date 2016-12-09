@@ -216,6 +216,7 @@ void ConsoleUI::displaySortedList()
                 else
                 {
                     sortedInput = sortedInput[0];
+                    doubleCheck = true;
                     clearscreen();
                     while(doubleCheck)
                     {
@@ -689,7 +690,6 @@ void ConsoleUI::run()
                 case 'q':
                 case 'Q':
                 {
-                    clearscreen();
                     cout << "=======================" << endl;
                     cout << "| Program terminated. |" << endl;
                     cout << "=======================" << endl;
