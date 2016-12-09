@@ -49,6 +49,7 @@ void ConsoleUI::displayUnsortedList()
                     for(unsigned int i = 0; i < GVector.size(); i++)
                     {
                         cout << GVector[i] << endl;
+                        cout << "|------------------------------------------------------|" << endl;
                     }
                     check = false;
                     cout << "========================================================" << endl;
@@ -68,6 +69,7 @@ void ConsoleUI::displayUnsortedList()
                     for(unsigned int i = 0; i < CVector.size(); i++)
                     {
                         cout << CVector[i] << endl;
+                        cout << "|----------------------------------------------------------------------|" << endl;
                     }
                     check = false;
                     cout << "========================================================================" << endl;
@@ -163,12 +165,13 @@ void ConsoleUI::displaySortedList()
         cout << "| Enter 1 to sort Geniuses             |" << endl;
         cout << "| Enter 2 to sort Computers            |" << endl;
         cout << "| Enter 3 to sort Geniuses & Computers |" << endl;
+        cout << "| Enter 4 to sort Computers & Geniuses |" << endl;
         cout << "| Enter q to quit                      |" << endl;
         cout << "========================================" << endl;
 
         getline(cin, selectSort);
 
-        if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "3" && selectSort != "q" && selectSort != "Q"))
+        if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "3" && selectSort != "4" && selectSort != "q" && selectSort != "Q"))
         {
             clearscreen();
             printError();
@@ -187,11 +190,11 @@ void ConsoleUI::displaySortedList()
             {
                 selectSort = selectSort[0];
 
-                if(selectSort == "1")
+                if(selectSort == "1" || selectSort == "3")
                 {
                     printGeniusSort();
                 }
-                else if(selectSort == "2")
+                else if(selectSort == "2" || selectSort == "4")
                 {
                     printComputerSort();
                 }
@@ -258,6 +261,61 @@ void ConsoleUI::displaySortedList()
                                 clearscreen();
                                 printCVector(CVector);
                                 check = false;
+                            }
+                            else if(selectSort == "3")
+                            {
+                                clearscreen();
+                                cout << "========================================================" << endl;
+                                cout << "========== Sorted Geniuses & Computers list ==========" << endl;
+                                cout << "========================================================" << endl;
+                                cout << setw(26) << left << " Name" << setw(6) << "Gender" << "  " << " BirthYear" << " - " << "DeathYear" << endl;
+                                cout << "========================================================" << endl;
+                                vector<GeniusModel> GVector = _geniusservice.sortGenius(sortedInput, sortBy);
+
+                                for(unsigned int i = 0; i < GVector.size(); i++)
+                                {
+                                    cout << GVector[i] << endl;
+
+                                    vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
+
+                                    cout << "|   " << "- Linked computers" << endl;
+                                    for (unsigned int i= 0; i < computers.size(); i++)
+                                    {
+                                        cout << "|" << "\t" << computers[i].getModelName() << endl;
+                                    }
+                                    cout << "|-------------------------------------------------------" << endl;
+                                }
+                                check = false;
+                                cout << "========================================================" << endl;
+                                break;
+                            }
+                            else if(selectSort == "4")
+                            {
+                                clearscreen();
+                                cout << "========================================================================" << endl;
+                                cout << "================== Sorted Computers & Geniuses list ==================" << endl;
+                                cout << "========================================================================" << endl;
+                                cout << setw(26)<< left << " Model Name" << setw(2) << " " << "Make Year" << "   " << setw(21) << "Type" << " " << "Built(Y/N)" << endl;
+                                cout << "========================================================================" << endl;
+                                CVector = _computerservice.sortComputer(sortedInput, sortBy);
+
+                                for(unsigned int i = 0; i < CVector.size(); i++)
+                                {
+                                    cout << CVector[i] << endl;
+
+                                    vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
+
+                                    cout << "|   " << "- Made by" << endl;
+                                    for (unsigned int i= 0; i < geno.size(); i++)
+                                    {
+                                        cout << "|" << "\t" << geno[i].getName() << endl;
+
+                                    }
+                                    cout << "|-----------------------------------------------------------------------" << endl;
+                                }
+                                check = false;
+                                cout << "========================================================================" << endl;
+                                break;
                             }
                             doubleCheck = false;
                         }
