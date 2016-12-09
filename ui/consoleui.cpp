@@ -719,11 +719,11 @@ void ConsoleUI::addRelationship()
     GeniusModel genius;
     ComputerModel computer;
 
-    try
-    {
         while(invalid)
         {
-            cout << "Search for Genius to link to computer or enter Q to quit" << endl;
+            cout << "============================================================" << endl;
+            cout << "| Search for Genius to link to computer or enter Q to quit |" << endl;
+            cout << "============================================================" << endl;
             getline(cin,inputGenius);
             vector<GeniusModel> findGenius = _geniusservice.find(inputGenius);
 
@@ -733,7 +733,7 @@ void ConsoleUI::addRelationship()
                 {
                     for(size_t i = 0; i < findGenius.size(); i++)
                     {
-                        cout << "Option: " << i+1 << findGenius[i].getName() << endl;
+                        cout << "Option:" << i+1 << " - " << findGenius[i].getName() << endl;
                     }
                     cout << "Select Genius to link:";
                     getline(cin, optionString);
@@ -741,19 +741,24 @@ void ConsoleUI::addRelationship()
                     option = atoi(optionString.c_str());
                     if (option > 0 && option < findGenius.size()+1)
                     {
-                        cout << findGenius[option-1].getName() << endl;
+                        clearscreen();
+                        cout << "==========================================" << endl;
+                        cout << " " << findGenius[option-1].getName() << endl;
+                        cout << "==========================================" << endl;
                         cout << "Is this the Genius you want to link? (Y/N)" << endl;
                         getline(cin,confirm);
 
                         if(confirm == "y" || confirm == "Y")
                         {
+                            clearscreen();
                             genius = findGenius[option-1];
-                            cout << findGenius[option-1].getName() << " selected" << endl;
+                            cout << " " << findGenius[option-1].getName() << " selected" << endl;
                             check = false;
                             invalid = false;
                         }
                         else if(confirm == "n" || confirm == "N")
                         {
+                            clearscreen();
                             check = true;
                         }
                         else
@@ -775,43 +780,55 @@ void ConsoleUI::addRelationship()
                 }
 
             }
+            else if(inputGenius == "q" || inputGenius == "Q")
+            {
+                clearscreen();
+                return run();
+            }
             else if(findGenius.size() == 0)
             {
                 clearscreen();
                 cout << "No results found!" << endl;
             }
+
             else
             {
-                    cout << findGenius[0].getName() << endl;
-                    cout << "Is this the Genius you want to link? (Y/N)" << endl;
-                    getline(cin,confirm);
+                clearscreen();
+                cout << "==========================================" << endl;
+                cout << " " << findGenius[0].getName() << endl;
+                cout << "==========================================" << endl;
+                cout << "Is this the Genius you want to link? (Y/N)" << endl;
+                getline(cin,confirm);
 
-                    if(confirm == "y" || confirm == "Y")
-                    {
-                        genius = findGenius[0];
-                        cout << findGenius[0].getName() << " selected" << endl;
-                        invalid = false;
-                    }
-                    else if(confirm == "n" || confirm == "N")
-                    {
-                        clearscreen();
-                        invalid = true;
-                    }
-                    else
-                    {
-                        clearscreen();
-                        printError();
-                    }
+                if(confirm == "y" || confirm == "Y")
+                {
+                    clearscreen();
+                    genius = findGenius[0];
+                    cout << " " << findGenius[0].getName() << " selected" << endl;
+                    invalid = false;
+                }
+                else if(confirm == "n" || confirm == "N")
+                {
+                    clearscreen();
+                    invalid = true;
+                }
+                else
+                {
+                    clearscreen();
+                    printError();
+                }
             }
 
         }
 
-        bool invalid = true;
-        bool check = true;
+        invalid = true;
+        check = true;
 
         while(invalid)
         {
-            cout << "Search for Computer to link to selected Genius or enter Q to quit" << endl;
+            cout << "============================================================================================" << endl;
+            cout << "| Search for Computer to link to " << genius.getName() << " or enter Q to quit |" << endl;
+            cout << "============================================================================================" << endl;
             getline(cin,inputComputer);
             vector<ComputerModel> findComputer = _computerservice.find(inputComputer);
 
@@ -821,7 +838,7 @@ void ConsoleUI::addRelationship()
                 {
                     for(size_t i = 0; i < findComputer.size(); i++)
                     {
-                        cout << "Option: " << i+1 << findComputer[i].getModelName() << endl;
+                        cout << "Option:" << i+1 << " - " << findComputer[i].getModelName() << endl;
                     }
                     cout << "Select Computer to link:";
                     getline(cin, optionString);
@@ -829,14 +846,18 @@ void ConsoleUI::addRelationship()
                     option = atoi(optionString.c_str());
                     if (option > 0 && option < findComputer.size()+1)
                     {
-                        cout << findComputer[option-1].getModelName() << endl;
-                        cout << "Is this the Computer you want to link? (Y/N)" << endl;
+                        clearscreen();
+                        cout << "==========================================" << endl;
+                        cout << " " << findComputer[option-1].getModelName() << endl;
+                        cout << "==========================================" << endl;
+                        cout << "Is this the Computer you want to link to " << genius.getName() << " ? (Y/N)" << endl;
                         getline(cin,confirm);
 
                         if(confirm == "y" || confirm == "Y")
                         {
+                            clearscreen();
                             computer = findComputer[option-1];
-                            cout << findComputer[option-1].getModelName() << " selected" << endl;
+                            cout << " " << findComputer[option-1].getModelName() << " selected" << endl;
                             saved = _computergeniusservice.getRelationship(computer, genius);
                             check = false;
                             invalid = false;
@@ -864,6 +885,11 @@ void ConsoleUI::addRelationship()
                 }
 
             }
+            else if(inputComputer == "q" || inputComputer == "Q")
+            {
+                clearscreen();
+                return run();
+            }
             else if(findComputer.size() == 0)
             {
                 clearscreen();
@@ -871,35 +897,33 @@ void ConsoleUI::addRelationship()
             }
             else
             {
-                    cout << findComputer[0].getModelName() << endl;
-                    cout << "Is this the Computer you want to link? (Y/N)" << endl;
-                    getline(cin,confirm);
+                clearscreen();
+                cout << "==========================================" << endl;
+                cout << " " << findComputer[0].getModelName() << endl;
+                cout << "==========================================" << endl;
+                cout << "Is this the Computer you want to link to " << genius.getName() << " ? (Y/N)" << endl;
+                getline(cin,confirm);
 
-                    if(confirm == "y" || confirm == "Y")
-                    {
-                        computer = findComputer[0];
-                        cout << findComputer[0].getModelName() << " selected" << endl;
-                        saved = _computergeniusservice.getRelationship(computer, genius);
-                        invalid = false;
-                    }
-                    else if(confirm == "n" || confirm == "N")
-                    {
-                        clearscreen();
-                        invalid = true;
-                    }
-                    else
-                    {
-                        clearscreen();
-                        printError();
-                    }
+                if(confirm == "y" || confirm == "Y")
+                {
+                    clearscreen();
+                    computer = findComputer[0];
+                    cout << " " << findComputer[0].getModelName() << " selected" << endl;
+                    saved = _computergeniusservice.getRelationship(computer, genius);
+                    invalid = false;
+                }
+                else if(confirm == "n" || confirm == "N")
+                {
+                    clearscreen();
+                    invalid = true;
+                }
+                else
+                {
+                    clearscreen();
+                    printError();
+                }
             }
-
         }
-    }
-    catch(int)
-    {
-        cerr << "Link failed" << endl;
-    }
 
     if(saved == true)
     {
@@ -1335,6 +1359,12 @@ void ConsoleUI::run()
                 }
                 case '7':
                 {
+                    clearscreen();
+                    addRelationship();
+                    break;
+                }
+                case '8':
+                {
                     clearscreen ();
                     game();
                     break;
@@ -1432,7 +1462,8 @@ void ConsoleUI::printMenu()
     cout << "| Enter 4 to Search for entry |" << endl;
     cout << "| Enter 5 to Delete an entry  |" << endl;
     cout << "| Enter 6 to Modify an entry  |" << endl;
-    cout << "| Enter 7 to Play a game      |" << endl;
+    cout << "| Enter 7 to Add link         |" << endl;
+    cout << "| Enter 8 to Play a game      |" << endl;
     cout << "| Enter q to Quit             |" << endl;
     cout << "===============================" << endl;
 }
