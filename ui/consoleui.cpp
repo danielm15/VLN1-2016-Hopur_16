@@ -11,7 +11,7 @@ void ConsoleUI::displayUnsortedList()
 {
     bool check = true;
     char input = ' ';
-    string strinput;
+    string strInput;
 
     while(!(input == 'q' || input == 'Q') && check == true)
     {
@@ -23,104 +23,115 @@ void ConsoleUI::displayUnsortedList()
         cout << "| Enter q to quit                                |" << endl;
         cout << "==================================================" << endl;
 
-        getline(cin, strinput);
+        getline(cin, strInput);
 
-        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "3" && strinput != "4" && strinput != "q" && strinput != "Q"))
+        if(strInput.length() != 1 || (strInput != "1" && strInput != "2" && strInput != "3" && strInput != "4" && strInput != "q" && strInput != "Q"))
         {
             clearscreen();
             printError();
         }
         else
         {
-            input = strinput[0];
+            input = strInput[0];
 
             switch(input)
             {
                 case '1':
                 {
                     clearscreen();
-                    cout << "===================== Unsorted Genius list ==================" << endl;
-                    cout << "============================================================="<< endl;
-                    cout << setw(24)<< "Name" << setw(9) << "Gender" << "  " << "Birth Year" << "  -  " << "Death Year" << endl;
-                    cout << "============================================================="<< endl;
+                    cout << "========================================================"<< endl;
+                    cout << "================== Unsorted Genius list ================" << endl;
+                    cout << "========================================================"<< endl;
+                    cout << setw(26) << left << " Name" << setw(6) << "Gender" << "  " << " BirthYear" << " - " << "DeathYear" << endl;
+                    cout << "========================================================"<< endl;
                     vector<GeniusModel> GVector = _geniusservice.getGenius();
 
                     for(unsigned int i = 0; i < GVector.size(); i++)
                     {
                         cout << GVector[i] << endl;
+                        cout << "|------------------------------------------------------|" << endl;
                     }
                     check = false;
-                    cout << "=============================================================" << endl;
+                    cout << "========================================================" << endl;
                     cout << endl;
                     break;
                 }
                 case '2':
                 {
                     clearscreen();
-                    cout << "========================= Unsorted Computer list =========================" << endl;
-                    cout << "=========================================================================="<< endl;
-                    cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
-                    cout << "=========================================================================="<< endl;
+                    cout << "========================================================================" << endl;
+                    cout << "======================== Unsorted Computer list ========================" << endl;
+                    cout << "========================================================================" << endl;
+                    cout << setw(26)<< left << " Model Name" << setw(2) << " " << "Make Year" << "   " << setw(21) << "Type" << " " << "Built(Y/N)" << endl;
+                    cout << "========================================================================" << endl;
                     vector<ComputerModel> CVector = _computerservice.getComputer();
 
                     for(unsigned int i = 0; i < CVector.size(); i++)
                     {
                         cout << CVector[i] << endl;
+                        cout << "|----------------------------------------------------------------------|" << endl;
                     }
                     check = false;
-                    cout << "==========================================================================" << endl;
+                    cout << "========================================================================" << endl;
                     cout << endl;
                     break;
                 }
                 case '3':
                 {
-                clearscreen();
-                cout << "====================| Unsorted Geniuses & Computers list |=================" << endl;
-                vector<GeniusModel> GVector = _geniusservice.getGenius();
+                    clearscreen();
+                    cout << "========================================================" << endl;
+                    cout << "========== Unsorted Geniuses & Computers list ==========" << endl;
+                    cout << "========================================================" << endl;
+                    cout << setw(26) << left << " Name" << setw(6) << "Gender" << "  " << " BirthYear" << " - " << "DeathYear" << endl;
+                    cout << "========================================================" << endl;
+                    vector<GeniusModel> GVector = _geniusservice.getGenius();
 
-                for(unsigned int i = 0; i < GVector.size(); i++)
-                {
-                    cout << GVector[i].getName() << endl;
-
-                    vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
-
-                    for (unsigned int i= 0; i < computers.size(); i++)
+                    for(unsigned int i = 0; i < GVector.size(); i++)
                     {
-                        cout << "\t" << computers[i].getModelName() << endl;
+                        cout << GVector[i] << endl;
 
+                        vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
+
+                        cout << "|   " << "- Linked computers" << endl;
+                        for (unsigned int i= 0; i < computers.size(); i++)
+                        {
+                            cout << "|" << "\t" << computers[i].getModelName() << endl;
+                        }
+                        cout << "|-------------------------------------------------------" << endl;
                     }
+                    check = false;
+                    cout << "========================================================" << endl;
+                    break;
+                }
+                case '4':
+                {
+                    clearscreen();
+                    cout << "========================================================================" << endl;
+                    cout << "================== Unsorted Computers & Geniuses list ==================" << endl;
+                    cout << "========================================================================" << endl;
+                    cout << setw(26)<< left << " Model Name" << setw(2) << " " << "Make Year" << "   " << setw(21) << "Type" << " " << "Built(Y/N)" << endl;
+                    cout << "========================================================================" << endl;
+                    vector<ComputerModel> CVector = _computerservice.getComputer();
+
+                    for(unsigned int i = 0; i < CVector.size(); i++)
+                    {
+                        cout << CVector[i] << endl;
+
+                        vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
+
+                        cout << "|   " << "- Made by" << endl;
+                        for (unsigned int i= 0; i < geno.size(); i++)
+                        {
+                            cout << "|" << "\t" << geno[i].getName() << endl;
+
+                        }
+                        cout << "|-----------------------------------------------------------------------" << endl;
+                    }
+                    check = false;
+                        cout << "========================================================================" << endl;
                     cout << endl;
+                    break;
                 }
-                check = false;
-                cout << endl;
-                break;
-            }
-            case '4':
-            {
-                clearscreen();
-                cout << "========================= unsorted Computers & Geniuses list =========================" << endl;
-                cout << "=========================================================================="<< endl;
-                cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
-                cout << "=========================================================================="<< endl;
-                vector<ComputerModel> CVector = _computerservice.getComputer();
-
-                for(unsigned int i = 0; i < CVector.size(); i++)
-                {
-                    cout << CVector[i] << endl;
-
-                    vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
-
-                    for (unsigned int i= 0; i < geno.size(); i++)
-                    {
-                        cout << "\t" << geno[i].getName() << endl;
-
-                    }
-                }
-                check = false;
-                cout << "==========================================================================" << endl;
-                cout << endl;
-                break;
-            }
                 case 'q':
                 case 'Q':
                 {
@@ -145,128 +156,186 @@ void ConsoleUI::displaySortedList()
     vector<ComputerModel> CVector;
     string sortedInput, selectSort, sortBy;
     bool isValid = false;
+    bool doubleCheck = true;
     bool check = true;
 
-    cout << "============== Sort list ===============" << endl;
-    cout << "| Enter 1 to sort Geniuses             |" << endl;
-    cout << "| Enter 2 to sort Computers            |" << endl;
-    cout << "| Enter 3 to sort Geniuses & Computers |" << endl;
-    cout << "| Enter q to quit                      |" << endl;
-    cout << "========================================" << endl;
-
-    getline(cin, selectSort);
-
-    if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "q" && selectSort != "Q"))
+    while(check || (selectSort != "q" && selectSort != "Q"))
     {
-        clearscreen();
-        printError();
-        return displaySortedList();
-    }
-    else
-    {
-        selectSort = selectSort[0];
+        cout << "============== Sort list ===============" << endl;
+        cout << "| Enter 1 to sort Geniuses             |" << endl;
+        cout << "| Enter 2 to sort Computers            |" << endl;
+        cout << "| Enter 3 to sort Geniuses & Computers |" << endl;
+        cout << "| Enter 4 to sort Computers & Geniuses |" << endl;
+        cout << "| Enter q to quit                      |" << endl;
+        cout << "========================================" << endl;
 
-        if(selectSort == "1")
+        getline(cin, selectSort);
+
+        if(selectSort.length() != 1 || (selectSort != "1" && selectSort != "2" && selectSort != "3" && selectSort != "4" && selectSort != "q" && selectSort != "Q"))
         {
             clearscreen();
-            printGeniusSort();
+            printError();
+            check = true;
         }
-        else if(selectSort == "2")
+        else if(selectSort == "q" || selectSort == "Q")
         {
             clearscreen();
-            printComputerSort();
+            check = false;
+            break;
         }
         else
-
-        while(!isValid)
         {
-            selectSort = selectSort[0];
+            clearscreen();
+            while(!isValid || sortedInput != "q" || sortedInput != "Q")
+            {
+                selectSort = selectSort[0];
 
-            if(selectSort == "1")
-            {
-                clearscreen();
-                printGeniusSort();
-            }
-            else if(selectSort == "2")
-            {
-                clearscreen();
-                printComputerSort();
-            }
-            else
-            {
-                clearscreen();
-                return run();
-            }
-
-            getline(cin, sortedInput);
-
-            if(sortedInput.length() != 1 || (sortedInput != "a" && sortedInput != "A"
-                                             && sortedInput != "b" && sortedInput != "B"
-                                             && sortedInput != "c" && sortedInput != "C"
-                                             && sortedInput != "d" && sortedInput != "D"
-                                             && sortedInput != "q" && sortedInput != "Q"))
-            {
-                clearscreen();
-                printError();
-                isValid = false;
-            }
-            else if(sortedInput == "q" || sortedInput == "Q")
-            {
-                clearscreen();
-                break;
-            }
-            else
-            {
-                sortedInput = sortedInput[0];
-                isValid = true;
-
-                while(check)
+                if(selectSort == "1" || selectSort == "3")
+                {
+                    printGeniusSort();
+                }
+                else if(selectSort == "2" || selectSort == "4")
+                {
+                    printComputerSort();
+                }
+                else
                 {
                     clearscreen();
-                    cout << "=========== ASC & DESC ? ==========" << endl;
-                    cout << "| Enter A for order by ascending  |" << endl;
-                    cout << "| Enter D for order by descending |" << endl;
-                    cout << "| Enter Q to quit                 |" << endl;
-                    cout << "===================================" << endl;
-                    getline(cin, sortBy);
+                    printError();
+                    break;
+                }
+                getline(cin, sortedInput);
 
-                    if(sortBy.length() != 1)
+                if(sortedInput.length() != 1 || (sortedInput != "a" && sortedInput != "A"
+                                                 && sortedInput != "b" && sortedInput != "B"
+                                                 && sortedInput != "c" && sortedInput != "C"
+                                                 && sortedInput != "d" && sortedInput != "D"
+                                                 && sortedInput != "q" && sortedInput != "Q"))
+                {
+                    clearscreen();
+                    printError();
+                    isValid = false;
+                }
+                else if(sortedInput == "q" || sortedInput == "Q")
+                {
+                    isValid = true;
+                    clearscreen();
+                    break;
+                }
+                else
+                {
+                    sortedInput = sortedInput[0];
+                    doubleCheck = true;
+                    clearscreen();
+                    while(doubleCheck)
                     {
-                        clearscreen();
-                        printError();
-                        check = true;
-                    }
-                    else if(sortBy[0] == 'a' || sortBy[0] == 'A' || sortBy[0] == 'd' || sortBy[0] == 'D')
-                    {
-                        sortBy = sortBy[0];
+                        cout << "=========== ASC & DESC ? ==========" << endl;
+                        cout << "| Enter A for order by ascending  |" << endl;
+                        cout << "| Enter D for order by descending |" << endl;
+                        cout << "| Enter Q to quit                 |" << endl;
+                        cout << "===================================" << endl;
+                        getline(cin, sortBy);
 
-                        if(selectSort == "1")
+                        if(sortBy.length() != 1 || (sortBy != "A" && sortBy != "a" && sortBy != "D" && sortBy != "d"))
                         {
-                            GVector = _geniusservice.sortGenius(sortedInput, sortBy);
-
                             clearscreen();
-                            printGVector(GVector);
-                            check = false;
+                            printError();
+                            doubleCheck = true;
                         }
-                        else if(selectSort == "2")
+                        else if(sortBy == "a" || sortBy == "A" || sortBy == "d" || sortBy == "D")
                         {
-                            CVector = _computerservice.sortComputer(sortedInput, sortBy);
+                            sortBy = sortBy[0];
 
-                            clearscreen();
-                            printCVector(CVector);
-                            check = false;
+                            if(selectSort == "1")
+                            {
+                                GVector = _geniusservice.sortGenius(sortedInput, sortBy);
+
+                                clearscreen();
+                                printGVector(GVector);
+                                check = false;
+                            }
+                            else if(selectSort == "2")
+                            {
+                                CVector = _computerservice.sortComputer(sortedInput, sortBy);
+
+                                clearscreen();
+                                printCVector(CVector);
+                                check = false;
+                            }
+                            else if(selectSort == "3")
+                            {
+                                clearscreen();
+                                cout << "========================================================" << endl;
+                                cout << "========== Sorted Geniuses & Computers list ==========" << endl;
+                                cout << "========================================================" << endl;
+                                cout << setw(26) << left << " Name" << setw(6) << "Gender" << "  " << " BirthYear" << " - " << "DeathYear" << endl;
+                                cout << "========================================================" << endl;
+                                vector<GeniusModel> GVector = _geniusservice.sortGenius(sortedInput, sortBy);
+
+                                for(unsigned int i = 0; i < GVector.size(); i++)
+                                {
+                                    cout << GVector[i] << endl;
+
+                                    vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
+
+                                    cout << "|   " << "- Linked computers" << endl;
+                                    for (unsigned int i= 0; i < computers.size(); i++)
+                                    {
+                                        cout << "|" << "\t" << computers[i].getModelName() << endl;
+                                    }
+                                    cout << "|-------------------------------------------------------" << endl;
+                                }
+                                check = false;
+                                cout << "========================================================" << endl;
+                                break;
+                            }
+                            else if(selectSort == "4")
+                            {
+                                clearscreen();
+                                cout << "========================================================================" << endl;
+                                cout << "================== Sorted Computers & Geniuses list ==================" << endl;
+                                cout << "========================================================================" << endl;
+                                cout << setw(26)<< left << " Model Name" << setw(2) << " " << "Make Year" << "   " << setw(21) << "Type" << " " << "Built(Y/N)" << endl;
+                                cout << "========================================================================" << endl;
+                                CVector = _computerservice.sortComputer(sortedInput, sortBy);
+
+                                for(unsigned int i = 0; i < CVector.size(); i++)
+                                {
+                                    cout << CVector[i] << endl;
+
+                                    vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
+
+                                    cout << "|   " << "- Made by" << endl;
+                                    for (unsigned int i= 0; i < geno.size(); i++)
+                                    {
+                                        cout << "|" << "\t" << geno[i].getName() << endl;
+
+                                    }
+                                    cout << "|-----------------------------------------------------------------------" << endl;
+                                }
+                                check = false;
+                                cout << "========================================================================" << endl;
+                                break;
+                            }
+                            doubleCheck = false;
                         }
-                    }
-                    else if(sortBy[0] == 'q' || sortBy[0] == 'Q')
-                    {
-                        clearscreen();
-                        check = false;
-                        break;
+                        else if(sortBy == "q" || sortBy == "Q")
+                        {
+                            clearscreen();
+                            doubleCheck = false;
+                            break;
+                        }
+                        else
+                        {
+                            clearscreen();
+                            printError();
+                        }
                     }
                 }
             }
         }
     }
+
 }
 
 // Puts some restrictions on what kind of data you can input
@@ -279,34 +348,34 @@ void ConsoleUI::addNewEntryToDataSet()
     bool check = true;
     char gender;
     char input = ' ';
-    string name, modelName, type, strinput;
+    string name, modelName, type, strInput;
     unsigned int dateOfDeath, dateOfBirth, makeYear;
 
     GeniusValidation v;
     ComputerValidation c;
 
-    while(!(input == 'q' || input == 'Q') && check)
+    while(!(strInput == "q" || strInput == "Q") && check)
     {
         cout << "============ Add entry =============" << endl;
         cout << "| Enter 1 to add a Genius          |" << endl;
         cout << "| Enter 2 to add a Computer        |" << endl;
         cout << "| Enter Q to quit                  |" << endl;
         cout << "====================================" << endl;
-        getline(cin, strinput);
+        getline(cin, strInput);
 
-        if(strinput.length() != 1 || (strinput != "1" && strinput != "2" && strinput != "q" && strinput != "Q"))
+        if(strInput.length() != 1 || (strInput != "1" && strInput != "2" && strInput != "q" && strInput != "Q"))
         {
             clearscreen();
             printError();
         }
-        else if(strinput == "q" || strinput == "Q")
+        else if(strInput == "q" || strInput == "Q")
         {
             clearscreen();
             break;
         }
         else
         {
-            input = strinput[0];
+            input = strInput[0];
 
             switch(input)
             {
@@ -455,7 +524,7 @@ void ConsoleUI::deleteAnEntry()
                 do
                 {
                     vector<GeniusModel> g = _geniusservice.find(name);
-                    int option;
+                    unsigned int option;
                     string optionString;
 
                     if (g.size() > 1)
@@ -540,7 +609,7 @@ void ConsoleUI::deleteAnEntry()
                 do
                 {
                     vector<ComputerModel> c = _computerservice.find(name);
-                    int option;
+                    unsigned int option;
                     string optionString;
 
                     if (c.size() > 1)
@@ -559,6 +628,7 @@ void ConsoleUI::deleteAnEntry()
                             if (option > 0 && option < c.size()+1)
                             {
                                 validOption = true;
+                                check = false;
                                 cout << c[option-1] << endl;
                                 cout << "Are you sure you want to delete this entry? (y/n): ";
                                 getline(cin,YorNString,'\n');
@@ -579,11 +649,11 @@ void ConsoleUI::deleteAnEntry()
                                 cout << "Please enter the option you would like to delete: " << endl;
                                 getline(cin,optionString,'\n');
                             }
-                        }while (validOption == false);
+                        }while (!validOption);
                     }
                     else if (c.size() == 1)
                     {
-                        check = true;
+                        check = false;
                         cout << c[0] << endl;
                         cout << "Would you like to delete this entry? (y/n): ";
                         getline(cin,YorNString,'\n');
@@ -627,7 +697,6 @@ void ConsoleUI::deleteAnEntry()
         }
     }
 }
-
 void ConsoleUI::modifyAnEntry()
 {
     bool built = false;
@@ -996,64 +1065,6 @@ void ConsoleUI::modifyAnEntry()
         }
     }
 }
-void ConsoleUI::smile()
-{
-    cout << "777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777 777777777" << endl;
-    cout << "777777777777777777777777777777777............................................7777777777777 777777777" << endl;
-    cout << "7777777777777777777777777................7777777777777777777777777777777777.....7777777777 777777777" << endl;
-    cout << "7777777777777777777...........7777777777.....777777777777777..7777777777777777...777777777 777777777" << endl;
-    cout << "77777777777777777....77777777777777777777777777777777777777777777..7777777777777...7777777 777777777" << endl;
-    cout << "77777777777777....7777.77......777777777777...77777777777777..777777.777777777777...777777 777777777" << endl;
-    cout << "777777777777....7777777777777777777777777777777777777777777777777..7777.7777777777...77777 777777777" << endl;
-    cout << "77777777777...777777777777.....77777777777777777777.7777777777...777.7777.777777777...7777 777777777" << endl;
-    cout << "7777777777..77777777777.7777777777777777777777777.7777777777777777..777.7777.7777777...777 777777777" << endl;
-    cout << "7777777777..777777777.777777777777.7777777777777777777777777777777777.77.7777.7777777..777 777777777" << endl;
-    cout << "7777777777..77777777.77777777777777777777777777777777777777777777777777.77.77777777777..77 777777777" << endl;
-    cout << "777777777..777777777777777777777777777777777777777777..............7777777777777777777...7 777777777" << endl;
-    cout << "77777777...777777777777........7777777777777777777.....777............77777777777777777... 777777777" << endl;
-    cout << "7777....77777777777..............7777777777777....777777........77...777777777777777777... 7777777" << endl;
-    cout << "777...777.....7...7...............77777777777...77777.................7777.7777........7.. ..77777" << endl;
-    cout << "77..777.777777777777777777.............7777777.........77777777777..777.777777777777777777 ...7777" << endl;
-    cout << "7..77.777..777777777777777777777....77777777777.....777777...77777777777777..........77777 77..777" << endl;
-    cout << "7..7.77.777......7777777777777777..7777777777777777777777777....7777777......777777....777 7.7..77" << endl;
-    cout << "7...77777..........7777.777777777..777777777777777777777777777...........77777..77777...77 7.77..." << endl;
-    cout << "7...77777.7777777........77777777..7777777777777777777777777777777777777777777..777777..77 7.77..." << endl;
-    cout << "7...77.7777777..77....77777777....77777777777777777777777777777777777777777.....7777777..7 7.777.." << endl;
-    cout << "7..7777.777777..77777777777....7777777777777777........7777777777777777.....777......77..7 7.777.." << endl;
-    cout << "7....777..77....7777777777.....77777777777777777777..77777777777777......77777...7...7...7 7.77..." << endl;
-    cout << "77..7..77777....7777777..77.....777777777.......777..7777777777.......77777777..777777..77 7777..." << endl;
-    cout << "77...7777.77..7...777.77777777...77777777777777.7...777777........7..7777777....77777..777 .77...7" << endl;
-    cout << "777...77777.........777777777777......777777777777777........777777..7777......777777777.. 77..777" << endl;
-    cout << "7777...7777..7..7......77777777777...77777777777........7777777777...7........7777777.7777 7...777" << endl;
-    cout << "77777..7777....77..77........77777777..............77..7777777777.......77...7777777777... ..77777" << endl;
-    cout << "77777..7777....77..7777....................7777777777..777777........7777...777777777777.. .777777" << endl;
-    cout << "77777..7777....77..777...7777777..7777777..7777777777...7.........7..777...77777777777...7 7777777" << endl;
-    cout << "77777..7777........777..77777777..7777777..777777777...........7777..77...77777777777...77 7777777" << endl;
-    cout << "77777..7777.................................................7777777......777777777777..777 7777777" << endl;
-    cout << "77777..7777...........................................7..77777777777...7777777777777...777 7777777" << endl;
-    cout << "77777..77777....................................7777777..777777777...77777777777777...7777 7777777" << endl;
-    cout << "77777..77777..7...........................7..7777777777...77777....777777777777777...77777 7777777" << endl;
-    cout << "77777..777777..7..77..777..77777...77777777..77777777777..777....777777777777777...7777777 7777777" << endl;
-    cout << "77777..777777......7...777..77777..77777777..777777777777......7777777777777777...77777777 7777777" << endl;
-    cout << "77777..7777777....777...77...7777..77777777..777777777......7777777.77777.777...7777777777 7777777" << endl;
-    cout << "77777..777777777.........77..7777...7777777..77.........77777777.77777..777....77777777777 7777777" << endl;
-    cout << "77777..77777777777777...............................777777777..7777..7777.... 777777777777777" << endl;
-    cout << "7777...77777777.777777777777777777777777777777777777777777.77777..7777.....77 77777777777777" << endl;
-    cout << "7777..7777777777.777777777777777777777777777777777777..777777.77777.....77777 77777777777777" << endl;
-    cout << "7777..777777777777.777777777777777777777777777777..777777..77777.....77777777 77777777777777" << endl;
-    cout << "77..77777..77777777...77777777777..........777777..7777777......7777777 777777777777" << endl;
-    cout << "7..777777777.7777777777777777777777777...777777777777.....777777 77777777" << endl;
-    cout << "7...7777777777...............777777777777777777777.....777777 7777" << endl;
-    cout << "7...777777777777777777777777777777777777777777.....777777 77" << endl;
-    cout << "77...77777777777777777777777777777777777..7.....7777777" << endl;
-    cout << "777....7777777777777777777777777777..........77777777" << endl;
-    cout << "7777.....7777777777777777777.........77777777777777" << endl;
-    cout << "7777777........................77777777777777777777" << endl;
-    cout << "        YOU JUST GOT TROLLED, TROLOLOLOLO" << endl;
-    cout << "                No game for you          " << endl;
-}
-
-
 void ConsoleUI::run()
 {
     string input;
@@ -1140,6 +1151,7 @@ void ConsoleUI::clearscreen()
 
 void ConsoleUI::printGVector(vector<GeniusModel> GVector)
 {
+    cout << "============================================================="<< endl;
     cout << "===================== Sorted Genius list ====================" << endl;
     cout << "============================================================="<< endl;
     cout << setw(24)<< "Name" << setw(9) << "Gender" << "  " << "Birth Year" << "  -  " << "Death Year" << endl;
@@ -1154,6 +1166,7 @@ void ConsoleUI::printGVector(vector<GeniusModel> GVector)
 
 void ConsoleUI::printCVector(vector<ComputerModel> CVector)
 {
+    cout << "=========================================================================="<< endl;
     cout << "========================= Sorted Computer list ===========================" << endl;
     cout << "=========================================================================="<< endl;
     cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
@@ -1207,4 +1220,61 @@ void ConsoleUI::printMenu()
     cout << "| Enter 7 to Play a game      |" << endl;
     cout << "| Enter q to Quit             |" << endl;
     cout << "===============================" << endl;
+}
+
+void ConsoleUI::smile()
+{
+    cout << "777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777 777777777" << endl;
+    cout << "777777777777777777777777777777777............................................7777777777777 777777777" << endl;
+    cout << "7777777777777777777777777................7777777777777777777777777777777777.....7777777777 777777777" << endl;
+    cout << "7777777777777777777...........7777777777.....777777777777777..7777777777777777...777777777 777777777" << endl;
+    cout << "77777777777777777....77777777777777777777777777777777777777777777..7777777777777...7777777 777777777" << endl;
+    cout << "77777777777777....7777.77......777777777777...77777777777777..777777.777777777777...777777 777777777" << endl;
+    cout << "777777777777....7777777777777777777777777777777777777777777777777..7777.7777777777...77777 777777777" << endl;
+    cout << "77777777777...777777777777.....77777777777777777777.7777777777...777.7777.777777777...7777 777777777" << endl;
+    cout << "7777777777..77777777777.7777777777777777777777777.7777777777777777..777.7777.7777777...777 777777777" << endl;
+    cout << "7777777777..777777777.777777777777.7777777777777777777777777777777777.77.7777.7777777..777 777777777" << endl;
+    cout << "7777777777..77777777.77777777777777777777777777777777777777777777777777.77.77777777777..77 777777777" << endl;
+    cout << "777777777..777777777777777777777777777777777777777777..............7777777777777777777...7 777777777" << endl;
+    cout << "77777777...777777777777........7777777777777777777.....777............77777777777777777... 777777777" << endl;
+    cout << "7777....77777777777..............7777777777777....777777........77...777777777777777777... 7777777" << endl;
+    cout << "777...777.....7...7...............77777777777...77777.................7777.7777........7.. ..77777" << endl;
+    cout << "77..777.777777777777777777.............7777777.........77777777777..777.777777777777777777 ...7777" << endl;
+    cout << "7..77.777..777777777777777777777....77777777777.....777777...77777777777777..........77777 77..777" << endl;
+    cout << "7..7.77.777......7777777777777777..7777777777777777777777777....7777777......777777....777 7.7..77" << endl;
+    cout << "7...77777..........7777.777777777..777777777777777777777777777...........77777..77777...77 7.77..." << endl;
+    cout << "7...77777.7777777........77777777..7777777777777777777777777777777777777777777..777777..77 7.77..." << endl;
+    cout << "7...77.7777777..77....77777777....77777777777777777777777777777777777777777.....7777777..7 7.777.." << endl;
+    cout << "7..7777.777777..77777777777....7777777777777777........7777777777777777.....777......77..7 7.777.." << endl;
+    cout << "7....777..77....7777777777.....77777777777777777777..77777777777777......77777...7...7...7 7.77..." << endl;
+    cout << "77..7..77777....7777777..77.....777777777.......777..7777777777.......77777777..777777..77 7777..." << endl;
+    cout << "77...7777.77..7...777.77777777...77777777777777.7...777777........7..7777777....77777..777 .77...7" << endl;
+    cout << "777...77777.........777777777777......777777777777777........777777..7777......777777777.. 77..777" << endl;
+    cout << "7777...7777..7..7......77777777777...77777777777........7777777777...7........7777777.7777 7...777" << endl;
+    cout << "77777..7777....77..77........77777777..............77..7777777777.......77...7777777777... ..77777" << endl;
+    cout << "77777..7777....77..7777....................7777777777..777777........7777...777777777777.. .777777" << endl;
+    cout << "77777..7777....77..777...7777777..7777777..7777777777...7.........7..777...77777777777...7 7777777" << endl;
+    cout << "77777..7777........777..77777777..7777777..777777777...........7777..77...77777777777...77 7777777" << endl;
+    cout << "77777..7777.................................................7777777......777777777777..777 7777777" << endl;
+    cout << "77777..7777...........................................7..77777777777...7777777777777...777 7777777" << endl;
+    cout << "77777..77777....................................7777777..777777777...77777777777777...7777 7777777" << endl;
+    cout << "77777..77777..7...........................7..7777777777...77777....777777777777777...77777 7777777" << endl;
+    cout << "77777..777777..7..77..777..77777...77777777..77777777777..777....777777777777777...7777777 7777777" << endl;
+    cout << "77777..777777......7...777..77777..77777777..777777777777......7777777777777777...77777777 7777777" << endl;
+    cout << "77777..7777777....777...77...7777..77777777..777777777......7777777.77777.777...7777777777 7777777" << endl;
+    cout << "77777..777777777.........77..7777...7777777..77.........77777777.77777..777....77777777777 7777777" << endl;
+    cout << "77777..77777777777777...............................777777777..7777..7777.... 777777777777777" << endl;
+    cout << "7777...77777777.777777777777777777777777777777777777777777.77777..7777.....77 77777777777777" << endl;
+    cout << "7777..7777777777.777777777777777777777777777777777777..777777.77777.....77777 77777777777777" << endl;
+    cout << "7777..777777777777.777777777777777777777777777777..777777..77777.....77777777 77777777777777" << endl;
+    cout << "77..77777..77777777...77777777777..........777777..7777777......7777777 777777777777" << endl;
+    cout << "7..777777777.7777777777777777777777777...777777777777.....777777 77777777" << endl;
+    cout << "7...7777777777...............777777777777777777777.....777777 7777" << endl;
+    cout << "7...777777777777777777777777777777777777777777.....777777 77" << endl;
+    cout << "77...77777777777777777777777777777777777..7.....7777777" << endl;
+    cout << "777....7777777777777777777777777777..........77777777" << endl;
+    cout << "7777.....7777777777777777777.........77777777777777" << endl;
+    cout << "7777777........................77777777777777777777" << endl;
+    cout << "        YOU JUST GOT TROLLED, TROLOLOLOLO" << endl;
+    cout << "                No game for you          " << endl;
 }

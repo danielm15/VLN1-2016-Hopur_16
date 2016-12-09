@@ -8,6 +8,9 @@ GeniusRepository::GeniusRepository()
 
 vector<GeniusModel> GeniusRepository::getAllGeniuses()
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<GeniusModel> geniuses;
 
@@ -20,6 +23,9 @@ vector<GeniusModel> GeniusRepository::getAllGeniuses()
 
 vector<GeniusModel> GeniusRepository::searchForGenius(string name)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<GeniusModel> geniuses;
 
@@ -36,8 +42,9 @@ vector<GeniusModel> GeniusRepository::searchForGenius(string name)
 
 vector<GeniusModel> GeniusRepository::sort(string field, bool asc)
 {
-    cout << field << endl;
-    cout << asc << endl;
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<GeniusModel> geniuses;
     string sortBy = "ASC";
@@ -46,7 +53,7 @@ vector<GeniusModel> GeniusRepository::sort(string field, bool asc)
     {
         sortBy = "DESC";
     }
-    string queryString = ("SELECT * FROM Geniuses ORDER BY " + field + ", Name " + sortBy);
+    string queryString = ("SELECT * FROM Geniuses ORDER BY " + field + " " + sortBy + ", Name " + sortBy);
     query.exec(QString::fromStdString(queryString));
 
     geniuses = extractQueryToVector(query);
@@ -56,6 +63,9 @@ vector<GeniusModel> GeniusRepository::sort(string field, bool asc)
 
 bool GeniusRepository::saveGenius(GeniusModel genius)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QString Qname = QString::fromStdString(genius.getName());
     QString Qgender = QString::fromStdString(genius.getGender());
     unsigned int birthYear = genius.getBirthYear();
@@ -81,6 +91,9 @@ bool GeniusRepository::saveGenius(GeniusModel genius)
 
 bool GeniusRepository::removeGenius(GeniusModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
 
     query.prepare("DELETE FROM Geniuses WHERE GeniusID = :id");
@@ -91,6 +104,9 @@ bool GeniusRepository::removeGenius(GeniusModel model)
 
 bool GeniusRepository::updateGenius(GeniusModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
 
     query.prepare("UPDATE Geniuses \
@@ -115,8 +131,8 @@ vector<GeniusModel> GeniusRepository::extractQueryToVector(QSqlQuery query) cons
 
     while(query.next()){
         unsigned int id = query.value("GeniusID").toUInt();
-        string name = query.value("name").toString().toStdString();
-        string gender = query.value("gender").toString().toStdString();
+        string name = query.value("Name").toString().toStdString();
+        string gender = query.value("Gender").toString().toStdString();
         unsigned int yearOfBirth = query.value("BirthYear").toUInt();
         unsigned int yearOfDeath = query.value("DeathYear").toUInt();
         GeniusModel model = GeniusModel(id, name, gender, yearOfBirth, yearOfDeath);

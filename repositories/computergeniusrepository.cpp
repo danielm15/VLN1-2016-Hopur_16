@@ -19,7 +19,7 @@ bool ComputerGeniusRepository::addRelationship(ComputerModel computer, GeniusMod
     return query.exec();
 }
 
-vector<ComputerModel> ComputerGeniusRepository::getGeniuseComputers(GeniusModel model)
+vector<ComputerModel> ComputerGeniusRepository::getGeniusComputers(GeniusModel model)
 {
     // For some reason if I do not do this again here I get database connection error
     _db = QSqlDatabase::database();
@@ -39,11 +39,14 @@ vector<ComputerModel> ComputerGeniusRepository::getGeniuseComputers(GeniusModel 
 
 vector<GeniusModel> ComputerGeniusRepository::getComputerGeniuses(ComputerModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<GeniusModel> geniuses;
 
     query.prepare("SELECT Name, Gender, BirthYear, DeathYear FROM GC_Join as j \
-               INNER JOIN Geniuses as g on g.GeniusID = j.GeniusId \
+               INNER JOIN Geniuses as g on g.GeniusID = j.GeniusID \
                WHERE ComputerID = :computerID");
     query.bindValue(":computerID", model.getId());
     query.exec();
@@ -58,13 +61,12 @@ vector<ComputerModel> ComputerGeniusRepository::extractComputerQueryToVector(QSq
     vector<ComputerModel> computers;
 
     while(query.next()){
-        unsigned int id = query.value("MakeYear").toUInt();
+        //unsigned int id = query.value("ComputerID").toUInt();
         string modelName = query.value("ModelName").toString().toStdString();
         unsigned int makeYear = query.value("MakeYear").toUInt();
         string type = query.value("Type").toString().toStdString();
         bool built = query.value("Built").toUInt();
-
-        computers.push_back(ComputerModel(id, modelName, makeYear, type, built));
+        computers.push_back(ComputerModel(modelName, makeYear, type, built));
     }
 
     return computers;
@@ -75,6 +77,7 @@ vector<GeniusModel> ComputerGeniusRepository::extractGeniusQueryToVector(QSqlQue
     vector<GeniusModel> geniuses;
 
     while(query.next()){
+        //unsigned int id = query.value("GeniusID").toUInt();
         string name = query.value("name").toString().toStdString();
         string gender = query.value("gender").toString().toStdString();
         unsigned int yearOfBirth = query.value("BirthYear").toUInt();
