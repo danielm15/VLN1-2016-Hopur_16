@@ -76,54 +76,60 @@ void ConsoleUI::displayUnsortedList()
                 }
                 case '3':
                 {
-                clearscreen();
-                cout << "====================| Unsorted Geniuses & Computers list |=================" << endl;
-                vector<GeniusModel> GVector = _geniusservice.getGenius();
+                    clearscreen();
+                    cout << "========================================================" << endl;
+                    cout << "========== Unsorted Geniuses & Computers list ==========" << endl;
+                    cout << "========================================================" << endl;
+                    cout << setw(26) << left << " Name" << setw(6) << "Gender" << "  " << " BirthYear" << " - " << "DeathYear" << endl;
+                    cout << "========================================================" << endl;
+                    vector<GeniusModel> GVector = _geniusservice.getGenius();
 
-                for(unsigned int i = 0; i < GVector.size(); i++)
-                {
-                    cout << GVector[i].getName() << endl;
-
-                    vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
-
-                    for (unsigned int i= 0; i < computers.size(); i++)
+                    for(unsigned int i = 0; i < GVector.size(); i++)
                     {
-                        cout << "\t" << computers[i].getModelName() << endl;
+                        cout << GVector[i] << endl;
 
+                        vector<ComputerModel> computers = _geniusservice.getAllComputersGeniusBuilt(GVector[i]);
+
+                        cout << "|   " << "- Linked computers" << endl;
+                        for (unsigned int i= 0; i < computers.size(); i++)
+                        {
+                            cout << "|" << "\t" << computers[i].getModelName() << endl;
+                        }
+                        cout << "|-------------------------------------------------------" << endl;
                     }
+                    check = false;
+                    cout << "========================================================" << endl;
+                    break;
+                }
+                case '4':
+                {
+                    clearscreen();
+                    cout << "========================================================================" << endl;
+                    cout << "================== Unsorted Computers & Geniuses list ==================" << endl;
+                    cout << "========================================================================" << endl;
+                    cout << setw(26)<< left << " Model Name" << setw(2) << " " << "Make Year" << "   " << setw(21) << "Type" << " " << "Built(Y/N)" << endl;
+                    cout << "========================================================================" << endl;
+                    vector<ComputerModel> CVector = _computerservice.getComputer();
+
+                    for(unsigned int i = 0; i < CVector.size(); i++)
+                    {
+                        cout << CVector[i] << endl;
+
+                        vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
+
+                        cout << "|   " << "- Made by" << endl;
+                        for (unsigned int i= 0; i < geno.size(); i++)
+                        {
+                            cout << "|" << "\t" << geno[i].getName() << endl;
+
+                        }
+                        cout << "|-----------------------------------------------------------------------" << endl;
+                    }
+                    check = false;
+                        cout << "========================================================================" << endl;
                     cout << endl;
+                    break;
                 }
-                check = false;
-                cout << endl;
-                break;
-            }
-            case '4':
-            {
-                clearscreen();
-                cout << "======================================================================================" << endl;
-                cout << "========================= Unsorted Computers & Geniuses list =========================" << endl;
-                cout << "======================================================================================" << endl;
-                cout << setw(26)<< "Model Name" << setw(3) << " " << "Make Year" << setw(23) << "Type" << "   " << "Built(Y/N)" << endl;
-                cout << "======================================================================================" << endl;
-                vector<ComputerModel> CVector = _computerservice.getComputer();
-
-                for(unsigned int i = 0; i < CVector.size(); i++)
-                {
-                    cout << CVector[i] << endl;
-
-                    vector<GeniusModel> geno = _computerservice.getAllGeniusesWhoBuiltComputer(CVector[i]);
-
-                    for (unsigned int i= 0; i < geno.size(); i++)
-                    {
-                        cout << "\t" << geno[i].getName() << endl;
-
-                    }
-                }
-                check = false;
-                cout << "==========================================================================" << endl;
-                cout << endl;
-                break;
-            }
                 case 'q':
                 case 'Q':
                 {
