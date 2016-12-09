@@ -534,7 +534,7 @@ void ConsoleUI::deleteAnEntry()
                         {
                             cout << "Option " << i+1 << "  " << g[i] << endl;
                         }
-                        cout << "Please enter the option you would like to delete: " << endl;
+                        cout << "Please enter the option you would like to delete or Q to quit: " << endl;
                         getline(cin,optionString,'\n');                        
                         bool validOption = false;
                         do
@@ -554,13 +554,18 @@ void ConsoleUI::deleteAnEntry()
                                 }
                                 else
                                 {
+                                    clearscreen();
                                     cout << "Entry was not deleted" << endl;
                                 }
+                            }
+                            else if(optionString == "q" || optionString == "Q")
+                            {
+                                clearscreen();
+                                break;
                             }
                             else
                             {
                                 printError();
-                                cout << "Please enter the option you would like to delete: " << endl;
                                 getline(cin,optionString,'\n');
                             }
                         }while (validOption == false);
@@ -579,6 +584,7 @@ void ConsoleUI::deleteAnEntry()
                         }
                         else
                         {
+                            clearscreen();
                             cout << "Entry was not deleted" << endl;
                         }
                     }
@@ -631,7 +637,7 @@ void ConsoleUI::deleteAnEntry()
                                 check = false;
                                 cout << c[option-1] << endl;
                                 cout << "Are you sure you want to delete this entry? (y/n): ";
-                                getline(cin,YorNString,'\n');
+                                getline(cin,YorNString);
 
                                 if(YorNString == "y" || YorNString == "Y")
                                 {
@@ -640,13 +646,18 @@ void ConsoleUI::deleteAnEntry()
                                 }
                                 else
                                 {
+                                    clearscreen();
                                     cout << "Entry was not deleted" << endl;
                                 }
+                            }
+                            else if(optionString == "q" || optionString == "Q")
+                            {
+                                clearscreen();
+                                return run();
                             }
                             else
                             {
                                 printError();
-                                cout << "Please enter the option you would like to delete: " << endl;
                                 getline(cin,optionString,'\n');
                             }
                         }while (!validOption);
@@ -665,7 +676,8 @@ void ConsoleUI::deleteAnEntry()
                         }
                         else
                         {
-                        cout << "Entry was not deleted" << endl;
+                            clearscreen();
+                            cout << "Entry was not deleted" << endl;
                         }
                     }
                     else
@@ -683,7 +695,6 @@ void ConsoleUI::deleteAnEntry()
             }
             cout << endl;
         }
-
         else if (inputString == "q" || inputString == "Q")
         {
             clearscreen();
@@ -697,6 +708,209 @@ void ConsoleUI::deleteAnEntry()
         }
     }
 }
+
+void ConsoleUI::addRelationship()
+{
+    string inputGenius, inputComputer, confirm, optionString;
+    unsigned int option;
+    bool invalid = true;
+    bool check = true;
+    bool saved = false;
+    GeniusModel genius;
+    ComputerModel computer;
+
+    try
+    {
+        while(invalid)
+        {
+            cout << "Search for Genius to link to computer or enter Q to quit" << endl;
+            getline(cin,inputGenius);
+            vector<GeniusModel> findGenius = _geniusservice.find(inputGenius);
+
+            if(findGenius.size() > 1)
+            {
+                while(check)
+                {
+                    for(size_t i = 0; i < findGenius.size(); i++)
+                    {
+                        cout << "Option: " << i+1 << findGenius[i].getName() << endl;
+                    }
+                    cout << "Select Genius to link:";
+                    getline(cin, optionString);
+
+                    option = atoi(optionString.c_str());
+                    if (option > 0 && option < findGenius.size()+1)
+                    {
+                        cout << findGenius[option-1].getName() << endl;
+                        cout << "Is this the Genius you want to link? (Y/N)" << endl;
+                        getline(cin,confirm);
+
+                        if(confirm == "y" || confirm == "Y")
+                        {
+                            genius = findGenius[option-1];
+                            cout << findGenius[option-1].getName() << " selected" << endl;
+                            check = false;
+                            invalid = false;
+                        }
+                        else if(confirm == "n" || confirm == "N")
+                        {
+                            check = true;
+                        }
+                        else
+                        {
+                            clearscreen();
+                            printError();
+                        }
+                    }
+                    else if(optionString == "q" || optionString == "Q")
+                    {
+                        clearscreen();
+                        return run();
+                    }
+                    else
+                    {
+                        clearscreen();
+                        printError();
+                    }
+                }
+
+            }
+            else if(findGenius.size() == 0)
+            {
+                clearscreen();
+                cout << "No results found!" << endl;
+            }
+            else
+            {
+                    cout << findGenius[0].getName() << endl;
+                    cout << "Is this the Genius you want to link? (Y/N)" << endl;
+                    getline(cin,confirm);
+
+                    if(confirm == "y" || confirm == "Y")
+                    {
+                        genius = findGenius[0];
+                        cout << findGenius[0].getName() << " selected" << endl;
+                        invalid = false;
+                    }
+                    else if(confirm == "n" || confirm == "N")
+                    {
+                        clearscreen();
+                        invalid = true;
+                    }
+                    else
+                    {
+                        clearscreen();
+                        printError();
+                    }
+            }
+
+        }
+
+        bool invalid = true;
+        bool check = true;
+
+        while(invalid)
+        {
+            cout << "Search for Computer to link to selected Genius or enter Q to quit" << endl;
+            getline(cin,inputComputer);
+            vector<ComputerModel> findComputer = _computerservice.find(inputComputer);
+
+            if(findComputer.size() > 1)
+            {
+                while(check)
+                {
+                    for(size_t i = 0; i < findComputer.size(); i++)
+                    {
+                        cout << "Option: " << i+1 << findComputer[i].getModelName() << endl;
+                    }
+                    cout << "Select Computer to link:";
+                    getline(cin, optionString);
+
+                    option = atoi(optionString.c_str());
+                    if (option > 0 && option < findComputer.size()+1)
+                    {
+                        cout << findComputer[option-1].getModelName() << endl;
+                        cout << "Is this the Computer you want to link? (Y/N)" << endl;
+                        getline(cin,confirm);
+
+                        if(confirm == "y" || confirm == "Y")
+                        {
+                            computer = findComputer[option-1];
+                            cout << findComputer[option-1].getModelName() << " selected" << endl;
+                            saved = _computergeniusservice.getRelationship(computer, genius);
+                            check = false;
+                            invalid = false;
+                        }
+                        else if(confirm == "n" || confirm == "N")
+                        {
+                            check = true;
+                        }
+                        else
+                        {
+                            clearscreen();
+                            printError();
+                        }
+                    }
+                    else if(optionString == "q" || optionString == "Q")
+                    {
+                        clearscreen();
+                        return run();
+                    }
+                    else
+                    {
+                        clearscreen();
+                        printError();
+                    }
+                }
+
+            }
+            else if(findComputer.size() == 0)
+            {
+                clearscreen();
+                cout << "No results found!" << endl;
+            }
+            else
+            {
+                    cout << findComputer[0].getModelName() << endl;
+                    cout << "Is this the Computer you want to link? (Y/N)" << endl;
+                    getline(cin,confirm);
+
+                    if(confirm == "y" || confirm == "Y")
+                    {
+                        computer = findComputer[0];
+                        cout << findComputer[0].getModelName() << " selected" << endl;
+                        saved = _computergeniusservice.getRelationship(computer, genius);
+                        invalid = false;
+                    }
+                    else if(confirm == "n" || confirm == "N")
+                    {
+                        clearscreen();
+                        invalid = true;
+                    }
+                    else
+                    {
+                        clearscreen();
+                        printError();
+                    }
+            }
+
+        }
+    }
+    catch(int)
+    {
+        cerr << "Link failed" << endl;
+    }
+
+    if(saved == true)
+    {
+        cout << genius.getName() << " and " << computer.getModelName() << " are now linked." << endl;
+    }
+    else
+    {
+        cout << "Link between " << genius.getName() << " and " << computer.getModelName() << " failed." << endl;
+    }
+}
+
 void ConsoleUI::modifyAnEntry()
 {
     bool built = false;
@@ -812,7 +1026,6 @@ void ConsoleUI::modifyAnEntry()
                                 g[option-1].update(name, genderString, dateOfBirth, dateOfDeath);
 
                                 _geniusservice.update(g[option-1]);
-
                             }
                             else
                             {
@@ -1065,6 +1278,7 @@ void ConsoleUI::modifyAnEntry()
         }
     }
 }
+
 void ConsoleUI::run()
 {
     string input;
@@ -1123,6 +1337,7 @@ void ConsoleUI::run()
                 {
                     clearscreen ();
                     game();
+                    break;
 
                 }
                 case 'q':
@@ -1195,7 +1410,7 @@ void ConsoleUI::printComputerSort()
     cout << "| Enter a for list sorted by Model name |" << endl;
     cout << "| Enter b for list sorted by Make year  |" << endl;
     cout << "| Enter c for list sorted by Type       |" << endl;
-    cout << "| Enter d for list sorted by Year built |" << endl;
+    cout << "| Enter d for list sorted by Built      |" << endl;
     cout << "| Enter q to quit                       |" << endl;
     cout << "=========================================" << endl;
 }
