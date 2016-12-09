@@ -174,14 +174,14 @@ bool ComputerValidation::promptForBuilt()
 
     while(check)
     {
-        cout << "Built: ";
+        cout << "Built(y/n): ";
         getline(cin,strBuilt,'\n');
 
         rejected = validateBuilt(strBuilt);
 
         if(rejected == true)
         {
-            cout << "Please enter yes or no!" << endl;
+            cout << "Please enter y or n!" << endl;
             check = true;
         }
         else
@@ -209,7 +209,7 @@ bool ComputerValidation::validateBuilt(string built)
         rejected = true;
     if(built.length() != 1)
         rejected = true;
-    if((built[0] != 'Y' || built[0] != 'y') && (built[0] != 'N' || built[0] != 'n'))
+    if((built[0] != 'Y' && built[0] != 'y') && (built[0] != 'N' && built[0] != 'n'))
     {
         rejected = true;
     }

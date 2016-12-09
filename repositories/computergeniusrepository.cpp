@@ -39,6 +39,9 @@ vector<ComputerModel> ComputerGeniusRepository::getGeniusComputers(GeniusModel m
 
 vector<GeniusModel> ComputerGeniusRepository::getComputerGeniuses(ComputerModel model)
 {
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
     QSqlQuery query(_db);
     vector<GeniusModel> geniuses;
 
