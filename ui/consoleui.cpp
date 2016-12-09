@@ -236,13 +236,13 @@ void ConsoleUI::displaySortedList()
                         cout << "===================================" << endl;
                         getline(cin, sortBy);
 
-                        if(sortBy.length() != 1 || (sortBy != "A" && sortBy != "a" && sortBy != "D" && sortBy != "d"))
+                        if(sortBy.length() != 1 || (sortBy != "A" && sortBy != "a" && sortBy != "D" && sortBy != "d" && sortBy != "q" && sortBy != "Q"))
                         {
                             clearscreen();
                             printError();
                             doubleCheck = true;
                         }
-                        else if(sortBy == "a" || sortBy == "A" || sortBy == "d" || sortBy == "D")
+                        else if(sortBy == "a" || sortBy == "A" || sortBy == "d" || sortBy == "D" /*|| sortBy == "q" || sortBy == "Q"*/)
                         {
                             sortBy = sortBy[0];
 
@@ -734,7 +734,7 @@ void ConsoleUI::modifyAnEntry()
                 do
                 {
                     vector<GeniusModel> g = _geniusservice.find(name);
-                    int option;
+                    unsigned int option;
                     string optionString;
 
                     if (g.size() > 1)
@@ -910,7 +910,7 @@ void ConsoleUI::modifyAnEntry()
                 do
                 {
                     vector<ComputerModel> c = _computerservice.find(modelName);
-                    int option = 0;
+                    unsigned int option = 0;
                     string optionString;
 
                     if (c.size() > 1)
