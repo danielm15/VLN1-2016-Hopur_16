@@ -30,7 +30,7 @@ private:
     void printGeniusSort();
     void printComputerSort();
     void printError();
-    void smile();
+    void game();
     void printMenu();
     void clearscreen ();
 };
