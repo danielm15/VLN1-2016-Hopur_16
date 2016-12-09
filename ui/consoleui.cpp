@@ -834,6 +834,154 @@ void ConsoleUI::modifyAnEntry()
         else if (inputString == "2")
         {
             cout << "Enter name of Computer: " << endl;
+            getline(cin,modelName,'\n');
+            try
+            {
+                bool check = true;
+                do
+                {
+                    vector<ComputerModel> c = _computerservice.find(modelName);
+                    int option = 0;
+                    string optionString;
+
+                    if (c.size() > 1)
+                    {
+                        check = false;
+                        for(size_t i = 0; i < c.size(); i++)
+                        {
+                            cout << "Option " << i+1 << "  " << c[i] << endl;
+                        }
+                        cout << "Please enter the option you would like to modify: " << endl;
+                        getline(cin,optionString,'\n');
+                        bool validOption = false;
+                        do
+                        {
+                            option = atoi(optionString.c_str());
+                            if (option > 0 && option < c.size()+1)
+                            {
+                                validOption = true;
+                                clearscreen();
+                                cout << c[option-1] << endl;
+                                cout << "Would you like to change the Computer ModelName? (y/n): ";
+                                getline(cin,YorNString,'\n');
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    modelName = vc.promptForModelName();
+                                }
+                                else
+                                {
+                                    modelName = c[option-1].getModelName();
+                                }
+                                cout << "Would you like to change the Computer MakeYear? (y/n): ";
+                                getline(cin,YorNString,'\n');
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    makeYear = vc.promptForMakeYear();
+                                }
+                                else
+                                {
+                                    makeYear = c[option-1].getMakeYear();
+                                }
+                                cout << "Would you like to change the Computer Type? (y/n): ";
+                                getline(cin,YorNString,'\n');
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    type = vc.promptForType();
+                                }
+                                else
+                                {
+                                    type = c[option-1].getType();
+                                }
+                                cout << "Would you like to change the Genius Built? (y/n): ";
+                                getline(cin,YorNString,'\n');
+                                if(YorNString == "y" || YorNString == "Y")
+                                {
+                                    built = vc.promptForBuilt();
+                                }
+                                else
+                                {
+                                    built = c[option-1].getBuilt();
+                                }
+
+                                c[option-1].update(modelName, makeYear, type, built);
+
+                                _computerservice.update(c[option-1]);
+
+                            }
+                            else
+                            {
+                                printError();
+                                cout << "Please enter the option you would like to modify: " << endl;
+                                getline(cin,optionString,'\n');
+                            }
+                        }while (validOption == false);
+                    }
+                    else if (c.size() == 1)
+                    {
+                        check = false;
+                        clearscreen();
+                        cout << c[0] << endl;
+                        cout << "Would you like to change the Computer ModelName? (y/n): ";
+                        getline(cin,YorNString,'\n');
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            modelName = vc.promptForModelName();
+                        }
+                        else
+                        {
+                            modelName = c[0].getModelName();
+                        }
+                        cout << "Would you like to change the Computer MakeYear? (y/n): ";
+                        getline(cin,YorNString,'\n');
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            makeYear = vc.promptForMakeYear();
+                        }
+                        else
+                        {
+                            makeYear = c[0].getMakeYear();
+                        }
+                        cout << "Would you like to change the Computer Type? (y/n): ";
+                        getline(cin,YorNString,'\n');
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            type = vc.promptForType();
+                        }
+                        else
+                        {
+                            type = c[0].getType();
+                        }
+                        cout << "Would you like to change the Genius Built? (y/n): ";
+                        getline(cin,YorNString,'\n');
+                        if(YorNString == "y" || YorNString == "Y")
+                        {
+                            built = vc.promptForBuilt();
+                        }
+                        else
+                        {
+                            built = c[0].getBuilt();
+                        }
+
+                        c[0].update(modelName, makeYear, type, built);
+
+                        _computerservice.update(c[0]);
+
+                    }
+                    else
+                    {
+                        check = true;
+                        printError();
+                        cout << "Enter name of Genius: " << endl;
+                        getline(cin, name,'\n');
+                    }
+                }while(check == true);
+            }
+            catch(int)
+            {
+                cerr << "Did not find anything" << endl;
+            }
+            cout << endl;
+
         }
         else if (inputString == "q" || inputString == "Q")
         {
