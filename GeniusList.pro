@@ -22,7 +22,11 @@ SOURCES += main.cpp\
         services/computerservice.cpp\
         repositories/computergeniusrepository.cpp \
         repositories/databasemanager.cpp \
-        services/computergeniusservice.cpp
+        services/computergeniusservice.cpp \
+    addcomputer.cpp \
+    addgenius.cpp \
+    viewgenius.cpp \
+    viewcomputer.cpp
 
 HEADERS  += mainwindow.h\
             repositories/geniusrepository.h \
@@ -33,6 +37,14 @@ HEADERS  += mainwindow.h\
             services/computerservice.h \
             repositories/computergeniusrepository.h \
             repositories/databasemanager.h \
-            services/computergeniusservice.h
+            services/computergeniusservice.h \
+    addcomputer.h \
+    addgenius.h \
+    viewgenius.h \
+    viewcomputer.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    addcomputer.ui \
+    addgenius.ui \
+    viewgenius.ui \
+    viewcomputer.ui
