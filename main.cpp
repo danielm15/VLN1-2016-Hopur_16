@@ -1,12 +1,13 @@
-#include "ui/consoleui.h"
+#include "mainwindow.h"
 #include <repositories/databasemanager.h>
+#include <QApplication>
 
-int main()
+int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
     DatabaseManager db;
-    ConsoleUI ui;
+    MainWindow w;
+    w.show();
 
-    ui.run();
-
-    return 0;
+    return a.exec();
 }
