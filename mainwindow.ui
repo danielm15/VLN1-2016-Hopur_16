@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>679</width>
-    <height>440</height>
+    <width>969</width>
+    <height>486</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <attribute name="title">
@@ -48,16 +48,6 @@
           <widget class="QListWidget" name="listGeniuses"/>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButtonViewGeniusDetails">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>View Genius Details</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="pushButtonDeleteGenius">
            <property name="enabled">
             <bool>false</bool>
@@ -75,6 +65,29 @@
           </widget>
          </item>
         </layout>
+       </widget>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>70</y>
+          <width>461</width>
+          <height>281</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelComputerDetails">
+        <property name="geometry">
+         <rect>
+          <x>520</x>
+          <y>20</y>
+          <width>361</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:600;&quot;&gt;Computer Details&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="tabComputers">
@@ -105,16 +118,6 @@
           <widget class="QListWidget" name="listComputers"/>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButtonViewComputerDetails">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>View Computer Details</string>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="pushButtonDeleteComputer">
            <property name="enabled">
             <bool>false</bool>
@@ -133,6 +136,29 @@
          </item>
         </layout>
        </widget>
+       <widget class="QTableView" name="tableView">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>70</y>
+          <width>461</width>
+          <height>281</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelGeniusDetails">
+        <property name="geometry">
+         <rect>
+          <x>520</x>
+          <y>20</y>
+          <width>361</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:x-large; font-weight:600;&quot;&gt;Genius Details&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -143,7 +169,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>679</width>
+     <width>969</width>
      <height>26</height>
     </rect>
    </property>
