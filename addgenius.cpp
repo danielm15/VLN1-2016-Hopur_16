@@ -64,7 +64,7 @@ void AddGenius::on_pushButtonSaveGenius_clicked()
     name[0] = name[0].toUpper();
 
     geniusService.addGenius(name.toStdString(), gender[0], birthYear, deathYear);
-    this->done(0);
+    this->done(1);
 }
 
 /**
