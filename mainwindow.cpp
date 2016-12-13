@@ -48,3 +48,15 @@ void MainWindow::displayComputers(vector<ComputerModel> computers)
         ui->listComputers->addItem(QString::fromStdString(computer.getModelName()));
     }
 }
+
+void MainWindow::on_pushButtonAddGenius_clicked()
+{
+   AddGenius geniusDialog;
+   geniusDialog.exec();
+}
+
+void MainWindow::on_pushButtonAddComputer_clicked()
+{
+    AddComputer computerDialog;
+    computerDialog.exec();
+}
