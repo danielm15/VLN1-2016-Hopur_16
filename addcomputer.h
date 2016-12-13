@@ -2,6 +2,9 @@
 #define ADDCOMPUTER_H
 
 #include <QDialog>
+#include <QDate>
+
+#include "services/computerservice.h"
 
 namespace Ui {
 class AddComputer;
@@ -15,8 +18,13 @@ public:
     explicit AddComputer(QWidget *parent = 0);
     ~AddComputer();
 
+private slots:
+    void on_pushButtonSaveComputer_clicked();
+
 private:
     Ui::AddComputer *ui;
+
+    bool checkIfYearIsValid(QString);
 };
 
 #endif // ADDCOMPUTER_H

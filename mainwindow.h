@@ -32,6 +32,8 @@ private slots:
 
     void on_actionAddGenius_triggered();
 
+    void on_actionAddComputer_triggered();
+
 private:
     Ui::MainWindow *ui;
 
