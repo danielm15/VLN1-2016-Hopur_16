@@ -2,6 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <services/geniusservice.h>
+#include <services/computerservice.h>
+
+#include <vector>
+
+using namespace std;
 
 #include "addgenius.h"
 #include "addcomputer.h"
@@ -26,6 +32,13 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    void displayAllGeniuses();
+    void displayGeniuses(vector<GeniusModel> geniuses);
+    void displayAllComputers();
+    void displayComputers(vector<ComputerModel> computers);
+    GeniusService _geniusService;
+    ComputerService _computerService;
 };
 
 #endif // MAINWINDOW_H
