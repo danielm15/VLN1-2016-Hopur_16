@@ -12,3 +12,15 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_pushButtonAddGenius_clicked()
+{
+   AddGenius geniusDialog;
+   geniusDialog.exec();
+}
+
+void MainWindow::on_pushButtonAddComputer_clicked()
+{
+    AddComputer computerDialog;
+    computerDialog.exec();
+}
