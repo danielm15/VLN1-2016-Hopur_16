@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>347</height>
+    <width>679</width>
+    <height>440</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
           <x>9</x>
           <y>9</y>
           <width>441</width>
-          <height>241</height>
+          <height>342</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -45,7 +45,7 @@
           <widget class="QLineEdit" name="lineEditGeniusFilter"/>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidgetGeniuses"/>
+          <widget class="QListWidget" name="listGeniuses"/>
          </item>
          <item>
           <widget class="QPushButton" name="pushButtonViewGeniusDetails">
@@ -87,7 +87,7 @@
           <x>9</x>
           <y>9</y>
           <width>441</width>
-          <height>241</height>
+          <height>342</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -102,7 +102,7 @@
           <widget class="QLineEdit" name="lineEditComputerFilter"/>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidgetComputers"/>
+          <widget class="QListWidget" name="listComputers"/>
          </item>
          <item>
           <widget class="QPushButton" name="pushButtonViewComputerDetails">
@@ -143,8 +143,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>480</width>
-     <height>17</height>
+     <width>679</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
