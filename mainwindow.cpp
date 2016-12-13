@@ -53,6 +53,8 @@ void MainWindow::on_pushButtonAddGenius_clicked()
 {
    AddGenius geniusDialog;
    int returnValueFromAddGenius = geniusDialog.exec();
+   if (returnValueFromAddGenius == 0)
+       ui->statusBar->showMessage("Successfully added new genius", 2000);
 }
 
 void MainWindow::on_pushButtonAddComputer_clicked()
