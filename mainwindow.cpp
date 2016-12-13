@@ -16,11 +16,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButtonAddGenius_clicked()
 {
    AddGenius geniusDialog;
-   geniusDialog.exec();
+   int returnValueFromAddGenius = geniusDialog.exec();
 }
 
 void MainWindow::on_pushButtonAddComputer_clicked()
 {
     AddComputer computerDialog;
-    computerDialog.exec();
+    int returnValueFromAddComputer = computerDialog.exec();
 }
