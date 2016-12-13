@@ -60,3 +60,8 @@ void MainWindow::on_pushButtonAddComputer_clicked()
     AddComputer computerDialog;
     int returnValueFromAddComputer = computerDialog.exec();
 }
+
+void MainWindow::on_actionAddGenius_triggered()
+{
+    on_pushButtonAddGenius_clicked();
+}

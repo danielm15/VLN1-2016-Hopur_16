@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>images/addgenius.png</file>
+        <file>images/addcomputer.png</file>
+    </qresource>
+</RCC>

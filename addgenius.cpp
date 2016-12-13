@@ -74,7 +74,7 @@ void AddGenius::on_pushButtonSaveGenius_clicked()
  */
 bool AddGenius::checkIfYearIsValid(QString year)
 {
-    int currentYear = QDate::currentDate().year();
+    unsigned int currentYear = QDate::currentDate().year();
 
     if (year.length() != 4)
         return false;
@@ -87,7 +87,7 @@ bool AddGenius::checkIfYearIsValid(QString year)
             return false;
     }
 
-    if (year.toInt() > currentYear)
+    if (year.toUInt() > currentYear)
         return false;
 
     return true;
