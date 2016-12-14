@@ -47,6 +47,8 @@ private slots:
 
     void on_clearComputerSelection_clicked();
 
+    void on_geniusDetailsTable_cellChanged(int row, int column);
+
     void on_pushButtonDeleteGenius_clicked();
 
     void on_pushButtonDeleteComputer_clicked();
@@ -62,6 +64,7 @@ private:
     void displayGeniusDetails(vector<GeniusModel> geniuses);
     void displayAllComputerDetails();
     void displayComputerDetails(vector<ComputerModel> computers);
+    bool checkIfYearIsValid(QString year);
 
     GeniusService _geniusService;
     ComputerService _computerService;
