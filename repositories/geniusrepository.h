@@ -10,7 +10,6 @@
 #include <string>
 
 #include "models/geniusmodel.h"
-#include "repositories/computergeniusrepository.h"
 
 using namespace std;
 

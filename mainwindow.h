@@ -42,6 +42,8 @@ private slots:
 
     void on_listComputers_clicked(const QModelIndex &index);
 
+    void on_pushButtonDeleteComputer_clicked();
+
 private:
     Ui::MainWindow *ui;
 

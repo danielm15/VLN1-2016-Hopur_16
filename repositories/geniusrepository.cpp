@@ -99,7 +99,15 @@ bool GeniusRepository::removeGenius(GeniusModel model)
     query.prepare("DELETE FROM Geniuses WHERE GeniusID = :id");
     query.bindValue(":id", model.getId());
 
-    return query.exec();
+    if (!query.exec())
+        return false;
+
+    // Cascade GC_Join
+    query.prepare("DELETE FROM GC_Join WHERE GeniusID = :genius");
+    query.bindValue(":genius", QString::number(model.getId()));
+    query.exec();
+
+    return true;
 }
 
 bool GeniusRepository::updateGenius(GeniusModel model)

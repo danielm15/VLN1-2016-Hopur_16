@@ -5,13 +5,22 @@ ComputerGeniusRepository::ComputerGeniusRepository()
     _db = QSqlDatabase::database();
 }
 
+/**
+ * @brief ComputerGeniusRepository::addRelationship Addes new row to GC_Join table if it does not already exists
+ * @param computer
+ * @param genius
+ * @return boolean value from the query
+ */
 bool ComputerGeniusRepository::addRelationship(ComputerModel computer, GeniusModel genius)
 {
+    // Return early if models are already linked together
+    if (checkIfComputerAndGeniusAreAlreadyLinked(computer, genius))
+        return false;
+
     // For some reason if I do not do this again here I get database connection error
     _db = QSqlDatabase::database();
 
     QSqlQuery query(_db);
-
 
     query.prepare("INSERT INTO GC_Join(GeniusID, ComputerID) VALUES(:genius, :computer)");
     query.bindValue(":genius", QString::number(genius.getId()));
@@ -20,6 +29,34 @@ bool ComputerGeniusRepository::addRelationship(ComputerModel computer, GeniusMod
     return query.exec();
 }
 
+/**
+ * @brief ComputerGeniusRepository::removeRelationship, Removes relationship from GC_Join, if it exists.
+ * @param computer
+ * @param genius
+ * @return boolean return value from the query.
+ */
+bool ComputerGeniusRepository::removeRelationship(ComputerModel computer, GeniusModel genius)
+{
+    if (!checkIfComputerAndGeniusAreAlreadyLinked(computer, genius))
+        return false;
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
+    QSqlQuery query(_db);
+
+    query.prepare("DELETE FROM GC_Join \
+                  WHERE ComputerID = :computer and GeniusID = :genius");
+    query.bindValue(":genius", QString::number(genius.getId()));
+    query.bindValue(":computer", QString::number(computer.getId()));
+
+    return query.exec();
+}
+
+/**
+ * @brief ComputerGeniusRepository::getGeniusComputers Returns all Computers that were built by genius
+ * @param model
+ * @return vector of computers
+ */
 vector<ComputerModel> ComputerGeniusRepository::getGeniusComputers(GeniusModel model)
 {
     // For some reason if I do not do this again here I get database connection error
@@ -38,6 +75,11 @@ vector<ComputerModel> ComputerGeniusRepository::getGeniusComputers(GeniusModel m
     return computers;
 }
 
+/**
+ * @brief ComputerGeniusRepository::getComputerGeniuses, Fetches all Geniuses that built computer from the database
+ * @param model
+ * @return vector of geniuses
+ */
 vector<GeniusModel> ComputerGeniusRepository::getComputerGeniuses(ComputerModel model)
 {
     // For some reason if I do not do this again here I get database connection error
@@ -57,6 +99,11 @@ vector<GeniusModel> ComputerGeniusRepository::getComputerGeniuses(ComputerModel 
     return geniuses;
 }
 
+/**
+ * @brief ComputerGeniusRepository::extractComputerQueryToVector, Transforms query to model objects
+ * @param query
+ * @return vector of computers
+ */
 vector<ComputerModel> ComputerGeniusRepository::extractComputerQueryToVector(QSqlQuery query) const
 {
     vector<ComputerModel> computers;
@@ -73,6 +120,11 @@ vector<ComputerModel> ComputerGeniusRepository::extractComputerQueryToVector(QSq
     return computers;
 }
 
+/**
+ * @brief ComputerGeniusRepository::extractGeniusQueryToVector, Transforms query to model objects
+ * @param query
+ * @return vector of geniuses
+ */
 vector<GeniusModel> ComputerGeniusRepository::extractGeniusQueryToVector(QSqlQuery query) const
 {
     vector<GeniusModel> geniuses;
@@ -88,4 +140,32 @@ vector<GeniusModel> ComputerGeniusRepository::extractGeniusQueryToVector(QSqlQue
     }
 
     return geniuses;
+}
+
+/**
+ * @brief ComputerGeniusRepository::checkIfComputerAndGeniusAreAlreadyLinked
+ *        Check's if computer and genius have already been linked together.
+ * @param computer
+ * @param genius
+ * @return true if computer and genius are linked, else false.
+ */
+bool ComputerGeniusRepository::checkIfComputerAndGeniusAreAlreadyLinked(ComputerModel computer, GeniusModel genius)
+{
+    // For some reason if I do not do this again here I get database connection error
+    _db = QSqlDatabase::database();
+
+    QSqlQuery query(_db);
+
+    query.prepare("SELECT * FROM GC_Join \
+                   WHERE ComputerID = :computerID and GeniusID = :geniusID");
+
+    query.bindValue(":computerID", QString::number(computer.getId()));
+    query.bindValue(":geniusID", QString::number(genius.getId()));
+
+    query.exec();
+
+    if (query.next())
+        return true; // They are linked
+
+    return false; // They are not linked
 }
