@@ -29,10 +29,10 @@ vector<ComputerModel> ComputerGeniusRepository::getGeniusComputers(GeniusModel m
     vector<ComputerModel> computers;
 
     query.prepare("SELECT ModelName, MakeYear, Type, Built FROM GC_Join as j \
-               INNER JOIN Computers as c on c.ComputerID = j.ComputerID \
-               WHERE GeniusID = :geniusID");
-    query.bindValue(":geniusID", model.getId());
-    query.exec();
+                  INNER JOIN Computers as c on c.ComputerID = j.ComputerID \
+            WHERE GeniusID = :geniusID");
+            query.bindValue(":geniusID", model.getId());
+            query.exec();
     computers = extractComputerQueryToVector(query);
 
     return computers;
@@ -47,10 +47,10 @@ vector<GeniusModel> ComputerGeniusRepository::getComputerGeniuses(ComputerModel 
     vector<GeniusModel> geniuses;
 
     query.prepare("SELECT Name, Gender, BirthYear, DeathYear FROM GC_Join as j \
-               INNER JOIN Geniuses as g on g.GeniusID = j.GeniusID \
-               WHERE ComputerID = :computerID");
-    query.bindValue(":computerID", model.getId());
-    query.exec();
+                  INNER JOIN Geniuses as g on g.GeniusID = j.GeniusID \
+            WHERE ComputerID = :computerID");
+            query.bindValue(":computerID", model.getId());
+            query.exec();
 
     geniuses = extractGeniusQueryToVector(query);
 

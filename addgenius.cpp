@@ -16,20 +16,25 @@ AddGenius::~AddGenius()
     delete ui;
 }
 
+/**
+ * @brief AddGenius::on_pushButtonSaveGenius_clicked Validates and calls save method on genius service layer. Delivers status code to be used in the status bar on main ui
+ */
 void AddGenius::on_pushButtonSaveGenius_clicked()
 {
-    GeniusService geniusService;
-
-    ui->labelGeniusNameError->setText("");
-    ui->labelGeniusBirthYearError->setText("");
-    ui->labelGeniusDeathYearError->setText("");
-
     QString name = ui->lineEditGeniusName->text();
     string gender = ui->comboBoxGeniusGender->currentText().toStdString();
     QString birthYearStr = ui->lineEditBirthYear->text();
     QString deathYearStr = ui->lineEditDeathYear->text();
 
     bool hasError = false;
+    bool saved;
+
+    unsigned int birthYear;
+    unsigned int deathYear;
+
+    ui->labelGeniusNameError->setText("");
+    ui->labelGeniusBirthYearError->setText("");
+    ui->labelGeniusDeathYearError->setText("");
 
     if (name.isEmpty())
     {
@@ -49,8 +54,8 @@ void AddGenius::on_pushButtonSaveGenius_clicked()
         hasError = true;
     }
 
-    unsigned int birthYear = birthYearStr.toUInt();
-    unsigned int deathYear = deathYearStr.toUInt();
+    birthYear = birthYearStr.toUInt();
+    deathYear = deathYearStr.toUInt();
 
     if (birthYear < deathYear)
     {
@@ -63,8 +68,12 @@ void AddGenius::on_pushButtonSaveGenius_clicked()
 
     name[0] = name[0].toUpper();
 
-    geniusService.addGenius(name.toStdString(), gender[0], birthYear, deathYear);
-    this->done(1);
+    saved = _geniusService.addGenius(name.toStdString(), gender[0], birthYear, deathYear);
+
+    if (saved)
+        this->done(1);
+    else
+        this->done(0);
 }
 
 /**

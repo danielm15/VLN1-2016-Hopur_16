@@ -23,6 +23,7 @@ private slots:
 
 private:
     Ui::AddGenius *ui;
+    GeniusService _geniusService;
     bool checkIfYearIsValid(QString year);
 };
 

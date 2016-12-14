@@ -23,6 +23,7 @@ private slots:
 
 private:
     Ui::AddComputer *ui;
+    ComputerService _computerService;
 
     bool checkIfYearIsValid(QString);
 };

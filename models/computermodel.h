@@ -65,12 +65,12 @@ public:
     int getBuilt() const;
     
     /**
-     * @brief update, 
+     * @brief update,
      * @param modelName
      * @param makeYear
      * @param type
      * @param built
-     * @return 
+     * @return
      */
     bool update(string modelName, unsigned int makeYear, string type, int built);
 
