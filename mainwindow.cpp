@@ -129,7 +129,12 @@ void MainWindow::on_pushButtonAddGenius_clicked()
    AddGenius geniusDialog;
    int returnValueFromAddGenius = geniusDialog.exec();
    if (returnValueFromAddGenius == 1)
+   {
+       displayAllGeniuses();
+       displayGeniusDetails(currentlyDisplayedGeniuses);
+
        ui->statusBar->showMessage("Successfully added new genius", 2000);
+   }
 }
 
 void MainWindow::on_pushButtonAddComputer_clicked()
@@ -137,7 +142,12 @@ void MainWindow::on_pushButtonAddComputer_clicked()
     AddComputer computerDialog;
     int returnValueFromAddComputer = computerDialog.exec();
     if (returnValueFromAddComputer == 1)
+    {
+        displayAllComputers();
+        displayComputerDetails(currentlyDisplayedComputers);
+
         ui->statusBar->showMessage("Successfully added new computer", 2000);
+    }
 }
 
 void MainWindow::on_actionAddGenius_triggered()
@@ -249,7 +259,6 @@ void MainWindow::on_pushButtonDeleteGenius_clicked()
         ui->pushButtonDeleteGenius->setEnabled(false);
 
         displayAllGeniuses();
-
         displayGeniusDetails(currentlyDisplayedGeniuses);
     }
     else
@@ -271,7 +280,6 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
         ui->pushButtonDeleteComputer->setEnabled(false);
 
         displayAllComputers();
-
         displayComputerDetails(currentlyDisplayedComputers);
     }
     else

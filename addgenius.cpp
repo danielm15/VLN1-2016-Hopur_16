@@ -57,7 +57,7 @@ void AddGenius::on_pushButtonSaveGenius_clicked()
     birthYear = birthYearStr.toUInt();
     deathYear = deathYearStr.toUInt();
 
-    if (birthYear < deathYear)
+    if (birthYear > deathYear)
     {
         ui->labelGeniusDeathYearError->setText("<span style='color:red'>Nobody can die before he is born!</span>");
         hasError = true;
