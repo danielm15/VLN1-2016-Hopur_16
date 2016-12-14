@@ -210,10 +210,12 @@ void MainWindow::on_listComputers_clicked(const QModelIndex &index)
 
 void MainWindow::on_clearGeniusSelection_clicked()
 {
+    ui->lineEditGeniusFilter->clear();
     displayAllGeniusDetails();
 }
 
 void MainWindow::on_clearComputerSelection_clicked()
 {
+    ui->lineEditComputerFilter->clear();
     displayAllComputerDetails();
 }
