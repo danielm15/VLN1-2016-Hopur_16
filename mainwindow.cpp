@@ -247,6 +247,10 @@ void MainWindow::on_pushButtonDeleteGenius_clicked()
         ui->statusBar->showMessage("Successfully deleted the selected Genius", 2000);
 
         ui->pushButtonDeleteGenius->setEnabled(false);
+
+        displayAllGeniuses();
+
+        displayGeniusDetails(currentlyDisplayedGeniuses);
     }
     else
     {
@@ -265,6 +269,10 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
         ui->statusBar->showMessage("Successfully deleted the selected Computer", 2000);
 
         ui->pushButtonDeleteComputer->setEnabled(false);
+
+        displayAllComputers();
+
+        displayComputerDetails(currentlyDisplayedComputers);
     }
     else
     {
