@@ -309,6 +309,7 @@ bool MainWindow::checkIfYearIsValid(QString year)
         return false;
 
     return true;
+}
 
 void MainWindow::on_pushButtonDeleteGenius_clicked()
 {
