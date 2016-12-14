@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     displayAllGeniuses();
     displayAllComputers();
-    displayGeniusDetails();
-    displayComputerDetails();
+    displayAllGeniusDetails();
+    displayAllComputerDetails();
 }
 
 MainWindow::~MainWindow()
@@ -51,10 +51,14 @@ void MainWindow::displayComputers(vector<ComputerModel> computers)
     }
 }
 
-void MainWindow::displayGeniusDetails()
+void MainWindow::displayAllGeniusDetails()
 {
-    vector<GeniusModel> geniuses = _geniusService.getGenius();
+   vector<GeniusModel> geniuses = _geniusService.getGenius();
+   displayGeniusDetails(geniuses);
+}
 
+void MainWindow::displayGeniusDetails(vector<GeniusModel> geniuses)
+{
     ui->geniusDetailsTable->clearContents();
 
     ui->geniusDetailsTable->setRowCount(geniuses.size());
@@ -78,10 +82,14 @@ void MainWindow::displayGeniusDetails()
     }
 }
 
-void MainWindow::displayComputerDetails()
+void MainWindow::displayAllComputerDetails()
 {
     vector<ComputerModel> computers = _computerService.getComputer();
+    displayComputerDetails(computers);
+}
 
+void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
+{
     ui->computerDetailsTable->clearContents();
 
     ui->computerDetailsTable->setRowCount(computers.size());
@@ -139,6 +147,7 @@ void MainWindow::on_lineEditComputerFilter_textChanged(const QString &arg1)
 
     vector<ComputerModel> computers = _computerService.find(input);
     displayComputers(computers);
+    displayComputerDetails(computers);
 }
 
 void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
@@ -147,14 +156,64 @@ void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
 
     vector<GeniusModel> geniuses = _geniusService.find(input);
     displayGeniuses(geniuses);
+    displayGeniusDetails(geniuses);
 }
 
 void MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
 {
+    int clicked = ui->listGeniuses->currentIndex().row();
 
+    vector<GeniusModel> geniuses = _geniusService.getGenius();
+
+    GeniusModel genius = geniuses.at(clicked);
+
+    QString name = QString::fromStdString(genius.getName());
+    QString gender = QString::fromStdString(genius.getGender());
+    QString BirthYear = QString::number(genius.getBirthYear());
+    QString DeathYear = QString::number(genius.getDeathYear());
+
+    if(DeathYear == "0")
+        DeathYear = "N/A";
+
+    ui->geniusDetailsTable->clearContents();
+    ui->geniusDetailsTable->setItem(0, 0, new QTableWidgetItem(name));
+    ui->geniusDetailsTable->setItem(0, 1, new QTableWidgetItem(gender));
+    ui->geniusDetailsTable->setItem(0, 2, new QTableWidgetItem(BirthYear));
+    ui->geniusDetailsTable->setItem(0, 3, new QTableWidgetItem(DeathYear));
 }
 
 void MainWindow::on_listComputers_clicked(const QModelIndex &index)
 {
+    int clicked = ui->listComputers->currentIndex().row();
 
+    vector<ComputerModel> computers = _computerService.getComputer();
+
+    ComputerModel computer = computers.at(clicked);
+
+    QString ModelName = QString::fromStdString(computer.getModelName());
+    QString MakeYear = QString::number(computer.getMakeYear());
+    QString type = QString::fromStdString(computer.getType());
+    QString built = QString::number(computer.getBuilt());
+
+    if(built == "0")
+        built = "N";
+    else
+        built = "Y";
+
+    ui->computerDetailsTable->clearContents();
+    ui->computerDetailsTable->setItem(0, 0, new QTableWidgetItem(ModelName));
+    ui->computerDetailsTable->setItem(0, 1, new QTableWidgetItem(MakeYear));
+    ui->computerDetailsTable->setItem(0, 2, new QTableWidgetItem(type));
+    ui->computerDetailsTable->setItem(0, 3, new QTableWidgetItem(built));
+
+}
+
+void MainWindow::on_clearGeniusSelection_clicked()
+{
+    displayAllGeniusDetails();
+}
+
+void MainWindow::on_clearComputerSelection_clicked()
+{
+    displayAllComputerDetails();
 }
