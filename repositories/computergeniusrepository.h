@@ -39,11 +39,20 @@ public:
      */
     bool addRelationship(ComputerModel computer, GeniusModel genius);
 
+    /**
+     * @brief removeRelationship, removes relationship, if there exists one
+     * @param computer
+     * @param genius
+     * @return true if success, else false
+     */
+    bool removeRelationship(ComputerModel computer, GeniusModel genius);
+
 private:
     QSqlDatabase _db;
 
     vector<ComputerModel> extractComputerQueryToVector(QSqlQuery query) const;
     vector<GeniusModel> extractGeniusQueryToVector(QSqlQuery query) const;
+    bool checkIfComputerAndGeniusAreAlreadyLinked(ComputerModel computer, GeniusModel genius);
 };
 
 #endif // COMPUTERGENIUSREPOSITORY_H
