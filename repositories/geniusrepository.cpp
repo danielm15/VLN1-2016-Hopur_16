@@ -110,14 +110,14 @@ bool GeniusRepository::updateGenius(GeniusModel model)
     QSqlQuery query(_db);
 
     query.prepare("UPDATE Geniuses \
-                   SET Name         = :name, \
-                       Gender       = :gender, \
-                       BirthYear    = :birthYear, \
-                       DeathYear    = :deathYear \
-                   WHERE GeniusID   = :id");
+                  SET Name         = :name, \
+                  Gender       = :gender, \
+                  BirthYear    = :birthYear, \
+                  DeathYear    = :deathYear \
+            WHERE GeniusID   = :id");
 
-    query.bindValue(":name",      QString::fromStdString(model.getName()));
-    query.bindValue(":gender",    QString::fromStdString(model.getGender()));
+            query.bindValue(":name",      QString::fromStdString(model.getName()));
+            query.bindValue(":gender",    QString::fromStdString(model.getGender()));
     query.bindValue(":birthYear", model.getBirthYear());
     query.bindValue(":deathYear", model.getDeathYear());
     query.bindValue(":id",        model.getId());

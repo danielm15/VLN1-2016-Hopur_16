@@ -100,14 +100,14 @@ bool ComputerRepository::updateComputer(ComputerModel model)
     QSqlQuery query(_db);
 
     query.prepare("UPDATE Computers \
-                   SET ModelName = :modelName, \
-                       MakeYear  = :makeYear, \
-                       Type      = :type, \
-                       Built     = :built \
-                   WHERE ComputerID = :id");
+                  SET ModelName = :modelName, \
+                  MakeYear  = :makeYear, \
+                  Type      = :type, \
+                  Built     = :built \
+            WHERE ComputerID = :id");
 
-    query.bindValue(":modelName", QString::fromStdString(model.getModelName()));
-    query.bindValue(":makeYear", model.getMakeYear());
+            query.bindValue(":modelName", QString::fromStdString(model.getModelName()));
+            query.bindValue(":makeYear", model.getMakeYear());
     query.bindValue(":type", QString::fromStdString(model.getType()));
     query.bindValue(":built", model.getBuilt());
     query.bindValue(":id", model.getId());
