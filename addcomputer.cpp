@@ -18,10 +18,14 @@ AddComputer::~AddComputer()
     delete ui;
 }
 
+/**
+ * @brief AddComputer::on_pushButtonSaveComputer_clicked
+ *      Validates parameters for computer and calls save
+ *      method on computer service. If save is success
+ *      a status code 1 is sent down to ui, else 0
+ */
 void AddComputer::on_pushButtonSaveComputer_clicked()
 {
-    ComputerService computerService;
-
     ui->labelMakeYearError->setText("");
     ui->labelModelNameError->setText("");
 
@@ -32,6 +36,8 @@ void AddComputer::on_pushButtonSaveComputer_clicked()
     bool built;
 
     bool hasError = false;
+    bool saved;
+    unsigned int makeYear;
 
     if (modelName.isEmpty())
     {
@@ -53,15 +59,21 @@ void AddComputer::on_pushButtonSaveComputer_clicked()
     else
         built = 0;
 
-    unsigned int makeYear = makeYearStr.toUInt();
+    makeYear = makeYearStr.toUInt();
 
-    computerService.addComputer(modelName.toStdString(), makeYear, type.toStdString(), built);
+    saved = _computerService.addComputer(modelName.toStdString(), makeYear, type.toStdString(), built);
 
-    this->done(1);
+    if (saved)
+        this->done(1);
+    else
+        this->done(0);
 }
 
 /**
- * @brief AddComputer::checkIfYearIsValid Validates if year string is 4 digits and does not have zero as a first digit, Year cannot be higher than current year
+ * @brief AddComputer::checkIfYearIsValid Validates if
+ *        year string is 4 digits and does not have
+ *        zero as a first digit, Year cannot be
+ *        higher than current year
  * @param year
  * @return true if year is valid, else false
  */
