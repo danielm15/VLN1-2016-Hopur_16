@@ -2,6 +2,9 @@
 #define ADDGENIUS_H
 
 #include <QDialog>
+#include <QDate>
+
+#include "services/geniusservice.h"
 
 namespace Ui {
 class AddGenius;
@@ -15,8 +18,12 @@ public:
     explicit AddGenius(QWidget *parent = 0);
     ~AddGenius();
 
+private slots:
+    void on_pushButtonSaveGenius_clicked();
+
 private:
     Ui::AddGenius *ui;
+    bool checkIfYearIsValid(QString year);
 };
 
 #endif // ADDGENIUS_H

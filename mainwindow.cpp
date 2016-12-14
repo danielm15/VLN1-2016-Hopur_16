@@ -60,11 +60,25 @@ void MainWindow::onListComputersItemClicked(QListWidgetItem *item)
 void MainWindow::on_pushButtonAddGenius_clicked()
 {
    AddGenius geniusDialog;
-   geniusDialog.exec();
+   int returnValueFromAddGenius = geniusDialog.exec();
+   if (returnValueFromAddGenius == 1)
+       ui->statusBar->showMessage("Successfully added new genius", 2000);
 }
 
 void MainWindow::on_pushButtonAddComputer_clicked()
 {
     AddComputer computerDialog;
-    computerDialog.exec();
+    int returnValueFromAddComputer = computerDialog.exec();
+    if (returnValueFromAddComputer == 1)
+        ui->statusBar->showMessage("Successfully added new computer", 2000);
+}
+
+void MainWindow::on_actionAddGenius_triggered()
+{
+    on_pushButtonAddGenius_clicked();
+}
+
+void MainWindow::on_actionAddComputer_triggered()
+{
+    on_pushButtonAddComputer_clicked();
 }

@@ -42,3 +42,6 @@ HEADERS  += mainwindow.h\
 FORMS    += mainwindow.ui \
     addcomputer.ui \
     addgenius.ui
+
+RESOURCES += \
+    resources.qrc

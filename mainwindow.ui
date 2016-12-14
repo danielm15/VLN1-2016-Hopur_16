@@ -170,9 +170,17 @@
      <x>0</x>
      <y>0</y>
      <width>969</width>
-     <height>26</height>
+     <height>17</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionAddGenius"/>
+    <addaction name="actionAddComputer"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -183,8 +191,28 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAddGenius">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/addgenius.png</normaloff>:/icons/images/addgenius.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Genius</string>
+   </property>
+  </action>
+  <action name="actionAddComputer">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/images/addcomputer.png</normaloff>:/icons/images/addcomputer.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add Computer</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

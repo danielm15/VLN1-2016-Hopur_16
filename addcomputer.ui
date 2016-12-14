@@ -22,11 +22,22 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="labelComputerName">
-     <property name="text">
-      <string>Model Name</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="labelComputerName">
+       <property name="text">
+        <string>Model Name</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelModelNameError">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QLineEdit" name="lineEditComputerName">
@@ -36,11 +47,22 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="labelComputerMakeYear">
-     <property name="text">
-      <string>Make year</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="labelComputerMakeYear">
+       <property name="text">
+        <string>Make year</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelMakeYearError">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QLineEdit" name="lineEditMakeYear">
@@ -69,7 +91,7 @@
    <item>
     <widget class="QPushButton" name="pushButtonSaveComputer">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="text">
       <string>Save Computer</string>
