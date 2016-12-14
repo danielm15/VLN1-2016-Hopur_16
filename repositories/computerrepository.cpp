@@ -89,7 +89,15 @@ bool ComputerRepository::removeComputer(ComputerModel model)
     query.prepare("DELETE FROM Computers WHERE ComputerID = :id");
     query.bindValue(":id", model.getId());
 
-    return query.exec();
+    if (!query.exec())
+        return false;
+
+    // Cascade GC_Join
+    query.prepare("DELETE FROM GC_Join WHERE ComputerID = :computer");
+    query.bindValue(":computer", QString::number(model.getId()));
+    query.exec();
+
+    return true;
 }
 
 bool ComputerRepository::updateComputer(ComputerModel model)

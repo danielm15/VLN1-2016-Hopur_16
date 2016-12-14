@@ -67,7 +67,7 @@ private:
     ComputerService _computerService;
 
     vector<GeniusModel> currentlyDisplayedGeniuses;
-    vector<ComputerModel> currentlyDisplayedComputer;
+    vector<ComputerModel> currentlyDisplayedComputers;
 };
 
 #endif // MAINWINDOW_H
