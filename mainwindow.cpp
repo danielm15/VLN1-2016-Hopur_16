@@ -236,8 +236,10 @@ void MainWindow::on_clearComputerSelection_clicked()
     displayAllComputerDetails();
 }
 
+
 void MainWindow::on_geniusDetailsTable_cellChanged(int row, int column)
 {
+    /*
     GeniusModel genius = currentlyDisplayedGeniuses.at(row);
     bool hasError = false;
 
@@ -261,7 +263,6 @@ void MainWindow::on_geniusDetailsTable_cellChanged(int row, int column)
     }
     else if (column == 2 && !hasError && checkIfYearIsValid(changedCell))
     {
-
         birthYear = changedCell.toUInt();
     }
     else if (column == 3 && !hasError && checkIfYearIsValid(changedCell))
@@ -283,6 +284,7 @@ void MainWindow::on_geniusDetailsTable_cellChanged(int row, int column)
 
     if(_geniusService.update(genius))
         ui->statusBar->showMessage("Update success", 3000);
+        */
 }
 
 /**
@@ -353,4 +355,55 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
     {
         ui->statusBar->showMessage("Error: Selected Computer was not deleted", 2000);
     }
+}
+
+void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
+{
+    /*
+    ComputerModel computer = currentlyDisplayedComputers.at(item->row());
+    bool hasError = false;
+
+    string modelName = computer.getModelName();
+    string type = computer.getType();
+    unsigned int makeYear = computer.getMakeYear();
+    bool built = computer.getBuilt();
+    int column = item->column();
+
+    QString changedCell = ui->computerDetailsTable->item(item->row(), item->column())->text();
+
+    if (changedCell.isEmpty())
+        hasError = true;
+
+    if (column == 0 && !hasError)
+    {
+        modelName = changedCell.toStdString();
+    }
+    else if (column == 1 && !hasError && checkIfYearIsValid(changedCell))
+    {
+        makeYear = changedCell.toUInt();
+    }
+    else if (column == 2 && !hasError )
+    {
+        type = changedCell.toStdString();
+    }
+    else if (column == 3 && !hasError)
+    {
+
+    }
+    else
+    {
+        hasError = true;
+    }
+
+    if (hasError)
+    {
+        ui->statusBar->showMessage("Couldn't update model, check your input!", 3000);
+        return;
+    }
+
+    computer.update(modelName, makeYear, type, built);
+
+    if(_computerService.update(computer))
+        ui->statusBar->showMessage("Update success", 3000);
+    */
 }

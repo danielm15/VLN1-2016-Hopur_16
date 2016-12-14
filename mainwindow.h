@@ -6,6 +6,7 @@
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
 #include <QMouseEvent>
+#include <QTableWidgetItem>
 
 #include <vector>
 
@@ -52,6 +53,8 @@ private slots:
     void on_pushButtonDeleteGenius_clicked();
 
     void on_pushButtonDeleteComputer_clicked();
+
+    void on_computerDetailsTable_itemChanged(QTableWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
