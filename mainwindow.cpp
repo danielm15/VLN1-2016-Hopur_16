@@ -32,6 +32,8 @@ void MainWindow::displayGeniuses(vector<GeniusModel> geniuses)
         GeniusModel genius = geniuses.at(i);
         ui->listGeniuses->addItem(QString::fromStdString(genius.getName()));
     }
+
+    currentlyDisplayedGeniuses = geniuses;
 }
 
 void MainWindow::displayAllComputers()
@@ -49,6 +51,9 @@ void MainWindow::displayComputers(vector<ComputerModel> computers)
         ComputerModel computer = computers.at(i);
         ui->listComputers->addItem(QString::fromStdString(computer.getModelName()));
     }
+
+    currentlyDisplayedComputers = computers;
+
 }
 
 void MainWindow::displayAllGeniusDetails()
@@ -80,6 +85,8 @@ void MainWindow::displayGeniusDetails(vector<GeniusModel> geniuses)
         ui->geniusDetailsTable->setItem(row, 2, new QTableWidgetItem(BirthYear));
         ui->geniusDetailsTable->setItem(row, 3, new QTableWidgetItem(DeathYear));
     }
+
+    currentlyDisplayedGeniuses = geniuses;
 }
 
 void MainWindow::displayAllComputerDetails()
@@ -113,6 +120,8 @@ void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
         ui->computerDetailsTable->setItem(row, 2, new QTableWidgetItem(type));
         ui->computerDetailsTable->setItem(row, 3, new QTableWidgetItem(built));
     }
+
+    currentlyDisplayedComputers = computers;
 }
 
 void MainWindow::on_pushButtonAddGenius_clicked()
@@ -145,25 +154,25 @@ void MainWindow::on_lineEditComputerFilter_textChanged(const QString &arg1)
 {
     string input = ui->lineEditComputerFilter->text().toStdString();
 
-    vector<ComputerModel> computers = _computerService.find(input);
-    displayComputers(computers);
-    displayComputerDetails(computers);
+    currentlyDisplayedComputers = _computerService.find(input);
+    displayComputers(currentlyDisplayedComputers);
+    displayComputerDetails(currentlyDisplayedComputers);
 }
 
 void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
 {
     string input = ui->lineEditGeniusFilter->text().toStdString();
 
-    vector<GeniusModel> geniuses = _geniusService.find(input);
-    displayGeniuses(geniuses);
-    displayGeniusDetails(geniuses);
+    currentlyDisplayedGeniuses = _geniusService.find(input);
+    displayGeniuses(currentlyDisplayedGeniuses);
+    displayGeniusDetails(currentlyDisplayedGeniuses);
 }
 
 void MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
 {
     int clicked = ui->listGeniuses->currentIndex().row();
 
-    vector<GeniusModel> geniuses = _geniusService.getGenius();
+    vector<GeniusModel> geniuses = currentlyDisplayedGeniuses;
 
     GeniusModel genius = geniuses.at(clicked);
 
@@ -180,13 +189,15 @@ void MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
     ui->geniusDetailsTable->setItem(0, 1, new QTableWidgetItem(gender));
     ui->geniusDetailsTable->setItem(0, 2, new QTableWidgetItem(BirthYear));
     ui->geniusDetailsTable->setItem(0, 3, new QTableWidgetItem(DeathYear));
+
+    currentlyDisplayedGeniuses = geniuses;
 }
 
 void MainWindow::on_listComputers_clicked(const QModelIndex &index)
 {
     int clicked = ui->listComputers->currentIndex().row();
 
-    vector<ComputerModel> computers = _computerService.getComputer();
+    vector<ComputerModel> computers = currentlyDisplayedComputers;
 
     ComputerModel computer = computers.at(clicked);
 
@@ -206,6 +217,7 @@ void MainWindow::on_listComputers_clicked(const QModelIndex &index)
     ui->computerDetailsTable->setItem(0, 2, new QTableWidgetItem(type));
     ui->computerDetailsTable->setItem(0, 3, new QTableWidgetItem(built));
 
+    currentlyDisplayedComputers = computers;
 }
 
 void MainWindow::on_clearGeniusSelection_clicked()
