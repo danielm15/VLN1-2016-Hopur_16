@@ -39,13 +39,17 @@ private slots:
 
     void on_lineEditGeniusFilter_textChanged(const QString &arg1);
 
-    void on_listGeniuses_clicked(const QModelIndex &index);
+    bool on_listGeniuses_clicked(const QModelIndex &index);
 
     void on_listComputers_clicked(const QModelIndex &index);
 
     void on_clearGeniusSelection_clicked();
 
     void on_clearComputerSelection_clicked();
+
+    void on_pushButtonDeleteGenius_clicked();
+
+    void on_pushButtonDeleteComputer_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -61,6 +65,9 @@ private:
 
     GeniusService _geniusService;
     ComputerService _computerService;
+
+    vector<GeniusModel> currentlyDisplayedGeniuses;
+    vector<ComputerModel> currentlyDisplayedComputer;
 };
 
 #endif // MAINWINDOW_H
