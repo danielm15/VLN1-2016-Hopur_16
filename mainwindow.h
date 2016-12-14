@@ -30,8 +30,6 @@ private slots:
 
     void on_pushButtonAddComputer_clicked();
 
-    void onListGeniusesItemClicked(QListWidgetItem* item);
-    void onListComputersItemClicked(QListWidgetItem* item);
     void on_actionAddGenius_triggered();
 
     void on_actionAddComputer_triggered();
@@ -40,6 +38,10 @@ private slots:
 
     void on_lineEditGeniusFilter_textChanged(const QString &arg1);
 
+    void on_listGeniuses_clicked(const QModelIndex &index);
+
+    void on_listComputers_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
 
@@ -47,7 +49,8 @@ private:
     void displayGeniuses(vector<GeniusModel> geniuses);
     void displayAllComputers();
     void displayComputers(vector<ComputerModel> computers);
-
+    void displayGeniusDetails();
+    void displayComputerDetails();
 
     GeniusService _geniusService;
     ComputerService _computerService;
