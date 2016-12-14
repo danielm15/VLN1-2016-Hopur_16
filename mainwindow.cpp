@@ -24,7 +24,11 @@ MainWindow::~MainWindow()
 void MainWindow::displayAllGeniuses()
 {
     vector<GeniusModel> geniuses = _geniusService.getGenius();
+    displayGeniuses(geniuses);
+}
 
+void MainWindow::displayGeniuses(vector<GeniusModel> geniuses)
+{
     ui->listGeniuses->clear();
 
     for(unsigned int i = 0; i < geniuses.size(); i++)
@@ -37,7 +41,11 @@ void MainWindow::displayAllGeniuses()
 void MainWindow::displayAllComputers()
 {
     vector<ComputerModel> computers = _computerService.getComputer();
+    displayComputers(computers);
+}
 
+void MainWindow::displayComputers(vector<ComputerModel> computers)
+{
     ui->listComputers->clear();
 
     for(unsigned int i = 0; i < computers.size(); i++)
@@ -81,4 +89,20 @@ void MainWindow::on_actionAddGenius_triggered()
 void MainWindow::on_actionAddComputer_triggered()
 {
     on_pushButtonAddComputer_clicked();
+}
+
+void MainWindow::on_lineEditComputerFilter_textChanged(const QString &arg1)
+{
+    string input = ui->lineEditComputerFilter->text().toStdString();
+
+    vector<ComputerModel> computers = _computerService.find(input);
+    displayComputers(computers);
+}
+
+void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
+{
+    string input = ui->lineEditGeniusFilter->text().toStdString();
+
+    vector<GeniusModel> geniuses = _geniusService.find(input);
+    displayGeniuses(geniuses);
 }

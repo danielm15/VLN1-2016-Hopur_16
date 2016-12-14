@@ -42,7 +42,14 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEditGeniusFilter"/>
+          <widget class="QLineEdit" name="lineEditGeniusFilter">
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Search for genius</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QListWidget" name="listGeniuses"/>
@@ -112,7 +119,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEditComputerFilter"/>
+          <widget class="QLineEdit" name="lineEditComputerFilter">
+           <property name="placeholderText">
+            <string>Search for computer</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QListWidget" name="listComputers"/>
@@ -170,7 +181,7 @@
      <x>0</x>
      <y>0</y>
      <width>969</width>
-     <height>17</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

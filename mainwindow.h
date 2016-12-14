@@ -36,11 +36,17 @@ private slots:
 
     void on_actionAddComputer_triggered();
 
+    void on_lineEditComputerFilter_textChanged(const QString &arg1);
+
+    void on_lineEditGeniusFilter_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 
     void displayAllGeniuses();
+    void displayGeniuses(vector<GeniusModel> geniuses);
     void displayAllComputers();
+    void displayComputers(vector<ComputerModel> computers);
 
 
     GeniusService _geniusService;
