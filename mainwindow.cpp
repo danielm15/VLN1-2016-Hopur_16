@@ -231,3 +231,78 @@ void MainWindow::on_clearComputerSelection_clicked()
     ui->lineEditComputerFilter->clear();
     displayAllComputerDetails();
 }
+
+void MainWindow::on_geniusDetailsTable_cellChanged(int row, int column)
+{
+    GeniusModel genius = currentlyDisplayedGeniuses.at(row);
+    bool hasError = false;
+
+    string name = genius.getName();
+    string gender = genius.getGender();
+    unsigned int birthYear = genius.getBirthYear();
+    unsigned int deathYear = genius.getDeathYear();
+
+    QString changedCell = ui->geniusDetailsTable->item(row, column)->text();
+
+    if (changedCell.isEmpty())
+        hasError = true;
+
+    if (column == 0 && !hasError)
+    {
+        name = changedCell.toStdString();
+    }
+    else if (column == 1 && !hasError)
+    {
+        gender = changedCell.toStdString();
+    }
+    else if (column == 2 && !hasError && checkIfYearIsValid(changedCell))
+    {
+
+        birthYear = changedCell.toUInt();
+    }
+    else if (column == 3 && !hasError && checkIfYearIsValid(changedCell))
+    {
+        deathYear = changedCell.toUInt();
+    }
+    else
+    {
+        hasError = true;
+    }
+
+    if (hasError)
+    {
+        ui->statusBar->showMessage("Couldn't update model, check your input!", 3000);
+        return;
+    }
+
+    genius.update(name, gender, birthYear, deathYear);
+
+    if(_geniusService.update(genius))
+        ui->statusBar->showMessage("Update success", 3000);
+}
+
+/**
+ * @brief AddGenius::checkIfYearIsValid Validates if year string is 4 digits and does not have zero as a first digit, Year cannot be higher than current year
+ * @param year
+ * @return true if year is valid, else false
+ */
+bool MainWindow::checkIfYearIsValid(QString year)
+{
+    unsigned int currentYear = QDate::currentDate().year();
+
+    if (year.length() != 4)
+        return false;
+
+    for (int i = 0; i < year.length(); i++)
+    {
+        if(!year[i].isDigit())
+            return false;
+        else if (i == 0 && year[i] == '0')
+            return false;
+    }
+
+    if (year.toUInt() > currentYear)
+        return false;
+
+    return true;
+}
