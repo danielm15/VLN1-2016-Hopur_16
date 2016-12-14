@@ -168,8 +168,10 @@ void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
     displayGeniusDetails(currentlyDisplayedGeniuses);
 }
 
-void MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
+bool MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
 {
+    ui->pushButtonDeleteGenius->setEnabled(true);
+
     int clicked = ui->listGeniuses->currentIndex().row();
 
     vector<GeniusModel> geniuses = currentlyDisplayedGeniuses;
@@ -195,6 +197,8 @@ void MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
 
 void MainWindow::on_listComputers_clicked(const QModelIndex &index)
 {
+    ui->pushButtonDeleteComputer->setEnabled(true);
+
     int clicked = ui->listComputers->currentIndex().row();
 
     vector<ComputerModel> computers = currentlyDisplayedComputers;
@@ -305,4 +309,47 @@ bool MainWindow::checkIfYearIsValid(QString year)
         return false;
 
     return true;
+
+void MainWindow::on_pushButtonDeleteGenius_clicked()
+{
+    int currentlySelectedGeniusIndex = ui->listGeniuses->currentIndex().row();
+    GeniusModel currentlySelectedGenius = currentlyDisplayedGeniuses.at(currentlySelectedGeniusIndex);
+    bool success = _geniusService.remove(currentlySelectedGenius);
+
+    if (success)
+    {
+        ui->statusBar->showMessage("Successfully deleted the selected Genius", 2000);
+
+        ui->pushButtonDeleteGenius->setEnabled(false);
+
+        displayAllGeniuses();
+
+        displayGeniusDetails(currentlyDisplayedGeniuses);
+    }
+    else
+    {
+        ui->statusBar->showMessage("Error: Selected Genius was not deleted", 2000);
+    }
+}
+
+void MainWindow::on_pushButtonDeleteComputer_clicked()
+{
+    int currentlySelectedComputerIndex = ui->listComputers->currentIndex().row();
+    ComputerModel currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComputerIndex);
+    bool success = _computerService.remove(currentlySelectedComputer);
+
+    if (success)
+    {
+        ui->statusBar->showMessage("Successfully deleted the selected Computer", 2000);
+
+        ui->pushButtonDeleteComputer->setEnabled(false);
+
+        displayAllComputers();
+
+        displayComputerDetails(currentlyDisplayedComputers);
+    }
+    else
+    {
+        ui->statusBar->showMessage("Error: Selected Computer was not deleted", 2000);
+    }
 }
