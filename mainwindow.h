@@ -5,6 +5,7 @@
 #include <QListWidget>
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
+#include <services/computergeniusservice.h>
 #include <QMouseEvent>
 #include <QTableWidgetItem>
 
@@ -36,9 +37,9 @@ private slots:
 
     void on_actionAddComputer_triggered();
 
-    void on_lineEditComputerFilter_textChanged(const QString &arg1);
+    void on_lineEditComputerFilter_textChanged();
 
-    void on_lineEditGeniusFilter_textChanged(const QString &arg1);
+    void on_lineEditGeniusFilter_textChanged();
 
     void on_listGeniuses_clicked();
 
@@ -67,6 +68,8 @@ private:
     void displayGeniusDetails(vector<GeniusModel> geniuses);
     void displayAllComputerDetails();
     void displayComputerDetails(vector<ComputerModel> computers);
+    void displayAllRelations();
+    void displayRelations(vector<GeniusModel> geniuses);
     bool checkIfYearIsValid(QString year);
 
     GeniusService _geniusService;
