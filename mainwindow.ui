@@ -21,7 +21,7 @@
        <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <attribute name="title">
@@ -240,7 +240,7 @@
        <attribute name="title">
         <string>Relations</string>
        </attribute>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>30</x>
@@ -276,6 +276,16 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QPushButton" name="pushButtonEditRelation">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Edit relation</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </widget>
@@ -289,7 +299,7 @@
      <x>0</x>
      <y>0</y>
      <width>1114</width>
-     <height>17</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

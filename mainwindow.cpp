@@ -163,6 +163,8 @@ void MainWindow::displayRelations(vector<GeniusModel> geniuses)
             treeGenius->addChild(treeComputer);
         }
     }
+
+    currentlyDisplayedGeniusRelations = geniuses;
 }
 
 void MainWindow::on_pushButtonAddGenius_clicked()
@@ -439,3 +441,16 @@ void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
         ui->statusBar->showMessage("Update success", 3000);
 */
 }
+
+void MainWindow::on_pushButtonEditRelation_clicked()
+{
+    EditRelation editDialog;
+
+    editDialog.exec();
+}
+
+void MainWindow::on_geniusComputerRelationWidget_clicked()
+{
+    ui->pushButtonEditRelation->setEnabled(true);
+}
+
