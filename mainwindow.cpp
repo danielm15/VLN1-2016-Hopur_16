@@ -39,6 +39,7 @@ void MainWindow::displayGeniuses(vector<GeniusModel> geniuses)
 void MainWindow::displayAllComputers()
 {
     vector<ComputerModel> computers = _computerService.getComputer();
+    currentlyDisplayedComputers = computers;
     displayComputers(computers);
 }
 
@@ -59,6 +60,7 @@ void MainWindow::displayComputers(vector<ComputerModel> computers)
 void MainWindow::displayAllGeniusDetails()
 {
    vector<GeniusModel> geniuses = _geniusService.getGenius();
+   currentlyDisplayedGeniuses = geniuses;
    displayGeniusDetails(geniuses);
 }
 
