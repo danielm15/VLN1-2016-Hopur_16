@@ -129,7 +129,12 @@ void MainWindow::on_pushButtonAddGenius_clicked()
    AddGenius geniusDialog;
    int returnValueFromAddGenius = geniusDialog.exec();
    if (returnValueFromAddGenius == 1)
+   {
+       displayAllGeniuses();
+       displayGeniusDetails(currentlyDisplayedGeniuses);
+
        ui->statusBar->showMessage("Successfully added new genius", 2000);
+   }
 }
 
 void MainWindow::on_pushButtonAddComputer_clicked()
@@ -137,7 +142,12 @@ void MainWindow::on_pushButtonAddComputer_clicked()
     AddComputer computerDialog;
     int returnValueFromAddComputer = computerDialog.exec();
     if (returnValueFromAddComputer == 1)
+    {
+        displayAllComputers();
+        displayComputerDetails(currentlyDisplayedComputers);
+
         ui->statusBar->showMessage("Successfully added new computer", 2000);
+    }
 }
 
 void MainWindow::on_actionAddGenius_triggered()
@@ -168,8 +178,10 @@ void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
     displayGeniusDetails(currentlyDisplayedGeniuses);
 }
 
-void MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
+bool MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
 {
+    ui->pushButtonDeleteGenius->setEnabled(true);
+
     int clicked = ui->listGeniuses->currentIndex().row();
 
     vector<GeniusModel> geniuses = currentlyDisplayedGeniuses;
@@ -195,6 +207,8 @@ void MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
 
 void MainWindow::on_listComputers_clicked(const QModelIndex &index)
 {
+    ui->pushButtonDeleteComputer->setEnabled(true);
+
     int clicked = ui->listComputers->currentIndex().row();
 
     vector<ComputerModel> computers = currentlyDisplayedComputers;
@@ -231,4 +245,174 @@ void MainWindow::on_clearComputerSelection_clicked()
 {
     ui->lineEditComputerFilter->clear();
     displayAllComputerDetails();
+}
+
+
+void MainWindow::on_geniusDetailsTable_cellChanged(int row, int column)
+{
+    /*
+    GeniusModel genius = currentlyDisplayedGeniuses.at(row);
+    bool hasError = false;
+
+    string name = genius.getName();
+    string gender = genius.getGender();
+    unsigned int birthYear = genius.getBirthYear();
+    unsigned int deathYear = genius.getDeathYear();
+
+    QString changedCell = ui->geniusDetailsTable->item(row, column)->text();
+
+    if (changedCell.isEmpty())
+        hasError = true;
+
+    if (column == 0 && !hasError)
+    {
+        name = changedCell.toStdString();
+    }
+    else if (column == 1 && !hasError)
+    {
+        gender = changedCell.toStdString();
+    }
+    else if (column == 2 && !hasError && checkIfYearIsValid(changedCell))
+    {
+        birthYear = changedCell.toUInt();
+    }
+    else if (column == 3 && !hasError && checkIfYearIsValid(changedCell))
+    {
+        deathYear = changedCell.toUInt();
+    }
+    else
+    {
+        hasError = true;
+    }
+
+    if (hasError)
+    {
+        ui->statusBar->showMessage("Couldn't update model, check your input!", 3000);
+        return;
+    }
+
+    genius.update(name, gender, birthYear, deathYear);
+
+    if(_geniusService.update(genius))
+        ui->statusBar->showMessage("Update success", 3000);
+        */
+}
+
+/**
+ * @brief AddGenius::checkIfYearIsValid Validates if year string is 4 digits and does not have zero as a first digit, Year cannot be higher than current year
+ * @param year
+ * @return true if year is valid, else false
+ */
+bool MainWindow::checkIfYearIsValid(QString year)
+{
+    unsigned int currentYear = QDate::currentDate().year();
+
+    if (year.length() != 4)
+        return false;
+
+    for (int i = 0; i < year.length(); i++)
+    {
+        if(!year[i].isDigit())
+            return false;
+        else if (i == 0 && year[i] == '0')
+            return false;
+    }
+
+    if (year.toUInt() > currentYear)
+        return false;
+
+    return true;
+}
+
+void MainWindow::on_pushButtonDeleteGenius_clicked()
+{
+    int currentlySelectedGeniusIndex = ui->listGeniuses->currentIndex().row();
+    GeniusModel currentlySelectedGenius = currentlyDisplayedGeniuses.at(currentlySelectedGeniusIndex);
+    bool success = _geniusService.remove(currentlySelectedGenius);
+
+    if (success)
+    {
+        ui->statusBar->showMessage("Successfully deleted the selected Genius", 2000);
+
+        ui->pushButtonDeleteGenius->setEnabled(false);
+
+        displayAllGeniuses();
+        displayGeniusDetails(currentlyDisplayedGeniuses);
+    }
+    else
+    {
+        ui->statusBar->showMessage("Error: Selected Genius was not deleted", 2000);
+    }
+}
+
+void MainWindow::on_pushButtonDeleteComputer_clicked()
+{
+    int currentlySelectedComputerIndex = ui->listComputers->currentIndex().row();
+    ComputerModel currentlySelectedComputer = currentlyDisplayedComputers.at(currentlySelectedComputerIndex);
+    bool success = _computerService.remove(currentlySelectedComputer);
+
+    if (success)
+    {
+        ui->statusBar->showMessage("Successfully deleted the selected Computer", 2000);
+
+        ui->pushButtonDeleteComputer->setEnabled(false);
+
+        displayAllComputers();
+        displayComputerDetails(currentlyDisplayedComputers);
+    }
+    else
+    {
+        ui->statusBar->showMessage("Error: Selected Computer was not deleted", 2000);
+    }
+}
+
+void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
+{
+    /*
+    ComputerModel computer = currentlyDisplayedComputers.at(item->row());
+    bool hasError = false;
+
+    string modelName = computer.getModelName();
+    string type = computer.getType();
+    unsigned int makeYear = computer.getMakeYear();
+    bool built = computer.getBuilt();
+    int column = item->column();
+
+    QString changedCell = ui->computerDetailsTable->item(item->row(), item->column())->text();
+
+    if (changedCell.isEmpty())
+        hasError = true;
+
+    if (column == 0 && !hasError)
+    {
+        modelName = changedCell.toStdString();
+    }
+    else if (column == 1 && !hasError && checkIfYearIsValid(changedCell))
+    {
+        makeYear = changedCell.toUInt();
+    }
+    else if (column == 2 && !hasError )
+    {
+        type = changedCell.toStdString();
+    }
+    else if (column == 3 && !hasError)
+    {
+
+    }
+    else
+    {
+        hasError = true;
+    }
+
+    if (hasError)
+    {
+        ui->statusBar->showMessage("Couldn't update model, check your input!", 3000);
+        return;
+    }
+
+    computer.update(modelName, makeYear, type, built);
+
+    if(_computerService.update(computer))
+        ui->statusBar->showMessage("Update success", 3000);
+    */
 }
