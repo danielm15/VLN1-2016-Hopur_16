@@ -6,7 +6,9 @@
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
 #include <edithcpdialog.h>
+#include <services/computergeniusservice.h>
 #include <QMouseEvent>
+#include <QTableWidgetItem>
 
 #include <vector>
 
@@ -36,13 +38,13 @@ private slots:
 
     void on_actionAddComputer_triggered();
 
-    void on_lineEditComputerFilter_textChanged(const QString &arg1);
+    void on_lineEditComputerFilter_textChanged();
 
-    void on_lineEditGeniusFilter_textChanged(const QString &arg1);
+    void on_lineEditGeniusFilter_textChanged();
 
-    void on_listGeniuses_clicked(const QModelIndex &index);
+    void on_listGeniuses_clicked();
 
-    void on_listComputers_clicked(const QModelIndex &index);
+    void on_listComputers_clicked();
 
     void on_clearGeniusSelection_clicked();
 
@@ -51,6 +53,14 @@ private slots:
     void on_listGeniuses_doubleClicked(const QModelIndex &index);
 
     void on_listComputers_doubleClicked(const QModelIndex &index);
+
+    void on_geniusDetailsTable_cellChanged(int row, int column);
+
+    void on_pushButtonDeleteGenius_clicked();
+
+    void on_pushButtonDeleteComputer_clicked();
+
+    void on_computerDetailsTable_itemChanged(QTableWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
@@ -63,12 +73,17 @@ private:
     void displayGeniusDetails(vector<GeniusModel> geniuses);
     void displayAllComputerDetails();
     void displayComputerDetails(vector<ComputerModel> computers);
+    void displayAllRelations();
+    void displayRelations(vector<GeniusModel> geniuses);
+    bool checkIfYearIsValid(QString year);
 
     GeniusService _geniusService;
     ComputerService _computerService;
 
     vector<GeniusModel> currentlyDisplayedGeniuses;
+    vector<GeniusModel> currentlyDisplayedGeniusDetails;
     vector<ComputerModel> currentlyDisplayedComputers;
+    vector<ComputerModel> currentlyDisplayedComputerDetails;
 };
 
 #endif // MAINWINDOW_H

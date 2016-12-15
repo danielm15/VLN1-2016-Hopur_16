@@ -21,6 +21,10 @@ public:
 private slots:
     void on_pushButtonSaveComputer_clicked();
 
+    void on_lineEditMakeYear_editingFinished();
+
+    void on_checkBoxComputerBuilt_toggled(bool checked);
+
 private:
     Ui::AddComputer *ui;
     ComputerService _computerService;

@@ -9,6 +9,9 @@ AddGenius::AddGenius(QWidget *parent) :
 
     ui->comboBoxGeniusGender->addItem("Male");
     ui->comboBoxGeniusGender->addItem("Female");
+
+    _computers = _computerService.getComputer();
+    updateComputerComboBox(_computers);
 }
 
 AddGenius::~AddGenius()
@@ -57,7 +60,7 @@ void AddGenius::on_pushButtonSaveGenius_clicked()
     birthYear = birthYearStr.toUInt();
     deathYear = deathYearStr.toUInt();
 
-    if (birthYear < deathYear)
+    if (birthYear > deathYear && deathYear != 0)
     {
         ui->labelGeniusDeathYearError->setText("<span style='color:red'>Nobody can die before he is born!</span>");
         hasError = true;
@@ -69,6 +72,25 @@ void AddGenius::on_pushButtonSaveGenius_clicked()
     name[0] = name[0].toUpper();
 
     saved = _geniusService.addGenius(name.toStdString(), gender[0], birthYear, deathYear);
+
+    if (saved)
+    {
+        GeniusModel genius;
+
+        vector<GeniusModel> geniuses = _geniusService.find(name.toStdString());
+        for (size_t i = 0; i < geniuses.size(); i++)
+        {
+            genius = geniuses.at(i);
+            if (genius.getName() == name.toStdString() && genius.getGender() == gender && genius.getBirthYear() == birthYear && genius.getDeathYear() == deathYear)
+                break;
+        }
+
+        for (size_t i = 0; i < _geniusComputers.size(); i++)
+        {
+            ComputerModel computer = _geniusComputers.at(i);
+            _relationships.getRelationship(computer, genius);
+        }
+    }
 
     if (saved)
         this->done(1);
@@ -100,4 +122,62 @@ bool AddGenius::checkIfYearIsValid(QString year)
         return false;
 
     return true;
+}
+
+void AddGenius::updateComputerComboBox(vector<ComputerModel> computers)
+{
+    ui->comboBoxComputers->addItem("");
+    for (size_t i = 0; i < computers.size(); i++)
+    {
+        ComputerModel computer = computers.at(i);
+        QString name = QString::fromStdString(computer.getModelName());
+        ui->comboBoxComputers->addItem(name);
+    }
+}
+
+void AddGenius::updateComputerList(vector<ComputerModel> computers)
+{
+    ui->listWidgetComputers->clear();
+
+    for (size_t i = 0; i < computers.size(); i++)
+    {
+        ComputerModel computer = computers.at(i);
+        QString name = QString::fromStdString(computer.getModelName());
+        ui->listWidgetComputers->addItem(name);
+    }
+}
+
+void AddGenius::on_comboBoxComputers_currentIndexChanged(int index)
+{
+    if (index == 0)
+        return;
+
+    ComputerModel computer = _computers.at(index - 1);
+    _computers.erase(_computers.begin() + index - 1);
+    ui->comboBoxComputers->setCurrentIndex(0);
+    ui->comboBoxComputers->removeItem(index);
+
+    _geniusComputers.push_back(computer);
+    updateComputerList(_geniusComputers);
+}
+
+void AddGenius::on_listWidgetComputers_clicked(const QModelIndex &index)
+{
+    ui->buttonRemoveSelectedComputer->setEnabled(true);
+}
+
+void AddGenius::on_buttonRemoveSelectedComputer_clicked()
+{
+    int index = ui->listWidgetComputers->currentIndex().row();
+
+    ComputerModel computer = _geniusComputers.at(index);
+    QString name = QString::fromStdString(computer.getModelName());
+
+    _geniusComputers.erase(_geniusComputers.begin() + index);
+
+    _computers.push_back(computer);
+    ui->comboBoxComputers->addItem(name);
+
+    updateComputerList(_geniusComputers);
+    ui->buttonRemoveSelectedComputer->setEnabled(false);
 }
