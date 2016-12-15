@@ -138,6 +138,7 @@ void MainWindow::on_pushButtonAddGenius_clicked()
        displayAllGeniuses();
        displayGeniusDetails(currentlyDisplayedGeniuses);
 
+       ui->pushButtonDeleteGenius->setEnabled(false);
        ui->statusBar->showMessage("Successfully added new genius", 2000);
    }
 }
@@ -151,6 +152,7 @@ void MainWindow::on_pushButtonAddComputer_clicked()
         displayAllComputers();
         displayComputerDetails(currentlyDisplayedComputers);
 
+        ui->pushButtonDeleteComputer->setEnabled(false);
         ui->statusBar->showMessage("Successfully added new computer", 2000);
     }
 }
@@ -167,6 +169,8 @@ void MainWindow::on_actionAddComputer_triggered()
 
 void MainWindow::on_lineEditComputerFilter_textChanged(const QString &arg1)
 {
+    ui->pushButtonDeleteComputer->setEnabled(false);
+
     string input = ui->lineEditComputerFilter->text().toStdString();
 
     currentlyDisplayedComputers = _computerService.find(input);
@@ -176,6 +180,8 @@ void MainWindow::on_lineEditComputerFilter_textChanged(const QString &arg1)
 
 void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
 {
+    ui->pushButtonDeleteGenius->setEnabled(false);
+
     string input = ui->lineEditGeniusFilter->text().toStdString();
 
     currentlyDisplayedGeniuses = _geniusService.find(input);
@@ -313,8 +319,8 @@ void MainWindow::on_pushButtonDeleteGenius_clicked()
     if (success)
     {
         ui->statusBar->showMessage("Successfully deleted the selected Genius", 2000);
-
         ui->pushButtonDeleteGenius->setEnabled(false);
+        ui->lineEditGeniusFilter->clear();
 
         displayAllGeniuses();
         displayGeniusDetails(currentlyDisplayedGeniuses);
@@ -334,8 +340,8 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
     if (success)
     {
         ui->statusBar->showMessage("Successfully deleted the selected Computer", 2000);
-
         ui->pushButtonDeleteComputer->setEnabled(false);
+        ui->lineEditComputerFilter->clear();
 
         displayAllComputers();
         displayComputerDetails(currentlyDisplayedComputers);
