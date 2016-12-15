@@ -211,13 +211,17 @@ void MainWindow::on_listComputers_clicked()
 void MainWindow::on_clearGeniusSelection_clicked()
 {
     ui->lineEditGeniusFilter->clear();
+    ui->geniusDetailsTable->setSortingEnabled(false);
     displayAllGeniusDetails();
+    ui->geniusDetailsTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_clearComputerSelection_clicked()
 {
     ui->lineEditComputerFilter->clear();
+    ui->computerDetailsTable->setSortingEnabled(false);
     displayAllComputerDetails();
+    ui->computerDetailsTable->setSortingEnabled(true);
 }
 
 
