@@ -130,10 +130,6 @@
          </layout>
         </item>
        </layout>
-       <zorder>geniusDetailsTable</zorder>
-       <zorder>clearGeniusSelection</zorder>
-       <zorder>labelComputerDetails</zorder>
-       <zorder>verticalLayoutWidget</zorder>
       </widget>
       <widget class="QWidget" name="tabComputers">
        <attribute name="title">
@@ -250,7 +246,7 @@
      <x>0</x>
      <y>0</y>
      <width>1114</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -273,7 +269,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAddGenius">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/images/addgenius.png</normaloff>:/icons/images/addgenius.png</iconset>
    </property>
    <property name="text">
@@ -282,7 +278,7 @@
   </action>
   <action name="actionAddComputer">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset>
      <normaloff>:/icons/images/addcomputer.png</normaloff>:/icons/images/addcomputer.png</iconset>
    </property>
    <property name="text">
@@ -291,8 +287,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

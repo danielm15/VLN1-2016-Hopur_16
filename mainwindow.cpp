@@ -231,3 +231,28 @@ void MainWindow::on_clearComputerSelection_clicked()
     ui->lineEditComputerFilter->clear();
     displayAllComputerDetails();
 }
+
+void MainWindow::on_listGeniuses_doubleClicked(const QModelIndex &index)
+{
+    edithCpDialog edit;
+    int doubleClicked = ui->listGeniuses->currentIndex().row();
+    GeniusModel selectedGenius = currentlyDisplayedGeniuses[doubleClicked];
+    edit.setGenius(selectedGenius);
+
+    int returnValueFromEditGenius = edit.exec();
+
+    if(returnValueFromEditGenius == 1)
+        ui ->statusBar->showMessage("Succesfully updated Genius", 2000);
+
+}
+
+void MainWindow::on_listComputers_doubleClicked(const QModelIndex &index)
+{
+    edithCpDialog edit;
+
+    int doubleClicked = ui->listComputers->currentIndex().row();
+
+    ComputerModel selectedComputer = currentlyDisplayedComputers[doubleClicked];
+
+    edit.setComputer(selectedComputer);
+}

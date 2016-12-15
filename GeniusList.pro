@@ -24,7 +24,8 @@ SOURCES += main.cpp\
         repositories/databasemanager.cpp \
         services/computergeniusservice.cpp \
     addcomputer.cpp \
-    addgenius.cpp
+    addgenius.cpp \
+    edithcpdialog.cpp
 
 HEADERS  += mainwindow.h\
             repositories/geniusrepository.h \
@@ -37,11 +38,13 @@ HEADERS  += mainwindow.h\
             repositories/databasemanager.h \
             services/computergeniusservice.h \
     addcomputer.h \
-    addgenius.h
+    addgenius.h \
+    edithcpdialog.h
 
 FORMS    += mainwindow.ui \
     addcomputer.ui \
-    addgenius.ui
+    addgenius.ui \
+    edithcpdialog.ui
 
 RESOURCES += \
     resources.qrc

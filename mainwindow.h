@@ -5,6 +5,7 @@
 #include <QListWidget>
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
+#include <edithcpdialog.h>
 #include <QMouseEvent>
 
 #include <vector>
@@ -46,6 +47,10 @@ private slots:
     void on_clearGeniusSelection_clicked();
 
     void on_clearComputerSelection_clicked();
+
+    void on_listGeniuses_doubleClicked(const QModelIndex &index);
+
+    void on_listComputers_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
