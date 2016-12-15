@@ -40,6 +40,7 @@ void MainWindow::displayGeniuses(vector<GeniusModel> geniuses)
 void MainWindow::displayAllComputers()
 {
     vector<ComputerModel> computers = _computerService.getComputer();
+    currentlyDisplayedComputers = computers;
     displayComputers(computers);
 }
 
@@ -60,6 +61,7 @@ void MainWindow::displayComputers(vector<ComputerModel> computers)
 void MainWindow::displayAllGeniusDetails()
 {
    vector<GeniusModel> geniuses = _geniusService.getGenius();
+   currentlyDisplayedGeniuses = geniuses;
    displayGeniusDetails(geniuses);
 }
 
@@ -110,6 +112,9 @@ void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
         QString MakeYear = QString::number(computer.getMakeYear());
         QString type = QString::fromStdString(computer.getType());
         QString built = QString::number(computer.getBuilt());
+
+        if (MakeYear == "0")
+            MakeYear = "";
 
         if(built == "0")
             built = "N";
@@ -169,6 +174,7 @@ void MainWindow::on_pushButtonAddGenius_clicked()
        displayAllGeniuses();
        displayGeniusDetails(currentlyDisplayedGeniuses);
 
+       ui->pushButtonDeleteGenius->setEnabled(false);
        ui->statusBar->showMessage("Successfully added new genius", 2000);
    }
 }
@@ -182,6 +188,7 @@ void MainWindow::on_pushButtonAddComputer_clicked()
         displayAllComputers();
         displayComputerDetails(currentlyDisplayedComputers);
 
+        ui->pushButtonDeleteComputer->setEnabled(false);
         ui->statusBar->showMessage("Successfully added new computer", 2000);
     }
 }
@@ -198,6 +205,8 @@ void MainWindow::on_actionAddComputer_triggered()
 
 void MainWindow::on_lineEditComputerFilter_textChanged()
 {
+    ui->pushButtonDeleteComputer->setEnabled(false);
+
     string input = ui->lineEditComputerFilter->text().toStdString();
 
     currentlyDisplayedComputers = _computerService.find(input);
@@ -207,6 +216,8 @@ void MainWindow::on_lineEditComputerFilter_textChanged()
 
 void MainWindow::on_lineEditGeniusFilter_textChanged()
 {
+    ui->pushButtonDeleteGenius->setEnabled(false);
+
     string input = ui->lineEditGeniusFilter->text().toStdString();
 
     currentlyDisplayedGeniuses = _geniusService.find(input);
@@ -245,13 +256,17 @@ void MainWindow::on_listComputers_clicked()
 void MainWindow::on_clearGeniusSelection_clicked()
 {
     ui->lineEditGeniusFilter->clear();
+    ui->geniusDetailsTable->setSortingEnabled(false);
     displayAllGeniusDetails();
+    ui->geniusDetailsTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_clearComputerSelection_clicked()
 {
     ui->lineEditComputerFilter->clear();
+    ui->computerDetailsTable->setSortingEnabled(false);
     displayAllComputerDetails();
+    ui->computerDetailsTable->setSortingEnabled(true);
 }
 
 
@@ -340,8 +355,8 @@ void MainWindow::on_pushButtonDeleteGenius_clicked()
     if (success)
     {
         ui->statusBar->showMessage("Successfully deleted the selected Genius", 2000);
-
         ui->pushButtonDeleteGenius->setEnabled(false);
+        ui->lineEditGeniusFilter->clear();
 
         displayAllGeniuses();
         displayGeniusDetails(currentlyDisplayedGeniuses);
@@ -361,8 +376,8 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
     if (success)
     {
         ui->statusBar->showMessage("Successfully deleted the selected Computer", 2000);
-
         ui->pushButtonDeleteComputer->setEnabled(false);
+        ui->lineEditComputerFilter->clear();
 
         displayAllComputers();
         displayComputerDetails(currentlyDisplayedComputers);
