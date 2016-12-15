@@ -21,7 +21,7 @@
        <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <attribute name="title">
@@ -236,6 +236,26 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Relations</string>
+       </attribute>
+       <widget class="QTreeWidget" name="treeWidget">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>60</y>
+          <width>256</width>
+          <height>192</height>
+         </rect>
+        </property>
+        <column>
+         <property name="text">
+          <string notr="true">1</string>
+         </property>
+        </column>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -245,8 +265,6 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1106</width>
-     <height>22</height>
      <width>1114</width>
      <height>26</height>
     </rect>

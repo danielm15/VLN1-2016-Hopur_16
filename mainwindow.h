@@ -40,9 +40,9 @@ private slots:
 
     void on_lineEditGeniusFilter_textChanged(const QString &arg1);
 
-    void on_listGeniuses_clicked(const QModelIndex &index);
+    void on_listGeniuses_clicked();
 
-    void on_listComputers_clicked(const QModelIndex &index);
+    void on_listComputers_clicked();
 
     void on_clearGeniusSelection_clicked();
 
@@ -73,7 +73,9 @@ private:
     ComputerService _computerService;
 
     vector<GeniusModel> currentlyDisplayedGeniuses;
+    vector<GeniusModel> currentlyDisplayedGeniusDetails;
     vector<ComputerModel> currentlyDisplayedComputers;
+    vector<ComputerModel> currentlyDisplayedComputerDetails;
 };
 
 #endif // MAINWINDOW_H
