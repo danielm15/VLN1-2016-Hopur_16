@@ -444,8 +444,15 @@ void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
 void MainWindow::on_pushButtonEditRelation_clicked()
 {
     EditRelation editDialog;
+    int clicked = ui->geniusComputerRelationWidget->currentIndex().row();
 
-    editDialog.exec();
+    GeniusModel selectedGenius = currentlyDisplayedGeniusRelations.at(clicked);
+    editDialog.setGenius(selectedGenius);
+
+    int returnValueFromEditRelation = editDialog.exec();
+
+    if(returnValueFromEditRelation == 1)
+        ui ->statusBar->showMessage("Succesfully updated relation", 2000);
 }
 
 void MainWindow::on_geniusComputerRelationWidget_clicked()
@@ -470,10 +477,7 @@ void MainWindow::on_listGeniuses_doubleClicked()
 void MainWindow::on_listComputers_doubleClicked()
 {
     edithCpDialog edit;
-
     int doubleClicked = ui->listComputers->currentIndex().row();
-
     ComputerModel selectedComputer = currentlyDisplayedComputers[doubleClicked];
-
     edit.setComputer(selectedComputer);
 }
