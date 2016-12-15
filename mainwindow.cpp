@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     displayAllComputers();
     displayAllGeniusDetails();
     displayAllComputerDetails();
+    displayAllRelations();
 }
 
 MainWindow::~MainWindow()
@@ -129,6 +130,41 @@ void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
     currentlyDisplayedComputerDetails = computers;
 }
 
+void MainWindow::displayAllRelations()
+{
+    vector<GeniusModel> geniuses = _geniusService.getGenius();
+    displayRelations(geniuses);
+}
+
+void MainWindow::displayRelations(vector<GeniusModel> geniuses)
+{
+    ui->geniusComputerRelationWidget->clear();
+    ui->geniusComputerRelationWidget->setColumnCount(1);
+    ui->geniusComputerRelationWidget->setHeaderLabels(QStringList() << "Geniuses");
+    vector<ComputerModel> computers;
+
+    for(unsigned int i = 0; i < geniuses.size(); i++)
+    {
+        GeniusModel genius = geniuses.at(i);
+
+        QTreeWidgetItem *treeGenius = new QTreeWidgetItem(ui->geniusComputerRelationWidget);
+        QString name = QString::fromStdString(genius.getName());
+        treeGenius->setText(0, name);
+
+        computers = _geniusService.getAllComputersGeniusBuilt(genius);
+
+        for(unsigned int i = 0; i < computers.size(); i++)
+        {
+            ComputerModel computer = computers.at(i);
+            QTreeWidgetItem *treeComputer = new QTreeWidgetItem();
+
+            QString ModelName = QString::fromStdString(computer.getModelName());
+            treeComputer->setText(0, ModelName);
+            treeGenius->addChild(treeComputer);
+        }
+    }
+}
+
 void MainWindow::on_pushButtonAddGenius_clicked()
 {
    AddGenius geniusDialog;
@@ -167,7 +203,7 @@ void MainWindow::on_actionAddComputer_triggered()
     on_pushButtonAddComputer_clicked();
 }
 
-void MainWindow::on_lineEditComputerFilter_textChanged(const QString &arg1)
+void MainWindow::on_lineEditComputerFilter_textChanged()
 {
     ui->pushButtonDeleteComputer->setEnabled(false);
 
@@ -178,7 +214,7 @@ void MainWindow::on_lineEditComputerFilter_textChanged(const QString &arg1)
     displayComputerDetails(currentlyDisplayedComputers);
 }
 
-void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
+void MainWindow::on_lineEditGeniusFilter_textChanged()
 {
     ui->pushButtonDeleteGenius->setEnabled(false);
 
