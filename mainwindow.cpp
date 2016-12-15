@@ -452,7 +452,11 @@ void MainWindow::on_pushButtonEditRelation_clicked()
     int returnValueFromEditRelation = editDialog.exec();
 
     if(returnValueFromEditRelation == 1)
-        ui ->statusBar->showMessage("Succesfully updated relation", 2000);
+    {
+        ui->statusBar->showMessage("Succesfully updated relation", 2000);
+        ui->pushButtonEditRelation->setEnabled(false);
+    }
+
 }
 
 void MainWindow::on_geniusComputerRelationWidget_clicked()
