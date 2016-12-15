@@ -12,6 +12,9 @@ AddComputer::AddComputer(QWidget *parent) :
     ui->comboBoxComputerType->addItem("Electromechanical");
     ui->comboBoxComputerType->addItem("Electronic");
     ui->comboBoxComputerType->addItem("Integrated circuit");
+
+    _geniuses = _geniusService.getGenius();
+    updateGeniusComboBox(_geniuses);
 }
 
 AddComputer::~AddComputer()
@@ -79,6 +82,27 @@ void AddComputer::on_pushButtonSaveComputer_clicked()
 
     saved = _computerService.addComputer(modelName.toStdString(), makeYear, type.toStdString(), built);
 
+
+    if (saved)
+    {
+        ComputerModel computer;
+
+        vector<ComputerModel> computers = _computerService.find(modelName.toStdString());
+
+        for (size_t i = 0; i < computers.size(); i++)
+        {
+            computer = computers.at(i);
+            if (computer.getModelName() == modelName.toStdString() && computer.getMakeYear() == makeYear && computer.getType() == type.toStdString() && computer.getBuilt() == builtBool)
+                break;
+        }
+
+        for (size_t i = 0; i < _computerGeniuses.size(); i++)
+        {
+            GeniusModel genius = _computerGeniuses.at(i);
+            _relationships.getRelationship(computer, genius);
+        }
+    }
+
     if (saved)
         this->done(1);
     else
@@ -130,4 +154,62 @@ void AddComputer::on_checkBoxComputerBuilt_toggled(bool checked)
     {
         ui->lineEditMakeYear->setText("");
     }
+}
+
+void AddComputer::updateGeniusComboBox(vector<GeniusModel> geniuses)
+{
+    ui->comboBoxGeniuses->addItem("");
+    for (size_t i = 0; i < geniuses.size(); i++)
+    {
+        GeniusModel genius = geniuses.at(i);
+        QString name = QString::fromStdString(genius.getName());
+        ui->comboBoxGeniuses->addItem(name);
+    }
+}
+
+void AddComputer::updateGeniusList(vector<GeniusModel> geniuses)
+{
+    ui->listWidgetGeniuses->clear();
+
+    for (size_t i = 0; i < geniuses.size(); i++)
+    {
+        GeniusModel genius = geniuses.at(i);
+        QString name = QString::fromStdString(genius.getName());
+        ui->listWidgetGeniuses->addItem(name);
+    }
+}
+
+void AddComputer::on_comboBoxGeniuses_currentIndexChanged(int index)
+{
+    if (index == 0)
+        return;
+
+    GeniusModel genius = _geniuses.at(index - 1);
+    _geniuses.erase(_geniuses.begin() + index - 1);
+    ui->comboBoxGeniuses->setCurrentIndex(0);
+    ui->comboBoxGeniuses->removeItem(index);
+
+    _computerGeniuses.push_back(genius);
+    updateGeniusList(_computerGeniuses);
+}
+
+void AddComputer::on_listWidgetGeniuses_clicked(const QModelIndex &index)
+{
+    ui->buttonRemoveGeniuses->setEnabled(true);
+}
+
+void AddComputer::on_buttonRemoveGeniuses_clicked()
+{
+    int index = ui->listWidgetGeniuses->currentIndex().row();
+
+    GeniusModel genius = _computerGeniuses.at(index);
+    QString name = QString::fromStdString(genius.getName());
+
+    _computerGeniuses.erase(_computerGeniuses.begin() + index);
+
+    _geniuses.push_back(genius);
+    ui->comboBoxGeniuses->addItem(name);
+
+    updateGeniusList(_computerGeniuses);
+    ui->buttonRemoveGeniuses->setEnabled(false);
 }
