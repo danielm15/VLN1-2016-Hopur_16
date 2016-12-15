@@ -178,7 +178,7 @@ void MainWindow::on_lineEditGeniusFilter_textChanged(const QString &arg1)
     displayGeniusDetails(currentlyDisplayedGeniuses);
 }
 
-bool MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
+void MainWindow::on_listGeniuses_clicked(const QModelIndex &index)
 {
     ui->pushButtonDeleteGenius->setEnabled(true);
 

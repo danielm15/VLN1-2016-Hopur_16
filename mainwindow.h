@@ -40,7 +40,7 @@ private slots:
 
     void on_lineEditGeniusFilter_textChanged(const QString &arg1);
 
-    bool on_listGeniuses_clicked(const QModelIndex &index);
+    void on_listGeniuses_clicked(const QModelIndex &index);
 
     void on_listComputers_clicked(const QModelIndex &index);
 
