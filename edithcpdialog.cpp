@@ -1,14 +1,13 @@
 #include "edithcpdialog.h"
 #include "ui_edithcpdialog.h"
 
+#include <qdebug.h>
+
 edithCpDialog::edithCpDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::edithCpDialog)
 {
     ui->setupUi(this);
-
-    QString name = QString::fromStdString(_genius.getName());
-    ui->lineEditGeniusName->setText(name);
 }
 
 edithCpDialog::~edithCpDialog()
@@ -18,7 +17,18 @@ edithCpDialog::~edithCpDialog()
 
 void edithCpDialog::setGenius(GeniusModel selectedGenius)
 {
-   _genius = selectedGenius;
+
+    _genius = selectedGenius;
+    QString name = QString::fromStdString(_genius.getName());
+    QString birthYear = QString::number(selectedGenius.getBirthYear());
+    QString deathYear = QString::number(selectedGenius.getDeathYear());
+
+    ui->lineEditGeniusName->setText(name);
+    if (selectedGenius.getGender() == "Female")
+        ui->comboBoxGeniusGender->setCurrentIndex(1);
+    ui->lineEditBirthYear->setText(birthYear);
+    if (deathYear != "0")
+        ui->lineEditDeathYear->setText(deathYear);
 }
 
 void edithCpDialog::setComputer(ComputerModel selectedComputer)
@@ -39,13 +49,14 @@ void edithCpDialog::on_pushButton_clicked()
     unsigned int birthYear;
     unsigned int deathYear;
 
-    ui->labelGeniusNameError->setText("");
+    ui->labelNameError->setText("");
+    ui->labelGenderError->setText("");
     ui->labelGeniusBirthYearError->setText("");
     ui->labelGeniusDeathYearError->setText("");
 
     if (name.isEmpty())
     {
-        ui->labelGeniusNameError->setText("<span style='color:red'>Genius needs a name!</span>");
+        ui->labelNameError->setText("<span style='color:red'>Genius needs a name!</span>");
         hasError = true;
     }
 
@@ -64,7 +75,7 @@ void edithCpDialog::on_pushButton_clicked()
     birthYear = birthYearStr.toUInt();
     deathYear = deathYearStr.toUInt();
 
-    if (birthYear < deathYear)
+    if (birthYear > deathYear && deathYear != 0)
     {
         ui->labelGeniusDeathYearError->setText("<span style='color:red'>Nobody can die before he is born!</span>");
         hasError = true;
