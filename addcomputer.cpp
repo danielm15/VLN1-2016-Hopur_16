@@ -1,5 +1,6 @@
 #include "addcomputer.h"
 #include "ui_addcomputer.h"
+#include <QDebug>
 
 AddComputer::AddComputer(QWidget *parent) :
     QDialog(parent),
@@ -33,7 +34,7 @@ void AddComputer::on_pushButtonSaveComputer_clicked()
     QString makeYearStr = ui->lineEditMakeYear->text();
     QString type = ui->comboBoxComputerType->currentText();
     bool builtBool = ui->checkBoxComputerBuilt->isChecked();
-    bool built;
+    int built;
 
     bool hasError = false;
     bool saved;
@@ -47,7 +48,22 @@ void AddComputer::on_pushButtonSaveComputer_clicked()
 
     if (!checkIfYearIsValid(makeYearStr))
     {
-        ui->labelMakeYearError->setText("<span style='color:red'>Enter valid year!</span>");
+        if (ui->checkBoxComputerBuilt->checkState())
+        {
+            ui->labelMakeYearError->setText("<span style='color:red'>Enter valid year!</span>");
+            hasError = true;
+        }
+    }
+
+    if (makeYearStr.isEmpty() && builtBool)
+    {
+        ui->labelMakeYearError->setText("<span style='color:red'>This is a required field for built computers</span>");
+        hasError = true;
+    }
+
+    if (!makeYearStr.isEmpty() && !builtBool)
+    {
+        ui->labelMakeYearError->setText("<span style='color:red'>This fields need's to be empty!</span>");
         hasError = true;
     }
 
@@ -96,4 +112,22 @@ bool AddComputer::checkIfYearIsValid(QString year)
         return false;
 
     return true;
+}
+
+void AddComputer::on_lineEditMakeYear_editingFinished()
+{
+    QString makeYear = ui->lineEditMakeYear->text();
+
+    if (makeYear.isEmpty())
+        ui->checkBoxComputerBuilt->setChecked(false);
+    else
+        ui->checkBoxComputerBuilt->setChecked(true);
+}
+
+void AddComputer::on_checkBoxComputerBuilt_toggled(bool checked)
+{
+    if (!checked)
+    {
+        ui->lineEditMakeYear->setText("");
+    }
 }

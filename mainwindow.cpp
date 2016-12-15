@@ -112,6 +112,9 @@ void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
         QString type = QString::fromStdString(computer.getType());
         QString built = QString::number(computer.getBuilt());
 
+        if (MakeYear == "0")
+            MakeYear = "";
+
         if(built == "0")
             built = "N";
         else
