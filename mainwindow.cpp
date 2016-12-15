@@ -271,10 +271,10 @@ void MainWindow::on_clearComputerSelection_clicked()
     ui->computerDetailsTable->setSortingEnabled(true);
 }
 
-
+/*
 void MainWindow::on_geniusDetailsTable_cellChanged(int row, int column)
 {
-    /*
+
     GeniusModel genius = currentlyDisplayedGeniuses.at(row);
     bool hasError = false;
 
@@ -319,8 +319,8 @@ void MainWindow::on_geniusDetailsTable_cellChanged(int row, int column)
 
     if(_geniusService.update(genius))
         ui->statusBar->showMessage("Update success", 3000);
-        */
 }
+*/
 
 /**
  * @brief AddGenius::checkIfYearIsValid Validates if year string is 4 digits and does not have zero as a first digit, Year cannot be higher than current year
@@ -390,9 +390,9 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
     }
 }
 
+/*
 void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
 {
-/*
     ComputerModel computer = currentlyDisplayedComputers.at(item->row());
     bool hasError = false;
 
@@ -438,8 +438,8 @@ void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
 
     if(_computerService.update(computer))
         ui->statusBar->showMessage("Update success", 3000);
-*/
 }
+*/
 
 void MainWindow::on_pushButtonEditRelation_clicked()
 {
@@ -470,14 +470,25 @@ void MainWindow::on_listGeniuses_doubleClicked()
     int returnValueFromEditGenius = edit.exec();
 
     if(returnValueFromEditGenius == 1)
+    {
+        displayAllGeniuses();
         ui ->statusBar->showMessage("Succesfully updated Genius", 2000);
+    }
 
 }
 
 void MainWindow::on_listComputers_doubleClicked()
 {
-    edithCpDialog edit;
+    EditComputer edit;
     int doubleClicked = ui->listComputers->currentIndex().row();
     ComputerModel selectedComputer = currentlyDisplayedComputers[doubleClicked];
     edit.setComputer(selectedComputer);
+
+    int returnValueFromEditDialog = edit.exec();
+
+    if(returnValueFromEditDialog == 1)
+    {
+        displayAllComputers();
+        ui ->statusBar->showMessage("Succesfully updated Computer", 2000);
+    }
 }

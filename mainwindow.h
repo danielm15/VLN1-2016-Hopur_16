@@ -6,6 +6,7 @@
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
 #include <edithcpdialog.h>
+#include "editcomputer.h"
 #include <services/computergeniusservice.h>
 #include <QMouseEvent>
 #include <QTableWidgetItem>
@@ -55,13 +56,13 @@ private slots:
 
     void on_listComputers_doubleClicked();
 
-    void on_geniusDetailsTable_cellChanged(int row, int column);
+    //void on_geniusDetailsTable_cellChanged(int row, int column);
 
     void on_pushButtonDeleteGenius_clicked();
 
     void on_pushButtonDeleteComputer_clicked();
 
-    void on_computerDetailsTable_itemChanged(QTableWidgetItem *item);
+    //void on_computerDetailsTable_itemChanged(QTableWidgetItem *item);
 
     void on_pushButtonEditRelation_clicked();
 
