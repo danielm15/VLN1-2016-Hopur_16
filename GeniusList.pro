@@ -25,6 +25,8 @@ SOURCES += main.cpp\
         services/computergeniusservice.cpp \
     addcomputer.cpp \
     addgenius.cpp \
+    editrelation.cpp \
+    edithcpdialog.cpp
     edithcpdialog.cpp
 
 HEADERS  += mainwindow.h\
@@ -39,11 +41,15 @@ HEADERS  += mainwindow.h\
             services/computergeniusservice.h \
     addcomputer.h \
     addgenius.h \
+    editrelation.h \
+    edithcpdialog.h
     edithcpdialog.h
 
 FORMS    += mainwindow.ui \
     addcomputer.ui \
     addgenius.ui \
+    editrelation.ui \
+    edithcpdialog.ui
     edithcpdialog.ui
 
 RESOURCES += \

@@ -16,6 +16,7 @@ using namespace std;
 
 #include "addgenius.h"
 #include "addcomputer.h"
+#include "editrelation.h"
 
 namespace Ui {
 class MainWindow;
@@ -50,9 +51,9 @@ private slots:
 
     void on_clearComputerSelection_clicked();
 
-    void on_listGeniuses_doubleClicked(const QModelIndex &index);
+    void on_listGeniuses_doubleClicked();
 
-    void on_listComputers_doubleClicked(const QModelIndex &index);
+    void on_listComputers_doubleClicked();
 
     void on_geniusDetailsTable_cellChanged(int row, int column);
 
@@ -61,6 +62,10 @@ private slots:
     void on_pushButtonDeleteComputer_clicked();
 
     void on_computerDetailsTable_itemChanged(QTableWidgetItem *item);
+
+    void on_pushButtonEditRelation_clicked();
+
+    void on_geniusComputerRelationWidget_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -82,6 +87,7 @@ private:
 
     vector<GeniusModel> currentlyDisplayedGeniuses;
     vector<GeniusModel> currentlyDisplayedGeniusDetails;
+    vector<GeniusModel> currentlyDisplayedGeniusRelations;
     vector<ComputerModel> currentlyDisplayedComputers;
     vector<ComputerModel> currentlyDisplayedComputerDetails;
 };

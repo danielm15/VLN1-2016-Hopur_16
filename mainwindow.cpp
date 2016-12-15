@@ -163,6 +163,8 @@ void MainWindow::displayRelations(vector<GeniusModel> geniuses)
             treeGenius->addChild(treeComputer);
         }
     }
+
+    currentlyDisplayedGeniusRelations = geniuses;
 }
 
 void MainWindow::on_pushButtonAddGenius_clicked()
@@ -388,7 +390,6 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
     }
 }
 
-
 void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
 {
 /*
@@ -440,7 +441,19 @@ void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
 */
 }
 
-void MainWindow::on_listGeniuses_doubleClicked(const QModelIndex &index)
+void MainWindow::on_pushButtonEditRelation_clicked()
+{
+    EditRelation editDialog;
+
+    editDialog.exec();
+}
+
+void MainWindow::on_geniusComputerRelationWidget_clicked()
+{
+    ui->pushButtonEditRelation->setEnabled(true);
+}
+
+void MainWindow::on_listGeniuses_doubleClicked()
 {
     edithCpDialog edit;
     int doubleClicked = ui->listGeniuses->currentIndex().row();
@@ -454,7 +467,7 @@ void MainWindow::on_listGeniuses_doubleClicked(const QModelIndex &index)
 
 }
 
-void MainWindow::on_listComputers_doubleClicked(const QModelIndex &index)
+void MainWindow::on_listComputers_doubleClicked()
 {
     edithCpDialog edit;
 

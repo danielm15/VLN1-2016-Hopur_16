@@ -27,7 +27,7 @@ private slots:
 
     void on_comboBoxComputers_currentIndexChanged(int index);
 
-    void on_listWidgetComputers_clicked(const QModelIndex &index);
+    void on_listWidgetComputers_clicked();
 
     void on_buttonRemoveSelectedComputer_clicked();
 

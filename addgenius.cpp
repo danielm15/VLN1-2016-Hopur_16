@@ -161,7 +161,7 @@ void AddGenius::on_comboBoxComputers_currentIndexChanged(int index)
     updateComputerList(_geniusComputers);
 }
 
-void AddGenius::on_listWidgetComputers_clicked(const QModelIndex &index)
+void AddGenius::on_listWidgetComputers_clicked()
 {
     ui->buttonRemoveSelectedComputer->setEnabled(true);
 }
