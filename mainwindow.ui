@@ -130,10 +130,6 @@
          </layout>
         </item>
        </layout>
-       <zorder>geniusDetailsTable</zorder>
-       <zorder>clearGeniusSelection</zorder>
-       <zorder>labelComputerDetails</zorder>
-       <zorder>verticalLayoutWidget</zorder>
       </widget>
       <widget class="QWidget" name="tabComputers">
        <attribute name="title">

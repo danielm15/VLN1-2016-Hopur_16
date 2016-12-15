@@ -218,6 +218,7 @@ void MainWindow::on_listComputers_clicked(const QModelIndex &index)
     ui->computerDetailsTable->setItem(0, 3, new QTableWidgetItem(built));
 
     currentlyDisplayedComputers = computers;
+
 }
 
 void MainWindow::on_clearGeniusSelection_clicked()
