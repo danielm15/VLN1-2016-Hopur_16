@@ -5,6 +5,7 @@
 #include <QListWidget>
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
+#include <edithcpdialog.h>
 #include <services/computergeniusservice.h>
 #include <QMouseEvent>
 #include <QTableWidgetItem>
@@ -49,6 +50,10 @@ private slots:
     void on_clearGeniusSelection_clicked();
 
     void on_clearComputerSelection_clicked();
+
+    void on_listGeniuses_doubleClicked();
+
+    void on_listComputers_doubleClicked();
 
     void on_geniusDetailsTable_cellChanged(int row, int column);
 

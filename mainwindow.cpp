@@ -390,7 +390,6 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
     }
 }
 
-
 void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
 {
 /*
@@ -454,3 +453,27 @@ void MainWindow::on_geniusComputerRelationWidget_clicked()
     ui->pushButtonEditRelation->setEnabled(true);
 }
 
+void MainWindow::on_listGeniuses_doubleClicked()
+{
+    edithCpDialog edit;
+    int doubleClicked = ui->listGeniuses->currentIndex().row();
+    GeniusModel selectedGenius = currentlyDisplayedGeniuses[doubleClicked];
+    edit.setGenius(selectedGenius);
+
+    int returnValueFromEditGenius = edit.exec();
+
+    if(returnValueFromEditGenius == 1)
+        ui ->statusBar->showMessage("Succesfully updated Genius", 2000);
+
+}
+
+void MainWindow::on_listComputers_doubleClicked()
+{
+    edithCpDialog edit;
+
+    int doubleClicked = ui->listComputers->currentIndex().row();
+
+    ComputerModel selectedComputer = currentlyDisplayedComputers[doubleClicked];
+
+    edit.setComputer(selectedComputer);
+}
