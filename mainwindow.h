@@ -4,13 +4,15 @@
 #include <QMainWindow>
 #include <QTreeWidget>
 #include <QListWidget>
+#include <QMouseEvent>
+#include <QItemSelectionModel>
+#include <QTableWidgetItem>
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
 #include <edithcpdialog.h>
 #include "editcomputer.h"
 #include <services/computergeniusservice.h>
-#include <QMouseEvent>
-#include <QTableWidgetItem>
+
 
 #include <vector>
 
@@ -69,15 +71,13 @@ private slots:
 
     void on_pushButtonEditRelation_clicked();
 
-    void on_buttonEditGenius_clicked();
-
-    void on_buttonEditComputer_clicked();
-
     void on_geniusComputerRelationWidget_itemClicked(QTreeWidgetItem *item);
 
     void on_editButtonGenius_clicked();
 
     void on_editbuttoncomputer_clicked();
+
+    void on_geniusDetails_tabBarClicked();
 
 private:
     Ui::MainWindow *ui;

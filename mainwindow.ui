@@ -25,7 +25,7 @@
        <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <attribute name="title">
@@ -69,6 +69,9 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Delete Selected Genius</string>
             </property>
@@ -76,6 +79,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonAddGenius">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Add Genius</string>
             </property>
@@ -312,6 +318,9 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Edit relation</string>
             </property>
@@ -331,7 +340,7 @@
      <x>0</x>
      <y>0</y>
      <width>1114</width>
-     <height>22</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -344,12 +353,20 @@
    <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
+   <addaction name="actionAddGenius"/>
+   <addaction name="actionAddComputer"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionAddGenius">
