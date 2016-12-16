@@ -17,25 +17,54 @@
    <iconset resource="resources.qrc">
     <normaloff>:/icons/images/genius-icon.png</normaloff>:/icons/images/genius-icon.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#MainWindow{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(128, 128, 128, 255), stop:1 rgba(225, 225, 225, 255));
+}
+</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true">#centralWidget {
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(128, 128, 128, 255), stop:1 rgba(225, 225, 225, 255));
+}</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_6">
     <item>
      <widget class="QTabWidget" name="geniusDetails">
       <property name="autoFillBackground">
        <bool>false</bool>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabGenius">
+       <property name="styleSheet">
+        <string notr="true">#tabGenius {
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(128, 128, 128, 255), stop:1 rgba(225, 225, 225, 255));
+}
+</string>
+       </property>
        <attribute name="title">
         <string>Geniuses</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QLabel" name="labelGeniuses">
+            <property name="styleSheet">
+             <string notr="true">#labelGeniuses{
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-radius: 19px;
+	border-color: none;
+	padding: 10px 50px;
+}</string>
+            </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Geniuses&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -52,15 +81,26 @@
            </widget>
           </item>
           <item>
-           <widget class="QListWidget" name="listGeniuses"/>
+           <widget class="QListWidget" name="listGeniuses">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+           </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="editButtonGenius">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">#editButtonGenius::enabled {
+             <string notr="true">#editButtonGenius {
+	padding: 6px 10px;
+	background-color: rgb(204, 204, 204);
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+#editButtonGenius::enabled {
 	background-color: rgb(32, 32, 113);
 	color: rgb(255, 255 ,255);
 }
@@ -74,13 +114,21 @@
             </property>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="pushButtonDeleteGenius">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">#pushButtonDeleteGenius::enabled {
+             <string notr="true">#pushButtonDeleteGenius {
+	padding: 6px 10px;
+	background-color: rgb(204, 204, 204);
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+
+#pushButtonDeleteGenius::enabled {
 	background-color: rgb(117, 34, 34);
 	color: rgb(255, 255 ,255);
 }
@@ -94,13 +142,16 @@
             </property>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="pushButtonAddGenius">
             <property name="styleSheet">
              <string notr="true">#pushButtonAddGenius {
 	color: rgb(255, 255, 255);
 	background-color: rgb(44, 150, 44);
-	
+	padding: 6px 10px;
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
 }
 
 #pushButtonAddGenius::hover {
@@ -118,17 +169,19 @@
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QLabel" name="labelComputerDetails">
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QLabel" name="labelGeniusDetails">
+            <property name="styleSheet">
+             <string notr="true">#labelGeniusDetails {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-radius: 19px;
+	border-color: none;
+	padding: 10px 50px;
+}</string>
+            </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Genius Details&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="clearGeniusSelection">
-            <property name="text">
-             <string>Show all</string>
             </property>
            </widget>
           </item>
@@ -177,24 +230,52 @@
             </column>
            </widget>
           </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QPushButton" name="clearGeniusSelection">
+            <property name="styleSheet">
+             <string notr="true">#clearGeniusSelection {
+	padding: 6px 10px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+
+#clearGeniusSelection::hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(185, 185, 185, 255), stop:1 rgba(255, 255, 255, 255));
+}</string>
+            </property>
+            <property name="text">
+             <string>Show all</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tabComputers">
+       <property name="styleSheet">
+        <string notr="true">#tabComputers {
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(128, 128, 128, 255), stop:1 rgba(225, 225, 225, 255));
+}</string>
+       </property>
        <attribute name="title">
         <string>Computers</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QLabel" name="labelComputers">
-            <property name="minimumSize">
-             <size>
-              <width>439</width>
-              <height>0</height>
-             </size>
+            <property name="styleSheet">
+             <string notr="true">#labelComputers {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-radius: 19px;
+	border-color: none;
+	padding: 10px 50px;
+}</string>
             </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Computers&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -211,13 +292,20 @@
           <item>
            <widget class="QListWidget" name="listComputers"/>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="editbuttoncomputer">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">#editbuttoncomputer::enabled {
+             <string notr="true">#editbuttoncomputer {
+	padding: 6px 10px;
+	background-color: rgb(204, 204, 204);
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+#editbuttoncomputer::enabled {
 	background-color: rgb(32, 32, 113);
 	color: rgb(255, 255 ,255);
 }
@@ -231,13 +319,21 @@
             </property>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="pushButtonDeleteComputer">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">#pushButtonDeleteComputer::enabled {
+             <string notr="true">#pushButtonDeleteComputer {
+	padding: 6px 10px;
+	background-color: rgb(204, 204, 204);
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+
+#pushButtonDeleteComputer::enabled {
 	background-color: rgb(117, 34, 34);
 	color: rgb(255, 255 ,255);
 }
@@ -251,18 +347,22 @@
             </property>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="pushButtonAddComputer">
             <property name="styleSheet">
-             <string notr="true">#pushButtonAddComputer {
+             <string notr="true">#pushButtonAddComputer{
 	color: rgb(255, 255, 255);
 	background-color: rgb(44, 150, 44);
-	
+	padding: 6px 10px;
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
 }
 
 #pushButtonAddComputer::hover {
 	background-color: rgb(56, 190, 56);
-}</string>
+}
+</string>
             </property>
             <property name="text">
              <string>Add Computer</string>
@@ -273,17 +373,19 @@
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QLabel" name="labelGeniusDetails">
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QLabel" name="labelComputerDetails">
+            <property name="styleSheet">
+             <string notr="true">#labelComputerDetails {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-radius: 19px;
+	border-color: none;
+	padding: 10px 50px;
+}</string>
+            </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Computer Details&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="clearComputerSelection">
-            <property name="text">
-             <string>Show all</string>
             </property>
            </widget>
           </item>
@@ -329,19 +431,53 @@
             </column>
            </widget>
           </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QPushButton" name="clearComputerSelection">
+            <property name="styleSheet">
+             <string notr="true">#clearComputerSelection {
+	padding: 6px 10px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+
+#clearComputerSelection::hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(185, 185, 185, 255), stop:1 rgba(255, 255, 255, 255));
+}</string>
+            </property>
+            <property name="text">
+             <string>Show all</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab">
+      <widget class="QWidget" name="tabRelations">
+       <property name="styleSheet">
+        <string notr="true">#tabRelations{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(128, 128, 128, 255), stop:1 rgba(225, 225, 225, 255));
+}</string>
+       </property>
        <attribute name="title">
         <string>Relations</string>
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QLabel" name="label">
+            <property name="styleSheet">
+             <string notr="true">#label {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-radius: 19px;
+	border-color: none;
+	padding: 10px 50px;
+}</string>
+            </property>
             <property name="text">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Relations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -371,13 +507,21 @@
             </column>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="pushButtonEditRelation">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">#pushButtonEditRelation::enabled {
+             <string notr="true">#pushButtonEditRelation {
+	padding: 6px 10px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+
+#pushButtonEditRelation::enabled {
 	background-color: rgb(32, 32, 113);
 	color: rgb(255, 255 ,255);
 }
@@ -405,7 +549,7 @@
      <x>0</x>
      <y>0</y>
      <width>1114</width>
-     <height>17</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -428,7 +572,7 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <addaction name="actionAddGenius"/>
    <addaction name="actionAddComputer"/>

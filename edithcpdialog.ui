@@ -120,15 +120,19 @@
    <item>
     <widget class="QLineEdit" name="lineEditDeathYear"/>
    </item>
-   <item>
+   <item alignment="Qt::AlignHCenter">
     <widget class="QPushButton" name="buttonEditRelationship">
      <property name="styleSheet">
-      <string notr="true">#buttonEditRelationship::enabled {
+      <string notr="true">#buttonEditRelationship {
 	background-color: rgb(32, 32, 113);
 	color: rgb(255, 255 ,255);
+	padding: 6px 10px;
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 14px;
 }
 
-#buttonEditRelationship::enabled::hover {
+#buttonEditRelationship::hover {
 	background-color: rgb(32, 32, 195);
 }</string>
      </property>
@@ -137,13 +141,16 @@
      </property>
     </widget>
    </item>
-   <item>
+   <item alignment="Qt::AlignHCenter">
     <widget class="QPushButton" name="pushButton">
      <property name="styleSheet">
       <string notr="true">#pushButton {
 	color: rgb(255, 255, 255);
 	background-color: rgb(44, 150, 44);
-	
+	padding: 6px 15px;
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 14px;
 }
 
 #pushButton::hover {

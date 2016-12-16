@@ -95,13 +95,16 @@
      </property>
     </widget>
    </item>
-   <item>
+   <item alignment="Qt::AlignHCenter">
     <widget class="QPushButton" name="pushButtonSave">
      <property name="styleSheet">
       <string notr="true">#pushButtonSave {
 	color: rgb(255, 255, 255);
 	background-color: rgb(44, 150, 44);
-	
+	padding: 6px 15px;
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
 }
 
 #pushButtonSave::hover {
