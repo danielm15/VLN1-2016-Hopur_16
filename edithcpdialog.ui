@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>339</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -122,6 +122,16 @@
    </item>
    <item>
     <widget class="QPushButton" name="buttonEditRelationship">
+     <property name="styleSheet">
+      <string notr="true">#buttonEditRelationship::enabled {
+	background-color: rgb(32, 32, 113);
+	color: rgb(255, 255 ,255);
+}
+
+#buttonEditRelationship::enabled::hover {
+	background-color: rgb(32, 32, 195);
+}</string>
+     </property>
      <property name="text">
       <string>Edit computer relationship</string>
      </property>
@@ -129,6 +139,17 @@
    </item>
    <item>
     <widget class="QPushButton" name="pushButton">
+     <property name="styleSheet">
+      <string notr="true">#pushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(44, 150, 44);
+	
+}
+
+#pushButton::hover {
+	background-color: rgb(56, 190, 56);
+}</string>
+     </property>
      <property name="text">
       <string>Save</string>
      </property>

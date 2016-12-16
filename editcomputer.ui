@@ -97,6 +97,17 @@
    </item>
    <item>
     <widget class="QPushButton" name="pushButtonSave">
+     <property name="styleSheet">
+      <string notr="true">#pushButtonSave {
+	color: rgb(255, 255, 255);
+	background-color: rgb(44, 150, 44);
+	
+}
+
+#pushButtonSave::hover {
+	background-color: rgb(56, 190, 56);
+}</string>
+     </property>
      <property name="text">
       <string>Save</string>
      </property>
