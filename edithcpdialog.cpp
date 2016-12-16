@@ -140,3 +140,13 @@ bool edithCpDialog::checkIfYearIsValid(QString year)
 
     return true;
 }
+
+void edithCpDialog::on_buttonEditRelationship_clicked()
+{
+    EditRelation editDialog;
+
+    GeniusModel selectedGenius = _genius;
+    editDialog.setGenius(selectedGenius);
+
+    editDialog.exec();
+}

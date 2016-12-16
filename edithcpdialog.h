@@ -25,6 +25,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_buttonEditRelationship_clicked();
+
 private:
     Ui::edithCpDialog *ui;
     GeniusModel _genius;
