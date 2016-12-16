@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
     displayAllComputers();
     displayAllGeniusDetails();
     displayAllComputerDetails();
-    displayAllRelations();
+    displayAllRelationsGC();
+    displayAllRelationsCG();
 }
 
 MainWindow::~MainWindow()
@@ -130,13 +131,13 @@ void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
     currentlyDisplayedComputerDetails = computers;
 }
 
-void MainWindow::displayAllRelations()
+void MainWindow::displayAllRelationsGC()
 {
     vector<GeniusModel> geniuses = _geniusService.getGenius();
-    displayRelations(geniuses);
+    displayRelationsGC(geniuses);
 }
 
-void MainWindow::displayRelations(vector<GeniusModel> geniuses)
+void MainWindow::displayRelationsGC(vector<GeniusModel> geniuses)
 {
     ui->geniusComputerRelationWidget->clear();
     ui->geniusComputerRelationWidget->setColumnCount(1);
@@ -171,6 +172,49 @@ void MainWindow::displayRelations(vector<GeniusModel> geniuses)
         }
     }
     currentlyDisplayedGeniusRelations = geniuses;
+}
+
+void MainWindow::displayAllRelationsCG()
+{
+    vector<ComputerModel> computers = _computerService.getComputer();
+    displayRelationsCG(computers);
+}
+
+void MainWindow::displayRelationsCG(vector<ComputerModel> computers)
+{
+    ui->computerGeniusRelationWidget->clear();
+    ui->computerGeniusRelationWidget->setColumnCount(1);
+    ui->computerGeniusRelationWidget->setHeaderLabels(QStringList() << "Computers");
+    vector<GeniusModel> geniuses;
+
+    for(unsigned int i = 0; i < computers.size(); i++)
+    {
+        ComputerModel computer = computers.at(i);
+
+        QTreeWidgetItem *treeComputer = new QTreeWidgetItem(ui->computerGeniusRelationWidget);
+        QString name = QString::fromStdString(computer.getModelName());
+        treeComputer->setText(0, name);
+
+        geniuses = _computerService.getAllGeniusesWhoBuiltComputer(computer);
+
+        if(geniuses.empty())
+        {
+
+        }
+        else
+        {
+            for(unsigned int i = 0; i < geniuses.size(); i++)
+            {
+                GeniusModel genius = geniuses.at(i);
+                QTreeWidgetItem *treeGenius = new QTreeWidgetItem();
+
+                QString Name = QString::fromStdString(genius.getName());
+                treeGenius->setText(0, Name);
+                treeComputer->addChild(treeGenius);
+            }
+        }
+    }
+    currentlyDisplayedComputerRelations = computers;
 }
 
 void MainWindow::on_pushButtonAddGenius_clicked()
@@ -463,7 +507,7 @@ void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
 }
 */
 
-void MainWindow::on_pushButtonEditRelation_clicked()
+void MainWindow::on_pushButtonEditRelationGC_clicked()
 {
     EditRelation editDialog;
     int clicked = ui->geniusComputerRelationWidget->currentIndex().row();
@@ -476,9 +520,29 @@ void MainWindow::on_pushButtonEditRelation_clicked()
     if(returnValueFromEditRelation == 1)
     {
         ui->statusBar->showMessage("Succesfully updated relation", 2000);
-        ui->pushButtonEditRelation->setEnabled(false);
+        ui->pushButtonEditRelationGC->setEnabled(false);
     }
-    displayAllRelations();
+    displayAllRelationsGC();
+    displayAllRelationsCG();
+}
+
+void MainWindow::on_pushButtonEditRelationCG_clicked()
+{
+    EditRelationCG editDialog;
+    int clicked = ui->computerGeniusRelationWidget->currentIndex().row();
+
+    ComputerModel selectedComputer = currentlyDisplayedComputerRelations.at(clicked);
+    editDialog.setComputer(selectedComputer);
+
+    int returnValueFromEditRelation = editDialog.exec();
+
+    if(returnValueFromEditRelation == 1)
+    {
+        ui->statusBar->showMessage("Succesfully updated relation", 2000);
+        ui->pushButtonEditRelationCG->setEnabled(false);
+    }
+    displayAllRelationsGC();
+    displayAllRelationsCG();
 }
 
 void MainWindow::on_listGeniuses_doubleClicked()
@@ -495,7 +559,7 @@ void MainWindow::on_listGeniuses_doubleClicked()
         ui->lineEditGeniusFilter->clear();
         displayAllGeniuses();
         displayGeniusDetails(currentlyDisplayedGeniuses);
-        displayAllRelations();
+        displayAllRelationsGC();
         ui->statusBar->showMessage("Succesfully updated Genius", 2000);
         ui->editButtonGenius->setEnabled(false);
         ui->pushButtonDeleteGenius->setEnabled(false);
@@ -535,10 +599,19 @@ void MainWindow::on_editbuttoncomputer_clicked()
 void MainWindow::on_geniusComputerRelationWidget_itemClicked(QTreeWidgetItem *item)
 {
     if(!item->parent())
-        ui->pushButtonEditRelation->setEnabled(true);
+        ui->pushButtonEditRelationGC->setEnabled(true);
     else
-        ui->pushButtonEditRelation->setEnabled(false);
+        ui->pushButtonEditRelationGC->setEnabled(false);
 }
+
+void MainWindow::on_computerGeniusRelationWidget_itemClicked(QTreeWidgetItem *item)
+{
+    if(!item->parent())
+        ui->pushButtonEditRelationCG->setEnabled(true);
+    else
+        ui->pushButtonEditRelationCG->setEnabled(false);
+}
+
 
 void MainWindow::on_geniusDetails_tabBarClicked()
 {
