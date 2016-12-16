@@ -158,7 +158,7 @@ void AddComputer::on_checkBoxComputerBuilt_toggled(bool checked)
 
 void AddComputer::updateGeniusComboBox(vector<GeniusModel> geniuses)
 {
-    ui->comboBoxGeniuses->addItem("");
+    ui->comboBoxGeniuses->addItem("- Add genius -");
     for (size_t i = 0; i < geniuses.size(); i++)
     {
         GeniusModel genius = geniuses.at(i);

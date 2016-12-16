@@ -132,7 +132,7 @@
        <item>
         <widget class="QLabel" name="labelAddComputers">
          <property name="text">
-          <string>Choose Computers Genius Built</string>
+          <string>Choose computers to link</string>
          </property>
         </widget>
        </item>

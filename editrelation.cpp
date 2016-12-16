@@ -52,7 +52,7 @@ void EditRelation::displayLinkedComputers()
 
 void EditRelation::updateComputerComboBox(vector<ComputerModel> computers)
 {
-    ui->allComputersComboBox->addItem("");
+    ui->allComputersComboBox->addItem("- Add computer -");
     for (size_t i = 0; i < computers.size(); i++)
     {
         ComputerModel computer = computers.at(i);

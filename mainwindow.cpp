@@ -473,11 +473,6 @@ void MainWindow::on_pushButtonEditRelation_clicked()
     displayAllRelations();
 }
 
-void MainWindow::on_geniusComputerRelationWidget_clicked()
-{
-    ui->pushButtonEditRelation->setEnabled(true);
-}
-
 void MainWindow::on_listGeniuses_doubleClicked()
 {
     edithCpDialog edit;
@@ -529,4 +524,12 @@ void MainWindow::on_buttonEditComputer_clicked()
 {
     on_listComputers_doubleClicked();
     //ui->buttonEditComputer->setEnabled(false);
+}
+
+void MainWindow::on_geniusComputerRelationWidget_itemClicked(QTreeWidgetItem *item)
+{
+    if(!item->parent())
+        ui->pushButtonEditRelation->setEnabled(true);
+    else
+        ui->pushButtonEditRelation->setEnabled(false);
 }

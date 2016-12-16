@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTreeWidget>
 #include <QListWidget>
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
@@ -68,11 +69,11 @@ private slots:
 
     void on_pushButtonEditRelation_clicked();
 
-    void on_geniusComputerRelationWidget_clicked();
-
     void on_buttonEditGenius_clicked();
 
     void on_buttonEditComputer_clicked();
+
+    void on_geniusComputerRelationWidget_itemClicked(QTreeWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;
