@@ -25,7 +25,7 @@
        <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <attribute name="title">
@@ -56,6 +56,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="editButtonGenius">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Edit Selected Genius</string>
             </property>
@@ -177,6 +180,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="editbuttoncomputer">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Edit Selected Computer</string>
             </property>
