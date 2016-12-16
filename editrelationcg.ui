@@ -6,12 +6,17 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>261</width>
-    <height>408</height>
+    <width>278</width>
+    <height>586</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Edit Relationship</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>images/genius-icon.png</normaloff>
+    <normalon>:/icons/images/genius-icon.png</normalon>images/genius-icon.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">#EditRelationCG{
@@ -23,8 +28,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>231</width>
-     <height>384</height>
+     <width>260</width>
+     <height>566</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -58,19 +63,27 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
         </property>
        </widget>
       </item>
-      <item>
+      <item alignment="Qt::AlignHCenter">
        <widget class="QPushButton" name="pushButtonRemoveGenius">
         <property name="enabled">
          <bool>false</bool>
         </property>
         <property name="styleSheet">
-         <string notr="true">#pushButtonRemoveComputer::enabled {
-	background-color: rgb(117, 34, 34);
-	color: rgb(255, 255 ,255);
+         <string notr="true">#pushButtonRemoveGenius {
+	padding: 6px 15px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(181, 181, 181, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+
+#pushButtonRemoveGenius::enabled {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(117, 34, 34, 255), stop:1 rgba(255, 48, 48, 255));
+	color: white;
 }
 
 #pushButtonRemoveComputer::enabled::hover {
-	background-color: rgb(166, 49, 49);
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(74, 21, 21, 255), stop:1 rgba(255, 48, 48, 255));
 }</string>
         </property>
         <property name="text">
@@ -83,17 +96,20 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
       </item>
      </layout>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="pushButtonSaveRelationCG">
       <property name="styleSheet">
-       <string notr="true">#pushButtonSaveRelation {
+       <string notr="true">#pushButtonSaveRelationCG{
 	color: rgb(255, 255, 255);
-	background-color: rgb(44, 150, 44);
-	
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0.0149254 rgba(31, 107, 31, 255), stop:1 rgba(110, 189, 100, 255));
+	padding: 6px 15px;
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
 }
 
-#pushButtonSaveRelation::hover {
-	background-color: rgb(56, 190, 56);
+#pushButtonSaveRelationCG::hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0.0149254 rgba(10, 35, 10, 255), stop:1 rgba(110, 189, 100, 255));
 }</string>
       </property>
       <property name="text">
