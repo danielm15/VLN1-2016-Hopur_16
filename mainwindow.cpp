@@ -153,17 +153,23 @@ void MainWindow::displayRelations(vector<GeniusModel> geniuses)
 
         computers = _geniusService.getAllComputersGeniusBuilt(genius);
 
-        for(unsigned int i = 0; i < computers.size(); i++)
+        if(computers.empty())
         {
-            ComputerModel computer = computers.at(i);
-            QTreeWidgetItem *treeComputer = new QTreeWidgetItem();
 
-            QString ModelName = QString::fromStdString(computer.getModelName());
-            treeComputer->setText(0, ModelName);
-            treeGenius->addChild(treeComputer);
+        }
+        else
+        {
+            for(unsigned int i = 0; i < computers.size(); i++)
+            {
+                ComputerModel computer = computers.at(i);
+                QTreeWidgetItem *treeComputer = new QTreeWidgetItem();
+
+                QString ModelName = QString::fromStdString(computer.getModelName());
+                treeComputer->setText(0, ModelName);
+                treeGenius->addChild(treeComputer);
+            }
         }
     }
-
     currentlyDisplayedGeniusRelations = geniuses;
 }
 
@@ -456,7 +462,7 @@ void MainWindow::on_pushButtonEditRelation_clicked()
         ui->statusBar->showMessage("Succesfully updated relation", 2000);
         ui->pushButtonEditRelation->setEnabled(false);
     }
-
+    displayAllRelations();
 }
 
 void MainWindow::on_geniusComputerRelationWidget_clicked()

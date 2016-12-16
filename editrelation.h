@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <mainwindow.h>
+#include <vector>
 
 namespace Ui {
 class EditRelation;
