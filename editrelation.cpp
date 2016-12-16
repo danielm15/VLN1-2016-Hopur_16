@@ -114,7 +114,7 @@ void EditRelation::on_pushButtonSaveRelation_clicked()
         ComputerModel computer = _geniusComputers.at(i);
         saved = _relationships.getRelationship(computer, _genius);
     }
-    main.displayAllRelations();
+    main.displayAllRelationsGC();
 
     this->done(1);
 

@@ -20,6 +20,7 @@ using namespace std;
 #include "addgenius.h"
 #include "addcomputer.h"
 #include "editrelation.h"
+#include "editrelationcg.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,7 +34,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void displayAllRelations();
+    void displayAllRelationsGC();
+
+    void displayAllRelationsCG();
 
 private slots:
     void on_pushButtonAddGenius_clicked();
@@ -68,9 +71,13 @@ private slots:
 
     //void on_computerDetailsTable_itemChanged(QTableWidgetItem *item);
 
-    void on_pushButtonEditRelation_clicked();
+    void on_pushButtonEditRelationGC_clicked();
+
+    void on_pushButtonEditRelationCG_clicked();
 
     void on_geniusComputerRelationWidget_itemClicked(QTreeWidgetItem *item);
+
+    void on_computerGeniusRelationWidget_itemClicked(QTreeWidgetItem *item);
 
     void on_editButtonGenius_clicked();
 
@@ -90,7 +97,8 @@ private:
     void displayAllComputerDetails();
     void displayComputerDetails(vector<ComputerModel> computers);
 
-    void displayRelations(vector<GeniusModel> geniuses);
+    void displayRelationsGC(vector<GeniusModel> geniuses);
+    void displayRelationsCG(vector<ComputerModel> computers);
     bool checkIfYearIsValid(QString year);
 
     GeniusService _geniusService;
@@ -101,6 +109,7 @@ private:
     vector<GeniusModel> currentlyDisplayedGeniusRelations;
     vector<ComputerModel> currentlyDisplayedComputers;
     vector<ComputerModel> currentlyDisplayedComputerDetails;
+    vector<ComputerModel> currentlyDisplayedComputerRelations;
 };
 
 #endif // MAINWINDOW_H
