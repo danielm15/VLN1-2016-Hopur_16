@@ -149,7 +149,7 @@
          </property>
          <property name="styleSheet">
           <string notr="true">#buttonRemoveSelectedComputer {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	background-color: rgb(204, 204, 204);
 	border: 2px solid;
 	border-color: transparent;
@@ -183,7 +183,7 @@
       <string notr="true">#pushButtonSaveGenius {
 	color: rgb(255, 255, 255);
 	background-color: rgb(44, 150, 44);
-	padding: 6px 10px;
+	padding: 6px 15px;
 	border: 2px solid;
 	border-color: transparent;
 	border-radius: 16px;

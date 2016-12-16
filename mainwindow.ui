@@ -39,7 +39,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <property name="styleSheet">
@@ -94,7 +94,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
             </property>
             <property name="styleSheet">
              <string notr="true">#editButtonGenius {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	background-color: rgb(204, 204, 204);
 	border: 2px solid;
 	border-color: transparent;
@@ -121,7 +121,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
             </property>
             <property name="styleSheet">
              <string notr="true">#pushButtonDeleteGenius {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	background-color: rgb(204, 204, 204);
 	border: 2px solid;
 	border-color: transparent;
@@ -148,7 +148,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
              <string notr="true">#pushButtonAddGenius {
 	color: rgb(255, 255, 255);
 	background-color: rgb(44, 150, 44);
-	padding: 6px 10px;
+	padding: 6px 15px;
 	border: 2px solid;
 	border-color: transparent;
 	border-radius: 16px;
@@ -234,7 +234,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
            <widget class="QPushButton" name="clearGeniusSelection">
             <property name="styleSheet">
              <string notr="true">#clearGeniusSelection {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
 	border: 2px solid;
 	border-color: transparent;
@@ -299,7 +299,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
             </property>
             <property name="styleSheet">
              <string notr="true">#editbuttoncomputer {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	background-color: rgb(204, 204, 204);
 	border: 2px solid;
 	border-color: transparent;
@@ -326,7 +326,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
             </property>
             <property name="styleSheet">
              <string notr="true">#pushButtonDeleteComputer {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	background-color: rgb(204, 204, 204);
 	border: 2px solid;
 	border-color: transparent;
@@ -353,7 +353,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
              <string notr="true">#pushButtonAddComputer{
 	color: rgb(255, 255, 255);
 	background-color: rgb(44, 150, 44);
-	padding: 6px 10px;
+	padding: 6px 15px;
 	border: 2px solid;
 	border-color: transparent;
 	border-radius: 16px;
@@ -435,7 +435,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
            <widget class="QPushButton" name="clearComputerSelection">
             <property name="styleSheet">
              <string notr="true">#clearComputerSelection {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
 	border: 2px solid;
 	border-color: transparent;
@@ -514,7 +514,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
             </property>
             <property name="styleSheet">
              <string notr="true">#pushButtonEditRelation {
-	padding: 6px 10px;
+	padding: 6px 15px;
 	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
 	border: 2px solid;
 	border-color: transparent;
