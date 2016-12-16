@@ -17,6 +17,11 @@
    <iconset resource="resources.qrc">
     <normaloff>:/icons/images/genius-icon.png</normaloff>:/icons/images/genius-icon.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#EditComputer{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(185, 185, 185, 255), stop:1 rgba(225, 225, 225, 255));
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
