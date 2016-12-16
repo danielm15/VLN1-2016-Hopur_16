@@ -69,10 +69,6 @@ private slots:
 
     void on_pushButtonEditRelation_clicked();
 
-    void on_buttonEditGenius_clicked();
-
-    void on_buttonEditComputer_clicked();
-
     void on_geniusComputerRelationWidget_itemClicked(QTreeWidgetItem *item);
 
     void on_editButtonGenius_clicked();
