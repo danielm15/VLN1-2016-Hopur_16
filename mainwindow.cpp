@@ -153,17 +153,23 @@ void MainWindow::displayRelations(vector<GeniusModel> geniuses)
 
         computers = _geniusService.getAllComputersGeniusBuilt(genius);
 
-        for(unsigned int i = 0; i < computers.size(); i++)
+        if(computers.empty())
         {
-            ComputerModel computer = computers.at(i);
-            QTreeWidgetItem *treeComputer = new QTreeWidgetItem();
 
-            QString ModelName = QString::fromStdString(computer.getModelName());
-            treeComputer->setText(0, ModelName);
-            treeGenius->addChild(treeComputer);
+        }
+        else
+        {
+            for(unsigned int i = 0; i < computers.size(); i++)
+            {
+                ComputerModel computer = computers.at(i);
+                QTreeWidgetItem *treeComputer = new QTreeWidgetItem();
+
+                QString ModelName = QString::fromStdString(computer.getModelName());
+                treeComputer->setText(0, ModelName);
+                treeGenius->addChild(treeComputer);
+            }
         }
     }
-
     currentlyDisplayedGeniusRelations = geniuses;
 }
 
@@ -177,6 +183,7 @@ void MainWindow::on_pushButtonAddGenius_clicked()
        displayGeniusDetails(currentlyDisplayedGeniuses);
 
        ui->pushButtonDeleteGenius->setEnabled(false);
+       ui->buttonEditGenius->setEnabled(false);
        ui->statusBar->showMessage("Successfully added new genius", 2000);
    }
 }
@@ -191,6 +198,7 @@ void MainWindow::on_pushButtonAddComputer_clicked()
         displayComputerDetails(currentlyDisplayedComputers);
 
         ui->pushButtonDeleteComputer->setEnabled(false);
+        ui->buttonEditComputer->setEnabled(false);
         ui->statusBar->showMessage("Successfully added new computer", 2000);
     }
 }
@@ -208,6 +216,7 @@ void MainWindow::on_actionAddComputer_triggered()
 void MainWindow::on_lineEditComputerFilter_textChanged()
 {
     ui->pushButtonDeleteComputer->setEnabled(false);
+    ui->buttonEditComputer->setEnabled(false);
 
     string input = ui->lineEditComputerFilter->text().toStdString();
 
@@ -219,6 +228,7 @@ void MainWindow::on_lineEditComputerFilter_textChanged()
 void MainWindow::on_lineEditGeniusFilter_textChanged()
 {
     ui->pushButtonDeleteGenius->setEnabled(false);
+    ui->buttonEditGenius->setEnabled(false);
 
     string input = ui->lineEditGeniusFilter->text().toStdString();
 
@@ -230,6 +240,7 @@ void MainWindow::on_lineEditGeniusFilter_textChanged()
 void MainWindow::on_listGeniuses_clicked()
 {
     ui->pushButtonDeleteGenius->setEnabled(true);
+    ui->buttonEditGenius->setEnabled(true);
 
     int clicked = ui->listGeniuses->currentIndex().row();
 
@@ -244,6 +255,7 @@ void MainWindow::on_listGeniuses_clicked()
 void MainWindow::on_listComputers_clicked()
 {
     ui->pushButtonDeleteComputer->setEnabled(true);
+    ui->buttonEditComputer->setEnabled(true);
 
     int clicked = ui->listComputers->currentIndex().row();
 
@@ -358,6 +370,7 @@ void MainWindow::on_pushButtonDeleteGenius_clicked()
     {
         ui->statusBar->showMessage("Successfully deleted the selected Genius", 2000);
         ui->pushButtonDeleteGenius->setEnabled(false);
+        ui->buttonEditGenius->setEnabled(false);
         ui->lineEditGeniusFilter->clear();
 
         displayAllGeniuses();
@@ -379,6 +392,7 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
     {
         ui->statusBar->showMessage("Successfully deleted the selected Computer", 2000);
         ui->pushButtonDeleteComputer->setEnabled(false);
+        ui->buttonEditComputer->setEnabled(false);
         ui->lineEditComputerFilter->clear();
 
         displayAllComputers();
@@ -456,7 +470,7 @@ void MainWindow::on_pushButtonEditRelation_clicked()
         ui->statusBar->showMessage("Succesfully updated relation", 2000);
         ui->pushButtonEditRelation->setEnabled(false);
     }
-
+    displayAllRelations();
 }
 
 void MainWindow::on_geniusComputerRelationWidget_clicked()
@@ -478,9 +492,9 @@ void MainWindow::on_listGeniuses_doubleClicked()
         ui->lineEditGeniusFilter->clear();
         displayAllGeniuses();
         displayGeniusDetails(currentlyDisplayedGeniuses);
+        displayAllRelations();
         ui ->statusBar->showMessage("Succesfully updated Genius", 2000);
     }
-
 }
 
 void MainWindow::on_listComputers_doubleClicked()
@@ -499,4 +513,14 @@ void MainWindow::on_listComputers_doubleClicked()
         displayComputerDetails(currentlyDisplayedComputers);
         ui ->statusBar->showMessage("Succesfully updated Computer", 2000);
     }
+}
+
+void MainWindow::on_buttonEditGenius_clicked()
+{
+    on_listGeniuses_doubleClicked();
+}
+
+void MainWindow::on_buttonEditComputer_clicked()
+{
+    on_listComputers_doubleClicked();
 }

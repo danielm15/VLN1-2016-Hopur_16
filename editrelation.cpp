@@ -89,30 +89,35 @@ void EditRelation::on_allComputersComboBox_currentIndexChanged(int index)
 
 void EditRelation::on_pushButtonRemoveComputer_clicked()
 {
+    MainWindow main;
     int index = ui->linkedComputersListWidget->currentIndex().row();
 
     ComputerModel computer = _geniusComputers.at(index);
     QString name = QString::fromStdString(computer.getModelName());
 
-    _geniusComputers.erase(_geniusComputers.begin() + index);
+    _relationships.removeRelationship(computer, _genius);
 
+    _geniusComputers.erase(_geniusComputers.begin() + index);
     _computers.push_back(computer);
     ui->allComputersComboBox->addItem(name);
 
     updateComputerList(_geniusComputers);
     ui->pushButtonRemoveComputer->setEnabled(false);
-
-    _relationships.removeRelationship(computer, _genius);
 }
 
 void EditRelation::on_pushButtonSaveRelation_clicked()
 {
+    MainWindow main;
+    bool saved;
     for (size_t i = 0; i < _geniusComputers.size(); i++)
     {
         ComputerModel computer = _geniusComputers.at(i);
-        _relationships.getRelationship(computer, _genius);
+        saved = _relationships.getRelationship(computer, _genius);
     }
+    main.displayAllRelations();
+
     this->done(1);
+
 }
 
 void EditRelation::on_linkedComputersListWidget_clicked()

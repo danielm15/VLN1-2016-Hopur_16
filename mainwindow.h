@@ -31,6 +31,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void displayAllRelations();
+
 private slots:
     void on_pushButtonAddGenius_clicked();
 
@@ -68,6 +70,10 @@ private slots:
 
     void on_geniusComputerRelationWidget_clicked();
 
+    void on_buttonEditGenius_clicked();
+
+    void on_buttonEditComputer_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -79,7 +85,7 @@ private:
     void displayGeniusDetails(vector<GeniusModel> geniuses);
     void displayAllComputerDetails();
     void displayComputerDetails(vector<ComputerModel> computers);
-    void displayAllRelations();
+
     void displayRelations(vector<GeniusModel> geniuses);
     bool checkIfYearIsValid(QString year);
 
