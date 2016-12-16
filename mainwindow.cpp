@@ -61,16 +61,15 @@ void MainWindow::displayComputers(vector<ComputerModel> computers)
 
 void MainWindow::displayAllGeniusDetails()
 {
-   vector<GeniusModel> geniuses = _geniusService.getGenius();
-   currentlyDisplayedGeniuses = geniuses;
-   displayGeniusDetails(geniuses);
+    vector<GeniusModel> geniuses = _geniusService.getGenius();
+    currentlyDisplayedGeniuses = geniuses;
+    displayGeniusDetails(geniuses);
 }
 
 void MainWindow::displayGeniusDetails(vector<GeniusModel> geniuses)
 {
     ui->geniusDetailsTable->clearContents();
 
-    //Couldn't find a way to get rid of this warning since setRowCount() returns an integer value;
     ui->geniusDetailsTable->setRowCount(static_cast<int>(geniuses.size()));
 
     for(unsigned int row = 0; row < geniuses.size(); row++)
@@ -104,7 +103,6 @@ void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
 {
     ui->computerDetailsTable->clearContents();
 
-    //Couldn't find a way to get rid of this warning since setRowCount() returns an integer value;
     ui->computerDetailsTable->setRowCount(static_cast<int>(computers.size()));
 
     for(unsigned int row = 0; row < computers.size(); row++)
@@ -221,17 +219,17 @@ void MainWindow::displayRelationsCG(vector<ComputerModel> computers)
 
 void MainWindow::on_pushButtonAddGenius_clicked()
 {
-   AddGenius geniusDialog;
-   int returnValueFromAddGenius = geniusDialog.exec();
-   if (returnValueFromAddGenius == 1)
-   {
-       displayAllGeniuses();
-       displayGeniusDetails(currentlyDisplayedGeniuses);
+    AddGenius geniusDialog;
+    int returnValueFromAddGenius = geniusDialog.exec();
+    if (returnValueFromAddGenius == 1)
+    {
+        displayAllGeniuses();
+        displayGeniusDetails(currentlyDisplayedGeniuses);
 
-       ui->pushButtonDeleteGenius->setEnabled(false);
-       ui->editButtonGenius->setEnabled(false);
-       ui->statusBar->showMessage("Successfully added new genius", 2000);
-   }
+        ui->pushButtonDeleteGenius->setEnabled(false);
+        ui->editButtonGenius->setEnabled(false);
+        ui->statusBar->showMessage("Successfully added new genius", 2000);
+    }
 }
 
 void MainWindow::on_pushButtonAddComputer_clicked()
@@ -337,57 +335,6 @@ void MainWindow::on_clearComputerSelection_clicked()
     ui->listComputers->clearSelection();
 }
 
-/*
-void MainWindow::on_geniusDetailsTable_cellChanged(int row, int column)
-{
-
-    GeniusModel genius = currentlyDisplayedGeniuses.at(row);
-    bool hasError = false;
-
-    string name = genius.getName();
-    string gender = genius.getGender();
-    unsigned int birthYear = genius.getBirthYear();
-    unsigned int deathYear = genius.getDeathYear();
-
-    QString changedCell = ui->geniusDetailsTable->item(row, column)->text();
-
-    if (changedCell.isEmpty())
-        hasError = true;
-
-    if (column == 0 && !hasError)
-    {
-        name = changedCell.toStdString();
-    }
-    else if (column == 1 && !hasError)
-    {
-        gender = changedCell.toStdString();
-    }
-    else if (column == 2 && !hasError && checkIfYearIsValid(changedCell))
-    {
-        birthYear = changedCell.toUInt();
-    }
-    else if (column == 3 && !hasError && checkIfYearIsValid(changedCell))
-    {
-        deathYear = changedCell.toUInt();
-    }
-    else
-    {
-        hasError = true;
-    }
-
-    if (hasError)
-    {
-        ui->statusBar->showMessage("Couldn't update model, check your input!", 3000);
-        return;
-    }
-
-    genius.update(name, gender, birthYear, deathYear);
-
-    if(_geniusService.update(genius))
-        ui->statusBar->showMessage("Update success", 3000);
-}
-*/
-
 /**
  * @brief AddGenius::checkIfYearIsValid Validates if year string is 4 digits and does not have zero as a first digit, Year cannot be higher than current year
  * @param year
@@ -457,57 +404,6 @@ void MainWindow::on_pushButtonDeleteComputer_clicked()
         ui->statusBar->showMessage("Error: Selected Computer was not deleted", 2000);
     }
 }
-
-/*
-void MainWindow::on_computerDetailsTable_itemChanged(QTableWidgetItem *item)
-{
-    ComputerModel computer = currentlyDisplayedComputers.at(item->row());
-    bool hasError = false;
-
-    string modelName = computer.getModelName();
-    string type = computer.getType();
-    unsigned int makeYear = computer.getMakeYear();
-    bool built = computer.getBuilt();
-    int column = item->column();
-
-    QString changedCell = ui->computerDetailsTable->item(item->row(), item->column())->text();
-
-    if (changedCell.isEmpty())
-        hasError = true;
-
-    if (column == 0 && !hasError)
-    {
-        modelName = changedCell.toStdString();
-    }
-    else if (column == 1 && !hasError && checkIfYearIsValid(changedCell))
-    {
-        makeYear = changedCell.toUInt();
-    }
-    else if (column == 2 && !hasError )
-    {
-        type = changedCell.toStdString();
-    }
-    else if (column == 3 && !hasError)
-    {
-
-    }
-    else
-    {
-        hasError = true;
-    }
-
-    if (hasError)
-    {
-        ui->statusBar->showMessage("Couldn't update model, check your input!", 3000);
-        return;
-    }
-
-    computer.update(modelName, makeYear, type, built);
-
-    if(_computerService.update(computer))
-        ui->statusBar->showMessage("Update success", 3000);
-}
-*/
 
 void MainWindow::on_pushButtonEditRelationGC_clicked()
 {

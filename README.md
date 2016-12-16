@@ -28,11 +28,15 @@ Genius icon http://www.iconarchive.com/tag/genius
 Every pop up window has it icon and title
 Status bar is used when saving to the database.
 Action are under file in menu
-Edit relationship is reused, both in edit genius and in the relationship tab
+Edit relationship is reused, both in edit genius/edit computer and in the relationship tab
 You can add relationship at the same time you add computer or genius
-When addit to relationship it is prevented that you can add same computer twice.
-it has a nice ui for showing what computers are left and what computer have been added.
+When adding a relationship it is prevented that you can add same computer/genius twice.
+It has a nice ui for showing what computers are left and what computer have been added.
 TreeWidget is used to show relationship
+
+CSS styling was written and applied through the CSS stylesheet editor in QtDesigner.
+To see the code go to QtDesigner, right click on a widgetitem for example one of the buttons
+and select change styleSheet to see the CSS for that button.
 
 ## Authors
  * Daníel Örn Melstað

@@ -49,8 +49,8 @@ bool ComputerGeniusRepository::removeRelationship(ComputerModel computer, Genius
 
     query.prepare("DELETE FROM GC_Join \
                   WHERE ComputerID = :computer and GeniusID = :genius");
-    query.bindValue(":genius", QString::number(genius.getId()));
-    query.bindValue(":computer", QString::number(computer.getId()));
+            query.bindValue(":genius", QString::number(genius.getId()));
+            query.bindValue(":computer", QString::number(computer.getId()));
 
     return query.exec();
 }
@@ -160,10 +160,10 @@ bool ComputerGeniusRepository::checkIfComputerAndGeniusAreAlreadyLinked(Computer
     QSqlQuery query(_db);
 
     query.prepare("SELECT * FROM GC_Join \
-                   WHERE ComputerID = :computerID and GeniusID = :geniusID");
+                  WHERE ComputerID = :computerID and GeniusID = :geniusID");
 
-    query.bindValue(":computerID", QString::number(computer.getId()));
-    query.bindValue(":geniusID", QString::number(genius.getId()));
+            query.bindValue(":computerID", QString::number(computer.getId()));
+            query.bindValue(":geniusID", QString::number(genius.getId()));
 
     query.exec();
 
