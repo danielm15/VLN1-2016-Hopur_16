@@ -25,7 +25,7 @@
        <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <attribute name="title">
@@ -59,6 +59,9 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Edit Selected Genius</string>
             </property>
@@ -69,6 +72,10 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="styleSheet">
+             <string notr="true">
+</string>
+            </property>
             <property name="text">
              <string>Delete Selected Genius</string>
             </property>
@@ -76,6 +83,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonAddGenius">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Add Genius</string>
             </property>
@@ -311,6 +321,9 @@
            <widget class="QPushButton" name="pushButtonEditRelation">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>Edit relation</string>

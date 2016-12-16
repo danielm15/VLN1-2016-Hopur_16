@@ -273,6 +273,10 @@ void MainWindow::on_clearGeniusSelection_clicked()
     ui->geniusDetailsTable->setSortingEnabled(false);
     displayAllGeniusDetails();
     ui->geniusDetailsTable->setSortingEnabled(true);
+
+    ui->pushButtonDeleteGenius->setEnabled(false);
+    ui->buttonEditGenius->setEnabled(false);
+    ui->listGeniuses->clearSelection();
 }
 
 void MainWindow::on_clearComputerSelection_clicked()
@@ -281,6 +285,10 @@ void MainWindow::on_clearComputerSelection_clicked()
     ui->computerDetailsTable->setSortingEnabled(false);
     displayAllComputerDetails();
     ui->computerDetailsTable->setSortingEnabled(true);
+
+    ui->pushButtonDeleteComputer->setEnabled(false);
+    ui->buttonEditComputer->setEnabled(false);
+    ui->listComputers->clearSelection();
 }
 
 /*
@@ -527,3 +535,11 @@ void MainWindow::on_geniusComputerRelationWidget_itemClicked(QTreeWidgetItem *it
     else
         ui->pushButtonEditRelation->setEnabled(false);
 }
+
+void MainWindow::on_geniusDetails_tabBarClicked()
+{
+    ui->pushButtonDeleteComputer->setEnabled(false);
+    ui->buttonEditComputer->setEnabled(false);
+    ui->listGeniuses->clearSelection();
+}
+
