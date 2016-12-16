@@ -45,6 +45,32 @@ void AddGenius::on_pushButtonSaveGenius_clicked()
         hasError = true;
     }
 
+    if (name.length() > 30)
+    {
+        ui->labelGeniusNameError->setText("<span style='color:red'>Genius name is too long!</span>");
+        hasError = true;
+    }
+
+    for (int i = 0; i < name.length() && !hasError; i++)
+    {
+        if(name.at(0) == ' ')
+            hasError = true;
+        if(name.at(0) == '.')
+            hasError = true;
+        if (name.at(i).isLetter())
+            continue;
+        if ((name.at(i) == '.' && name.at(i-1).isLetter()) && ((i-1 == 0) || name.at(i-2) == ' '))
+            continue;
+        if(name.at(i) == ' ')
+            continue;
+
+        hasError =true;
+
+        if (hasError)
+            ui->labelGeniusNameError->setText("<span style='color:red'>Please enter a valid name!</span>");
+
+    }
+
     if (!checkIfYearIsValid(birthYearStr))
     {
         ui->labelGeniusBirthYearError->setText("<span style='color:red'>Please enter a valid year!</span>");
@@ -126,7 +152,7 @@ bool AddGenius::checkIfYearIsValid(QString year)
 
 void AddGenius::updateComputerComboBox(vector<ComputerModel> computers)
 {
-    ui->comboBoxComputers->addItem("");
+    ui->comboBoxComputers->addItem("- Add computer -");
     for (size_t i = 0; i < computers.size(); i++)
     {
         ComputerModel computer = computers.at(i);
@@ -159,6 +185,8 @@ void AddGenius::on_comboBoxComputers_currentIndexChanged(int index)
 
     _geniusComputers.push_back(computer);
     updateComputerList(_geniusComputers);
+
+    ui->buttonRemoveSelectedComputer->setEnabled(false);
 }
 
 void AddGenius::on_listWidgetComputers_clicked()

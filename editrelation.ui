@@ -11,9 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Edit Relationship</string>
   </property>
-  <widget class="QWidget" name="">
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/images/genius-icon.png</normaloff>:/icons/images/genius-icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -55,6 +59,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="pushButtonRemoveComputer">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Remove selected computer</string>
         </property>
@@ -74,14 +81,9 @@
     </item>
    </layout>
   </widget>
-  <zorder>selectedGeniusListWidget</zorder>
-  <zorder>linkedComputersListWidget</zorder>
-  <zorder>pushButtonSaveRelation</zorder>
-  <zorder>label</zorder>
-  <zorder>label_2</zorder>
-  <zorder>allComputersComboBox</zorder>
-  <zorder>linkedComputersListWidget</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

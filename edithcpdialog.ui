@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Edit Genius</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/images/genius-icon.png</normaloff>:/icons/images/genius-icon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -117,6 +121,13 @@
     <widget class="QLineEdit" name="lineEditDeathYear"/>
    </item>
    <item>
+    <widget class="QPushButton" name="buttonEditRelationship">
+     <property name="text">
+      <string>Edit computer relationship</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="pushButton">
      <property name="text">
       <string>Save</string>
@@ -125,6 +136,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

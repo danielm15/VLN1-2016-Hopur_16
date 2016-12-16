@@ -19,6 +19,21 @@ To prevent multiple connections to the database we have a database manager class
 ## Project Management
 We have divided our group down to smaller groups that is responsible for each layer. For example Daníel and Sæþór have mainly been contributing to the datalayer, Sigurður has been maintaining the service layer and dividing it up to each own responsibility while Jóhann Grétar and Olga have been developing the interface (ConsoleUI) and testing the application and fixing bug that comes up.
 
+## Resource files
+add genius icon https://thenounproject.com/term/add-friend/34864/
+add computer icon https://www.iconfinder.com/icons/261205/add_computer_create_desktop_display_insert_lcd_monitor_pc_plus_screen_system_workstation_icon
+Genius icon http://www.iconarchive.com/tag/genius
+
+## Bonus point guide
+Every pop up window has it icon and title
+Status bar is used when saving to the database.
+Action are under file in menu
+Edit relationship is reused, both in edit genius and in the relationship tab
+You can add relationship at the same time you add computer or genius
+When addit to relationship it is prevented that you can add same computer twice.
+it has a nice ui for showing what computers are left and what computer have been added.
+TreeWidget is used to show relationship
+
 ## Authors
  * Daníel Örn Melstað
  * Grétar Berg Þorkláksson

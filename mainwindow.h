@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTreeWidget>
 #include <QListWidget>
 #include <services/geniusservice.h>
 #include <services/computerservice.h>
@@ -30,6 +31,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    void displayAllRelations();
 
 private slots:
     void on_pushButtonAddGenius_clicked();
@@ -66,7 +69,11 @@ private slots:
 
     void on_pushButtonEditRelation_clicked();
 
-    void on_geniusComputerRelationWidget_clicked();
+    void on_buttonEditGenius_clicked();
+
+    void on_buttonEditComputer_clicked();
+
+    void on_geniusComputerRelationWidget_itemClicked(QTreeWidgetItem *item);
 
     void on_editButtonGenius_clicked();
 
@@ -83,7 +90,7 @@ private:
     void displayGeniusDetails(vector<GeniusModel> geniuses);
     void displayAllComputerDetails();
     void displayComputerDetails(vector<ComputerModel> computers);
-    void displayAllRelations();
+
     void displayRelations(vector<GeniusModel> geniuses);
     bool checkIfYearIsValid(QString year);
 

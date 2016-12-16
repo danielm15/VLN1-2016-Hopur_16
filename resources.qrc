@@ -2,5 +2,8 @@
     <qresource prefix="/icons">
         <file>images/addgenius.png</file>
         <file>images/addcomputer.png</file>
+        <file>images/genius_318-26578.jpg</file>
+        <file>images/genius-icon.png</file>
+        <file>images/relationship.png</file>
     </qresource>
 </RCC>

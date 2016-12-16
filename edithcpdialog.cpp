@@ -60,6 +60,32 @@ void edithCpDialog::on_pushButton_clicked()
         hasError = true;
     }
 
+    if (name.length() > 30)
+    {
+        ui->labelNameError->setText("<span style='color:red'>Genius name is too long!</span>");
+        hasError = true;
+    }
+
+    for (int i = 0; i < name.length() && !hasError; i++)
+    {
+        if(name.at(0) == ' ')
+            hasError = true;
+        if(name.at(0) == '.')
+            hasError = true;
+        if (name.at(i).isLetter())
+            continue;
+        if ((name.at(i) == '.' && name.at(i-1).isLetter()) && ((i-1 == 0) || name.at(i-2) == ' '))
+            continue;
+        if(name.at(i) == ' ')
+            continue;
+
+        hasError =true;
+
+        if (hasError)
+            ui->labelNameError->setText("<span style='color:red'>Please enter a valid name!</span>");
+
+    }
+
     if (!checkIfYearIsValid(birthYearStr))
     {
         ui->labelGeniusBirthYearError->setText("<span style='color:red'>Please enter a valid year!</span>");
@@ -113,4 +139,14 @@ bool edithCpDialog::checkIfYearIsValid(QString year)
         return false;
 
     return true;
+}
+
+void edithCpDialog::on_buttonEditRelationship_clicked()
+{
+    EditRelation editDialog;
+
+    GeniusModel selectedGenius = _genius;
+    editDialog.setGenius(selectedGenius);
+
+    editDialog.exec();
 }
