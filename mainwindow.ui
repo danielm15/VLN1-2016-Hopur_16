@@ -39,7 +39,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <property name="styleSheet">
@@ -519,19 +519,19 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">#pushButtonEditRelation {
+             <string notr="true">#pushButtonEditRelationGC {
 	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(181, 181, 181, 255), stop:1 rgba(255, 255, 255, 255));
 	padding: 6px 15px;
 	border: 2px solid;
 	border-color: transparent;
 	border-radius: 16px;
 }
-#pushButtonEditRelation::enabled {
+#pushButtonEditRelationGC::enabled {
 	color: white;
 	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0.0149254 rgba(33, 33, 113, 255), stop:1 rgba(136, 175, 255, 255));
 }
 
-#pushButtonEditRelation::enabled::hover {
+#pushButtonEditRelationGC::enabled::hover {
 	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0.0149254 rgba(63 63, 113, 255), stop:1 rgba(136, 175, 255, 255));
 }</string>
             </property>
@@ -544,10 +544,19 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_9">
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QLabel" name="computerGeniusLabel">
+            <property name="styleSheet">
+             <string notr="true">#computerGeniusLabel {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(221, 221, 221, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-radius: 19px;
+	border-color: none;
+	padding: 10px 50px;
+}</string>
+            </property>
             <property name="text">
-             <string>Relations</string>
+             <string>&lt;h2&gt;Relations&lt;/h2&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -581,10 +590,27 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
             </column>
            </widget>
           </item>
-          <item>
+          <item alignment="Qt::AlignHCenter">
            <widget class="QPushButton" name="pushButtonEditRelationCG">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#pushButtonEditRelationCG {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(181, 181, 181, 255), stop:1 rgba(255, 255, 255, 255));
+	padding: 6px 15px;
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+#pushButtonEditRelationCG::enabled {
+	color: white;
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0.0149254 rgba(33, 33, 113, 255), stop:1 rgba(136, 175, 255, 255));
+}
+
+#pushButtonEditRelationCG::enabled::hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0.0149254 rgba(63 63, 113, 255), stop:1 rgba(136, 175, 255, 255));
+}</string>
             </property>
             <property name="text">
              <string>Edit Relation</string>
