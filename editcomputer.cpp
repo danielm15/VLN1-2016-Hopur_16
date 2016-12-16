@@ -151,3 +151,13 @@ bool EditComputer::checkIfYearIsValid(QString year)
 
     return true;
 }
+
+void EditComputer::on_buttonGeniusRelationship_clicked()
+{
+    EditRelationCG editDialog;
+
+    ComputerModel selectedComputer = _computer;
+    editDialog.setComputer(selectedComputer);
+
+    editDialog.exec();
+}

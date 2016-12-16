@@ -2,9 +2,9 @@
 #define EDITCOMPUTER_H
 
 #include <QDialog>
-
-#include "models/computermodel.h"
-#include "services/computerservice.h"
+#include <models/computermodel.h>
+#include <services/computerservice.h>
+#include <mainwindow.h>
 
 namespace Ui {
 class EditComputer;
@@ -26,6 +26,8 @@ private slots:
     void on_checkBoxBuilt_toggled(bool checked);
 
     void on_lineEditMakeYear_editingFinished();
+
+    void on_buttonGeniusRelationship_clicked();
 
 private:
     Ui::EditComputer *ui;
