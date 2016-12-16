@@ -476,6 +476,7 @@ void MainWindow::on_listGeniuses_doubleClicked()
     if(returnValueFromEditGenius == 1)
     {
         displayAllGeniuses();
+        displayGeniusDetails(currentlyDisplayedGeniusDetails);
         ui ->statusBar->showMessage("Succesfully updated Genius", 2000);
     }
 
