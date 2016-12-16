@@ -492,3 +492,14 @@ void MainWindow::on_listComputers_doubleClicked()
         ui ->statusBar->showMessage("Succesfully updated Computer", 2000);
     }
 }
+
+void MainWindow::on_editButtonGenius_clicked()
+{
+    on_listGeniuses_doubleClicked();
+}
+
+void MainWindow::on_editbuttoncomputer_clicked()
+{
+    on_listComputers_doubleClicked();
+
+}

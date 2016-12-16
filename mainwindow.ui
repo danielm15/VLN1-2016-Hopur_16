@@ -21,7 +21,7 @@
        <bool>false</bool>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabGenius">
        <attribute name="title">
@@ -49,6 +49,13 @@
           </item>
           <item>
            <widget class="QListWidget" name="listGeniuses"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="editButtonGenius">
+            <property name="text">
+             <string>Edit Selected Genius</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonDeleteGenius">
@@ -160,6 +167,13 @@
           </item>
           <item>
            <widget class="QListWidget" name="listComputers"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="editbuttoncomputer">
+            <property name="text">
+             <string>Edit Selected Computer</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonDeleteComputer">
@@ -304,7 +318,7 @@
      <x>0</x>
      <y>0</y>
      <width>1114</width>
-     <height>26</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

@@ -68,6 +68,10 @@ private slots:
 
     void on_geniusComputerRelationWidget_clicked();
 
+    void on_editButtonGenius_clicked();
+
+    void on_editbuttoncomputer_clicked();
+
 private:
     Ui::MainWindow *ui;
 
