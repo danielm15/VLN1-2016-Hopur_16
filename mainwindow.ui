@@ -56,6 +56,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="editButtonGenius">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Edit Selected Genius</string>
             </property>
@@ -66,6 +69,9 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Delete Selected Genius</string>
             </property>
@@ -73,6 +79,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="pushButtonAddGenius">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
              <string>Add Genius</string>
             </property>
@@ -305,6 +314,9 @@
            <widget class="QPushButton" name="pushButtonEditRelation">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>Edit relation</string>
