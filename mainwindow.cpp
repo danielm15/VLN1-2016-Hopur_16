@@ -69,6 +69,7 @@ void MainWindow::displayGeniusDetails(vector<GeniusModel> geniuses)
 {
     ui->geniusDetailsTable->clearContents();
 
+    //Couldn't find a way to get rid of this warning since setRowCount() returns an integer value;
     ui->geniusDetailsTable->setRowCount(geniuses.size());
 
     for(unsigned int row = 0; row < geniuses.size(); row++)
@@ -102,6 +103,7 @@ void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
 {
     ui->computerDetailsTable->clearContents();
 
+    //Couldn't find a way to get rid of this warning since setRowCount() returns an integer value;
     ui->computerDetailsTable->setRowCount(computers.size());
 
     for(unsigned int row = 0; row < computers.size(); row++)

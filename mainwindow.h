@@ -13,7 +13,6 @@
 #include "editcomputer.h"
 #include <services/computergeniusservice.h>
 
-
 #include <vector>
 
 using namespace std;
