@@ -55,12 +55,9 @@
            <widget class="QListWidget" name="listGeniuses"/>
           </item>
           <item>
-           <widget class="QPushButton" name="buttonEditGenius">
+           <widget class="QPushButton" name="editButtonGenius">
             <property name="enabled">
              <bool>false</bool>
-            </property>
-            <property name="styleSheet">
-             <string notr="true"/>
             </property>
             <property name="text">
              <string>Edit Selected Genius</string>
@@ -73,8 +70,7 @@
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true">
-</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>Delete Selected Genius</string>
@@ -189,10 +185,7 @@
            <widget class="QListWidget" name="listComputers"/>
           </item>
           <item>
-           <widget class="QPushButton" name="buttonEditComputer">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
+           <widget class="QPushButton" name="editbuttoncomputer">
             <property name="text">
              <string>Edit Selected Computer</string>
             </property>
