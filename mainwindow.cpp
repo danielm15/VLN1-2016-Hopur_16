@@ -481,7 +481,9 @@ void MainWindow::on_listGeniuses_doubleClicked()
 
     if(returnValueFromEditGenius == 1)
     {
+        ui->lineEditGeniusFilter->clear();
         displayAllGeniuses();
+        displayGeniusDetails(currentlyDisplayedGeniuses);
         ui ->statusBar->showMessage("Succesfully updated Genius", 2000);
     }
 
@@ -498,7 +500,9 @@ void MainWindow::on_listComputers_doubleClicked()
 
     if(returnValueFromEditDialog == 1)
     {
+        ui->lineEditComputerFilter->clear();
         displayAllComputers();
+        displayComputerDetails(currentlyDisplayedComputers);
         ui ->statusBar->showMessage("Succesfully updated Computer", 2000);
     }
 }
