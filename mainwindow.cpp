@@ -71,7 +71,7 @@ void MainWindow::displayGeniusDetails(vector<GeniusModel> geniuses)
     ui->geniusDetailsTable->clearContents();
 
     //Couldn't find a way to get rid of this warning since setRowCount() returns an integer value;
-    ui->geniusDetailsTable->setRowCount(geniuses.size());
+    ui->geniusDetailsTable->setRowCount(static_cast<int>(geniuses.size()));
 
     for(unsigned int row = 0; row < geniuses.size(); row++)
     {
@@ -105,7 +105,7 @@ void MainWindow::displayComputerDetails(vector<ComputerModel> computers)
     ui->computerDetailsTable->clearContents();
 
     //Couldn't find a way to get rid of this warning since setRowCount() returns an integer value;
-    ui->computerDetailsTable->setRowCount(computers.size());
+    ui->computerDetailsTable->setRowCount(static_cast<int>(computers.size()));
 
     for(unsigned int row = 0; row < computers.size(); row++)
     {
@@ -562,6 +562,7 @@ void MainWindow::on_listGeniuses_doubleClicked()
         displayAllGeniuses();
         displayGeniusDetails(currentlyDisplayedGeniuses);
         displayAllRelationsGC();
+        displayAllRelationsCG();
         ui->statusBar->showMessage("Succesfully updated Genius", 2000);
         ui->editButtonGenius->setEnabled(false);
         ui->pushButtonDeleteGenius->setEnabled(false);
@@ -582,6 +583,8 @@ void MainWindow::on_listComputers_doubleClicked()
         ui->lineEditComputerFilter->clear();
         displayAllComputers();
         displayComputerDetails(currentlyDisplayedComputers);
+        displayAllRelationsGC();
+        displayAllRelationsCG();
         ui->statusBar->showMessage("Succesfully updated Computer", 2000);
         ui->editbuttoncomputer->setEnabled(false);
         ui->pushButtonDeleteComputer->setEnabled(false);
