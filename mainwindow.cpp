@@ -493,7 +493,9 @@ void MainWindow::on_listGeniuses_doubleClicked()
         displayAllGeniuses();
         displayGeniusDetails(currentlyDisplayedGeniuses);
         displayAllRelations();
-        ui ->statusBar->showMessage("Succesfully updated Genius", 2000);
+        ui->statusBar->showMessage("Succesfully updated Genius", 2000);
+        ui->buttonEditGenius->setEnabled(false);
+        ui->pushButtonDeleteGenius->setEnabled(false);
     }
 }
 
@@ -511,16 +513,20 @@ void MainWindow::on_listComputers_doubleClicked()
         ui->lineEditComputerFilter->clear();
         displayAllComputers();
         displayComputerDetails(currentlyDisplayedComputers);
-        ui ->statusBar->showMessage("Succesfully updated Computer", 2000);
+        ui->statusBar->showMessage("Succesfully updated Computer", 2000);
+        ui->buttonEditComputer->setEnabled(false);
+        ui->pushButtonDeleteComputer->setEnabled(false);
     }
 }
 
 void MainWindow::on_buttonEditGenius_clicked()
 {
     on_listGeniuses_doubleClicked();
+    //ui->buttonEditGenius->setEnabled(false);
 }
 
 void MainWindow::on_buttonEditComputer_clicked()
 {
     on_listComputers_doubleClicked();
+    //ui->buttonEditComputer->setEnabled(false);
 }
