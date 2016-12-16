@@ -185,6 +185,8 @@ void AddGenius::on_comboBoxComputers_currentIndexChanged(int index)
 
     _geniusComputers.push_back(computer);
     updateComputerList(_geniusComputers);
+
+    ui->buttonRemoveSelectedComputer->setEnabled(false);
 }
 
 void AddGenius::on_listWidgetComputers_clicked()

@@ -191,6 +191,7 @@ void AddComputer::on_comboBoxGeniuses_currentIndexChanged(int index)
 
     _computerGeniuses.push_back(genius);
     updateGeniusList(_computerGeniuses);
+    ui->buttonRemoveGeniuses->setEnabled(false);
 }
 
 void AddComputer::on_listWidgetGeniuses_clicked()
