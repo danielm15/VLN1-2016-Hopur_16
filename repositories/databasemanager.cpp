@@ -6,7 +6,6 @@ DatabaseManager::DatabaseManager()
     if (!_db.isOpen())
     {
         QString dbName = "db.sqlite";
-
         _db.setDatabaseName(dbName);
         _db.open();
     }

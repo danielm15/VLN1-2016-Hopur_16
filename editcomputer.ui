@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>307</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -97,6 +97,13 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
     <widget class="QCheckBox" name="checkBoxBuilt">
      <property name="text">
       <string>Built</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="buttonGeniusRelationship">
+     <property name="text">
+      <string>Edit genius relationship</string>
      </property>
     </widget>
    </item>
