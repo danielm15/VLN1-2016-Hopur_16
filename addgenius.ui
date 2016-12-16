@@ -17,6 +17,11 @@
    <iconset resource="resources.qrc">
     <normaloff>:/icons/images/addgenius.png</normaloff>:/icons/images/addgenius.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#AddGenius{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(185, 185, 185, 255), stop:1 rgba(225, 225, 225, 255));
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -142,19 +147,27 @@
        <item>
         <widget class="QListWidget" name="listWidgetComputers"/>
        </item>
-       <item>
+       <item alignment="Qt::AlignHCenter">
         <widget class="QPushButton" name="buttonRemoveSelectedComputer">
          <property name="enabled">
           <bool>false</bool>
          </property>
          <property name="styleSheet">
-          <string notr="true">#buttonRemoveSelectedComputer::enabled {
-	background-color: rgb(117, 34, 34);
-	color: rgb(255, 255 ,255);
+          <string notr="true">#buttonRemoveSelectedComputer {
+	padding: 6px 15px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(181, 181, 181, 255), stop:1 rgba(255, 255, 255, 255));
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
+}
+
+#buttonRemoveSelectedComputer::enabled {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(117, 34, 34, 255), stop:1 rgba(255, 48, 48, 255));
+	color: white;
 }
 
 #buttonRemoveSelectedComputer::enabled::hover {
-	background-color: rgb(166, 49, 49);
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(74, 21, 21, 255), stop:1 rgba(255, 48, 48, 255));
 }</string>
          </property>
          <property name="text">
@@ -166,20 +179,23 @@
      </item>
     </layout>
    </item>
-   <item>
+   <item alignment="Qt::AlignHCenter">
     <widget class="QPushButton" name="pushButtonSaveGenius">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">#pushButtonSaveGenius {
+      <string notr="true">#pushButtonSaveGenius{
 	color: rgb(255, 255, 255);
-	background-color: rgb(44, 150, 44);
-	
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0.0149254 rgba(31, 107, 31, 255), stop:1 rgba(110, 189, 100, 255));
+	padding: 6px 15px;
+	border: 2px solid;
+	border-color: transparent;
+	border-radius: 16px;
 }
 
 #pushButtonSaveGenius::hover {
-	background-color: rgb(56, 190, 56);
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0.0149254 rgba(10, 35, 10, 255), stop:1 rgba(110, 189, 100, 255));
 }</string>
      </property>
      <property name="text">
