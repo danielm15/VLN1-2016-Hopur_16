@@ -108,7 +108,7 @@
        <item>
         <widget class="QLabel" name="labelAddGeniuses">
          <property name="text">
-          <string>Select makers</string>
+          <string>Choose geniuses to link</string>
          </property>
         </widget>
        </item>

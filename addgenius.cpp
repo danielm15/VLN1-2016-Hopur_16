@@ -152,7 +152,7 @@ bool AddGenius::checkIfYearIsValid(QString year)
 
 void AddGenius::updateComputerComboBox(vector<ComputerModel> computers)
 {
-    ui->comboBoxComputers->addItem("");
+    ui->comboBoxComputers->addItem("- Add computer -");
     for (size_t i = 0; i < computers.size(); i++)
     {
         ComputerModel computer = computers.at(i);
